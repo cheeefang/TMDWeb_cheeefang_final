@@ -1,0 +1,345 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Template.master.cs" Inherits="TMDWeb.Template" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Targeted Marketing Display Administration">
+    <meta name="author" content="NYP SIT">
+
+    <title>Targeted Marketing Display Administration</title>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/sb-admin-2.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="js/metisMenu.min.js"></script>
+    <!-- jQuery ui JavaScript -->
+    <script src="js/jquery-ui.js"></script>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="css/metisMenu.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!---jQuery ui CSS--->
+    <link href="css/jquery-ui.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <style type="text/css">
+        .welcome-admin {
+            font-size: large;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+        <div id="wrapper">
+            <!-- Admin Side Navigation -->
+            <div runat="server" id="adminDiv">
+                <!-- Admin Navigation -->
+
+                <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html" style="color: white;">Targeted Marketing Display</a>
+                    </div>
+                    <!-- /.navbar-header -->
+
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="login.aspx">Logout <i class="fa fa-sign-out fa-fw"></i></a>
+                            <!-- /.dropdown-user -->
+                        </li>
+                        <!-- /.dropdown -->
+                    </ul>
+                    <!-- /.navbar-top-links -->
+
+                    <div class="navbar-default sidebar" role="navigation">
+                        <div class="sidebar-nav navbar-collapse">
+                            <ul class="nav" id="side-menu">
+                                <li>
+                                    <div class="auto-style1">
+                                        <!--user welcome-->
+                                        <br />
+                                        <span class="welcome-admin" style="color: #435058;">Welcome, </span>
+                                        <br />
+                                        <span class="welcome-admin" style="color: #435058;">
+                                            <strong><asp:Label runat="server" ID="lbAdminName"></asp:Label></strong>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <!-- /input-group -->
+                                    </div>
+                                </li>
+
+                                  <!--order of modules to put on sidebar     1)profile2)user3)company4)bblocation5)adv6)feedback-->
+
+                         <!--CRUD-->
+
+                        <li>
+
+                            <a href="OwnProfile.aspx"><i class="fa fa-user fa-fw"></i> Profile </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="ViewUser.aspx"><i class="fas fa-users"></i> User Listing </a>
+
+                        </li>
+                        
+                     
+
+                        <li>
+
+                            <a href="CreateNewUser.aspx"><i class="fas fa-users"></i> New User </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="#"><i class="fa fa-building fa-fw"></i> Company <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+
+                                <li>                            
+                            <a href="CoInfoRead.aspx"><i class="fa fa-building fa-fw"></i> Company Information </a>
+                               </li>
+
+                                <li>                            
+                            <a href="CoInfoCreate.aspx"><i class="fa fa-building fa-fw"></i> New Company </a>
+                               </li>
+
+                                                
+
+                            </ul>
+                            </li>
+                        
+                        
+                        
+
+                        <li>
+
+                            <a href="BBLocationRead.aspx"><i class="fas fa-map-marker-alt"></i> Billboard Location Listing </a>
+                            
+                        </li>
+
+
+                        <li>
+
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Advertisement<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+
+                                <li>
+                                    <a href="Recordlist_Admin.aspx"><i class="fa fa-database fa-fw"></i> Existing Ad </a>
+                                </li>
+
+
+                                
+
+                              
+                            </ul>
+                            <!-- /.nav-first-level -->
+
+                        </li>
+
+                         <li>
+                                    <a href="AdFeedback.aspx"><i class="fa fa-bar-chart-o fa-fw"></i> Advertisement Feedback</a>
+                                </li>
+
+                         <li>
+                                    <a href="Logout.aspx"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+
+
+                        </div>
+                        <!-- /.sidebar-collapse -->
+                    </div>
+                    <!-- /.navbar-static-side -->
+                </nav>
+                <!--/adminDiv-->
+            </div>
+            <!--end of admin nav-->
+
+            <!--User Navigation-->
+            <div runat="server" id="userDiv">
+                <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html" style="color: white;">Targeted Marketing Display</a>
+                    </div>
+                    <!-- /.navbar-header -->
+
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="login.aspx">Logout <i class="fa fa-sign-out fa-fw"></i></a>
+                            <!-- /.dropdown-user -->
+                        </li>
+                        <!-- /.dropdown -->
+                    </ul>
+                    <!-- /.navbar-top-links -->
+
+
+
+
+                    <!--User Sidebar-->
+                    <div class="navbar-default sidebar" role="navigation">
+                        <div class="sidebar-nav navbar-collapse">
+                            <ul class="nav" id="side-menu">
+                                <li>
+                                    <div class="auto-style1">
+                                        <!--user welcome-->
+                                        <br />
+                                        <span class="welcome-admin" style="color: #435058;">Welcome, </span>
+                                        <br />
+                                        <span class="welcome-admin" style="color: #435058;">
+                                            <strong><asp:Label runat="server" ID="lbUserName"></asp:Label></strong>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <!-- /input-group -->
+                                    </div>
+                                </li>
+
+                                  <li>
+
+                            <a href="OwnProfile.aspx"><i class="fa fa-user fa-fw"></i> My Profile </a>
+
+                        </li>
+
+                         <li>
+                            <a href="ViewUser.aspx"><i class="fa fa-ViewUser"></i>View User </a>
+
+                        </li>
+                         <li>
+
+                            <a href="#"><i class="fa fa-building fa-fw"></i> Company <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+
+                                <li>                            
+                            <a href="CoInfoRead.aspx"><i class="fa fa-building fa-fw"></i> Company Information </a>
+                               </li>
+
+                                <li>                            
+                            <a href="CoInfoCreate.aspx"><i class="fa fa-building fa-fw"></i> New Company </a>
+                               </li>
+
+                                                
+
+                            </ul>
+                            </li>
+
+
+                        
+
+                        <li>
+
+                            <a href="Recordlist_Member.aspx"><i class="fa fa-database fa-fw"></i> Advertisement(Member) </a>
+                            <%--<ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#"><i class="fa fa-info-circle fa-fw"></i> Ad Details</a>
+                                </li>
+
+                                <li>
+                                    <a href="AdvFeedback.aspx"><i class='fa fa-comment fa-fw'></i> Ad Feedback</a>
+                                </li>
+
+                            </ul>
+                            <!-- /.nav-first-level -->--%>
+
+                        </li>
+
+                       
+
+                        <li>
+
+                            <a href="#"><i class="fa fa-envelope fa-fw"></i> Contact Us<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="FAQ.aspx"><i class='fa fa-question-circle fa-fw'></i> FAQ</a>
+                                </li>
+
+                                <li>
+                                    <a href="#"><i class='fa fa-send-o fa-fw'></i> Email Us</a>
+                                </li>
+
+                            </ul>
+                            <!-- /.nav-first-level -->
+
+                        </li>
+
+                     
+                        
+                        <li>
+                            <a href="AdrecordView.aspx"><i class="fa fa-AdvRecord fa-fw"></i>Advertisement Record View </a>
+
+                        </li>
+
+
+                       
+                        
+                         <li>
+                            <a href="Recordlist_admin.aspx"><i class="fa fa-RecordLst"></i>Advertisement Record view(Admin) </a>
+                        </li>
+
+                        <li>
+                            <a href="FeedBackBillboard.aspx"><i class="fa fa-FeedbackBillboard"></i>Billboard Feedback</a>
+                        </li>
+
+                        <li>
+                                    <a href="Logout.aspx"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                        <!-- /.sidebar-collapse -->
+                    </div>
+                    <!-- /.navbar-static-side -->
+                </nav>
+            </div>
+            <!--end of user nav bar-->
+
+            <div id="page-wrapper">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            </div>
+        </div>
+  
+</body>
+</html>

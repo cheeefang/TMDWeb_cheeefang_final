@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMDWeb", "TMDWeb\TMDWeb.csproj", "{B08BC0B5-3649-4730-B96C-673F0EB0EC56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMDApp", "TMDApp\TMDApp.csproj", "{702968FD-3A08-4A8B-AFDC-1178C57BB1EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B08BC0B5-3649-4730-B96C-673F0EB0EC56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B08BC0B5-3649-4730-B96C-673F0EB0EC56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B08BC0B5-3649-4730-B96C-673F0EB0EC56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B08BC0B5-3649-4730-B96C-673F0EB0EC56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{702968FD-3A08-4A8B-AFDC-1178C57BB1EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{702968FD-3A08-4A8B-AFDC-1178C57BB1EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{702968FD-3A08-4A8B-AFDC-1178C57BB1EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{702968FD-3A08-4A8B-AFDC-1178C57BB1EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9A78375A-C382-4DE0-9B17-685CA9AD7247}
+	EndGlobalSection
+EndGlobal

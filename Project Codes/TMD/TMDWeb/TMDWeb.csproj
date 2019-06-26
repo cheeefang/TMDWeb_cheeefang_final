@@ -1,0 +1,557 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B08BC0B5-3649-4730-B96C-673F0EB0EC56}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TMDWeb</RootNamespace>
+    <AssemblyName>TMDWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Korzh.EasyQuery, Version=5.0.0.15, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Korzh.EasyQuery.5.0.0\lib\netstandard2.0\Korzh.EasyQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="Korzh.EasyQuery.Db, Version=5.0.0.15, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Korzh.EasyQuery.Db.5.0.0\lib\netstandard2.0\Korzh.EasyQuery.Db.dll</HintPath>
+    </Reference>
+    <Reference Include="Korzh.EasyQuery.Linq, Version=5.0.0.15, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Korzh.EasyQuery.Linq.5.0.0\lib\netstandard2.0\Korzh.EasyQuery.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Thread, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Thread.4.3.0\lib\net46\System.Threading.Thread.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AdFeedback.aspx" />
+    <Content Include="AdrecordView.aspx" />
+    <Content Include="AdvCreate.aspx" />
+    <Content Include="BBLocationCreate.aspx" />
+    <Content Include="BBLocationRead.aspx" />
+    <Content Include="BBLocationUpdate.aspx" />
+    <Content Include="BillboardAdInfo.aspx" />
+    <Content Include="CoInfoCreate.aspx" />
+    <Content Include="CoInfoRead.aspx" />
+    <Content Include="CoInfoUpdate.aspx" />
+    <Content Include="CompanyAdvertInfo.aspx" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="CreateNewUser.aspx" />
+    <Content Include="FAQ.aspx" />
+    <Content Include="FeedbackAdv.aspx" />
+    <Content Include="FeedbackAnalyticsIndiv.aspx" />
+    <Content Include="FeedBackBillboard.aspx" />
+    <Content Include="font-awesome\css\font-awesome.css.map" />
+    <Content Include="font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="font-awesome\less\animated.less" />
+    <Content Include="font-awesome\less\bordered-pulled.less" />
+    <Content Include="font-awesome\less\core.less" />
+    <Content Include="font-awesome\less\extras.less" />
+    <Content Include="font-awesome\less\fixed-width.less" />
+    <Content Include="font-awesome\less\font-awesome.less" />
+    <Content Include="font-awesome\less\icons.less" />
+    <Content Include="font-awesome\less\larger.less" />
+    <Content Include="font-awesome\less\list.less" />
+    <Content Include="font-awesome\less\mixins.less" />
+    <Content Include="font-awesome\less\path.less" />
+    <Content Include="font-awesome\less\rotated-flipped.less" />
+    <Content Include="font-awesome\less\screen-reader.less" />
+    <Content Include="font-awesome\less\spinning.less" />
+    <Content Include="font-awesome\less\stacked.less" />
+    <Content Include="font-awesome\less\variables.less" />
+    <Content Include="font-awesome\scss\font-awesome.scss" />
+    <Content Include="font-awesome\scss\_animated.scss" />
+    <Content Include="font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="font-awesome\scss\_core.scss" />
+    <Content Include="font-awesome\scss\_extras.scss" />
+    <Content Include="font-awesome\scss\_fixed-width.scss" />
+    <Content Include="font-awesome\scss\_icons.scss" />
+    <Content Include="font-awesome\scss\_larger.scss" />
+    <Content Include="font-awesome\scss\_list.scss" />
+    <Content Include="font-awesome\scss\_mixins.scss" />
+    <Content Include="font-awesome\scss\_path.scss" />
+    <Content Include="font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="font-awesome\scss\_screen-reader.scss" />
+    <Content Include="font-awesome\scss\_spinning.scss" />
+    <Content Include="font-awesome\scss\_stacked.scss" />
+    <Content Include="font-awesome\scss\_variables.scss" />
+    <Content Include="jquery-ui.css" />
+    <Content Include="login.aspx" />
+    <Content Include="Logout.aspx" />
+    <Content Include="newAdvCreate.aspx" />
+    <Content Include="OtherUserProfile.aspx" />
+    <Content Include="OwnProfile.aspx" />
+    <Content Include="Recordlist_admin.aspx" />
+    <Content Include="Recordlist_member.aspx" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap\wells.less" />
+    <Content Include="Content\bootstrap\variables.less" />
+    <Content Include="Content\bootstrap\utilities.less" />
+    <Content Include="Content\bootstrap\type.less" />
+    <Content Include="Content\bootstrap\tooltip.less" />
+    <Content Include="Content\bootstrap\thumbnails.less" />
+    <Content Include="Content\bootstrap\theme.less" />
+    <Content Include="Content\bootstrap\tables.less" />
+    <Content Include="Content\bootstrap\scaffolding.less" />
+    <Content Include="Content\bootstrap\responsive-utilities.less" />
+    <Content Include="Content\bootstrap\responsive-embed.less" />
+    <Content Include="Content\bootstrap\progress-bars.less" />
+    <Content Include="Content\bootstrap\print.less" />
+    <Content Include="Content\bootstrap\popovers.less" />
+    <Content Include="Content\bootstrap\panels.less" />
+    <Content Include="Content\bootstrap\pagination.less" />
+    <Content Include="Content\bootstrap\pager.less" />
+    <Content Include="Content\bootstrap\normalize.less" />
+    <Content Include="Content\bootstrap\navs.less" />
+    <Content Include="Content\bootstrap\navbar.less" />
+    <Content Include="Content\bootstrap\modals.less" />
+    <Content Include="Content\bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="Content\bootstrap\mixins\text-overflow.less" />
+    <Content Include="Content\bootstrap\mixins\text-emphasis.less" />
+    <Content Include="Content\bootstrap\mixins\table-row.less" />
+    <Content Include="Content\bootstrap\mixins\tab-focus.less" />
+    <Content Include="Content\bootstrap\mixins\size.less" />
+    <Content Include="Content\bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="Content\bootstrap\mixins\resize.less" />
+    <Content Include="Content\bootstrap\mixins\reset-text.less" />
+    <Content Include="Content\bootstrap\mixins\reset-filter.less" />
+    <Content Include="Content\bootstrap\mixins\progress-bar.less" />
+    <Content Include="Content\bootstrap\mixins\panels.less" />
+    <Content Include="Content\bootstrap\mixins\pagination.less" />
+    <Content Include="Content\bootstrap\mixins\opacity.less" />
+    <Content Include="Content\bootstrap\mixins\nav-vertical-align.less" />
+    <Content Include="Content\bootstrap\mixins\nav-divider.less" />
+    <Content Include="Content\bootstrap\mixins\list-group.less" />
+    <Content Include="Content\bootstrap\mixins\labels.less" />
+    <Content Include="Content\bootstrap\mixins\image.less" />
+    <Content Include="Content\bootstrap\mixins\hide-text.less" />
+    <Content Include="Content\bootstrap\mixins\grid.less" />
+    <Content Include="Content\bootstrap\mixins\grid-framework.less" />
+    <Content Include="Content\bootstrap\mixins\gradients.less" />
+    <Content Include="Content\bootstrap\mixins\forms.less" />
+    <Content Include="Content\bootstrap\mixins\clearfix.less" />
+    <Content Include="Content\bootstrap\mixins\center-block.less" />
+    <Content Include="Content\bootstrap\mixins\buttons.less" />
+    <Content Include="Content\bootstrap\mixins\border-radius.less" />
+    <Content Include="Content\bootstrap\mixins\background-variant.less" />
+    <Content Include="Content\bootstrap\mixins\alerts.less" />
+    <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="Content\bootstrap\media.less" />
+    <Content Include="Content\bootstrap\list-group.less" />
+    <Content Include="Content\bootstrap\labels.less" />
+    <Content Include="Content\bootstrap\jumbotron.less" />
+    <Content Include="Content\bootstrap\input-groups.less" />
+    <Content Include="Content\bootstrap\grid.less" />
+    <Content Include="Content\bootstrap\glyphicons.less" />
+    <Content Include="Content\bootstrap\forms.less" />
+    <Content Include="Content\bootstrap\dropdowns.less" />
+    <Content Include="Content\bootstrap\component-animations.less" />
+    <Content Include="Content\bootstrap\code.less" />
+    <Content Include="Content\bootstrap\close.less" />
+    <Content Include="Content\bootstrap\carousel.less" />
+    <Content Include="Content\bootstrap\buttons.less" />
+    <Content Include="Content\bootstrap\button-groups.less" />
+    <Content Include="Content\bootstrap\breadcrumbs.less" />
+    <Content Include="Content\bootstrap\bootstrap.less" />
+    <Content Include="Content\bootstrap\badges.less" />
+    <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Content\_bootstrap-datetimepicker.less" />
+    <Content Include="Content\bootstrap-datetimepicker-build.less" />
+    <None Include="packages.config" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Template.Master" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\jquery-ui.css" />
+    <Content Include="css\metisMenu.css" />
+    <Content Include="css\sb-admin-2.css" />
+    <Content Include="font-awesome\css\font-awesome.css" />
+    <Content Include="font-awesome\css\font-awesome.min.css" />
+    <Content Include="font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="font-awesome\HELP-US-OUT.txt" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\jquery-ui.js" />
+    <Content Include="js\jquery.min.js" />
+    <Content Include="js\metisMenu.min.js" />
+    <Content Include="js\sb-admin-2.js" />
+    <Content Include="test.aspx" />
+    <Content Include="testRead.aspx" />
+    <Content Include="UpdateOtherUserProfile.aspx" />
+    <Content Include="UpdateOwnProfile.aspx" />
+    <Content Include="ViewUser.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdFeedback.aspx.cs">
+      <DependentUpon>AdFeedback.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdFeedback.aspx.designer.cs">
+      <DependentUpon>AdFeedback.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdrecordView.aspx.cs">
+      <DependentUpon>AdrecordView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdrecordView.aspx.designer.cs">
+      <DependentUpon>AdrecordView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdvCreate.aspx.cs">
+      <DependentUpon>AdvCreate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdvCreate.aspx.designer.cs">
+      <DependentUpon>AdvCreate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Advertisement.cs" />
+    <Compile Include="App_Code\Billboard.cs" />
+    <Compile Include="App_Code\Billboard_Management.cs" />
+    <Compile Include="App_Code\Company.cs" />
+    <Compile Include="App_Code\Company_Management.cs" />
+    <Compile Include="App_Code\Database.cs" />
+    <Compile Include="App_Code\User.cs" />
+    <Compile Include="App_Code\UserManagement.cs" />
+    <Compile Include="BBLocationCreate.aspx.cs">
+      <DependentUpon>BBLocationCreate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BBLocationCreate.aspx.designer.cs">
+      <DependentUpon>BBLocationCreate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BBLocationRead.aspx.cs">
+      <DependentUpon>BBLocationRead.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BBLocationRead.aspx.designer.cs">
+      <DependentUpon>BBLocationRead.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BBLocationUpdate.aspx.cs">
+      <DependentUpon>BBLocationUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BBLocationUpdate.aspx.designer.cs">
+      <DependentUpon>BBLocationUpdate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BillboardAdInfo.aspx.cs">
+      <DependentUpon>BillboardAdInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BillboardAdInfo.aspx.designer.cs">
+      <DependentUpon>BillboardAdInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CoInfoCreate.aspx.cs">
+      <DependentUpon>CoInfoCreate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CoInfoCreate.aspx.designer.cs">
+      <DependentUpon>CoInfoCreate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CoInfoRead.aspx.cs">
+      <DependentUpon>CoInfoRead.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CoInfoRead.aspx.designer.cs">
+      <DependentUpon>CoInfoRead.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CoInfoUpdate.aspx.cs">
+      <DependentUpon>CoInfoUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CoInfoUpdate.aspx.designer.cs">
+      <DependentUpon>CoInfoUpdate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyAdvertInfo.aspx.cs">
+      <DependentUpon>CompanyAdvertInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CompanyAdvertInfo.aspx.designer.cs">
+      <DependentUpon>CompanyAdvertInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateNewUser.aspx.cs">
+      <DependentUpon>CreateNewUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateNewUser.aspx.designer.cs">
+      <DependentUpon>CreateNewUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FAQ.aspx.cs">
+      <DependentUpon>FAQ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FAQ.aspx.designer.cs">
+      <DependentUpon>FAQ.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FeedbackAdv.aspx.cs">
+      <DependentUpon>FeedbackAdv.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FeedbackAdv.aspx.designer.cs">
+      <DependentUpon>FeedbackAdv.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FeedbackAnalyticsIndiv.aspx.cs">
+      <DependentUpon>FeedbackAnalyticsIndiv.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FeedbackAnalyticsIndiv.aspx.designer.cs">
+      <DependentUpon>FeedbackAnalyticsIndiv.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FeedBackBillboard.aspx.cs">
+      <DependentUpon>FeedBackBillboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FeedBackBillboard.aspx.designer.cs">
+      <DependentUpon>FeedBackBillboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="newAdvCreate.aspx.cs">
+      <DependentUpon>newAdvCreate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="newAdvCreate.aspx.designer.cs">
+      <DependentUpon>newAdvCreate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OtherUserProfile.aspx.cs">
+      <DependentUpon>OtherUserProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OtherUserProfile.aspx.designer.cs">
+      <DependentUpon>OtherUserProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OwnProfile.aspx.cs">
+      <DependentUpon>OwnProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OwnProfile.aspx.designer.cs">
+      <DependentUpon>OwnProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Recordlist_admin.aspx.cs">
+      <DependentUpon>Recordlist_admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Recordlist_admin.aspx.designer.cs">
+      <DependentUpon>Recordlist_admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Recordlist_member.aspx.cs">
+      <DependentUpon>Recordlist_member.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Recordlist_member.aspx.designer.cs">
+      <DependentUpon>Recordlist_member.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Template.Master.cs">
+      <DependentUpon>Template.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Template.Master.designer.cs">
+      <DependentUpon>Template.Master</DependentUpon>
+    </Compile>
+    <Compile Include="test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="testRead.aspx.cs">
+      <DependentUpon>testRead.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="testRead.aspx.designer.cs">
+      <DependentUpon>testRead.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateOtherUserProfile.aspx.cs">
+      <DependentUpon>UpdateOtherUserProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateOtherUserProfile.aspx.designer.cs">
+      <DependentUpon>UpdateOtherUserProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateOwnProfile.aspx.cs">
+      <DependentUpon>UpdateOwnProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateOwnProfile.aspx.designer.cs">
+      <DependentUpon>UpdateOwnProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewUser.aspx.cs">
+      <DependentUpon>ViewUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewUser.aspx.designer.cs">
+      <DependentUpon>ViewUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TMDApp\TMDApp.csproj">
+      <Project>{702968fd-3a08-4a8b-afdc-1178c57bb1ef}</Project>
+      <Name>TMDApp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58659</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:58659/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
