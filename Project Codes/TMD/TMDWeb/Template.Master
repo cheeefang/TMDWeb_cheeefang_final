@@ -21,6 +21,8 @@
     <script src="js/metisMenu.min.js"></script>
     <!-- jQuery ui JavaScript -->
     <script src="js/jquery-ui.js"></script>
+    <!-- Custom fonts for fontawesome-->
+     <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +73,7 @@
 
                     <ul class="nav navbar-top-links navbar-right">
                         <li class="dropdown">
-                            <a class="dropdown-toggle" href="login.aspx">Logout <i class="fa fa-sign-out fa-fw"></i></a>
+                            <a class="dropdown-toggle" href="Logout.aspx">Logout <i class="fa fa-sign-out fa-fw"></i></a>
                             <!-- /.dropdown-user -->
                         </li>
                         <!-- /.dropdown -->
@@ -88,15 +90,13 @@
                                         <span class="welcome-admin" style="color: #435058;">Welcome, </span>
                                         <br />
                                         <span class="welcome-admin" style="color: #435058;">
-                                            <strong><asp:Label runat="server" ID="lbAdminName"></asp:Label></strong>
-                                        </span>
+                                            <strong><asp:Label runat="server" ID="lbAdminName"></asp:Label></strong> </span>
                                         <br />
                                         <br />
                                         <!-- /input-group -->
                                     </div>
                                 </li>
-
-                                  <!--order of modules to put on sidebar     1)profile2)user3)company4)bblocation5)adv6)feedback-->
+   <!--order of modules to put on sidebar     1)profile2)user3)company4)bblocation5)adv6)feedback-->
 
                          <!--CRUD-->
 
@@ -143,7 +143,7 @@
 
                         <li>
 
-                            <a href="BBLocationRead.aspx"><i class="fas fa-map-marker-alt"></i> Billboard Location Listing </a>
+                            <a href="BBLocationRead.aspx"> <i class="fas fa-map-marker-alt"></i> Billboard Location Listing </a>
                             
                         </li>
 
@@ -175,21 +175,17 @@
                                 </li>
 
 
-
-
-                            </ul>
-
-
-
-
-                        </div>
-                        <!-- /.sidebar-collapse -->
-                    </div>
-                    <!-- /.navbar-static-side -->
-                </nav>
-                <!--/adminDiv-->
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
             </div>
-            <!--end of admin nav-->
+            <!-- /.navbar-static-side -->
+        </nav>
+        <!--/adminDiv-->
+       </div>
+      
+        <!--end of admin nav-->
+
 
             <!--User Navigation-->
             <div runat="server" id="userDiv">
@@ -207,7 +203,7 @@
 
                     <ul class="nav navbar-top-links navbar-right">
                         <li class="dropdown">
-                            <a class="dropdown-toggle" href="login.aspx">Logout <i class="fa fa-sign-out fa-fw"></i></a>
+                            <a class="dropdown-toggle" href="Logout.aspx">Logout <i class="fa fa-sign-out fa-fw"></i></a>
                             <!-- /.dropdown-user -->
                         </li>
                         <!-- /.dropdown -->
@@ -243,7 +239,7 @@
                         </li>
 
                          <li>
-                            <a href="ViewUser.aspx"><i class="fa fa-ViewUser"></i>View User </a>
+                            <a href="ViewUser.aspx"><i class="fas fa-ViewUser"></i> View User </a>
 
                         </li>
                          <li>
@@ -321,9 +317,6 @@
                             <a href="FeedBackBillboard.aspx"><i class="fa fa-FeedbackBillboard"></i>Billboard Feedback</a>
                         </li>
 
-                        <li>
-                                    <a href="Logout.aspx"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                                </li>
 
                             </ul>
 

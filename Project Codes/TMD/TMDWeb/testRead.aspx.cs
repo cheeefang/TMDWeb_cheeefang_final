@@ -57,7 +57,7 @@ namespace targeted_marketing_display
            
         }
 
-        protected void editBtn(object sender, EventArgs e)
+        protected void editBtn_Click(object sender, EventArgs e)
         {
             Response.Redirect("BBLocationUpdate.aspx");
 
