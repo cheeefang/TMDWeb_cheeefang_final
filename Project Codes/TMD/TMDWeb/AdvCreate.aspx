@@ -56,8 +56,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
-        <div id="page-wrapper" style="overflow: no-display">
-
+    
             <div class="container" style="height: 100%">            
                 <div runat="server" class="alert alert-warning" id="alertWarning" visible="False" style="margin-top: 10px;">
                     <strong>Warning!</strong>
@@ -384,7 +383,7 @@
 
         </div>
 
-  </div>
+
 
     </form>
 

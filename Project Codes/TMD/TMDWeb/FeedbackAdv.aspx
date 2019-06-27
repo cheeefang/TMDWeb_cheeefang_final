@@ -11,7 +11,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
         <div id="adminDiv" runat="server">
-            <div id="page-wrapper">
+       
                 <!--button-->
                 <div class="row">
                     <div class="col-lg-12">
@@ -41,7 +41,7 @@
                     <asp:Button ID="btnAdd" runat="server" Text="Add" CssClass="btn btn-primary" OnClick="btnAdd_Click"/>
                 </div>
             </div>
-        </div>
+
         </div>
     </form>
 </asp:Content>

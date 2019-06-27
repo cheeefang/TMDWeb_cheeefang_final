@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="BBLocationRead.aspx.cs" Inherits="targeted_marketing_display.BBLocationRead" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server" align="left">
     <style type="text/css">
         .auto-style2 {
             height: 42px;
@@ -29,14 +29,14 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" align="left">
     <form runat="server">
 
 
 
-        <div id="adminDiv" runat="server">
+        <div id="adminDiv" runat="server" align="left">
 
-            <div id="page-wrapper">
+       
                 <!--button-->
                 <div class="row">
                     <div class="col-lg-12">
@@ -199,11 +199,11 @@
                         <!-- /.table-responsive -->
                     </div>
                 </div>
-            </div>
+         
         </div>
 
         <div id="userDiv" runat="server">
-            <div id="page-wrapper">
+          
                 <div class="row">
 
                     <div class="col-lg-12">
@@ -301,7 +301,7 @@
                         <!-- /.table-responsive -->
                     </div>
                 </div>
-            </div>
+     
         </div>
 
     </form>

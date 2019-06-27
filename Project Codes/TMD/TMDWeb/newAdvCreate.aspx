@@ -7,7 +7,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
-        <div id="page-wrapper">
+     
 
             
 
@@ -176,7 +176,7 @@
                 </div>
             </div>
 
-        </div>
+  
 
     </form>
 </asp:Content>

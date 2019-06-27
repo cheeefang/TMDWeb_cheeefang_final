@@ -59,7 +59,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
         <div id="adminDiv" runat="server">
-            <div id="page-wrapper">
+     
                 <!--button-->
                 <div class="row">
                     <div class="col-lg-12">
@@ -373,7 +373,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+
         </div> 
     </form>
 </asp:Content>

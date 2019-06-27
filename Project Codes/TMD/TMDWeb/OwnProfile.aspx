@@ -5,7 +5,7 @@
 
     <form runat="server">
 
-        <div id="page-wrapper">
+     
 
             <div runat="server" id="UserView" visible="false">
 
@@ -145,7 +145,7 @@
 
             </div>
 
-        </div>
+   
 
     </form>
 </asp:Content>

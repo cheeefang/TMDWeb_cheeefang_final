@@ -42,12 +42,15 @@ namespace targeted_marketing_display
             dr["Status"] = "Active";
             dt.Rows.Add(dr2);
 
-            GridView1.DataSource = dt;
+            //GridView1.DataSource = dt;
             GridView1.DataBind();
 
         }
+        protected void delBtn_Click(object sender,  EventArgs e)
+        {
 
-        protected void addbtn_Click(object sender, EventArgs e)
+        }
+        protected void adsBtn_Click(object sender, EventArgs e)
         {
            
         }
