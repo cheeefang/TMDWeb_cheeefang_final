@@ -95,13 +95,13 @@ namespace BBMgmt
 
 
 
-        public Boolean BBInfoUpdate(string BillboardID, string BillboardCode, string AddressLn1, string AddressLn2, string City, string Country,string latitude,string Longtitude, string postalCode, string lastUpdBy, string lastUpdOn)
+        public Boolean BBInfoUpdate(string BillboardID, string AddressLn1, string AddressLn2, string City, string Country,string latitude,string Longtitude, string postalCode, string lastUpdBy, string lastUpdOn)
         {
             Boolean result;
 
-            SqlCommand cmd = new SqlCommand("UPDATE [BillboardLocation] SET BillboardCode = @paraBillboardCode, AddressLn1 = @paraAddressLn1 , AddressLn2 = @paraAddressLn2 ,City=@paraCity , Country=@paraCountry ,latitude=@paralatitude,Longtitude=@paraLongtitude,@parapostalCode=@parapostalCode, LastUpdBy = @paraLastUpdBy, LastUpdOn = @paraLastUpdOn WHERE BillboardID=@paraBillboardID");
+            SqlCommand cmd = new SqlCommand("UPDATE [BillboardLocation] SET AddressLn1 = @paraAddressLn1 , AddressLn2 = @paraAddressLn2 ,City=@paraCity , Country=@paraCountry ,latitude=@paralatitude,Longtitude=@paraLongtitude,@parapostalCode=@parapostalCode, LastUpdBy = @paraLastUpdBy, LastUpdOn = @paraLastUpdOn WHERE BillboardID=@paraBillboardID");
             cmd.Parameters.AddWithValue("@paraBillboardID", BillboardID);
-            cmd.Parameters.AddWithValue("@paraBillboardCode", BillboardCode);
+          
             cmd.Parameters.AddWithValue("@paraAddressLn1", AddressLn1);
             cmd.Parameters.AddWithValue("@paraAddressLn2", AddressLn2);
             cmd.Parameters.AddWithValue("@paraCity", City);

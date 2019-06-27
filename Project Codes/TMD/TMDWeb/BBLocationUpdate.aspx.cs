@@ -25,7 +25,7 @@ namespace targeted_marketing_display
 
                 BillboardObj = bDao.getBillboardByID(Session["BillboardID"].ToString());
                 //CompanyObj = CDao.getCompanyByID(Session["CompanyID"].ToString());
-                BbLocationCode.Text = BillboardObj.BillboardCode;
+          
                 BbAddLn1.Text = BillboardObj.AddressLn1;
                 BbAddLn2.Text = BillboardObj.AddressLn2;
                 BbCity.Text = BillboardObj.City;
@@ -49,8 +49,8 @@ namespace targeted_marketing_display
         protected void updateBtn_Click(object sender, EventArgs e)
         {
 
-            if (BbLocationCode.Text == "" || BBCountry.SelectedValue == "" || BbAddLn1.Text == ""
-                || BbCity.Text == "" || BbPostalCode.Text == "" || BbLocationCode.Text == "")
+            if ( BBCountry.SelectedValue == "" || BbAddLn1.Text == ""
+                || BbCity.Text == "" || BbPostalCode.Text == "" || BbAddLn2.Text=="" || BBLatitude.Text=="" || BBLongtitude.Text=="")
             {
                 alertWarning.Visible = true;
                 alertSuccess.Visible = false;
@@ -63,7 +63,7 @@ namespace targeted_marketing_display
                 //Company_Management cDAO = new Company_Management();
                 // string companyName = CoName.Text;
                 // string Industry = CoIndustry.SelectedValue;
-                string BillboardCode = BbLocationCode.Text;
+                
                 string Addr1 = BbAddLn1.Text;
                 string Addr2 = BbAddLn2.Text;
                 string City = BbCity.Text;
@@ -73,15 +73,18 @@ namespace targeted_marketing_display
                 string postalCode = BbPostalCode.Text;
                 string lastUpdBy = Session["userID"].ToString();
                 string lastUpdOn = DateTime.Now.ToString("MM/dd/yyyy h:mm tt");
-                Boolean insCnt = bDAO.BBInfoUpdate(Session["BillboardID"].ToString(), BillboardCode, Addr1, Addr2, City, Country,latitude,Longtitude,postalCode,lastUpdBy, lastUpdOn);
+                Boolean insCnt = bDAO.BBInfoUpdate(Session["BillboardID"].ToString(), Addr1, Addr2, City, Country,latitude,Longtitude,postalCode,lastUpdBy, lastUpdOn);
                 alertWarning.Visible = false;
                 alertSuccess.Visible = true;
-                BbLocationCode.Text = String.Empty;
+             
                 BbAddLn1.Text = String.Empty;
                 BbAddLn2.Text = String.Empty;
                 BBCountry.SelectedValue = "";
                 BbCity.Text = String.Empty;
                 BbPostalCode.Text = String.Empty;
+                BBLatitude.Text = String.Empty;
+                BBLongtitude.Text = String.Empty;
+
             }
         }
 

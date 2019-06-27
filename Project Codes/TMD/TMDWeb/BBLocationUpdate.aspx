@@ -39,15 +39,7 @@
 
 
             <div class="row">
-                <div class="col-lg-6">
-
-                    <div class="form-group">
-                        <label>Billboard Code </label>
-                       
-                        <asp:TextBox class="form-control" ID="BbLocationCode" placeholder="Enter BB Location Code" runat="server"></asp:TextBox>&nbsp;
-                    </div>
-
-                </div>
+               
 
                 <div class="col-lg-6">
 
