@@ -159,6 +159,12 @@
                     <div class="col-lg-12">
 
                         <div class="table-responsive">
+                            <div class="alert alert-success" runat="server" id="panel_success" visible="false">
+       <asp:Label ID="lbl_success" runat="server"></asp:Label>
+   </div>
+   <div class="alert alert-danger" runat="server" id="panel_error" visible="false">
+       <asp:Label ID="lbl_error" runat="server"></asp:Label>
+   </div>
                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [User].Name, [User].Type, Company.Name AS Expr1, [User].Email, [User].UserID FROM [User] INNER JOIN Company ON [User].CompanyID = Company.CompanyID where [User].Status=1" FilterExpression="Name LIKE '%{0}%' OR Type LIKE '%{0}%' OR Expr1 LIKE '%{0}%' OR Email LIKE '%{0}%' ">
                                 <FilterParameters>
                                             <asp:ControlParameter ControlID="tbSearch" Name="Name" PropertyName="Text" />
