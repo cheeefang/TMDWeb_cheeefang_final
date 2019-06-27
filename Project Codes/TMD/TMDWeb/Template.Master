@@ -21,8 +21,8 @@
     <script src="js/metisMenu.min.js"></script>
     <!-- jQuery ui JavaScript -->
     <script src="js/jquery-ui.js"></script>
-    <!-- Custom fonts for fontawesome-->
-     <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">
+    <!-- Custom fonts for fontawesome(DONT TOUCH)-->
+     <link href="Content/fontawesome-free-5.9.0-web/css/all.css" rel="stylesheet">
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
