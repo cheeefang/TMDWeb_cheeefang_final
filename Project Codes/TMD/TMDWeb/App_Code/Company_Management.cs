@@ -35,7 +35,7 @@ namespace CoInfoMgmt
             sCmd.Parameters.AddWithValue("@Industry", Industry);
             sCmd.Parameters.AddWithValue("@CreatedOn", CreatedOn);
 
-            dbConnection.executeNonQuery(sCmd);
+         
 
             result = dbConnection.executeNonQuery(sCmd);
 

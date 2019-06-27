@@ -54,6 +54,47 @@ namespace BBMgmt
             return obj;
         }
 
+        public Billboard getBillboardAdvertsByID(string BillboardID)
+        {
+            SqlCommand cmd = new SqlCommand("Select * from [Advertisement] inner join [AdvertisementLocation] on [Advertisement].AdvID=[AdvertisementLocation].AdvID  where [Advertisement].AdvID=@paraAdvID and Advertisement].Status = 1");
+           
+            cmd.Parameters.AddWithValue("@paraBillboardID", BillboardID);
+
+            DataTable dt = dbConnection.getDataTable(cmd);
+
+            Billboard obj = new Billboard();
+
+            int rec_cnt = dt.Rows.Count;
+            if (rec_cnt > 0)
+            {
+                DataRow row = dt.Rows[0];
+
+                obj.BillboardID = Convert.ToInt32(row["BillboardID"]);
+                obj.BillboardCode = row["BillboardCode"].ToString();
+                obj.latitude = (row["latitude"].ToString());
+                obj.Longtitude = (row["Longtitude"].ToString());
+                obj.AddressLn1 = row["AddressLn1"].ToString();
+                obj.AddressLn2 = row["AddressLn2"].ToString();
+                obj.City = row["City"].ToString();
+                obj.Country = row["Country"].ToString();
+                obj.postalCode = row["postalCode"].ToString();
+                obj.status = Convert.ToInt32(row["status"]);
+                obj.CreatedBy = Convert.ToInt32(row["CreatedBy"]);
+                obj.CreatedOn = row["CreatedOn"].ToString();
+                obj.LastUpdBy = row["LastUpdBy"].ToString();
+                obj.LastUpdOn = row["LastUpdOn"].ToString();
+            }
+            else
+            {
+                obj = null;
+            }
+
+            return obj;
+        }
+
+
+
+
         public Boolean BBInfoUpdate(string BillboardID, string BillboardCode, string AddressLn1, string AddressLn2, string City, string Country,string latitude,string Longtitude, string postalCode, string lastUpdBy, string lastUpdOn)
         {
             Boolean result;
