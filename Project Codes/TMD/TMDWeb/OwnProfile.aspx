@@ -85,7 +85,7 @@
 
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        <h1 class="page-header">Profile</h1>
+                        <h1 class="page-header"> My Profile</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
