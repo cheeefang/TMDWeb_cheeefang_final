@@ -62,7 +62,9 @@
 
                         <div class="table-responsive">
                             <%--                        <table class="table table-striped table-bordered table-hover" style="width: 100%">--%>
-                            <asp:GridView ID="GridView1" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Width="100%" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" HorizontalAlign="Center" DataKeyNames="AdvID">
+                            <asp:GridView ID="GridView1" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Width="100%" 
+                                BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px"
+                                CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" HorizontalAlign="Center" DataKeyNames="AdvID" PageSize="10"  OnPreRender="GridView1_PreRender">
                                 <AlternatingRowStyle HorizontalAlign="Center" />
                                 <Columns>
 
@@ -113,7 +115,7 @@
                                 <EmptyDataRowStyle HorizontalAlign="Center" />
                                 <FooterStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Center" />
                                 <HeaderStyle BackColor="#848c8E" Font-Bold="True" ForeColor="#f1f2ee" HorizontalAlign="Center" />
-                                <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Center" />
+                                <PagerStyle BackColor="White"  ForeColor="#85C1E9" HorizontalAlign="Left"  />
                                 <RowStyle ForeColor="#435058" Height="20px" Width="30px" HorizontalAlign="Center" />
                                 <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
                                 <SortedAscendingCellStyle BackColor="#F1F1F1" HorizontalAlign="Center" />
@@ -121,6 +123,7 @@
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" HorizontalAlign="Center" />
                                 <SortedDescendingHeaderStyle BackColor="#00547E" HorizontalAlign="Center" />
                             </asp:GridView>
+                            <asp:Label ID="Label1" style="color:darkslateblue" runat="server" Text="Label"></asp:Label>
                             <%--                            </table>--%>
                         </div>
                         <!-- /.table-responsive -->

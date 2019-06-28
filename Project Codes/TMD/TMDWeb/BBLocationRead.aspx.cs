@@ -149,5 +149,10 @@ namespace targeted_marketing_display
 
 
 
+
+        protected void GridView1_PreRender(object sender, EventArgs e)
+        {
+            Label1.Text = "Displaying Page " + (GridView1.PageIndex + 1).ToString() + " of " + GridView1.PageCount.ToString();
+        }
     }
 }

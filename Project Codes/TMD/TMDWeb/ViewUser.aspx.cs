@@ -8,6 +8,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Text;
+using PagedList;
+using PagedList.Mvc;
 using targeted_marketing_display.App_Code;
 
 
@@ -20,6 +22,7 @@ namespace targeted_marketing_display
 
             if (!IsPostBack)
             {
+               
                 Database db = new Database();
 
                 SqlCommand cmd = new SqlCommand("Select * from [User] WHERE Type != @paraType and [User].Status = 1");
@@ -131,6 +134,11 @@ namespace targeted_marketing_display
 
             //gvUser.DataSource = ds;
             gvUser.DataBind();
+        }
+
+        protected void gvUser_PreRender(object sender, EventArgs e)
+        {
+            LabelPaging.Text = "Displaying Page " + (gvUser.PageIndex + 1).ToString() + " of " + gvUser.PageCount.ToString();
         }
     }
 }

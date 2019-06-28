@@ -63,7 +63,8 @@
 
                         <div class="table-responsive">
                             <%--                        <table class="table table-striped table-bordered table-hover" style="width: 100%">--%>
-                            <asp:GridView ID="GridView1" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False"  Width="100%" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" HorizontalAlign="Center" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" DataKeyNames="AdvID">
+                            <asp:GridView ID="GridView1" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False"  Width="100%" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3"
+                                DataSourceID="SqlDataSource1" AllowPaging="True" HorizontalAlign="Center" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" DataKeyNames="AdvID" OnPreRender="GridView1_PreRender" PageSize="10">
                                  <AlternatingRowStyle HorizontalAlign="Center" />
                                  <Columns>
 
@@ -109,6 +110,7 @@
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" HorizontalAlign="Center" />
                                 <SortedDescendingHeaderStyle BackColor="#00547E" HorizontalAlign="Center" />
                             </asp:GridView>
+                            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                             <%--                            </table>--%>
                         </div>
                         <!-- /.table-responsive -->

@@ -55,9 +55,12 @@
                         <div class="table-responsive">                       
 
                           <%--                        <table class="table table-striped table-bordered table-hover" style="width: 100%">--%>
-                            <asp:GridView ID="GridView3" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Height="100%" Width="100%" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1" >
+                            <asp:GridView ID="GridView3" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Height="100%" Width="100%"
+                                BackColor="White" BorderColor="#CCCCCC" BorderStyle="None"
+                                BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" OnPreRender="GridView3_PreRender" PageSize="10" 
+                                OnSelectedIndexChanged="GridView3_SelectedIndexChanged">
 
-
+                           
 
                                 <Columns>
 
@@ -127,14 +130,10 @@
                                         <ItemStyle Width="5%" HorizontalAlign="Center" Wrap="True" VerticalAlign="Middle" />
                                         </asp:TemplateField>
 
-                                   
-
-
-
                                 </Columns>
                                 <FooterStyle BackColor="White" ForeColor="#000066" />
                                 <HeaderStyle BackColor="#848c8E" Font-Bold="True" ForeColor="#f1f2ee" HorizontalAlign="Center" Wrap="False" />
-                                <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                                <PagerStyle BackColor="White" ForeColor="#85C1E9" HorizontalAlign="Left" />
                                 <RowStyle ForeColor="#435058" />
                                 <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
                                 <SortedAscendingCellStyle BackColor="#F1F1F1" />
@@ -142,6 +141,7 @@
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                                 <SortedDescendingHeaderStyle BackColor="#00547E" />
                             </asp:GridView>
+                            <asp:Label ID="Label1" style="color:darkslateblue" runat="server" Text="Label"></asp:Label>
                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [Name], [Industry], [CompanyID] FROM [Company] where status=1" FilterExpression="Name LIKE '%{0}%' OR Industry LIKE '%{0}%'">
                                 <FilterParameters>
                                             <asp:ControlParameter ControlID="tbSearch" Name="Name" PropertyName="Text" />

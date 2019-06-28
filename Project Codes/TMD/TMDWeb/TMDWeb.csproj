@@ -1761,6 +1761,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="CreateNewUser.aspx" />
+    <Content Include="css\gridview.css" />
     <Content Include="css\TMD.css" />
     <Content Include="FAQ.aspx" />
     <Content Include="FeedbackAdv.aspx" />

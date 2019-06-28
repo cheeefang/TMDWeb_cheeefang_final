@@ -87,7 +87,7 @@
                         <div class="table-responsive">
                             <%--                        <table class="table table-striped table-bordered table-hover" style="width: 100%">--%>
 
-                            <asp:GridView ID="GridView1" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Height="100%" Width="100%" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource4">
+                            <asp:GridView ID="GridView1" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Height="100%" Width="100%" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource4" AllowPaging="True" OnPreRender="GridView1_PreRender" PageSize="10">
                                 <Columns>
 
                                     <asp:TemplateField Visible="false">
@@ -121,7 +121,11 @@
 
                                             <asp:LinkButton ID="viewBtn" OnCommand="infoBtn_Command" runat="server" CommandName="BillboardAdInfo" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
 
+
                                         <i class="fas fa-eye"></i>
+
+                                            
+
 
                                         </asp:LinkButton>
                                       
@@ -136,7 +140,10 @@
                                         <itemtemplate>
                                  
                                         <asp:LinkButton ID="editBtn" OnCommand="editBtn_Command" runat="server" CommandName="BillboardUpdateInfo" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
+
                                         <i class="fa fa-edit"></i>
+                                            
+
                                             </asp:LinkButton>
                                   
                                          </itemtemplate>
@@ -155,7 +162,10 @@
 
                                             
                                         <asp:LinkButton ID="DeleteBtn" OnCommand="btnDelete_Command" runat="server" CommandName="DeleteBBMessage" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
+
                                              <i class="fa fa-trash"></i>
+                                             
+
                                              </asp:LinkButton>
                                       
 
@@ -180,6 +190,8 @@
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                                 <SortedDescendingHeaderStyle BackColor="#00547E" />
                             </asp:GridView>
+
+                            <asp:Label ID="Label1" style="color:darkslateblue" runat="server" Text="Label"></asp:Label>
 
                             <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT BillboardID,BillboardCode, Latitude ,Longtitude ,(( AddressLn1) + ' '+( AddressLn2 )+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address FROM BillboardLocation where status=1 " FilterExpression="BillboardCode LIKE '%{0}%' OR Address LIKE '%{0}%' OR convert(Latitude,'System.String') LIKE '%{0}%' OR convert(Longtitude,'System.String') LIKE '%{0}%'">
                                  <FilterParameters>
@@ -284,7 +296,7 @@
                                 </Columns>
                                 <FooterStyle BackColor="White" ForeColor="#000066" />
                                 <HeaderStyle BackColor="#848c8E" Font-Bold="True" ForeColor="#f1f2ee" />
-                                <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                                <PagerStyle BackColor="White" ForeColor="#85C1E9" HorizontalAlign="Left" />
                                 <RowStyle ForeColor="#435058" />
                                 <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
                                 <SortedAscendingCellStyle BackColor="#F1F1F1" />

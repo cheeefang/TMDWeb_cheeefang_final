@@ -41,7 +41,9 @@
                 <div class="row">
 
                     <div class="col-lg-12">
-                        <h1 class="page-header"> View User</h1>
+                        <h1 class="page-header"> 
+                            
+                            View User</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -55,7 +57,9 @@
                     </button>
                 </div>
 
+       
                 <div class="row">
+                     <div class="col-lg-6">
                     <div class="input-group custom-search-form">
                   <div style="padding: 20px; float: left; width:30%;">
                                           <p class="input-group" style="width:350px;margin-left:-20px;">
@@ -67,9 +71,34 @@
                                             </p>
                                     </div>
             </div>
+                         </div>
             
 
-                            <asp:GridView ID="gvUser" runat="server" CssClass="table table-striped table-bordered table-hover" AutoGenerateColumns="False" Height="100%" Width="100%" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1"  >
+                                        <div class="col-lg-6">
+                        </br>
+                        <a href="CreateNewUser.aspx" class="btn btn-primary nextBtn pull-right" type="button"> <b>New User </b> </a>
+                    </div>
+                </div>
+
+
+                
+
+                 <div runat="server" class="alert alert-success" id="Div1" visible="False">
+                    <strong>Success!</strong> 
+                    <asp:Label runat="server" ID="Label1"></asp:Label>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+
+
+
+
+
+                            <asp:GridView ID="gvUser" runat="server" CssClass="table table-striped table-bordered table-hover" AutoGenerateColumns="False" Height="100%" Width="100%" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1"
+                                AllowPaging="true"  PageSize="10" OnPreRender="gvUser_PreRender">
+                               
                                 <Columns>
 
                                      <asp:TemplateField Visible="false">
@@ -135,15 +164,12 @@
                                         <ControlStyle Height="50%" />
                                         <HeaderStyle HorizontalAlign="Center" Wrap="False" />
                                         <ItemStyle Width="5%" HorizontalAlign="Center" Wrap="True" VerticalAlign="Middle" />
-                                  </asp:templatefield>
-                                    
-                                    
-                                    
+                                  </asp:templatefield>                                    
 
                                 </Columns>
                                 <FooterStyle BackColor="White" ForeColor="#000066" />
                                 <HeaderStyle BackColor="#848c8E" Font-Bold="True" ForeColor="#f1f2ee" />
-                                <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                                <PagerStyle BackColor="White" ForeColor="#85C1E9" HorizontalAlign="Left" />
                                 <RowStyle ForeColor="#435058" />
                                 <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
                                 <SortedAscendingCellStyle BackColor="#F1F1F1" />
@@ -152,7 +178,7 @@
                                 <SortedDescendingHeaderStyle BackColor="#00547E" />
                             </asp:GridView>
 
-                
+                <asp:Label ID="LabelPaging" runat="server" Text="Label"></asp:Label>
 
                 <div class="row">
 

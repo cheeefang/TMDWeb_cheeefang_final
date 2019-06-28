@@ -19,8 +19,7 @@ namespace targeted_marketing_display
         {
             if (!IsPostBack)
             {
-                
-              
+                           
                 Company_Management coMgmt = new Company_Management();
                 DataTable dt = coMgmt.CoInfoRead();
 
@@ -110,7 +109,17 @@ namespace targeted_marketing_display
 
         }
 
-        
 
+
+
+        protected void GridView3_PreRender(object sender, EventArgs e)
+        {
+            Label1.Text = "Displaying Page " + (GridView3.PageIndex + 1).ToString() + " of " + GridView3.PageCount.ToString();
+        }
+
+        protected void GridView3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

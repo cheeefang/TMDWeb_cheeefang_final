@@ -11,6 +11,9 @@
     <meta name="author" content="NYP SIT">
 
     <title>Targeted Marketing Display Administration</title>
+    <!-- Custom Pagination CSS-->
+    <link href="css/gridview.css" rel="stylesheet" />
+
 
     <!-- Custom Theme JavaScript -->
     <script src="js/jquery.min.js"></script>
@@ -114,29 +117,19 @@
                         
                      
 
-                        <li>
 
-                            <a href="CreateNewUser.aspx"><i class="fas fa-users"></i> New User </a>
+                    
 
-                        </li>
-
-                        <li>
-
-                            <a href="#"><i class="fa fa-building fa-fw"></i> Company <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-
-                                <li>                            
+                          
+                                <li>
+                                                       
                             <a href="CoInfoRead.aspx"><i class="fa fa-building fa-fw"></i> Company Information </a>
                                </li>
 
-                                <li>                            
-                            <a href="CoInfoCreate.aspx"><i class="fa fa-building fa-fw"></i> New Company </a>
-                               </li>
+                            
 
                                                 
 
-                            </ul>
-                            </li>
                         
                         
                         
