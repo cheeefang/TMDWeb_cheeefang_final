@@ -22,7 +22,7 @@
                     </button>
                 </div>
 
-                <div runat="server" class="alert alert-warning" id="alertWarning" visible="False">
+                <div runat="server" class="alert alert-danger" id="alertWarning" visible="False">
                     <strong>Warning!</strong>
                     <asp:Label ID="msgWarning" runat="server"></asp:Label>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">

@@ -58,7 +58,7 @@
     <form runat="server">
     
             <div class="container" style="height: 100%">            
-                <div runat="server" class="alert alert-warning" id="alertWarning" visible="False" style="margin-top: 10px;">
+                <div runat="server" class="alert alert-danger" id="alertWarning" visible="False" style="margin-top: 10px;">
                     <strong>Warning!</strong>
                     <asp:Label ID="warningLocation" runat="server"></asp:Label>
                 </div>

@@ -23,8 +23,8 @@
                     <strong>Success!</strong> Company Information has been Updated.
                 </div>
                
-                <div runat="server" class="alert alert-warning" id="alertWarning" visible="False">
-                    <strong>Warning!</strong> Nothing was updated. 
+                <div runat="server" class="alert alert-danger" id="alertWarning" visible="False">
+                    <strong>Warning!</strong> Update Unsuccessful
                 </div>
 
             <br />

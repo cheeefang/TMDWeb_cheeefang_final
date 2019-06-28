@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 using System.Text;
 using CoInfoMgmt;
 using targeted_marketing_display.App_Code;
-
+using System.Configuration;
 namespace targeted_marketing_display
    
 {
@@ -19,7 +19,7 @@ namespace targeted_marketing_display
         {
             if (!IsPostBack)
             {
-                           
+                
                 Company_Management coMgmt = new Company_Management();
                 DataTable dt = coMgmt.CoInfoRead();
 
@@ -28,9 +28,23 @@ namespace targeted_marketing_display
             }
         }
 
-        protected void adsBtn_Click(object sender, EventArgs e)
+        protected void adsBtn_Command(object sender, CommandEventArgs e)
         {
-            Response.Redirect("##");
+            if (e.CommandName== "AdvertInfo")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                GridViewRow row = GridView3.Rows[index];
+                LinkButton lbButton1 = sender as LinkButton;
+                GridViewRow gvRow1 = (GridViewRow)lbButton1.NamingContainer;
+                //Need to Retrieve CompanyID to edit user
+                Label lb_CompanyID = (Label)gvRow1.FindControl("lb_CompanyID");
+
+                Session["CompanyID"] = lb_CompanyID.Text;
+
+
+                Response.Redirect("CompanyAdvertInfo.aspx");
+
+            }
 
         }
         protected void btnDelete_Command(object sender, CommandEventArgs e)

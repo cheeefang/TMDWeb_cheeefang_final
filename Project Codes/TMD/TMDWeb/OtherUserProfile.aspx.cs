@@ -19,7 +19,7 @@ namespace targeted_marketing_display
         {
             User userObj = new User();
             UserManagement uDao = new UserManagement();
-
+            
 
             userObj = uDao.getUserByID(Session["SelectedID"].ToString());
 

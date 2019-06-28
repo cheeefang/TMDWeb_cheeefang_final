@@ -22,7 +22,7 @@
                     <strong>Success!</strong> New Company Information has been created.
                 </div>
                
-                <div runat="server" class="alert alert-warning" id="alertWarning" visible="False">
+                <div runat="server" class="alert alert-danger" id="alertWarning" visible="False">
                     <strong>Warning!</strong>  <asp:Label ID="warningLocation" runat="server"></asp:Label>
                 </div>
                

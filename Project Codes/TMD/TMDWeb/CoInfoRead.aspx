@@ -19,7 +19,7 @@
                 </div>
                 <!-- /.row -->
 
-                <br />
+   
                  <div class="row">
                        <div class="col-lg-6">
                    <div class="input-group custom-search-form" style="width: 50%">
@@ -110,7 +110,7 @@
                                       <asp:TemplateField HeaderText="Adverts">
                                         <ItemTemplate>
 
-                                        <asp:LinkButton ID="adsBtn" OnClick="adsBtn_Click" runat="server">
+                                        <asp:LinkButton ID="adsBtn" OnCommand="adsBtn_Command" runat="server" CommandName="AdvertInfo" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
                                         <i class="fa fa-folder"></i>
                                             </asp:LinkButton>
                                        </ItemTemplate>

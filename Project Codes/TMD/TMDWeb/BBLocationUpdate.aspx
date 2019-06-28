@@ -29,7 +29,7 @@
                     <strong>Success!</strong> Location has been updated.
                 </div>
 
-                <div runat="server" class="alert alert-warning" id="alertWarning" visible="False">
+                <div runat="server" class="alert alert-danger" id="alertWarning" visible="False">
                     <strong>Warning!</strong> Nothing was updated. 
                 </div>
 
