@@ -27,7 +27,7 @@
                 <!--button-->
                 <div class="row">
                     <div class="col-lg-12" style="margin-top:15px;">
-                        <h1 class="page-header">View Advertisement</h1>
+                        <h1 class="page-header">Advertisements Listing</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>

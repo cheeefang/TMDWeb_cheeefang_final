@@ -105,7 +105,7 @@
 
                         <li>
 
-                            <a href="OwnProfile.aspx"><i class="fa fa-user fa-fw"></i> Profile </a>
+                            <a href="OwnProfile.aspx"><i class="fa fa-user fa-fw"></i> Profile Listing</a>
 
                         </li>
 
@@ -123,7 +123,7 @@
                           
                                 <li>
                                                        
-                            <a href="CoInfoRead.aspx"><i class="fa fa-building fa-fw"></i> Company Information </a>
+                            <a href="CoInfoRead.aspx"><i class="fa fa-building fa-fw"></i> Company Listing </a>
                                </li>
 
                             
@@ -140,28 +140,12 @@
                             
                         </li>
 
-
-                        <li>
-
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Advertisement<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-
                                 <li>
-                                    <a href="Recordlist_Admin.aspx"><i class="fa fa-database fa-fw"></i> Existing Ad </a>
+                                    <a href="Recordlist_Admin.aspx"><i class="fa fa-sitemap fa-fw"></i> Advertisement Listing </a>
                                 </li>
 
 
-                                
-
-                              
-                            </ul>
-                            <!-- /.nav-first-level -->
-
-                        </li>
-
-                         <li>
-                                    <a href="AdFeedback.aspx"><i class="fa fa-bar-chart-o fa-fw"></i> Advertisement Feedback</a>
-                                </li>
+                                                      
 
                          <li>
                                     <a href="Logout.aspx"><i class="fas fa-sign-out-alt"></i> Logout</a>
