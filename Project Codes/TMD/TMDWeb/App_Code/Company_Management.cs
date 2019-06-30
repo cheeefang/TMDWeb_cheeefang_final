@@ -153,40 +153,7 @@ namespace CoInfoMgmt
         }
 
 
-        public CompanyAdverts getCompanyAdvertsByCompanyID(string CompanyID)
-        {
-            SqlCommand cmd = new SqlCommand("Select * from [Company] inner join [Advertisement] on [Company].CompanyID=[Advertisement].CompanyID  where  [Advertisement].status =1 ");
-            cmd.Parameters.AddWithValue("@paraCompanyID", CompanyID);
-            DataTable dt = dbConnection.getDataTable(cmd);
-
-            CompanyAdverts obj = new CompanyAdverts();
-
-            int rec_cnt = dt.Rows.Count;
-            if (rec_cnt > 0)
-            {
-                DataRow row = dt.Rows[0];
-          
-                obj.AdvName = row["Name"].ToString();
-                obj.ItemType = row["ItemType"].ToString();
-                obj.CompanyID = Convert.ToInt32(row["companyID"]);
-                obj.StartDate= row["StartDate"].ToString();
-                obj.EndDate = row["EndDate"].ToString();
-
-
-                obj.status = Convert.ToInt32(row["Status"]);
-                obj.CreatedBy = Convert.ToInt32(row["CreatedBy"]);
-                obj.CreatedOn = row["CreatedOn"].ToString();
-                obj.LastUpdBy = row["LastUpdBy"].ToString();
-                obj.LastUpdOn = row["LastUpdOn"].ToString();
-            }
-            else
-            {
-                obj = null;
-            }
-
-            return obj;
-        }
-
+       
 
 
 

@@ -21,32 +21,51 @@ namespace targeted_marketing_display
 
             if (!IsPostBack)
             {
-                CompanyAdverts CompanyObj = new CompanyAdverts();
-                Company_Management cDao = new Company_Management();
+                // conn and reader declared outside try
+                // block for visibility in finally block
+                SqlConnection conn = null;
+                SqlDataReader reader = null;
 
-                CompanyObj = cDao.getCompanyAdvertsByCompanyID(Session["CompanyID"].ToString());
-                foreach (GridViewRow gr in GridView1.Rows)
-                {
+                string inputCity = "London";
+              
+                    // instantiate and open connection
+                    conn = new
+                        SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                    conn.Open();
 
-                    GridView1.Rows[gr.RowIndex].Cells[0].Text = CompanyObj.AdvName.ToString();
-                    GridView1.Rows[gr.RowIndex].Cells[1].Text = CompanyObj.ItemType.ToString();
-                    GridView1.Rows[gr.RowIndex].Cells[2].Text = CompanyObj.StartDate.ToString();
-                    GridView1.Rows[gr.RowIndex].Cells[3].Text =CompanyObj.EndDate.ToString();
-                        
-                }
+                  
 
+                    // 1. declare command object with parameter
+                    SqlCommand cmd = new SqlCommand(
+                        "select [Company].Name,[Advertisement].Name,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
+                        "where [ComPany].CompanyID=@ID ", conn);
 
+                    // 2. define parameters used in command object
+                    SqlParameter param = new SqlParameter();
+                    param.ParameterName = "@ID";
+                    param.Value = Session["CompanyID"].ToString();
+
+                    // 3. add new parameter to command object
+                    cmd.Parameters.Add(param);
+
+                    // get data stream
+                    reader = cmd.ExecuteReader();
+
+                   
+                    GridView1.DataSource = reader;
+                    GridView1.DataBind();
 
 
 
             }
-
-
         }
 
-        protected void GridView1_PreRender(object sender, EventArgs e)
-        {
-           
-        }
+
+
+
+
     }
+
+
+     
 }
