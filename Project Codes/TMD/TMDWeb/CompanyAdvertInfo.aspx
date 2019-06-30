@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Company Adverts Listing</title>
 </head>
 <body>
  
@@ -13,6 +13,12 @@
             
 
     <form id="form1" runat="server">
+          <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Company Adverts Listing</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
         <asp:GridView ID="GridView1" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <EditRowStyle BackColor="#999999" />
@@ -32,6 +38,24 @@
             
 
     </form>
+          <p>
+ 
+        
+       
+            
+
+          <asp:Label ID="ErrorMessage" runat="server" visible="false" Text="This Company has yet to create an Advertisement."></asp:Label>
+ 
+        
+       
+            
+
+          </p>
+ 
+        
+       
+            
+
     </form>
-</body>
+    </body>
 </html>
