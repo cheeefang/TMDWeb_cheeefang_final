@@ -26,7 +26,7 @@ namespace targeted_marketing_display
                 SqlConnection conn = null;
                 SqlDataReader reader = null;
 
-                string inputCity = "London";
+               
               
                     // instantiate and open connection
                     conn = new
@@ -67,8 +67,13 @@ namespace targeted_marketing_display
 
 
 
+
+        protected void GridView1_PreRender(object sender, EventArgs e)
+        {
+            LabelPaging.Text = "Displaying Page " + (GridView1.PageIndex + 1).ToString() + " of " + GridView1.PageCount.ToString();
+        }
     }
 
 
-     
+
 }

@@ -20,13 +20,49 @@ namespace targeted_marketing_display
         {
             if (!IsPostBack)
             {
-                Billboard BillboardObj = new Billboard();
-                Billboard_Management bDao = new Billboard_Management();
-                //Company CompanyObj = new Company();
-                // Company_Management CDao = new Company_Management();
+                SqlConnection conn = null;
+                SqlDataReader reader = null;
 
-                BillboardObj = bDao.getBillboardByID(Session["BillboardID"].ToString());
+
+
+                // instantiate and open connection
+                conn = new
+                    SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                conn.Open();
+
+
+
+                // 1. declare command object with parameter
+                SqlCommand cmd = new SqlCommand(
+                    " select  [Advertisement].Name,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join" +
+                    " [AdvertisementLocation] on [Advertisement].AdvID=[AdvertisementLocation].AdvID join " +
+                    "[BillboardLocation] on[AdvertisementLocation].BillboardID =[BillboardLocation].BillboardID " +
+                    "where [Advertisement].status=1 and [BillboardLocation].BillboardID=@ID", conn);
+
+                // 2. define parameters used in command object
+                SqlParameter param = new SqlParameter();
+                param.ParameterName = "@ID";
+                param.Value = Session["BillboardID"].ToString();
+
+                // 3. add new parameter to command object
+                cmd.Parameters.Add(param);
+
+                // get data stream
+                reader = cmd.ExecuteReader();
+
+
+                GridView1.DataSource = reader;
+                GridView1.DataBind();
+                if (GridView1.Rows.Count == 0)
+                {
+                    ErrorMessage.Visible = true;
+                }
             }
+        }
+
+        protected void GridView1_PreRender(object sender, EventArgs e)
+        {
+            LabelPaging.Text = "Displaying Page " + (GridView1.PageIndex + 1).ToString() + " of " + GridView1.PageCount.ToString();
         }
     }
 }
