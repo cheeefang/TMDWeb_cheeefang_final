@@ -57,7 +57,7 @@
 </head>
 <body>
 
-        <div id="wrapper">
+        <div id="wrapper" style="min-height: 856px;">
             <!-- Admin Side Navigation -->
             <div runat="server" id="adminDiv" >
                 <!-- Admin Navigation -->

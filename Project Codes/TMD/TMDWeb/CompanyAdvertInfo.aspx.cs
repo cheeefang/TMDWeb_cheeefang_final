@@ -60,7 +60,7 @@ namespace targeted_marketing_display
                      //List<> ds = new ();
                     //da.Fill(ds);
 
-                GridView1.DataSource = reader;
+                    GridView1.DataSource = reader;
                     GridView1.DataBind();
                     if (GridView1.Rows.Count == 0)
                     {

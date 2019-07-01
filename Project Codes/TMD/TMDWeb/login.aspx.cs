@@ -45,7 +45,7 @@ namespace targeted_marketing_display
                 int pswdMatch = 1;
 
                 //noted,CheEe(002):comment this to bypass the login!!!
-                /**********************************************
+               
                 string pswdHash = userObj.PasswordHash;
 
                 // convert into bytes
@@ -63,7 +63,7 @@ namespace targeted_marketing_display
                 for (int i = 0; i < 20; i++)
                     if (hashbytes[i + 16] != hash[i])
                         pswdMatch = 0;
-                **********************************************/
+          
 
 
                 if (pswdMatch == 1)

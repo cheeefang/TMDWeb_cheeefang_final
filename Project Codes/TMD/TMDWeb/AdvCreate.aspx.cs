@@ -14,7 +14,7 @@ namespace targeted_marketing_display
 {
     public partial class AdvCreate : System.Web.UI.Page
     {
-        Database dbConnection = new Database();
+
         SqlConnection insertconnection = new SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
         string dbConnStr = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
