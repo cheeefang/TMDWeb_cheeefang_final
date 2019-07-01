@@ -32,6 +32,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" align="left">
     <form runat="server">
 
+        <script type="text/javascript">
+// When the user clicks on <div>, open the popup
+function myFunction() {
+  var popup = document.getElementById("DeleteBtn");
+  popup.classList.toggle("show");
+}
+</script>
 
 
         <div id="adminDiv" runat="server" align="left">
