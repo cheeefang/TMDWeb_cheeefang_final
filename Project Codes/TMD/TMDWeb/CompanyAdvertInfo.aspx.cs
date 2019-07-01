@@ -16,23 +16,29 @@ namespace targeted_marketing_display
 {
     public partial class CompanyAdvertInfo : System.Web.UI.Page
     {
+
+
+        
         protected void Page_Load(object sender, EventArgs e)
         {
+            // conn and reader declared outside try
+            // block for visibility in finally block
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+
+
+
+            // instantiate and open connection
+            conn = new
+                SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+            conn.Open();
+
+
+      
 
             if (!IsPostBack)
             {
-                // conn and reader declared outside try
-                // block for visibility in finally block
-                SqlConnection conn = null;
-                SqlDataReader reader = null;
-
-               
               
-                    // instantiate and open connection
-                    conn = new
-                        SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
-                    conn.Open();
-
                   
 
                     // 1. declare command object with parameter
@@ -44,15 +50,17 @@ namespace targeted_marketing_display
                     SqlParameter param = new SqlParameter();
                     param.ParameterName = "@ID";
                     param.Value = Session["CompanyID"].ToString();
-
+                    List<DataList> newList = new List<DataList>();
                     // 3. add new parameter to command object
                     cmd.Parameters.Add(param);
 
                     // get data stream
                     reader = cmd.ExecuteReader();
+                   // SqlDataAdapter da = new SqlDataAdapter(cmd);
+                     //List<> ds = new ();
+                    //da.Fill(ds);
 
-                   
-                    GridView1.DataSource = reader;
+                GridView1.DataSource = reader;
                     GridView1.DataBind();
                     if (GridView1.Rows.Count == 0)
                     {
@@ -71,6 +79,12 @@ namespace targeted_marketing_display
         protected void GridView1_PreRender(object sender, EventArgs e)
         {
             LabelPaging.Text = "Displaying Page " + (GridView1.PageIndex + 1).ToString() + " of " + GridView1.PageCount.ToString();
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            GridView1.DataBind();
         }
     }
 

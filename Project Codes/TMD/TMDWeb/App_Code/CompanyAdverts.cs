@@ -15,9 +15,7 @@ namespace targeted_marketing_display.App_Code
     public class CompanyAdverts
     {
 
-         ArrayList AdvertArrayList=
-         new ArrayList { "CompanyID", "Industry", "Name", "Status", "CreatedBy", "CreatedOn" , "LastUpdBy", "LastUpdOn" };
-
+    
     }
 
 
