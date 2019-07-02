@@ -8,8 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Text;
-using PagedList;
-using PagedList.Mvc;
+
 using targeted_marketing_display.App_Code;
 
 
