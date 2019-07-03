@@ -301,7 +301,7 @@
             </div>
             <!--end of user nav bar-->
 
-            <div id="page-wrapper" style="min-height: 671px;">
+            <div id="page-wrapper" >
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
             </div>

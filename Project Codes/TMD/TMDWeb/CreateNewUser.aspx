@@ -98,7 +98,7 @@
                     </div>
                 </div>
 
-                <div runat="server" id="nUser" visible="false">
+                <div runat="server" id="nUser" visible="true">
                     <div class="col-lg-6">
 
                         <div class="form-group">
