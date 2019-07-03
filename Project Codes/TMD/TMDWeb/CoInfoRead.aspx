@@ -57,7 +57,7 @@
                           <%--                        <table class="table table-striped table-bordered table-hover" style="width: 100%">--%>
                             <asp:GridView ID="GridView3" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Height="100%" Width="100%"
                                 BackColor="White" BorderColor="#CCCCCC" BorderStyle="None"
-                                BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" OnPreRender="GridView3_PreRender" PageSize="10" 
+                                BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" OnPreRender="GridView3_PreRender" 
                                 OnSelectedIndexChanged="GridView3_SelectedIndexChanged">
 
                            
@@ -83,7 +83,7 @@
                                      <ItemStyle Width="50%" Wrap="False" VerticalAlign="Middle" HorizontalAlign="Left" />
 
                                       </asp:BoundField>
-                                    <asp:BoundField DataField="Industry" HeaderText="Industry" SortExpression="Industry" >
+                                    <asp:BoundField DataField="CodeDesc" HeaderText="Industry" SortExpression="CodeValue" >
 
                                         <ControlStyle Height="50%" />
                                         <HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" />
@@ -142,10 +142,12 @@
                                 <SortedDescendingHeaderStyle BackColor="#00547E" />
                             </asp:GridView>
                             <asp:Label ID="Label1" style="color:darkslateblue" runat="server" Text="Label"></asp:Label>
-                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [Name], [Industry], [CompanyID] FROM [Company] where status=1" FilterExpression="Name LIKE '%{0}%' OR Industry LIKE '%{0}%'">
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="select [Company].CompanyID,[CodeReferece].CodeValue,[Company].Name,[CodeReferece].CodeDesc from [Company] 
+inner join [CodeReferece] on [Company].Industry=[CodeReferece].CodeValue
+where [Company].Status=1" FilterExpression="Name LIKE '%{0}%' OR CodeDesc LIKE '%{0}%'">
                                 <FilterParameters>
                                             <asp:ControlParameter ControlID="tbSearch" Name="Name" PropertyName="Text" />
-                                            <asp:ControlParameter ControlID="tbSearch" Name="Indusrry" PropertyName="Text" />                                            
+                                            <asp:ControlParameter ControlID="tbSearch" Name="CodeValue" PropertyName="Text" />                                            
                                            
                                         </FilterParameters>        
 

@@ -20,11 +20,13 @@ namespace targeted_marketing_display
             if (!IsPostBack)
             {
                 
-                Company_Management coMgmt = new Company_Management();
-                DataTable dt = coMgmt.CoInfoRead();
+                    Company_Management coMgmt = new Company_Management();
+                    DataTable dt = coMgmt.CoInfoRead();
 
-                //GridView3.DataSource = dt;
-                GridView3.DataBind();
+                    //GridView3.DataSource = dt;
+                    GridView3.DataBind();
+                
+             
             }
         }
 
