@@ -9,6 +9,21 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
 
+   <script>
+        function deleteFunction() {
+
+            if (!confirm('Confirm Deletion of Company?')) {
+
+                return false;
+            }
+
+            else {
+                return true;
+            }
+        }
+</script>
+
+
         <div id="adminDiv">
           
                 <div class="row">
@@ -121,7 +136,7 @@
 
                                     <asp:TemplateField HeaderText="Delete">
                                         <ItemTemplate>
-                                    <asp:LinkButton ID="delBtn" OnCommand="btnDelete_Command" runat="server" CommandName="DeleteMessage" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
+                                    <asp:LinkButton ID="delBtn" OnCommand="btnDelete_Command"  OnClientClick="return deleteFunction();"  runat="server" CommandName="DeleteMessage" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
                                         <i class="fa fa-trash"></i>
                                             </asp:LinkButton>
                                     </ItemTemplate>

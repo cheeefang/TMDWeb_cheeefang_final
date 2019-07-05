@@ -38,6 +38,23 @@
 
         <form runat="server" id="deleteUser">
 
+
+     <script>
+        function deleteFunction() {
+
+            if (!confirm('Confirm Deletion of User?')) {
+
+                return false;
+            }
+
+            else {
+                return true;
+            }
+        }
+</script>
+
+
+
                 <div class="row">
 
                     <div class="col-lg-12">
@@ -152,7 +169,7 @@
                                         <itemtemplate>
 
                                             
-                                        <asp:LinkButton ID="DeleteBtn" OnCommand="btnDelete_Command" runat="server" CommandName="DeleteMessage" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
+                                        <asp:LinkButton ID="DeleteBtn" OnCommand="btnDelete_Command"   OnClientClick="return deleteFunction();" runat="server" CommandName="DeleteMessage" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
                                              <i class="fa fa-trash"></i>
                                              </asp:LinkButton>
                                       

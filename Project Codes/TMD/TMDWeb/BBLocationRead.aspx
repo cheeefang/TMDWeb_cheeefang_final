@@ -32,14 +32,19 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" align="left">
     <form runat="server">
 
-        <script type="text/javascript">
-// When the user clicks on <div>, open the popup
-function myFunction() {
-  var popup = document.getElementById("DeleteBtn");
-  popup.classList.toggle("show");
-}
-</script>
+    <script>
+        function deleteFunction() {
 
+            if (!confirm('Confirm Deletion of Billboard?')) {
+
+                return false;
+            }
+
+            else {
+                return true;
+            }
+        }
+</script>
 
         <div id="adminDiv" runat="server" align="left">
 
@@ -168,7 +173,7 @@ function myFunction() {
                                         <itemtemplate>
 
                                             
-                                        <asp:LinkButton ID="DeleteBtn" OnCommand="btnDelete_Command" runat="server" CommandName="DeleteBBMessage" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
+                                        <asp:LinkButton ID="DeleteBtn"  OnClientClick="return deleteFunction();"  OnCommand="btnDelete_Command" runat="server" CommandName="DeleteBBMessage" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
 
                                              <i class="fa fa-trash"></i>
                                              
