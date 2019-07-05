@@ -12,7 +12,7 @@
         }
     </script>
 
-    <script type="text/javascript">
+    <script type="text/javascript" language="javascript">
 
         function CheckCheck() {
 
@@ -39,6 +39,33 @@
 
         }
 
+        function HeaderCheckBoxClick(checkbox){
+        var gridView = document.getElementById("GridView1");
+        for (i = 1; i [ gridView.rows.length; i++) {
+            gridView.rows[i].cells[0].getElementsByTagName("INPUT")[0].checked = checkbox.checked;
+            }
+
+        }
+
+        
+        function ChildCheckBoxClick(checkbox){
+        var atleastOneCheckBoxUnchecked = false;
+        var gridView = document.getElementById("GridView1");
+
+        for (i = 1; i [ gridView.rows.length; i++){
+            if (gridView.rows[i].cells[0].getElementsByTagName("INPUT")[0].checked == false) 
+            {
+                atleastOneCheckBoxUnchecked = true;
+                break;
+            }
+        }
+
+        gridView.rows[0].cells[0].getElementsByTagName("INPUT")[0].checked = !atleastOneCheckBoxUnchecked;
+        }
+
+     
+
+
     </script>
 
     <style>
@@ -56,7 +83,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
-    
+ 
             <div class="container" style="height: 100%">            
                 <div runat="server" class="alert alert-danger" id="alertWarning" visible="False" style="margin-top: 10px;">
                     <strong>Warning!</strong>
@@ -92,10 +119,7 @@
 
             <div class="row">
                 
-                
-
-
-
+               
                 <div class="col-lg-6">
 
                     <div class="form-group">
@@ -236,13 +260,22 @@
                                         <Columns>
 
                                             
-                                            <asp:CommandField ShowSelectButton="True" />
+                                           <asp:TemplateField>
+
+                                                <ItemTemplate>
+                                                   <asp:Checkbox ID="CheckBoxSelector"   onclick="ChildCheckBoxClick(this);" runat="server" />
+                                               </ItemTemplate>
+                                               <HeaderTemplate>
+                                                   <asp:CheckBox ID="checkboxSelectAll" onclick="HeaderCheckBoxClick(this);" runat="server" />
+                                               </HeaderTemplate>
+                                              
+                                           </asp:TemplateField>
 
                                             
                                     <asp:TemplateField Visible="false">
                                         <ItemTemplate>
-                                           <asp:CheckBox ID="CheckBoxBB" runat="server" />
-                                        <!--   <asp:Label runat="server"  ID="lb_BillboardID" Text='<%# Bind("BillboardID") %>'></asp:Label> -->
+                                      
+                                       <asp:Label runat="server"  ID="lb_BillboardID" Text='<%# Bind("BillboardID") %>'></asp:Label> 
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
@@ -277,7 +310,7 @@
 
                                         </FilterParameters>
                                     </asp:SqlDataSource>
-
+                                         
                                    
                                     </div>
                                     <div class="modal-footer">
@@ -383,7 +416,11 @@
 
         </div>
 
+        <script type="text/javascript" >
+            
+       
 
+        </script>
 
     </form>
 

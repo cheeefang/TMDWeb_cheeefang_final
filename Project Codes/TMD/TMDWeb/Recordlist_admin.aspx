@@ -64,7 +64,7 @@
                             <%--                        <table class="table table-striped table-bordered table-hover" style="width: 100%">--%>
                             <asp:GridView ID="GridView1" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Width="100%" 
                                 BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px"
-                                CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" HorizontalAlign="Center" DataKeyNames="AdvID" PageSize="10"  OnPreRender="GridView1_PreRender">
+                                CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" HorizontalAlign="Center" DataKeyNames="AdvID"  OnPreRender="GridView1_PreRender">
                                 <AlternatingRowStyle HorizontalAlign="Center" />
                                 <Columns>
 
@@ -81,12 +81,9 @@
                                     <asp:BoundField DataField="Item" HeaderText="Item" SortExpression="Item"></asp:BoundField>
                                     <asp:BoundField DataField="ItemType" HeaderText="ItemType" SortExpression="ItemType"></asp:BoundField>
                                     <asp:BoundField DataField="Duration" HeaderText="Duration" SortExpression="Duration"></asp:BoundField>
-                                    <asp:BoundField DataField="companyID" HeaderText="companyID" SortExpression="companyID"></asp:BoundField>
+                               
                                     <asp:BoundField DataField="StartDate" HeaderText="StartDate" SortExpression="StartDate"></asp:BoundField>
                                     <asp:BoundField DataField="EndDate" HeaderText="EndDate" SortExpression="EndDate"></asp:BoundField>
-                                    <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status"  ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol"></asp:BoundField>
-                                    <asp:BoundField DataField="CreatedBy" HeaderText="CreatedBy" SortExpression="CreatedBy"  ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol"></asp:BoundField>
-                                     <asp:BoundField DataField="CreatedOn" HeaderText="CreatedOn" SortExpression="CreatedOn"  ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol"></asp:BoundField>
                                    
 
 
@@ -135,7 +132,7 @@
 
 
 
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [AdvID], [Name], [Item], [ItemType], [Duration], [companyID], [StartDate], [EndDate], [Status], [CreatedBy], [CreatedOn] FROM [Advertisement]" FilterExpression="Name LIKE '%{0}%' OR Item LIKE '%{0}%' OR convert(CreatedBy,'System.String') LIKE '%{0}%'">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [AdvID], [Name], [Item], [ItemType], [Duration],[StartDate], [EndDate]FROM [Advertisement]" FilterExpression="Name LIKE '%{0}%' OR Item LIKE '%{0}%' OR convert(CreatedBy,'System.String') LIKE '%{0}%'">
             <FilterParameters>
                                             <asp:ControlParameter ControlID="txtSearch" Name="Name" PropertyName="Text" />
                                             <asp:ControlParameter ControlID="txtSearch" Name="Item" PropertyName="Text" />                                            

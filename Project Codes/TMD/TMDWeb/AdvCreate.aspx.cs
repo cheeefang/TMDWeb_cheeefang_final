@@ -21,7 +21,7 @@ namespace targeted_marketing_display
         {
             if (!Page.IsPostBack)
             {
-                //string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
+                string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
                 SqlConnection sqlconn = new SqlConnection(dbConnStr);
                 string sqlquery = "SELECT * FROM [CodeReferece] WHERE ([CodeType] = @CodeType)";
                 SqlCommand cmd = new SqlCommand(sqlquery, sqlconn);
@@ -170,7 +170,7 @@ namespace targeted_marketing_display
                 DateTime edate = DateTime.Parse(endDateTB.Text);
                 
 
-                //string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
+                string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
                 SqlConnection sqlconn = new SqlConnection(dbConnStr);
                 String adv = "Insert into [Advertisement](Name,Item,ItemType,Duration,CompanyID,StartDate,EndDate,Status,CreatedBy,CreatedOn) Values(@Name,@Item,@ItemType,@Duration,@CompanyID,@StartDate,@EndDate,@Status,@CreatedBy,@CreatedOn)";
                 SqlCommand sqlcomm = new SqlCommand(adv);
@@ -190,9 +190,7 @@ namespace targeted_marketing_display
                 sqlcomm.ExecuteNonQuery();
                 sqlconn.Close();
 
-
-
-                //string maincon = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
+                string maincon = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
                 SqlConnection sqlcon = new SqlConnection(dbConnStr);
                 string sqlquery = "Insert into [AdvertisementCategory](AdvID,CategoryID) values(@AdvID,@CategoryID)";
                 SqlCommand sqlcom = new SqlCommand(sqlquery, sqlcon);
@@ -214,7 +212,7 @@ namespace targeted_marketing_display
 
 
 
-               // string mainconnn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
+                string mainconnn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
                 SqlConnection sqlconnn = new SqlConnection(dbConnStr);
                 string sqlqueryy = "Insert into [AdvertisementLocation](AdvID,BillboardID) values(@AdvID,@BillboardID)";
                 SqlCommand sqlcommm = new SqlCommand(sqlqueryy, sqlconnn);
@@ -238,7 +236,7 @@ namespace targeted_marketing_display
 
 
 
-                //string maincn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
+                string maincn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
                 SqlConnection sqlcn = new SqlConnection(dbConnStr);
                 string sqlque = "Insert into [AdvertisementAudience](AdvID,AgeID,GenderID) values(@AdvID,@AgeID,@GenderID)";
                 SqlCommand sqlcm = new SqlCommand(sqlque, sqlcn);
@@ -302,12 +300,11 @@ namespace targeted_marketing_display
                         sqlcm.Parameters.Clear();
 
                     }
-                   
 
                 }
                sqlcn.Close();
             }
-            Response.Redirect("AdrecordView.aspx");
+            Response.Redirect("recordlist_admin.aspx");
 
         }
 

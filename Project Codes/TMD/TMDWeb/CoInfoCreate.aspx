@@ -54,7 +54,7 @@
                             <asp:ListItem value="Manu">Manufacturing</asp:ListItem>
                             <asp:ListItem value="Sale">Sale</asp:ListItem>
                             <asp:ListItem value="Retail">Retail</asp:ListItem>
-                            <asp:ListItem value="Tran">Transport</asp:ListItem>
+                            <asp:ListItem value="Tran.">Transport</asp:ListItem>
                             <asp:ListItem value="House">House</asp:ListItem>
                             <asp:ListItem value="Rental">Rental</asp:ListItem>
                             <asp:ListItem value="Service">Service</asp:ListItem>
