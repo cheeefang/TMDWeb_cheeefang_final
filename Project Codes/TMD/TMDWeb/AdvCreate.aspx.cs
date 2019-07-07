@@ -78,7 +78,19 @@ namespace targeted_marketing_display
             //}
         }
 
-        
+        public int GetMaxIDAdvertisement()
+        {
+            int intID = 0;
+            SqlConnection co = new SqlConnection(dbConnStr);
+            SqlCommand cm = new SqlCommand("Select Max(AdvID) from Advertisement", co);
+            co.Open();
+            SqlDataReader dr = cm.ExecuteReader();
+            if (dr.Read())
+            {
+                intID = int.Parse(dr[0].ToString());
+            }
+            return intID + 1;
+        }
         public int GetMaxIDAdvAudience()
         {
             int intID = 0;
@@ -168,14 +180,15 @@ namespace targeted_marketing_display
 
                 DateTime sdate = DateTime.Parse(startDateTB.Text);
                 DateTime edate = DateTime.Parse(endDateTB.Text);
-                
 
+                int AdvertisementID = GetMaxIDAdvertisement();
                 string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
                 SqlConnection sqlconn = new SqlConnection(dbConnStr);
-                String adv = "Insert into [Advertisement](Name,Item,ItemType,Duration,CompanyID,StartDate,EndDate,Status,CreatedBy,CreatedOn) Values(@Name,@Item,@ItemType,@Duration,@CompanyID,@StartDate,@EndDate,@Status,@CreatedBy,@CreatedOn)";
+                String adv = "Insert into [Advertisement](AdvID,Name,Item,ItemType,Duration,CompanyID,StartDate,EndDate,Status,CreatedBy,CreatedOn) Values(@AdvID,@Name,@Item,@ItemType,@Duration,@CompanyID,@StartDate,@EndDate,@Status,@CreatedBy,@CreatedOn)";
                 SqlCommand sqlcomm = new SqlCommand(adv);
                 sqlcomm.Connection = sqlconn;
                 sqlconn.Open();
+                sqlcomm.Parameters.AddWithValue("@AdvID", AdvertisementID);
                 sqlcomm.Parameters.AddWithValue("@CreatedOn", DateTime.Now);
                 sqlcomm.Parameters.AddWithValue("@Name", adNameTB.Text);
                 sqlcomm.Parameters.AddWithValue("@Item", imagelink);
