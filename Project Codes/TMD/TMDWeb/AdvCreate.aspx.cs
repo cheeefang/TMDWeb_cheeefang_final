@@ -120,7 +120,7 @@ namespace targeted_marketing_display
             return intAdvId + 1;
         }
 
-        protected void Button_Confirm(object sender, EventArgs e)
+        protected void ButtonConfirm_Click(object sender, EventArgs e)
         {
 
             //initialise imagelink and getvalue
@@ -131,7 +131,7 @@ namespace targeted_marketing_display
             {
                 if (CheckBoxList2.Items[i].Selected)
 
-                    getvalue += CheckBoxList2.Items[i].Text + ",";
+                getvalue += CheckBoxList2.Items[i].Text + ",";
                 getvalue = getvalue.TrimEnd();
             }
 
@@ -190,7 +190,7 @@ namespace targeted_marketing_display
                 sqlcomm.ExecuteNonQuery();
                 sqlconn.Close();
 
-                string maincon = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
+       
                 SqlConnection sqlcon = new SqlConnection(dbConnStr);
                 string sqlquery = "Insert into [AdvertisementCategory](AdvID,CategoryID) values(@AdvID,@CategoryID)";
                 SqlCommand sqlcom = new SqlCommand(sqlquery, sqlcon);
@@ -212,7 +212,7 @@ namespace targeted_marketing_display
 
 
 
-                string mainconnn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
+          
                 SqlConnection sqlconnn = new SqlConnection(dbConnStr);
                 string sqlqueryy = "Insert into [AdvertisementLocation](AdvID,BillboardID) values(@AdvID,@BillboardID)";
                 SqlCommand sqlcommm = new SqlCommand(sqlqueryy, sqlconnn);
@@ -222,10 +222,10 @@ namespace targeted_marketing_display
                 
                 for (int i = 0; i < GridView1.Rows.Count; i++){
                     GridViewRow row = GridView1.Rows[i];
-                    bool chkbx = ((CheckBox)row.FindControl("CheckBox2")).Checked;
+                    bool chkbx = ((CheckBox)row.FindControl("CheckBoxSelector")).Checked;
                     if (chkbx)
                     {
-                        sqlcommm.Parameters.AddWithValue("@BillboardID", GridView1.Rows[i].Cells[6].Text);
+                        sqlcommm.Parameters.AddWithValue("@BillboardID", GridView1.Rows[i].Cells[2].Text);
                         sqlcommm.Parameters.AddWithValue("@AdvID", AdvId);
                         sqlcommm.ExecuteNonQuery();
                         sqlcommm.Parameters.Clear();
@@ -236,7 +236,6 @@ namespace targeted_marketing_display
 
 
 
-                string maincn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
                 SqlConnection sqlcn = new SqlConnection(dbConnStr);
                 string sqlque = "Insert into [AdvertisementAudience](AdvID,AgeID,GenderID) values(@AdvID,@AgeID,@GenderID)";
                 SqlCommand sqlcm = new SqlCommand(sqlque, sqlcn);
@@ -294,7 +293,7 @@ namespace targeted_marketing_display
                             sqlcm.Parameters.AddWithValue("@AgeID", "4");
                         }
                     
-
+                        
                         sqlcm.Parameters.AddWithValue("@AdvID", ID_audience);
                         sqlcm.ExecuteNonQuery();
                         sqlcm.Parameters.Clear();
@@ -307,6 +306,11 @@ namespace targeted_marketing_display
             Response.Redirect("recordlist_admin.aspx");
 
         }
+
+
+        
+
+
 
         protected void CategoryButton_Click(object sender, EventArgs e)
         {
@@ -344,7 +348,7 @@ namespace targeted_marketing_display
             {
                 if (gvr.RowType == DataControlRowType.DataRow)
                 {
-                    CheckBox cb = (CheckBox)(gvr.FindControl("CheckBox2"));
+                    CheckBox cb = (CheckBox)(gvr.FindControl("CheckBoxSelector"));
                     if (cb.Checked == true)
                     {
                         billboardDisplayTB.Text = billboardDisplayTB.Text + "," + gvr.Cells[1].Text;
@@ -361,6 +365,7 @@ namespace targeted_marketing_display
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
         }
+
 
 
     }

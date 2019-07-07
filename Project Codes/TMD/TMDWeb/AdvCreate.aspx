@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="AdvCreate.aspx.cs" Inherits="targeted_marketing_display.AdvCreate"  %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master"  EnableEventValidation="false" AutoEventWireup="true" CodeFile="AdvCreate.aspx.cs" Inherits="targeted_marketing_display.AdvCreate"  %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -38,35 +38,66 @@
             }
 
         }
-
-        function HeaderCheckBoxClick(checkbox){
-        var gridView = document.getElementById("GridView1");
-        for (i = 1; i [ gridView.rows.length; i++) {
-            gridView.rows[i].cells[0].getElementsByTagName("INPUT")[0].checked = checkbox.checked;
-            }
-
-        }
-
-        
-        function ChildCheckBoxClick(checkbox){
-        var atleastOneCheckBoxUnchecked = false;
-        var gridView = document.getElementById("GridView1");
-
-        for (i = 1; i [ gridView.rows.length; i++){
-            if (gridView.rows[i].cells[0].getElementsByTagName("INPUT")[0].checked == false) 
-            {
-                atleastOneCheckBoxUnchecked = true;
-                break;
+        function HeaderCheckBoxClick(checkbox) {
+            var gridview = document.getElementById("GridView1");
+            for (var i = 1; i<gridview.rows.length; i++) {
+                gridview.rows[i].cells[0].getElementsByTagName("INPUT")[0].checked = checkbox.checked;
             }
         }
 
-        gridView.rows[0].cells[0].getElementsByTagName("INPUT")[0].checked = !atleastOneCheckBoxUnchecked;
+        function ChildCheckBoxClick(checkbox) {
+            var atleastOneCheckBoxUnchecked = false;
+            var gridview = document.getElementById("GridView1");
+
+            for (var i = 1; i<gridview.rows.length; i++) {
+                if (gridview.rows[i].cells[0].getElementsByTagName("INPUT")[0].checked == false) {
+                    atleastOneCheckBoxUnchecked = true;
+                    break;
+                }
+            }
+
+            gridview.rows[0].cells[0].getElementsByTagName("INPUT")[0].checked = !atleastOneCheckBoxUnchecked;
         }
 
-     
 
-
+      
     </script>
+
+ <script type="text/javascript">
+        function checkAll(objRef) {
+            var GridView = objRef.parentNode.parentNode.parentNode;
+            var inputList = GridView.getElementsByTagName("input");
+            for (var i = 0; i < inputList.length; i++) {
+                 var row = inputList[i].parentNode.parentNode;
+                if (inputList[i].type == "checkbox" && objRef != inputList[i]) {
+                     if (objRef.checked) {
+                       inputList[i].checked = true;
+                     }
+                     else {
+                         inputList[i].checked = false;
+                     }
+                 }
+             }
+         }
+
+         function Check_Click(objRef) {
+             var row = objRef.parentNode.parentNode;
+             var GridView = row.parentNode;
+             var inputList = GridView.getElementsByTagName("input");
+             for (var i = 0; i < inputList.length; i++) {
+                 var headerCheckBox = inputList[0];
+                 var checked = true;
+                 if (inputList[i].type == "checkbox" && inputList[i] != headerCheckBox) {
+                     if (!inputList[i].checked) {
+                       checked = false;
+                         break;
+                     }
+                 }
+             }
+             headerCheckBox.checked = checked;
+         }
+    </script>
+
 
     <style>
         .modal-dialog {
@@ -241,6 +272,7 @@
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header">
+                                       
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         <h4 class="modal-title" style="font-size: xx-large;">Billboard Locations</h4>
                                     </div>
@@ -255,29 +287,28 @@
 
 
                                         </p>
-                                    
+
+                                    <!-- Billboard Gridview-->
+
+
                                     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered table-hover" DataKeyNames="BillboardID" DataSourceID="SqlDataSource2" AllowPaging="True" Width="100%" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3">
-                                        <Columns>
-
-                                            
+                                        <Columns>                                         
                                            <asp:TemplateField>
-
-                                                <ItemTemplate>
-                                                   <asp:Checkbox ID="CheckBoxSelector"   onclick="ChildCheckBoxClick(this);" runat="server" />
-                                               </ItemTemplate>
                                                <HeaderTemplate>
-                                                   <asp:CheckBox ID="checkboxSelectAll" onclick="HeaderCheckBoxClick(this);" runat="server" />
+                                                   <asp:CheckBox ID="checkboxSelectAll"  onclick="checkAll(this);" runat="server" />
                                                </HeaderTemplate>
-                                              
+                                                <ItemTemplate>
+                                                   <asp:Checkbox ID="CheckBoxSelector" onclick="Check_Click(this);"  runat ="server" />
+                                               </ItemTemplate>                                            
                                            </asp:TemplateField>
 
                                             
-                                    <asp:TemplateField Visible="false">
-                                        <ItemTemplate>
+                               <asp:TemplateField Visible="true">
+                                        <ItemTemplate> 
                                       
                                        <asp:Label runat="server"  ID="lb_BillboardID" Text='<%# Bind("BillboardID") %>'></asp:Label> 
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
+                                   </ItemTemplate>
+                                    </asp:TemplateField> 
 
                                             <asp:BoundField DataField="BillboardID" HeaderText="BillboardID" SortExpression="BillboardID" ReadOnly="True" InsertVisible="False"   />
                                             <asp:BoundField DataField="BillboardCode" HeaderText="BillboardCode" SortExpression="BillboardCode" />
@@ -314,6 +345,7 @@
                                    
                                     </div>
                                     <div class="modal-footer">
+                                   
                                         <asp:Button ID="Button3" class="btn btn-default" runat="server" Text="Close" data-dismiss="modal" />
                                     </div>
                                 </div>
@@ -392,7 +424,7 @@
                             </div>
                         </div>
                     </div>
-                    <asp:Button ID="Button1" class="btn btn-primary nextBtn pull-right" runat="server" Text="Confirm" OnClick="Button_Confirm" style="margin-right:25px;"/>
+                    <asp:Button ID="Button1" class="btn btn-primary nextBtn pull-right" runat="server" Text="Confirm" OnClick="ButtonConfirm_Click" style="margin-right:25px;"/>
 
 
 
@@ -416,11 +448,7 @@
 
         </div>
 
-        <script type="text/javascript" >
-            
-       
 
-        </script>
 
     </form>
 
