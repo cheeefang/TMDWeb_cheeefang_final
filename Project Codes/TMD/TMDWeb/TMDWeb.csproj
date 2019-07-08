@@ -1819,6 +1819,7 @@
     <Content Include="Images\Chendol.jpg" />
     <Content Include="Images\Creamy-Tomato-and-Spinach-Pasta-skillet-1-500x480.jpg" />
     <Content Include="Images\delete.png" />
+    <Content Include="Images\Duck_Meat.jpg" />
     <Content Include="Images\grid-01.jpg" />
     <Content Include="Images\login page.jpg" />
     <Content Include="Images\noodles.jpg" />
@@ -1826,6 +1827,7 @@
     <Content Include="Images\Save.png" />
     <Content Include="Images\upload.png" />
     <Content Include="Images\Wheat.jpg" />
+    <Content Include="Images\Yole.jpg" />
     <Content Include="jquery-ui.css" />
     <Content Include="login.aspx" />
     <Content Include="Logout.aspx" />

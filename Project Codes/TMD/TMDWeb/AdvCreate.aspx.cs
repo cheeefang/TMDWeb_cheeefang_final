@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
-
+using targeted_marketing_display;
 using targeted_marketing_display.App_Code;
 
 namespace targeted_marketing_display
@@ -151,7 +151,7 @@ namespace targeted_marketing_display
             if (FileUpload1.HasFile)
             {
                 string fileExt = System.IO.Path.GetExtension(FileUpload1.FileName);
-                FileUpload1.SaveAs(Server.MapPath("~/Images/" + Literal1.Text));
+                FileUpload1.SaveAs(Server.MapPath("~/Images/" + FileUpload1.FileName));
 
             }
 
@@ -195,7 +195,6 @@ namespace targeted_marketing_display
                 sqlcomm.Parameters.AddWithValue("@ItemType", Literal2.Text);
                 sqlcomm.Parameters.AddWithValue("@StartDate", sdate);
                 sqlcomm.Parameters.AddWithValue("@EndDate", edate);
-
                 sqlcomm.Parameters.AddWithValue("@CompanyID", "1");
                 sqlcomm.Parameters.AddWithValue("@Status", "1");
                 sqlcomm.Parameters.AddWithValue("@CreatedBy", "2");
@@ -238,7 +237,7 @@ namespace targeted_marketing_display
                     bool chkbx = ((CheckBox)row.FindControl("CheckBoxSelector")).Checked;
                     if (chkbx)
                     {
-                        sqlcommm.Parameters.AddWithValue("@BillboardID", GridView1.Rows[i].Cells[2].Text);
+                        sqlcommm.Parameters.AddWithValue("@BillboardID", GridView1.Rows[i].Cells[1].Text);
                         sqlcommm.Parameters.AddWithValue("@AdvID", AdvId);
                         sqlcommm.ExecuteNonQuery();
                         sqlcommm.Parameters.Clear();
@@ -364,7 +363,7 @@ namespace targeted_marketing_display
                     CheckBox cb = (CheckBox)(gvr.FindControl("CheckBoxSelector"));
                     if (cb.Checked == true)
                     {
-                        billboardDisplayTB.Text = billboardDisplayTB.Text + "," + gvr.Cells[2].Text;
+                        billboardDisplayTB.Text = billboardDisplayTB.Text + "," + gvr.Cells[1].Text;
 
                     }
                 }
