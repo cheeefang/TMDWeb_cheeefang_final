@@ -184,11 +184,11 @@ namespace targeted_marketing_display
                 int AdvertisementID = GetMaxIDAdvertisement();
                 string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
                 SqlConnection sqlconn = new SqlConnection(dbConnStr);
-                String adv = "Insert into [Advertisement](AdvID,Name,Item,ItemType,Duration,CompanyID,StartDate,EndDate,Status,CreatedBy,CreatedOn) Values(@AdvID,@Name,@Item,@ItemType,@Duration,@CompanyID,@StartDate,@EndDate,@Status,@CreatedBy,@CreatedOn)";
+                String adv = "Insert into [Advertisement](Name,Item,ItemType,Duration,CompanyID,StartDate,EndDate,Status,CreatedBy,CreatedOn) Values(@Name,@Item,@ItemType,@Duration,@CompanyID,@StartDate,@EndDate,@Status,@CreatedBy,@CreatedOn)";
                 SqlCommand sqlcomm = new SqlCommand(adv);
                 sqlcomm.Connection = sqlconn;
                 sqlconn.Open();
-                sqlcomm.Parameters.AddWithValue("@AdvID", AdvertisementID);
+              
                 sqlcomm.Parameters.AddWithValue("@CreatedOn", DateTime.Now);
                 sqlcomm.Parameters.AddWithValue("@Name", adNameTB.Text);
                 sqlcomm.Parameters.AddWithValue("@Item", imagelink);
