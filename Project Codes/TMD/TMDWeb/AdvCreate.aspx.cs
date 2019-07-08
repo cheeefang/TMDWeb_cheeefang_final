@@ -40,13 +40,6 @@ namespace targeted_marketing_display
             CompareValidator1.ValueToCompare = DateTime.Now.ToShortDateString();
             CompareValidator2.ValueToCompare = DateTime.Now.ToShortDateString();
 
-            //DateTime date1 = Convert.ToDateTime(dtpstart.Text);
-            //DateTime date2 = Convert.ToDateTime(dtpend.Text);
-            //if (date1 > date2)
-            //{
-            //    //Response.Write("error");
-            //    dtpstart.Text = "";
-            //}
 
             if (FileUpload1.HasFile)
             {
@@ -72,11 +65,7 @@ namespace targeted_marketing_display
 
         protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            //if (!string.IsNullOrEmpty(txtSearch.Text))
-            //{
-            //    msg.InnerText = "Found " + GridView1.Rows.Count +
-            //        " rows matching keyword '" + txtSearch.Text + "'.";
-            //}
+            
         }
 
         public int GetMaxIDAdvertisement()
@@ -92,47 +81,7 @@ namespace targeted_marketing_display
             }
             return intID ;
         }
-        /*  public int GetMaxIDAdvAudience()
-          {
-              int intID = 0;
-              SqlConnection co = new SqlConnection(dbConnStr);
-              SqlCommand cm = new SqlCommand("select Max(AdvID) from AdvertisementAudience", co);
-              co.Open();
-              SqlDataReader drrR = cm.ExecuteReader();
-              if (drrR.Read())
-              {
-                  intID = int.Parse(drrR[0].ToString());
-              }
-              return intID + 1;
-          }*/
-
-        //public int GetMaxIDAdvCategory()
-        //{
-        //    int intId = 0;
-        //    SqlConnection con = new SqlConnection(dbConnStr);
-        //    SqlCommand cmd = new SqlCommand("select Max(AdvID) from AdvertisementCategory", con);
-        //    con.Open();
-        //    SqlDataReader dr = cmd.ExecuteReader();
-        //    if (dr.Read())
-        //    {
-        //        intId = int.Parse(dr[0].ToString());
-        //    }
-        //    return intId + 1;
-        //}
-        //public int GetMaxIDAdvLocation()
-        //{
-        //    int intAdvId = 0;
-        //    SqlConnection conn = new SqlConnection(dbConnStr);
-        //    SqlCommand cmdd = new SqlCommand("select Max(AdvID) from AdvertisementLocation", conn);
-        //    conn.Open();
-        //    SqlDataReader drr = cmdd.ExecuteReader();
-        //    if (drr.Read())
-        //    {
-        //        intAdvId = int.Parse(drr[0].ToString());
-        //    }
-        //    return intAdvId + 1;
-        //}
-
+      
         protected void ButtonConfirm_Click(object sender, EventArgs e)
         {
 
