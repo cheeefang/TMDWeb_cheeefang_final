@@ -129,10 +129,12 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-
+        
              <div class="row">
+             
                 <div class="col-lg-6">
                    <div class="form-group">
+                      
                         <label>Item(Image/Video) </label>
                         <label style="color: red">*</label>
                         &nbsp;
@@ -143,11 +145,13 @@
                         <asp:Literal ID="Literal1" runat="server"></asp:Literal>
                         <asp:Literal ID="Literal2" runat="server"></asp:Literal>
                         <br />
+
                     </div>
                 </div>
+            
                 <!-- /.col-lg-12 -->
             </div>
-
+           
             <div class="row">
                 
                

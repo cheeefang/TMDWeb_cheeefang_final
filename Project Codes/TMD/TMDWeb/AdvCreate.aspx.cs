@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using targeted_marketing_display;
 using targeted_marketing_display.App_Code;
-
+using System.IO;
 namespace targeted_marketing_display
 {
     public partial class AdvCreate : System.Web.UI.Page
@@ -19,6 +19,7 @@ namespace targeted_marketing_display
         string dbConnStr = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
+            //BillboardSearch.Attributes.Add("onClick", "return false;");
             if (!Page.IsPostBack)
             {
                 string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
@@ -151,7 +152,7 @@ namespace targeted_marketing_display
             if (FileUpload1.HasFile)
             {
                 string fileExt = System.IO.Path.GetExtension(FileUpload1.FileName);
-                FileUpload1.SaveAs(Server.MapPath("~/Images/" + FileUpload1.FileName));
+                FileUpload1.SaveAs(Server.MapPath("~/Images/") + FileUpload1.FileName);
 
             }
 
