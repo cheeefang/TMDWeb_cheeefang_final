@@ -306,11 +306,11 @@
                                <asp:TemplateField Visible="true">
                                         <ItemTemplate> 
                                       
-                                       <asp:Label runat="server"  ID="lb_BillboardID" Text='<%# Bind("BillboardID") %>'></asp:Label> 
+                                       <asp:Label runat="server" visible="false" ID="lb_BillboardID" Text='<%# Bind("BillboardID") %>'></asp:Label> 
                                    </ItemTemplate>
                                     </asp:TemplateField> 
 
-                                            <asp:BoundField DataField="BillboardID" HeaderText="BillboardID" SortExpression="BillboardID" ReadOnly="True" InsertVisible="False"   />
+                                            <asp:BoundField DataField="BillboardID" HeaderText="BillboardID" SortExpression="BillboardID" ReadOnly="True" InsertVisible="False"  />
                                             <asp:BoundField DataField="BillboardCode" HeaderText="BillboardCode" SortExpression="BillboardCode" />
                                             <asp:BoundField DataField="Latitude" HeaderText="Latitude" SortExpression="Latitude" />
                                             <asp:BoundField DataField="Longtitude" HeaderText="Longtitude" SortExpression="Longtitude" />

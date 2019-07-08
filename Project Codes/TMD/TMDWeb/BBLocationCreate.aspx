@@ -49,7 +49,7 @@
                     <div class="form-group">
                         <label>Billboard Code </label>
                         <label style="color: red">*</label>
-                        <asp:TextBox class="form-control" ID="BbLocationCode" placeholder="Enter Address Line 1" runat="server"></asp:TextBox>&nbsp;
+                        <asp:TextBox class="form-control" ID="BbLocationCode" placeholder="Enter Location Code" runat="server"></asp:TextBox>&nbsp;
                     </div>
 
                 </div>
@@ -93,7 +93,7 @@
 
                         <label>City </label>
                         <label style="color: red">*</label>
-                        <asp:TextBox class="form-control" ID="BbCity" placeholder="Enter Address Line 1" runat="server"></asp:TextBox>&nbsp;
+                        <asp:TextBox class="form-control" ID="BbCity" placeholder="Enter City" runat="server"></asp:TextBox>&nbsp;
                     </div>
                 </div>
 
@@ -369,15 +369,26 @@
                     <div class="form-group">
                         <label>Postal Code </label>
                         <label style="color: red">*</label>
-                        <asp:TextBox class="form-control" ID="BbPostalCode" placeholder="Enter Address Line 1" runat="server"></asp:TextBox>&nbsp;
+                        <asp:TextBox class="form-control" ID="BbPostalCode" placeholder="Enter Postal Code" runat="server"></asp:TextBox>&nbsp;
                     </div>
 
                 </div>
-
                 <div class="col-lg-6">
 
                     <div class="form-group">
-                        &nbsp;
+                        <label>Latitude </label>
+                        <label style="color: red">*</label>
+                        <asp:TextBox class="form-control" ID="BbLatitude" placeholder="Enter Latitude" runat="server"></asp:TextBox>&nbsp;
+                    </div>
+
+                </div>
+                  <div class="row">
+                <div class="col-lg-6">
+
+                    <div class="form-group">
+                        <label>Longtitude </label>
+                        <label style="color: red">*</label>
+                        <asp:TextBox class="form-control" ID="BBLongtitude" placeholder="Enter Longtitude" runat="server"></asp:TextBox>&nbsp;
                     </div>
 
                 </div>

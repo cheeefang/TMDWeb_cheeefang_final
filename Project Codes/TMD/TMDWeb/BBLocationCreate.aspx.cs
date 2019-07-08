@@ -9,7 +9,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BBMgmt;
-
+using targeted_marketing_display;
+using targeted_marketing_display.App_Code;
 using System.Net;
 using System.Xml.Linq;
 
@@ -34,13 +35,13 @@ namespace targeted_marketing_display
             String PostalCode = BbPostalCode.Text.ToString();
             DateTime CreatedOn = DateTime.Now;
             int Status = 1;
-            string latitude = "0";
+            string latitude = BbLatitude.Text.ToString();
             int CreatedBy = 1;
-            string Longtitude = "0";
+            string Longtitude = BBLongtitude.Text.ToString();
 
             Billboard_Management bbMgmt = new Billboard_Management();
             Boolean record = bbMgmt.BBcheck(BillboardCode, PostalCode);
-            
+
             if (BbLocationCode.Text != "")
             {
                 if (BbAddLn1.Text != "")
@@ -51,28 +52,70 @@ namespace targeted_marketing_display
                         {
                             if (BbPostalCode.Text != "")
                             {
-                                if (record == false)
+                                if (BbLatitude.Text != "")
                                 {
-                                    Boolean result = bbMgmt.BBinsert(BillboardCode, AddressLn1, AddressLn2, City, Country, PostalCode, CreatedOn, Status, latitude, Longtitude, CreatedBy);
-                                    if (result == true)
+
+                                    if (BBLongtitude.Text != "")
                                     {
-                                        alertWarning.Visible = false;
-                                        alertSuccess.Visible = true;
-                                        BbLocationCode.Text = String.Empty;
-                                        BbAddLn1.Text = String.Empty;
-                                        BbAddLn2.Text = String.Empty;
-                                        BBCountry.SelectedValue = "";
-                                        BbCity.Text = String.Empty;
-                                        BbPostalCode.Text = String.Empty;
+
+
+                                        if (record == false)
+                                        {
+                                            Boolean result = bbMgmt.BBinsert(BillboardCode, AddressLn1, AddressLn2, City, Country, PostalCode, CreatedOn, Status, latitude, Longtitude, CreatedBy);
+                                            if (result == true)
+                                            {
+                                                alertWarning.Visible = false;
+                                                alertSuccess.Visible = true;
+                                                BbLocationCode.Text = String.Empty;
+                                                BbAddLn1.Text = String.Empty;
+                                                BbAddLn2.Text = String.Empty;
+                                                BBCountry.SelectedValue = "";
+                                                BbCity.Text = String.Empty;
+                                                BbPostalCode.Text = String.Empty;
+                                            }
+                                        }
+
+                                        else
+                                        {
+                                            alertWarning.Visible = false;
+                                            alertSuccess.Visible = false;
+                                            alertDanger.Visible = true;
+                                            dangerLocation.Text = "Location already exist";
+                                        }
+                                    }
+
+                                    else
+                                    {
+                                        alertWarning.Visible = true;
+                                        alertSuccess.Visible = false;
+                                        alertDanger.Visible = false;
+                                        warningLocation.Text = "Please enter Longtitude";
                                     }
                                 }
 
                                 else
                                 {
-                                    alertWarning.Visible = false;
+                                    alertWarning.Visible = true;
                                     alertSuccess.Visible = false;
-                                    alertDanger.Visible = true;
-                                    dangerLocation.Text = "Location already exist";
+                                    alertDanger.Visible = false;
+                                    warningLocation.Text = "Please enter Latitude";
+                                }
+                            }
+                                else
+                                {
+                                    alertWarning.Visible = true;
+                                    alertSuccess.Visible = false;
+                                    alertDanger.Visible = false;
+                                    warningLocation.Text = "Please enter postal code";
+                                }
+                            }
+
+                                else
+                                {
+                                    alertWarning.Visible = true;
+                                    alertSuccess.Visible = false;
+                                    alertDanger.Visible = false;
+                                    warningLocation.Text = "Please select a country";
                                 }
                             }
 
@@ -81,7 +124,7 @@ namespace targeted_marketing_display
                                 alertWarning.Visible = true;
                                 alertSuccess.Visible = false;
                                 alertDanger.Visible = false;
-                                warningLocation.Text = "Please enter postal code";
+                                warningLocation.Text = "Please enter a city";
                             }
                         }
 
@@ -90,36 +133,20 @@ namespace targeted_marketing_display
                             alertWarning.Visible = true;
                             alertSuccess.Visible = false;
                             alertDanger.Visible = false;
-                            warningLocation.Text = "Please select a country";
+                            warningLocation.Text = "Please enter an Address";
                         }
                     }
-
                     else
                     {
                         alertWarning.Visible = true;
                         alertSuccess.Visible = false;
                         alertDanger.Visible = false;
-                        warningLocation.Text = "Please enter a city";
+                        warningLocation.Text = "Please enter a unique Billboard code";
                     }
-                }
 
-                else
-                {
-                    alertWarning.Visible = true;
-                    alertSuccess.Visible = false;
-                    alertDanger.Visible = false;
-                    warningLocation.Text = "Please enter an Address";
+
                 }
             }
-            else
-            {
-                alertWarning.Visible = true;
-                alertSuccess.Visible = false;
-                alertDanger.Visible = false;
-                warningLocation.Text = "Please enter a unique Billboard code";
-            }
-
-
         }
-    }
-}
+    
+

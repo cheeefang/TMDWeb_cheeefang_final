@@ -89,48 +89,48 @@ namespace targeted_marketing_display
             {
                 intID = int.Parse(dr[0].ToString());
             }
-            return intID + 1;
+            return intID ;
         }
-        public int GetMaxIDAdvAudience()
-        {
-            int intID = 0;
-            SqlConnection co = new SqlConnection(dbConnStr);
-            SqlCommand cm = new SqlCommand("select Max(AdvID) from AdvertisementAudience", co);
-            co.Open();
-            SqlDataReader drrR = cm.ExecuteReader();
-            if (drrR.Read())
-            {
-                intID = int.Parse(drrR[0].ToString());
-            }
-            return intID + 1;
-        }
+        /*  public int GetMaxIDAdvAudience()
+          {
+              int intID = 0;
+              SqlConnection co = new SqlConnection(dbConnStr);
+              SqlCommand cm = new SqlCommand("select Max(AdvID) from AdvertisementAudience", co);
+              co.Open();
+              SqlDataReader drrR = cm.ExecuteReader();
+              if (drrR.Read())
+              {
+                  intID = int.Parse(drrR[0].ToString());
+              }
+              return intID + 1;
+          }*/
 
-        public int GetMaxIDAdvCategory()
-        {
-            int intId = 0;
-            SqlConnection con = new SqlConnection(dbConnStr);
-            SqlCommand cmd = new SqlCommand("select Max(AdvID) from AdvertisementCategory", con);
-            con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-            if (dr.Read())
-            {
-                intId = int.Parse(dr[0].ToString());
-            }
-            return intId + 1;
-        }
-        public int GetMaxIDAdvLocation()
-        {
-            int intAdvId = 0;
-            SqlConnection conn = new SqlConnection(dbConnStr);
-            SqlCommand cmdd = new SqlCommand("select Max(AdvID) from AdvertisementLocation", conn);
-            conn.Open();
-            SqlDataReader drr = cmdd.ExecuteReader();
-            if (drr.Read())
-            {
-                intAdvId = int.Parse(drr[0].ToString());
-            }
-            return intAdvId + 1;
-        }
+        //public int GetMaxIDAdvCategory()
+        //{
+        //    int intId = 0;
+        //    SqlConnection con = new SqlConnection(dbConnStr);
+        //    SqlCommand cmd = new SqlCommand("select Max(AdvID) from AdvertisementCategory", con);
+        //    con.Open();
+        //    SqlDataReader dr = cmd.ExecuteReader();
+        //    if (dr.Read())
+        //    {
+        //        intId = int.Parse(dr[0].ToString());
+        //    }
+        //    return intId + 1;
+        //}
+        //public int GetMaxIDAdvLocation()
+        //{
+        //    int intAdvId = 0;
+        //    SqlConnection conn = new SqlConnection(dbConnStr);
+        //    SqlCommand cmdd = new SqlCommand("select Max(AdvID) from AdvertisementLocation", conn);
+        //    conn.Open();
+        //    SqlDataReader drr = cmdd.ExecuteReader();
+        //    if (drr.Read())
+        //    {
+        //        intAdvId = int.Parse(drr[0].ToString());
+        //    }
+        //    return intAdvId + 1;
+        //}
 
         protected void ButtonConfirm_Click(object sender, EventArgs e)
         {
@@ -210,7 +210,7 @@ namespace targeted_marketing_display
                 sqlcon.Open();
                 string str = adCategoryTB.Text;
                 string[] splitstr = str.Split(',');
-                int id = GetMaxIDAdvCategory();
+                int id = GetMaxIDAdvertisement();
 
 
                 foreach (string s in splitstr){
@@ -231,7 +231,7 @@ namespace targeted_marketing_display
                 SqlCommand sqlcommm = new SqlCommand(sqlqueryy, sqlconnn);
                 sqlconnn.Open();
 
-                int AdvId = GetMaxIDAdvLocation();
+                int AdvId = GetMaxIDAdvertisement();
                 
                 for (int i = 0; i < GridView1.Rows.Count; i++){
                     GridViewRow row = GridView1.Rows[i];
@@ -254,7 +254,7 @@ namespace targeted_marketing_display
                 SqlCommand sqlcm = new SqlCommand(sqlque, sqlcn);
                 sqlcn.Open();
 
-                int ID_audience = GetMaxIDAdvAudience();
+                int ID_audience = GetMaxIDAdvertisement();
 
 
                 for (int i = 0; i < CheckBoxList2.Items.Count; i++)
@@ -364,7 +364,7 @@ namespace targeted_marketing_display
                     CheckBox cb = (CheckBox)(gvr.FindControl("CheckBoxSelector"));
                     if (cb.Checked == true)
                     {
-                        billboardDisplayTB.Text = billboardDisplayTB.Text + "," + gvr.Cells[1].Text;
+                        billboardDisplayTB.Text = billboardDisplayTB.Text + "," + gvr.Cells[2].Text;
 
                     }
                 }
