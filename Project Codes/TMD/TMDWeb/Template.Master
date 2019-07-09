@@ -211,34 +211,22 @@
 
                         </li>
 
-                         <li>
-                            <a href="ViewUser.aspx"><i class="fas fa-ViewUser"></i> View User </a>
+                       
 
-                        </li>
-                         <li>
-
-                            <a href="#"><i class="fa fa-building fa-fw"></i> Company <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
 
                                 <li>                            
                             <a href="CoInfoRead.aspx"><i class="fa fa-building fa-fw"></i> Company Information </a>
                                </li>
 
-                                <li>                            
-                            <a href="CoInfoCreate.aspx"><i class="fa fa-building fa-fw"></i> New Company </a>
-                               </li>
-
+                           
                                                 
 
-                            </ul>
-                            </li>
+                             
 
 
                         
 
-                        <li>
-
-                            <a href="Recordlist_Member.aspx"><i class="fa fa-database fa-fw"></i> Advertisement(Member) </a>
+                        
                             <%--<ul class="nav nav-second-level">
                                 <li>
                                     <a href="#"><i class="fa fa-info-circle fa-fw"></i> Ad Details</a>
@@ -251,7 +239,6 @@
                             </ul>
                             <!-- /.nav-first-level -->--%>
 
-                        </li>
 
                        
 
@@ -264,7 +251,7 @@
                                 </li>
 
                                 <li>
-                                    <a href="#"><i class='fa fa-send-o fa-fw'></i> Email Us</a>
+                                    <a href="mailto:tmdboss2019@gmail.com?Subject=Feedback%20about%20Targeted%20Marketing%20Display"><i class='fa fa-send-o fa-fw'></i> Email Us</a>
                                 </li>
 
                             </ul>
@@ -273,21 +260,17 @@
                         </li>
 
                      
-                        
-                        <li>
-                            <a href="AdrecordView.aspx"><i class="fa fa-AdvRecord fa-fw"></i>Advertisement Record View </a>
-
-                        </li>
+              
 
 
                        
                         
                          <li>
-                            <a href="Recordlist_admin.aspx"><i class="fa fa-RecordLst"></i>Advertisement Record view(Admin) </a>
+                            <a href="Recordlist_admin.aspx"><i class="fa fa-sitemap fa-fw"></i> Advertisement Listing </a>
                         </li>
 
                         <li>
-                            <a href="FeedBackBillboard.aspx"><i class="fa fa-FeedbackBillboard"></i>Billboard Feedback</a>
+                            <a href="FeedBackBillboard.aspx"><i class="fas fa-comments-dollar"></i> Feedback </a>
                         </li>
 
 

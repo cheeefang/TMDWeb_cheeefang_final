@@ -82,12 +82,12 @@
 <ItemStyle CssClass="hiddencol"></ItemStyle>
                                     </asp:BoundField>
                                     <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name"></asp:BoundField>
-                                    <asp:ImageField DataImageUrlField="Item" HeaderText="Advert Image" ControlStyle-Width="150" ControlStyle-Height = "150"> 
+                                    <asp:ImageField DataImageUrlField="Item" HeaderText="Advert Image" ControlStyle-Width="100" ControlStyle-Height = "100"> 
         
                                     </asp:ImageField>
+                                     <asp:BoundField DataField="Name1" HeaderText="Company Name" SortExpression="Name1"></asp:BoundField>
                                     <asp:BoundField DataField="ItemType" HeaderText="ItemType" SortExpression="ItemType"></asp:BoundField>
-                                  
-                                    <asp:BoundField DataField="Duration" HeaderText="Duration" SortExpression="Duration"></asp:BoundField>
+                             
                                
                                     <asp:BoundField DataField="StartDate" HeaderText="StartDate" SortExpression="StartDate"></asp:BoundField>
                                     <asp:BoundField DataField="EndDate" HeaderText="EndDate" SortExpression="EndDate"></asp:BoundField>
@@ -122,7 +122,7 @@
 
 
 
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [AdvID], [Name], [Item], [ItemType], [Duration],[StartDate], [EndDate]FROM [Advertisement] where status=1" FilterExpression="Name LIKE '%{0}%' OR Item LIKE '%{0}%' OR convert(CreatedBy,'System.String') LIKE '%{0}%'">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [Advertisement].AdvID, [Advertisement].Name,[Company].Name, [Advertisement].Item, [Advertisement].ItemType,[StartDate], [EndDate]FROM [Advertisement] inner join [Company] on Company.CompanyID=[Advertisement].CompanyID" FilterExpression="Name LIKE '%{0}%' OR Item LIKE '%{0}%' OR convert(CreatedBy,'System.String') LIKE '%{0}%'">
             <FilterParameters>
                                             <asp:ControlParameter ControlID="txtSearch" Name="Name" PropertyName="Text" />
                                             <asp:ControlParameter ControlID="txtSearch" Name="Item" PropertyName="Text" />                                            

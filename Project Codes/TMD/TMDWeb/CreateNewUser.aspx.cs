@@ -24,7 +24,7 @@ namespace targeted_marketing_display
             {
                 Database db = new Database();
 
-                SqlCommand cmd = new SqlCommand("Select * from Company");
+                SqlCommand cmd = new SqlCommand("Select * from Company where status=1");
                 DataTable dt = db.getDataTable(cmd);
 
                 ddlCompany.DataSource = dt;

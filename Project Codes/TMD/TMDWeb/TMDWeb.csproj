@@ -1831,7 +1831,6 @@
     <Content Include="jquery-ui.css" />
     <Content Include="login.aspx" />
     <Content Include="Logout.aspx" />
-    <Content Include="newAdvCreate.aspx" />
     <Content Include="obj\Debug\TMDWeb.csproj.FileListAbsolute.txt" />
     <Content Include="OtherUserProfile.aspx" />
     <Content Include="OwnProfile.aspx" />
@@ -2160,13 +2159,6 @@
     </Compile>
     <Compile Include="Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="newAdvCreate.aspx.cs">
-      <DependentUpon>newAdvCreate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="newAdvCreate.aspx.designer.cs">
-      <DependentUpon>newAdvCreate.aspx</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />

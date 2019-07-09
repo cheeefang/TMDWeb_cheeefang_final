@@ -102,13 +102,13 @@
                             <asp:GridView ID="GridView1" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Height="100%" Width="100%" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource4" AllowPaging="True" OnPreRender="GridView1_PreRender" PageSize="10">
                                 <Columns>
 
-                                    <asp:TemplateField >
+                                    <asp:TemplateField visible="false">
                                         <ItemTemplate>
-                                            <asp:Label runat="server"  ID="lb_BillboardID" Text='<%# Bind("BillboardID") %>'></asp:Label>
+                                            <asp:Label runat="server" visible="false"  ID="lb_BillboardID" Text='<%# Bind("BillboardID") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
-                                    <asp:BoundField HeaderText="ID" DataField="BillboardID">
+                                    <asp:BoundField HeaderText="ID" DataField="BillboardID" visible="false">
                                         <ItemStyle Width="100px" Wrap="False" HorizontalAlign="Left"/>
                                     </asp:BoundField>
 
