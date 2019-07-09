@@ -20,6 +20,7 @@
             <Columns>
                 <asp:ImageField DataImageUrlField="Item"  HeaderText="Advert Image" ControlStyle-Width="100" ControlStyle-Height = "100">
                 </asp:ImageField>
+                
             </Columns>
             <EditRowStyle BackColor="#999999" />
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
