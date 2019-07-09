@@ -35,7 +35,7 @@ namespace targeted_marketing_display
 
                 // 1. declare command object with parameter
                 SqlCommand cmd = new SqlCommand(
-                    " select [BillboardLocation].BillboardID, [Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join" +
+                    " select [BillboardLocation].BillboardCode, [Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join" +
                     " [AdvertisementLocation] on [Advertisement].AdvID=[AdvertisementLocation].AdvID join " +
                     "[BillboardLocation] on[AdvertisementLocation].BillboardID =[BillboardLocation].BillboardID " +
                     "where [Advertisement].status=1 and [BillboardLocation].BillboardID=@ID", conn);
