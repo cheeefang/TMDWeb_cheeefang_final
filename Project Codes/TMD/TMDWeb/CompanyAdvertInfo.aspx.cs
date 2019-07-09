@@ -43,7 +43,7 @@ namespace targeted_marketing_display
 
                     // 1. declare command object with parameter
                     SqlCommand cmd = new SqlCommand(
-                        "select [Advertisement].Name,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
+                        "select [Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
                         "where [ComPany].CompanyID=@ID ", conn);
 
                     // 2. define parameters used in command object
