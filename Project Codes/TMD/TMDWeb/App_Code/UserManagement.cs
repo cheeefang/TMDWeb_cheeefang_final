@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Web;
 using System.Text;
 using System.Web;
 using targeted_marketing_display;
@@ -177,12 +178,25 @@ namespace targeted_marketing_display
             result = db.executeNonQuery(cmd);
             return result;
         }
-
+        //public Boolean CheckUserID(string userId, int currentUserID)
+        //{
+        //    Boolean result;
+        //    if (userId = currentUserID)
+        //    {
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        return true;
+        //    }
+        //}
+        
         public Boolean deleteQns(string userId)
         {
             Boolean result;
 
             //sqlStr.AppendLine("DELETE FROM [User] where UserID = @paraUserId");
+            
             SqlCommand cmd = new SqlCommand("Update [User] set Status = 0 where UserID = @parauserId");
 
             cmd.Parameters.AddWithValue("@paraUserId", userId);

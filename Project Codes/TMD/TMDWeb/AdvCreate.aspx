@@ -10,6 +10,9 @@
         function showModal() {
             $('#myModal2').modal('show');
         }
+        function hideModal() {
+            $('#myModal2').modal('close');
+        }
     </script>
 
     <script type="text/javascript" language="javascript">
@@ -139,6 +142,12 @@
                         <label>Item(Image/Video) </label>
                         <label style="color: red">*</label>
                         &nbsp;
+                       
+                                       
+                               
+                              
+                    
+
                         <asp:FileUpload ID="FileUpload1" runat="server" />
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ValidationExpression='(.*?)\.(jpg|jpeg|png|gif|avi|flv|wmv|mp4|mov|JPG|JPEG|PNG|GIF|AVI|FLV|WMV|MOV|MP4)$'
                             ControlToValidate="FileUpload1" runat="server" ForeColor="Red" ErrorMessage="Please select valid image/video file."
@@ -146,7 +155,8 @@
                         <asp:Literal ID="Literal1" runat="server"></asp:Literal>
                         <asp:Literal ID="Literal2" runat="server"></asp:Literal>
                         <br />
-                      
+                               
+                                   
                     </div>
                 </div>
 
@@ -277,10 +287,13 @@
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [CompanyID], [Name] FROM [Company] where status=1"></asp:SqlDataSource>
                         <label>Display Billboard </label>
                         <label style="color: red">*</label>
-                       
+                        <asp:UpdatePanel ID="updatepanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+
+                            <ContentTemplate>
                             <asp:TextBox ID="billboardDisplayTB" class="form-control" runat="server"   placeholder="Search..." data-toggle="modal" data-target="#myModal2" AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>
-             
+                    
                     </div>
+
                      <div id="myModal2" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg" >
 
@@ -304,7 +317,6 @@
                                         </p>
 
                                     <!-- Billboard Gridview-->
-
 
                                     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered table-hover" DataKeyNames="BillboardID" DataSourceID="SqlDataSource2" AllowPaging="True" Width="100%" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3">
                                         <Columns>                                         
@@ -337,6 +349,8 @@
                                         <SortedDescendingCellStyle BackColor="#CAC9C9" HorizontalAlign="Center" />
                                         <SortedDescendingHeaderStyle BackColor="#00547E" HorizontalAlign="Center" />
                                     </asp:GridView>
+                               
+                                      
                                     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" 
                                FilterExpression="BillboardCode LIKE '%{0}%' OR AddressLn LIKE '%{0}%' OR City LIKE '%{0}%' OR Country LIKE '%{0}%' OR postalCode LIKE '%{0}%'" 
                                         SelectCommand="SELECT BillboardID,BillboardCode, Latitude ,Longtitude ,(( AddressLn1) + ' '+( AddressLn2 )+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address FROM BillboardLocation where status=1 ">
@@ -353,11 +367,16 @@
                                    
                                     </div>
                                     <div class="modal-footer">
-                                       
-                                <asp:LinkButton runat="server" class="btn btn-default" ID="BillboardSearch" Style="height: 34px;" Text="Confirm" OnClick="BillboardSearch_Click" />
+                                    
+                                <asp:LinkButton runat="server" class="btn btn-default" ID="BillboardSearch" Style="height: 34px;" Text="Confirm" OnClick="BillboardSearch_Click" autopostback="true"  />
 
                             
                                         <asp:Button ID="Button3" class="btn btn-default" runat="server" Text="Close" data-dismiss="modal" />
+                                 </ContentTemplate>
+                                        <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="BillboardSearch" EventName="Click" />
+            </Triggers>
+                            </asp:UpdatePanel>
                                     </div>
                                 </div>
 

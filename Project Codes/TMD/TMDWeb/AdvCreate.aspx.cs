@@ -493,6 +493,7 @@ namespace targeted_marketing_display
             }
 
             billboardDisplayTB.Text = (billboardDisplayTB.Text).Substring(1);
+         
 
         }
 

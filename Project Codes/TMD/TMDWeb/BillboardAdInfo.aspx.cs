@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Data;
+
 using System.Data.SqlClient;
 using BBMgmt;
 using System.Text;
@@ -64,10 +64,12 @@ namespace targeted_marketing_display
 
             GridView1.DataSource = dt;
             GridView1.DataBind();
+            
             if (GridView1.Rows.Count == 0)
             {
                 ErrorMessage.Visible = true;
             }
+            conn.Close();
         }
 
 
@@ -81,7 +83,7 @@ namespace targeted_marketing_display
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             GridView1.PageIndex = e.NewPageIndex;
-            GridView1.DataBind();
+           
             BindGrid();
         }
     }

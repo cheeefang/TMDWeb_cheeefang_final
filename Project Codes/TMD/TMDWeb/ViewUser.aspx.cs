@@ -52,7 +52,9 @@ namespace targeted_marketing_display
                 UserManagement uDao = new UserManagement();
 
                 Label lb_msgId = (Label)gvRow1.FindControl("lb_UserID");
-              
+                // string CurrentSession = Session["UserID"].ToString();
+                
+                
                 uObj = uDao.getUserByID(lb_msgId.Text);
                 string userName = uObj.Name;
 
