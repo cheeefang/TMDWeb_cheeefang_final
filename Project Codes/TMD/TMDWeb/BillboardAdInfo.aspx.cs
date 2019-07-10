@@ -59,8 +59,7 @@ namespace targeted_marketing_display
             cmd.Connection = conn;
             sda.SelectCommand = cmd;
             sda.Fill(dt);
-            // get data stream
-            reader = cmd.ExecuteReader();
+      
 
 
             GridView1.DataSource = dt;
@@ -70,12 +69,13 @@ namespace targeted_marketing_display
             {
                 ErrorMessage.Visible = true;
             }
-            SqlCommand cmdCount = new SqlCommand("select count(*) from AdvertisementLocation where BillboardID=@BillboardID", conn);
+            SqlCommand cmdCount = new SqlCommand("select count(*) from [Advertisement] inner join [AdvertisementLocation] on [Advertisement].AdvID=[AdvertisementLocation].AdvID where BillboardID=@BillboardID and status=1", conn);
             SqlParameter paramCount = new SqlParameter();
             paramCount.ParameterName = "@BillboardID";
             paramCount.Value = Session["BillboardID"].ToString();
             cmdCount.Parameters.Add(paramCount);
-            
+            Int32 numberOfRows = Convert.ToInt32(cmdCount.ExecuteScalar());
+            rowCountLabel.Text = "("+numberOfRows.ToString()+" Ads)";
             conn.Close();
         }
 
