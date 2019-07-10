@@ -27,11 +27,10 @@ namespace targeted_marketing_display
 
             if (!IsPostBack)
             {
-                
-             
+
                 this.BindGrid();
 
-
+                   
 
 
             }
@@ -92,10 +91,14 @@ namespace targeted_marketing_display
             LabelPaging.Text = "Displaying Page " + (GridView1.PageIndex + 1).ToString() + " of " + GridView1.PageCount.ToString();
         }
 
-   
-
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+           
+            GridView1.PageIndex = e.NewPageIndex;
+            GridView1.DataBind();
+            BindGrid();
+        }
     }
-    
 
 
 
