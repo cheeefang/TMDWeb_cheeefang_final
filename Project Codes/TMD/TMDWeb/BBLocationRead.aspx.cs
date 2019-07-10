@@ -16,6 +16,7 @@ namespace targeted_marketing_display
 {
     public partial class BBLocationRead : System.Web.UI.Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             //ADM Or admin
@@ -29,16 +30,38 @@ namespace targeted_marketing_display
                 adminDiv.Visible = false;
                 userDiv.Visible = true;
             }
-           
-                Billboard_Management bbMgmt = new Billboard_Management();
-                DataTable dt = bbMgmt.BBread();
+            //SqlConnection conn = null;
+            //SqlDataReader reader = null;
 
-                //GridView1.DataSource = dt;
-                GridView1.DataBind();
+            //// instantiate and open connection
+            //conn = new
+            //    SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+            //conn.Open();
+            Billboard_Management bbMgmt = new Billboard_Management();
+                DataTable dt = bbMgmt.BBread();
+            
+            //GridView1.DataSource = dt;
+            GridView1.DataBind();
             
                 //GridView2.DataSource = dt;
                 GridView2.DataBind();
-                     
+                //foreach (GridViewRow row in GridView1.Rows)
+                //{
+                //    for (int i = 1; i <= GridView1.Rows.Count; i++)
+                //    {
+                        
+                //        string BillboardID = GridView1.Rows[i].Cells[0].Text.ToString();
+                //        SqlCommand cmd = new SqlCommand(
+                //        "select count(*) from AdvertisementLocation where BillboardID=@ID ", conn);
+                //        SqlParameter param = new SqlParameter();
+                //        param.ParameterName = "@ID";
+                //        param.Value = BillboardID;
+                        
+
+                //}
+
+                //}
+
         }
 
         protected void editBtn_Click(object sender, EventArgs e)
@@ -141,6 +164,8 @@ namespace targeted_marketing_display
 
             }
         }
+
+
 
 
 

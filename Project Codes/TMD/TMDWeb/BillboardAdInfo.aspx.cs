@@ -22,6 +22,7 @@ namespace targeted_marketing_display
             if (!IsPostBack)
             {
                 this.BindGrid();
+
             }
         }
 
@@ -69,6 +70,12 @@ namespace targeted_marketing_display
             {
                 ErrorMessage.Visible = true;
             }
+            SqlCommand cmdCount = new SqlCommand("select count(*) from AdvertisementLocation where BillboardID=@BillboardID", conn);
+            SqlParameter paramCount = new SqlParameter();
+            paramCount.ParameterName = "@BillboardID";
+            paramCount.Value = Session["BillboardID"].ToString();
+            cmdCount.Parameters.Add(paramCount);
+            
             conn.Close();
         }
 

@@ -10,7 +10,7 @@
  
           <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Billboard Advertisement Listing</h1>
+                        <h1 class="page-header">Billboard Advertisement Listing<label id="AdvCount"></label></h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -18,21 +18,34 @@
             OnPreRender="GridView1_PreRender" AllowPaging="True"  OnPageIndexChanging="GridView1_PageIndexChanging" AutoGenerateColumns="False" >
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
-                <asp:ImageField DataImageUrlField="Item"  HeaderText="Advert Image" ControlStyle-Width="100" ControlStyle-Height = "100">
-<ControlStyle Height="100px" Width="100px"></ControlStyle>
-                </asp:ImageField>
+               
+    
+                                    <asp:ImageField DataImageUrlField="Item" HeaderText="Advert Image" ControlStyle-Width="100" ControlStyle-Height = "100" /> 
+        
+                            
+                                    <asp:BoundField DataField="BillboardCode" HeaderText="Billboard Code" sortExpression="BillboardCode" ></asp:BoundField>
+                                    <asp:BoundField DataField="Name" HeaderText="Advert Name" SortExpression="Name"></asp:BoundField>
+                                    
+                                     
+                                    <asp:BoundField DataField="ItemType" HeaderText="ItemType" SortExpression="ItemType"></asp:BoundField>
+                             
+                               
+                                    <asp:BoundField DataField="StartDate" HeaderText="StartDate" SortExpression="StartDate"></asp:BoundField>
+                                    <asp:BoundField DataField="EndDate" HeaderText="EndDate" SortExpression="EndDate"></asp:BoundField>
+                                   
+
             </Columns>
-            <EditRowStyle BackColor="#999999" />
-            <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-            <HeaderStyle BackColor="#848C8E" Font-Bold="True" ForeColor="#F1F2EE"  />
-            <PagerSettings FirstPageText="First" LastPageText="Last" />
-             <PagerStyle BackColor="White" ForeColor="#85C1E9" HorizontalAlign="Left" />
-            <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-            <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-            <SortedAscendingCellStyle BackColor="#E9E7E2" />
-            <SortedAscendingHeaderStyle BackColor="#506C8C" />
-            <SortedDescendingCellStyle BackColor="#FFFDF8" />
-            <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+           <EditRowStyle HorizontalAlign="Center" CssClass="GridViewEditRow" />
+                                <EmptyDataRowStyle HorizontalAlign="Center" />
+                                <FooterStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Center" />
+                                <HeaderStyle BackColor="#848c8E" Font-Bold="True" ForeColor="#f1f2ee" HorizontalAlign="Center" />
+                                <PagerStyle BackColor="White"  ForeColor="#85C1E9" HorizontalAlign="Left"  />
+                                <RowStyle ForeColor="#435058" Height="20px" Width="30px" HorizontalAlign="Center" />
+                                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
+                                <SortedAscendingCellStyle BackColor="#F1F1F1" HorizontalAlign="Center" />
+                                <SortedAscendingHeaderStyle BackColor="#007DBB" HorizontalAlign="Center" />
+                                <SortedDescendingCellStyle BackColor="#CAC9C9" HorizontalAlign="Center" />
+                                <SortedDescendingHeaderStyle BackColor="#00547E" HorizontalAlign="Center" />
         </asp:GridView>
  
         

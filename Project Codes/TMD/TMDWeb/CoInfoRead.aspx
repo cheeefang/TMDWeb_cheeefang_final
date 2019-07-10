@@ -128,6 +128,7 @@
                                         <asp:LinkButton ID="adsBtn" OnCommand="adsBtn_Command" runat="server" CommandName="AdvertInfo" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
                                         <i class="fa fa-folder"></i>
                                             </asp:LinkButton>
+                                          <% %>
                                        </ItemTemplate>
                                            <ControlStyle Height="50%" />
                                         <HeaderStyle HorizontalAlign="Center" Wrap="False" />
