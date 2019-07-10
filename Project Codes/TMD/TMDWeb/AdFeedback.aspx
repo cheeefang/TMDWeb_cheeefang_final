@@ -101,7 +101,7 @@
             <div class="row">
                 <div class ="col-lg-6">
                     <div class="form-group">
-                        <asp:DropDownList ID="ddlCom" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlCom_SelectedIndexChanged" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="Name" DataValueField="Name"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlCom" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlCom_SelectedIndexChanged" AutoPostBack="True" DataTextField="Name" DataValueField="Name"></asp:DropDownList>
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [Name] FROM [Company]"></asp:SqlDataSource>
                     </div>
                 </div>

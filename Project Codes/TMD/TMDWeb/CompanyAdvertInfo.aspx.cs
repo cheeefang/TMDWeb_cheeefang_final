@@ -21,6 +21,26 @@ namespace targeted_marketing_display
         
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+
+      
+
+            if (!IsPostBack)
+            {
+                
+             
+                this.BindGrid();
+
+
+
+
+            }
+        }
+
+
+
+        public void BindGrid()
+        {
             // conn and reader declared outside try
             // block for visibility in finally block
             SqlConnection conn = null;
@@ -33,47 +53,38 @@ namespace targeted_marketing_display
                 SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
             conn.Open();
 
+            // 1. declare command object with parameter
+            SqlCommand cmd = new SqlCommand(
+                "select [Company].Name as Company,[Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
+                "where [ComPany].CompanyID=@ID and [Advertisement].status=1 ", conn);
 
-      
+            // 2. define parameters used in command object
+            SqlParameter param = new SqlParameter();
+            param.ParameterName = "@ID";
+            param.Value = Session["CompanyID"].ToString();
 
-            if (!IsPostBack)
+            // 3. add new parameter to command object
+            cmd.Parameters.Add(param);
+
+
+            SqlDataAdapter sda = new SqlDataAdapter();
+            DataTable dt = new DataTable();
+            cmd.Connection = conn;
+            sda.SelectCommand = cmd;
+            sda.Fill(dt);
+
+
+            // get data stream
+            // reader = cmd.ExecuteReader();
+
+
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+            if (GridView1.Rows.Count == 0)
             {
-              
-                  
-
-                    // 1. declare command object with parameter
-                    SqlCommand cmd = new SqlCommand(
-                        "select [Company].Name as Company,[Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
-                        "where [ComPany].CompanyID=@ID and [Advertisement].status=1 ", conn);
-
-                    // 2. define parameters used in command object
-                    SqlParameter param = new SqlParameter();
-                    param.ParameterName = "@ID";
-                    param.Value = Session["CompanyID"].ToString();
-                    List<DataList> newList = new List<DataList>();
-                    // 3. add new parameter to command object
-                    cmd.Parameters.Add(param);
-
-                    // get data stream
-                    reader = cmd.ExecuteReader();
-                   // SqlDataAdapter da = new SqlDataAdapter(cmd);
-                     //List<> ds = new ();
-                    //da.Fill(ds);
-
-                    GridView1.DataSource = reader;
-                    GridView1.DataBind();
-                    if (GridView1.Rows.Count == 0)
-                    {
-                        ErrorMessage.Visible = true;
-                    }
-
-
+                ErrorMessage.Visible = true;
             }
         }
-
-
-
-
 
 
         protected void GridView1_PreRender(object sender, EventArgs e)
@@ -81,12 +92,10 @@ namespace targeted_marketing_display
             LabelPaging.Text = "Displaying Page " + (GridView1.PageIndex + 1).ToString() + " of " + GridView1.PageCount.ToString();
         }
 
-        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            GridView1.PageIndex = e.NewPageIndex;
-            GridView1.DataBind();
-        }
+   
+
     }
+    
 
 
 
