@@ -36,6 +36,14 @@ namespace targeted_marketing_display
             }
         }
 
+        public static IEnumerable<T> Select<T>(this IDataReader reader,
+                                       Func<IDataReader, T> projection)
+        {
+            while (reader.Read())
+            {
+                yield return projection(reader);
+            }
+        }
 
 
         public void BindGrid()
@@ -65,16 +73,18 @@ namespace targeted_marketing_display
             // 3. add new parameter to command object
             cmd.Parameters.Add(param);
 
-
+           
             SqlDataAdapter sda = new SqlDataAdapter();
             DataTable dt = new DataTable();
-            cmd.Connection = conn;
+         
+            
+           cmd.Connection = conn;
             sda.SelectCommand = cmd;
             sda.Fill(dt);
 
 
             // get data stream
-            // reader = cmd.ExecuteReader();
+            reader = cmd.ExecuteReader();
 
 
             GridView1.DataSource = dt;

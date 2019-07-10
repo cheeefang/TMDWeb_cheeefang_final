@@ -21,49 +21,68 @@ namespace targeted_marketing_display
         {
             if (!IsPostBack)
             {
-                SqlConnection conn = null;
-                SqlDataReader reader = null;
-
-
-
-                // instantiate and open connection
-                conn = new
-                    SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
-                conn.Open();
-
-
-
-                // 1. declare command object with parameter
-                SqlCommand cmd = new SqlCommand(
-                    " select [BillboardLocation].BillboardCode, [Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join" +
-                    " [AdvertisementLocation] on [Advertisement].AdvID=[AdvertisementLocation].AdvID join " +
-                    "[BillboardLocation] on[AdvertisementLocation].BillboardID =[BillboardLocation].BillboardID " +
-                    "where [Advertisement].status=1 and [BillboardLocation].BillboardID=@ID", conn);
-
-                // 2. define parameters used in command object
-                SqlParameter param = new SqlParameter();
-                param.ParameterName = "@ID";
-                param.Value = Session["BillboardID"].ToString();
-
-                // 3. add new parameter to command object
-                cmd.Parameters.Add(param);
-
-                // get data stream
-                reader = cmd.ExecuteReader();
-
-
-                GridView1.DataSource = reader;
-                GridView1.DataBind();
-                if (GridView1.Rows.Count == 0)
-                {
-                    ErrorMessage.Visible = true;
-                }
+                this.BindGrid();
             }
         }
+
+        protected void BindGrid()
+        {
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+
+
+
+            // instantiate and open connection
+            conn = new
+                SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+            conn.Open();
+
+
+
+            // 1. declare command object with parameter
+            SqlCommand cmd = new SqlCommand(
+                " select [BillboardLocation].BillboardCode, [Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join" +
+                " [AdvertisementLocation] on [Advertisement].AdvID=[AdvertisementLocation].AdvID join " +
+                "[BillboardLocation] on[AdvertisementLocation].BillboardID =[BillboardLocation].BillboardID " +
+                "where [Advertisement].status=1 and [BillboardLocation].BillboardID=@ID", conn);
+
+            // 2. define parameters used in command object
+            SqlParameter param = new SqlParameter();
+            param.ParameterName = "@ID";
+            param.Value = Session["BillboardID"].ToString();
+
+            // 3. add new parameter to command object
+            cmd.Parameters.Add(param);
+            SqlDataAdapter sda = new SqlDataAdapter();
+            DataTable dt = new DataTable();
+            cmd.Connection = conn;
+            sda.SelectCommand = cmd;
+            sda.Fill(dt);
+            // get data stream
+            reader = cmd.ExecuteReader();
+
+
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+            if (GridView1.Rows.Count == 0)
+            {
+                ErrorMessage.Visible = true;
+            }
+        }
+
 
         protected void GridView1_PreRender(object sender, EventArgs e)
         {
             LabelPaging.Text = "Displaying Page " + (GridView1.PageIndex + 1).ToString() + " of " + GridView1.PageCount.ToString();
+        }
+
+
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            GridView1.DataBind();
+            BindGrid();
         }
     }
 }
