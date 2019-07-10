@@ -493,7 +493,7 @@ namespace targeted_marketing_display
             }
 
             billboardDisplayTB.Text = (billboardDisplayTB.Text).Substring(1);
-         
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Pop", "$('#myModal2').modal('hide');", true);
 
         }
 

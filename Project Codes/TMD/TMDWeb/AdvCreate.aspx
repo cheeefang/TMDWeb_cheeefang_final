@@ -285,15 +285,17 @@
 
                     <div class="form-group">
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [CompanyID], [Name] FROM [Company] where status=1"></asp:SqlDataSource>
+                       
+                        
                         <label>Display Billboard </label>
                         <label style="color: red">*</label>
-                        <asp:UpdatePanel ID="updatepanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                       <asp:UpdatePanel ID="updatepanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
 
                             <ContentTemplate>
                             <asp:TextBox ID="billboardDisplayTB" class="form-control" runat="server"   placeholder="Search..." data-toggle="modal" data-target="#myModal2" AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>
                     
                     </div>
-
+                    
                      <div id="myModal2" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg" >
 
@@ -367,16 +369,18 @@
                                    
                                     </div>
                                     <div class="modal-footer">
-                                    
+                                     
                                 <asp:LinkButton runat="server" class="btn btn-default" ID="BillboardSearch" Style="height: 34px;" Text="Confirm" OnClick="BillboardSearch_Click" autopostback="true"  />
 
-                            
                                         <asp:Button ID="Button3" class="btn btn-default" runat="server" Text="Close" data-dismiss="modal" />
-                                 </ContentTemplate>
-                                        <Triggers>
+                                 
+                                   
+                           </ContentTemplate>
+                                             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="BillboardSearch" EventName="Click" />
             </Triggers>
-                            </asp:UpdatePanel>
+                     </asp:UpdatePanel>
+                           
                                     </div>
                                 </div>
 
@@ -384,7 +388,7 @@
                         </div>
                 </div>
 
-
+                 
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group" style="margin-top:20px;">
