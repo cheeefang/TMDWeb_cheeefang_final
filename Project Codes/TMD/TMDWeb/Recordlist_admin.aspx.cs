@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using targeted_marketing_display.App_Code;
 using System.Configuration;
 namespace targeted_marketing_display
 {
@@ -34,30 +35,31 @@ namespace targeted_marketing_display
                 GridViewRow row = GridView1.Rows[index];
                 LinkButton btnButton1 = sender as LinkButton;
                 GridViewRow gvRow1 = (GridViewRow)btnButton1.NamingContainer;
-              //  Billboard bObj = new Billboard();
-                //User uObj = new User();
-                //UserManagement uDao = new UserManagement();
-               // Billboard_Management bDao = new Billboard_Management();
-
-
-
+                
+                Advertisement aObj = new Advertisement();
+                Advertisement_Management aDao = new Advertisement_Management();
+             
+               
                 Label lb_msgId = (Label)gvRow1.FindControl("lb_AdvertID");
-
-             //   bObj = bDao.getBillboardByID(lb_msgId.Text);
-            //    string BBCode = bObj.BillboardCode;
+                aObj = aDao.getAdvByID(lb_msgId.Text);
 
 
+        
+                //   bObj = bDao.getBillboardByID(lb_msgId.Text);
+                //    string BBCode = bObj.BillboardCode;
+                string AdvName = aObj.Name;
 
 
-              //  Boolean insCnt = bDao.deleteBillboard(lb_msgId.Text);
 
+                //Boolean insCnt = bDao.deleteBillboard(lb_msgId.Text);
+                Boolean DeleteAd = aDao.deleteAdvert(lb_msgId.Text);
                 //VIC: never inform if the delete is successful or not?
                 alertSuccess.Visible = true;
-                msgSuccess.Text = " Advert #" + AdvID + " Has Been Deleted Successfully!";
+                msgSuccess.Text = " Advert " + AdvName + " Has Been Deleted Successfully!";
 
                 Database db = new Database();
 
-                SqlCommand cmd = new SqlCommand("Select * from [BillboardLocation] WHERE Status = 1");
+                SqlCommand cmd = new SqlCommand("Select * from [Advertisement] WHERE Status = 1");
                 DataSet ds = db.getDataSet(cmd);
 
                 //gvUser.DataSource = ds;

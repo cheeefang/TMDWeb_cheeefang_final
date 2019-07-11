@@ -134,8 +134,7 @@ namespace targeted_marketing_display
                 LinkButton btnButton1 = sender as LinkButton;
                 GridViewRow gvRow1 = (GridViewRow)btnButton1.NamingContainer;
                 Billboard bObj = new Billboard();
-                //User uObj = new User();
-                //UserManagement uDao = new UserManagement();
+             
                 Billboard_Management bDao = new Billboard_Management();
 
 

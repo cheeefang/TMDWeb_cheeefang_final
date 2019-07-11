@@ -42,8 +42,13 @@ namespace targeted_marketing_display.App_Code
                 obj.LastUpdBy = row["LastUpdBy"].ToString();
                 obj.LastUpdOn = row["LastUpdOn"].ToString();
             }
+            else
+            {
+                obj = null;
+            }
 
-            
+            return obj;
+
 
         }
 
@@ -61,24 +66,24 @@ namespace targeted_marketing_display.App_Code
 
         }
 
-        public Boolean AdvertUpdate(string BillboardID, string AddressLn1, string AddressLn2, string City, string Country, string latitude, string Longtitude, string postalCode, string lastUpdBy, string lastUpdOn)
+        public Boolean AdvertUpdate(string AdvID, string Name, string Item, string ItemType, int Duration, int CompanyID, string StartDate, string EndDate,string LastUpdBy,string LastUpdOn)
         {
             Boolean result;
 
-            SqlCommand cmd = new SqlCommand("UPDATE [Advertisement] SET AddressLn1 = @paraAddressLn1 , AddressLn2 = @paraAddressLn2 ,City=@paraCity , Country=@paraCountry ,latitude=@paralatitude,Longtitude=@paraLongtitude,@parapostalCode=@parapostalCode, LastUpdBy = @paraLastUpdBy, LastUpdOn = @paraLastUpdOn WHERE BillboardID=@paraBillboardID");
-            cmd.Parameters.AddWithValue("@paraBillboardID", BillboardID);
+            SqlCommand cmd = new SqlCommand("UPDATE [Advertisement] SET Name = @paraName , Item = @paraItem ,ItemType=@paraItemType , Duration=@paraDuration ,CompanyID=@paraCompanyID,StartDate=@paraStartDate,EndDate=@paraEndDate, LastUpdBy = @paraLastUpdBy, LastUpdOn = @paraLastUpdOn WHERE AdvID=@paraAdvID");
+            cmd.Parameters.AddWithValue("@paraAdvID", AdvID);
 
-            cmd.Parameters.AddWithValue("@paraAddressLn1", AddressLn1);
-            cmd.Parameters.AddWithValue("@paraAddressLn2", AddressLn2);
-            cmd.Parameters.AddWithValue("@paraCity", City);
-            cmd.Parameters.AddWithValue("@paraCountry", Country);
-            cmd.Parameters.AddWithValue("@paralatitude", latitude);
-            cmd.Parameters.AddWithValue("@paraLongtitude", Longtitude);
-            cmd.Parameters.AddWithValue("@parapostalCode", postalCode);
+            cmd.Parameters.AddWithValue("@paraName", Name);
+            cmd.Parameters.AddWithValue("@paraItem", Item);
+            cmd.Parameters.AddWithValue("@paraItemType", ItemType);
+            cmd.Parameters.AddWithValue("@paraDuration", Duration);
+            cmd.Parameters.AddWithValue("@paraCompanyID", CompanyID);
+            cmd.Parameters.AddWithValue("@paraStartDate", StartDate);
+            cmd.Parameters.AddWithValue("@paraEndDate", EndDate);
 
 
-            cmd.Parameters.AddWithValue("@paraLastUpdBy", lastUpdBy);
-            cmd.Parameters.AddWithValue("@paraLastUpdOn", lastUpdOn);
+            cmd.Parameters.AddWithValue("@paraLastUpdBy", LastUpdBy);
+            cmd.Parameters.AddWithValue("@paraLastUpdOn", LastUpdOn);
 
             result = dbConnection.executeNonQuery(cmd);
             return result;
