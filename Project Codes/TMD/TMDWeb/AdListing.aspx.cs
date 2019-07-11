@@ -10,7 +10,7 @@ using targeted_marketing_display.App_Code;
 using System.Configuration;
 namespace targeted_marketing_display
 {
-    public partial class Recordlist_admin : System.Web.UI.Page
+    public partial class AdListing : System.Web.UI.Page
     {
         SqlConnection con = new SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
 
@@ -20,6 +20,28 @@ namespace targeted_marketing_display
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void editBtn_Command(object sender, CommandEventArgs e)
+        {
+            if (e.CommandName == "AdUpdateInfo")
+            {
+
+                int index = Convert.ToInt32(e.CommandArgument);
+
+
+                // Retrieve the row that contains the link button from the Rows collection.
+                GridViewRow row = GridView1.Rows[index];
+                LinkButton lbButton1 = sender as LinkButton;
+                GridViewRow gvRow1 = (GridViewRow)lbButton1.NamingContainer;
+
+                //Need to Retrieve userID to edit user
+                Label lb_AdvID = (Label)gvRow1.FindControl("lb_AdvertID");
+
+                Session["BillboardID"] = lb_AdvID.Text;
+
+                Response.Redirect("AdListing_update.aspx");
+            }
         }
 
 
@@ -47,7 +69,7 @@ namespace targeted_marketing_display
         
                 //   bObj = bDao.getBillboardByID(lb_msgId.Text);
                 //    string BBCode = bObj.BillboardCode;
-                string AdvName = aObj.Name;
+               
 
 
 
@@ -55,7 +77,7 @@ namespace targeted_marketing_display
                 Boolean DeleteAd = aDao.deleteAdvert(lb_msgId.Text);
                 //VIC: never inform if the delete is successful or not?
                 alertSuccess.Visible = true;
-                msgSuccess.Text = " Advert " + AdvName + " Has Been Deleted Successfully!";
+                msgSuccess.Text = " Advert# " + aObj.AdvID + " Has Been Deleted Successfully!";
 
                 Database db = new Database();
 

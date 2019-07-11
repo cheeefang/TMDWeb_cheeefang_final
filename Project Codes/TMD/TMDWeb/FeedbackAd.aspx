@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="FeedbackAdv.aspx.cs" Inherits="targeted_marketing_display.FeedbackAdv" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="FeedbackAd.aspx.cs" Inherits="targeted_marketing_display.FeedbackAd" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .lbAdv

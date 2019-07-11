@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="Recordlist_admin.aspx.cs" Inherits="targeted_marketing_display.Recordlist_admin" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="AdListing.aspx.cs" Inherits="targeted_marketing_display.AdListing" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
       .GridViewEditRow input[type=text] {
@@ -18,7 +18,19 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       <form runat="server">
+<script>
+        function deleteFunction() {
 
+            if (!confirm('Confirm Deletion of Advertisement')) {
+
+                return false;
+            }
+
+            else {
+                return true;
+            }
+        }
+</script>
 
 
         
@@ -51,7 +63,7 @@
           
                 <div class="col-lg-6">
                     </br>
-                    <a href="AdvCreate.aspx" class="btn btn-primary nextBtn pull-right" type="button"> <b> New Advertisement </b> </a>
+                    <a href="AdCreate.aspx" class="btn btn-primary nextBtn pull-right" type="button"> <b> New Advertisement </b> </a>
                   
                 </div>
                  </div>

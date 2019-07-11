@@ -122,8 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdFeedback.aspx" />
-    <Content Include="AdrecordView.aspx" />
-    <Content Include="AdvCreate.aspx" />
+    <Content Include="AdCreate.aspx" />
     <Content Include="BBLocationCreate.aspx" />
     <Content Include="BBLocationRead.aspx" />
     <Content Include="BBLocationUpdate.aspx" />
@@ -1767,7 +1766,7 @@
     <Content Include="css\gridview.css" />
     <Content Include="css\TMD.css" />
     <Content Include="FAQ.aspx" />
-    <Content Include="FeedbackAdv.aspx" />
+    <Content Include="FeedbackAd.aspx" />
     <Content Include="FeedbackAnalyticsIndiv.aspx" />
     <Content Include="FeedBackBillboard.aspx" />
     <Content Include="font-awesome\css\font-awesome.css.map" />
@@ -1834,8 +1833,7 @@
     <Content Include="obj\Debug\TMDWeb.csproj.FileListAbsolute.txt" />
     <Content Include="OtherUserProfile.aspx" />
     <Content Include="OwnProfile.aspx" />
-    <Content Include="Recordlist_admin.aspx" />
-    <Content Include="Recordlist_member.aspx" />
+    <Content Include="AdListing.aspx" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
@@ -2032,19 +2030,12 @@
     <Compile Include="AdFeedback.aspx.designer.cs">
       <DependentUpon>AdFeedback.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdrecordView.aspx.cs">
-      <DependentUpon>AdrecordView.aspx</DependentUpon>
+    <Compile Include="AdCreate.aspx.cs">
+      <DependentUpon>AdCreate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdrecordView.aspx.designer.cs">
-      <DependentUpon>AdrecordView.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AdvCreate.aspx.cs">
-      <DependentUpon>AdvCreate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdvCreate.aspx.designer.cs">
-      <DependentUpon>AdvCreate.aspx</DependentUpon>
+    <Compile Include="AdCreate.aspx.designer.cs">
+      <DependentUpon>AdCreate.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\Advertisement.cs" />
     <Content Include="App_Code\Advertisement_Management.cs" />
@@ -2126,12 +2117,12 @@
     <Compile Include="FAQ.aspx.designer.cs">
       <DependentUpon>FAQ.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FeedbackAdv.aspx.cs">
-      <DependentUpon>FeedbackAdv.aspx</DependentUpon>
+    <Compile Include="FeedbackAd.aspx.cs">
+      <DependentUpon>FeedbackAd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FeedbackAdv.aspx.designer.cs">
-      <DependentUpon>FeedbackAdv.aspx</DependentUpon>
+    <Compile Include="FeedbackAd.aspx.designer.cs">
+      <DependentUpon>FeedbackAd.aspx</DependentUpon>
     </Compile>
     <Compile Include="FeedbackAnalyticsIndiv.aspx.cs">
       <DependentUpon>FeedbackAnalyticsIndiv.aspx</DependentUpon>
@@ -2178,19 +2169,12 @@
     <Compile Include="OwnProfile.aspx.designer.cs">
       <DependentUpon>OwnProfile.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Recordlist_admin.aspx.cs">
-      <DependentUpon>Recordlist_admin.aspx</DependentUpon>
+    <Compile Include="AdListing.aspx.cs">
+      <DependentUpon>AdListing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Recordlist_admin.aspx.designer.cs">
-      <DependentUpon>Recordlist_admin.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Recordlist_member.aspx.cs">
-      <DependentUpon>Recordlist_member.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Recordlist_member.aspx.designer.cs">
-      <DependentUpon>Recordlist_member.aspx</DependentUpon>
+    <Compile Include="AdListing.aspx.designer.cs">
+      <DependentUpon>AdListing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Template.Master.cs">
       <DependentUpon>Template.Master</DependentUpon>

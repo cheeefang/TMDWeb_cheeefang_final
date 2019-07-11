@@ -12,7 +12,7 @@ using targeted_marketing_display.App_Code;
 using System.IO;
 namespace targeted_marketing_display
 {
-    public partial class AdvCreate : System.Web.UI.Page
+    public partial class AdCreate : System.Web.UI.Page
     {
         public int companyID { get; set; }
         SqlConnection insertconnection = new SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
@@ -440,7 +440,7 @@ namespace targeted_marketing_display
 
                
             }
-            Response.Redirect("recordlist_admin.aspx");
+            Response.Redirect("AdListing.aspx");
 
         }
 
