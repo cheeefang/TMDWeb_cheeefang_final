@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#"  MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeBehind="AdListingInfo.aspx.cs" Inherits="targeted_marketing_display.AdListingInfo" %>
+﻿<%@ Page Language="C#"  MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="AdListingInfo.aspx.cs" Inherits="targeted_marketing_display.AdListingInfo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -127,13 +127,6 @@
                                          
                                         <itemtemplate>
 
-                                            
-                                        <asp:LinkButton ID="DeleteBtn"  OnClientClick="return deleteFunction();"  OnCommand="btnDelete_Command" runat="server" CommandName="DeleteAdMessage" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
-
-                                             <i class="fa fa-trash"></i>
-                                             
-
-                                             </asp:LinkButton>
                                       
 
                                                                                                              
