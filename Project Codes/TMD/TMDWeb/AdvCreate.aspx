@@ -160,7 +160,7 @@
                     </div>
                 </div>
 
-                  <div class="col-lg-6" id="divCompany" runat="server">
+                  <div class="col-lg-6" id="divCompany" runat="server" visible="false">
                    <div class="form-group">
                  <label>Company</label>
                        <label style="color: red">*</label>
@@ -227,21 +227,12 @@
              
             </div>
 
-
-
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label>Category </label>
                         <label style="color: red">*</label>
                         &nbsp;
-                        
-
-     
-
-
-
-                     
                         <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
 
                         <asp:UpdatePanel ID="updatepanel1" runat="server">
@@ -262,12 +253,7 @@
                                     ScrollBars="Auto" BackColor="whitesmoke" Style="display: none; margin-top: 10px;">
 
                                     <asp:CheckBoxList ID="CheckBoxList1" runat="server" DataTextField="CodeDesc" DataValueField="CodeValue" onclick="javascript:CheckCheck();"></asp:CheckBoxList>
-
-
                                 </asp:Panel>
-
-
-
                             </ContentTemplate>
 
                         </asp:UpdatePanel>
@@ -276,24 +262,24 @@
 
                     </div>
                 </div>
-
-                
-
-
-
+               
                 <div class="col-lg-6">
 
                     <div class="form-group">
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [CompanyID], [Name] FROM [Company] where status=1"></asp:SqlDataSource>
-                       
                         
                         <label>Display Billboard </label>
                         <label style="color: red">*</label>
-                       <asp:UpdatePanel ID="updatepanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                        <asp:UpdatePanel ID="updatepanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
 
                             <ContentTemplate>
                             <asp:TextBox ID="billboardDisplayTB" class="form-control" runat="server"   placeholder="Search..." data-toggle="modal" data-target="#myModal2" AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>
-                    
+                      </ContentTemplate>
+                                             <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="BillboardSearch" EventName="Click" />
+            </Triggers>
+                     </asp:UpdatePanel>
+                           
                     </div>
                     
                      <div id="myModal2" class="modal fade" role="dialog">
@@ -374,55 +360,47 @@
 
                                         <asp:Button ID="Button3" class="btn btn-default" runat="server" Text="Close" data-dismiss="modal" />
                                  
-                                   
-                           </ContentTemplate>
-                                             <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="BillboardSearch" EventName="Click" />
-            </Triggers>
-                     </asp:UpdatePanel>
-                           
+                       
                                     </div>
                                 </div>
 
                             </div>
                         </div>
                 </div>
-
-                 
+                </div>
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group" style="margin-top:20px;">
-                            <label>&nbsp;&nbsp;&nbsp; Targeted Audience </label>
+                            <label>Targeted Audience </label>
                             <label style="color: red">*</label>
                             <asp:CheckBoxList ID="CheckBoxList2" runat="server" Width="822px" Font-Size="small" Font-Bold="false" Height="92px" RepeatDirection="Horizontal" Style="margin-right: 10px; margin-left:18px; margin-top: 3px; margin-bottom: 10px;" RepeatColumns="4" >
-                                <asp:ListItem Value="1">&nbsp &nbsp Male Child(Age 0-15)</asp:ListItem>
-                                <asp:ListItem Value="2">&nbsp &nbsp Male Young Adult(Age 16-30)</asp:ListItem>
-                                <asp:ListItem Value="3">&nbsp &nbsp Male Adult(Age 31-65)</asp:ListItem>
-                                <asp:ListItem Value="4">&nbsp &nbsp Male Senior(Age 66+)</asp:ListItem>
-                                <asp:ListItem Value="5">&nbsp &nbsp Female Child(Age 0-15)</asp:ListItem>
-                                <asp:ListItem Value="6">&nbsp &nbsp Female Young Adult(Age 16-30)</asp:ListItem>
-                                <asp:ListItem Value="7">&nbsp &nbsp Female Adult(Age 31-65)</asp:ListItem>
-                                <asp:ListItem Value="8">&nbsp &nbsp Female Senior(Age 66+)</asp:ListItem>
+                                <asp:ListItem Value="1">Male Child(Age 0-15)</asp:ListItem>
+                                <asp:ListItem Value="2">Male Young Adult(Age 16-30)</asp:ListItem>
+                                <asp:ListItem Value="3">Male Adult(Age 31-65)</asp:ListItem>
+                                <asp:ListItem Value="4">Male Senior(Age 66+)</asp:ListItem>
+                                <asp:ListItem Value="5">Female Child(Age 0-15)</asp:ListItem>
+                                <asp:ListItem Value="6">Female Young Adult(Age 16-30)</asp:ListItem>
+                                <asp:ListItem Value="7">Female Adult(Age 31-65)</asp:ListItem>
+                                <asp:ListItem Value="8">Female Senior(Age 66+)</asp:ListItem>
                             </asp:CheckBoxList>
                           
-                            &nbsp;
-                  
+                 
 
 
                         </div>
 
                     </div>
+                    </div>
 
-                </div>
+                
           
                 <div class="row">
-
                     <div class="col-lg-6">
                         <div class="form-group">
                             <p>
-                                &nbsp;&nbsp;&nbsp;
+                               
                                 <asp:CheckBox ID="CheckBox1" runat="server" />
-                                &nbsp Agree with the <a data-toggle="modal" data-target="#myModal">terms and conditions</a>
+                               Agree with the <a data-toggle="modal" data-target="#myModal">terms and conditions</a>
                             </p>
 
                             <!-- Modal -->
@@ -478,9 +456,6 @@
 
 
 
-
-
-        </div>
 
 
 

@@ -22,12 +22,14 @@ namespace targeted_marketing_display
            
             if ((string)Session["userType"] == "Admin")
             {
+                divCompany.Visible = true;
                 DropDownListCompany.Visible = true;
               //  int companyID = Convert.ToInt32(DropDownListCompany.SelectedItem.Value);
             }
             else{
-               // User userObj = new User();
-              //  UserManagement uDao = new UserManagement();
+                // User userObj = new User();
+                //  UserManagement uDao = new UserManagement();
+                divCompany.Visible = false;
                 DropDownListCompany.Visible = false;
                // userObj = uDao.getUserByID(Session["userID"].ToString());
                // int companyID = userObj.CompanyID;
@@ -493,8 +495,8 @@ namespace targeted_marketing_display
             }
 
             billboardDisplayTB.Text = (billboardDisplayTB.Text).Substring(1);
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Pop", "$('#myModal2').modal('hide');", true);
-
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "  hideModal();", true);
+          
         }
 
         protected void btnRun_Click(object sender, EventArgs e)
