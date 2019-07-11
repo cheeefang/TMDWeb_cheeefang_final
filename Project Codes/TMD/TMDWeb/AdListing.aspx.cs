@@ -22,6 +22,27 @@ namespace targeted_marketing_display
 
         }
 
+        protected void infoBtn_Command(object sender, CommandEventArgs e)
+        {
+            if (e.CommandName == "AdInfo")
+            {
+
+                int index = Convert.ToInt32(e.CommandArgument);
+
+
+                // Retrieve the row that contains the link button from the Rows collection.
+                GridViewRow row = GridView1.Rows[index];
+                LinkButton lbButton1 = sender as LinkButton;
+                GridViewRow gvRow1 = (GridViewRow)lbButton1.NamingContainer;
+
+                //Need to Retrieve userID to display info of user
+                Label lb_BillboardID = (Label)gvRow1.FindControl("lb_AdvertID");
+
+                Session["AdvertID"] = lb_BillboardID.Text;
+
+                Response.Redirect("AdListingInfo.aspx");
+            }
+        }
         protected void editBtn_Command(object sender, CommandEventArgs e)
         {
             if (e.CommandName == "AdUpdateInfo")
@@ -38,9 +59,9 @@ namespace targeted_marketing_display
                 //Need to Retrieve userID to edit user
                 Label lb_AdvID = (Label)gvRow1.FindControl("lb_AdvertID");
 
-                Session["BillboardID"] = lb_AdvID.Text;
+                Session["AdvertID"] = lb_AdvID.Text;
 
-                Response.Redirect("AdListing_update.aspx");
+                Response.Redirect("AdListingUpdate.aspx");
             }
         }
 

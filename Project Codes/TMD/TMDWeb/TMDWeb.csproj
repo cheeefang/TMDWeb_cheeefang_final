@@ -123,6 +123,8 @@
   <ItemGroup>
     <Content Include="AdFeedback.aspx" />
     <Content Include="AdCreate.aspx" />
+    <Content Include="AdListingInfo.aspx" />
+    <Content Include="AdListingUpdate.aspx" />
     <Content Include="BBLocationCreate.aspx" />
     <Content Include="BBLocationRead.aspx" />
     <Content Include="BBLocationUpdate.aspx" />
@@ -2037,8 +2039,22 @@
     <Compile Include="AdCreate.aspx.designer.cs">
       <DependentUpon>AdCreate.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdListingInfo.aspx.cs">
+      <DependentUpon>AdListingInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdListingInfo.aspx.designer.cs">
+      <DependentUpon>AdListingInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdListingUpdate.aspx.cs">
+      <DependentUpon>AdListingUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdListingUpdate.aspx.designer.cs">
+      <DependentUpon>AdListingUpdate.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Code\Advertisement.cs" />
-    <Content Include="App_Code\Advertisement_Management.cs" />
+    <Compile Include="App_Code\Advertisement_Management.cs" />
     <Compile Include="App_Code\Billboard.cs" />
     <Compile Include="App_Code\Billboard_Management.cs" />
     <Compile Include="App_Code\Company.cs" />
