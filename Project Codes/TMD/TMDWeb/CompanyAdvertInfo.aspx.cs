@@ -41,6 +41,8 @@ namespace targeted_marketing_display
 
         public void BindGrid()
         {
+
+
             // conn and reader declared outside try
             // block for visibility in finally block
             SqlConnection conn = null;
@@ -77,7 +79,7 @@ namespace targeted_marketing_display
 
 
             // get data stream
-            reader = cmd.ExecuteReader();
+          
 
 
             GridView1.DataSource = dt;
@@ -86,6 +88,14 @@ namespace targeted_marketing_display
             {
                 ErrorMessage.Visible = true;
             }
+            SqlCommand cmdCount = new SqlCommand("select count(*) from Advertisement where companyID=@CompanyID and status=1", conn);
+            SqlParameter paramCount = new SqlParameter();
+            paramCount.ParameterName = "@CompanyID";
+            paramCount.Value = Session["CompanyID"].ToString();
+            cmdCount.Parameters.Add(paramCount);
+            Int32 numberOfRows = Convert.ToInt32(cmdCount.ExecuteScalar());
+            rowCountLabel.Text = "(" + numberOfRows.ToString() + " Ads)";
+            conn.Close();
         }
 
 

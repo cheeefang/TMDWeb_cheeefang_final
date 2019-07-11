@@ -10,7 +10,8 @@
  
           <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Company Advertisement Listing</h1>
+                        <h1 class="page-header">Company Advertisement Listing<asp:label runat="server" id="rowCountLabel"></asp:label>
+                        </h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>

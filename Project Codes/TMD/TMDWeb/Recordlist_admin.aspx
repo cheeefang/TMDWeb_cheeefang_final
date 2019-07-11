@@ -123,12 +123,15 @@
 
 
 
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [Advertisement].AdvID,[Company].Name, [Advertisement].Name, [Advertisement].Item, [Advertisement].ItemType,[StartDate], [EndDate]FROM [Advertisement] inner join [Company] on Company.CompanyID=[Advertisement].CompanyID where [Advertisement].status=1" FilterExpression="Name LIKE '%{0}%' OR Item LIKE '%{0}%' OR convert(CreatedBy,'System.String') LIKE '%{0}%'">
+
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [Advertisement].AdvID,[Company].Name, [Advertisement].Name, [Advertisement].Item, [Advertisement].ItemType,[StartDate], [EndDate]FROM [Advertisement] inner join [Company] on Company.CompanyID=[Advertisement].CompanyID where [Advertisement].status=1" FilterExpression="Name LIKE '%{0}%' OR Item LIKE '%{0}%' OR Name1  LIKE '%{0}%' OR ItemType LIKE '%{0}%' OR convert(StartDate,'System.String') LIKE '%{0}%' OR convert(EndDate,'System.String') LIKE '%{0}%' ">
             <FilterParameters>
                                             <asp:ControlParameter ControlID="txtSearch" Name="Name" PropertyName="Text" />
                                             <asp:ControlParameter ControlID="txtSearch" Name="Item" PropertyName="Text" />                                            
-                                            <asp:ControlParameter ControlID="txtSearch" Name="CreatedBy" PropertyName="Text" />
-
+                                            <asp:ControlParameter ControlID="txtSearch" Name="Name1" PropertyName="Text" />
+                                            <asp:ControlParameter ControlID="txtSearch" Name="ItemType" PropertyName="Text" />
+                                             <asp:ControlParameter ControlID="txtSearch" Name="StartDate" PropertyName="Text" />
+                                            <asp:ControlParameter ControlID="txtSearch" Name="EndDate" PropertyName="Text" />
                                         </FilterParameters>        
             
        </asp:SqlDataSource>
