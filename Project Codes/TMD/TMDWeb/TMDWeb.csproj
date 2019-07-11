@@ -2047,6 +2047,7 @@
       <DependentUpon>AdvCreate.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\Advertisement.cs" />
+    <Content Include="App_Code\Advertisement_Management.cs" />
     <Compile Include="App_Code\Billboard.cs" />
     <Compile Include="App_Code\Billboard_Management.cs" />
     <Compile Include="App_Code\Company.cs" />

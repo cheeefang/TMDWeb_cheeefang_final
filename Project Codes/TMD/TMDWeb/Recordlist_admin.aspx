@@ -67,7 +67,11 @@
                                 CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" HorizontalAlign="Center" DataKeyNames="AdvID"  OnPreRender="GridView1_PreRender">
                                 <AlternatingRowStyle HorizontalAlign="Center" />
                                 <Columns>
-
+                                    <asp:TemplateField visible="false">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" visible="false"  ID="lb_AdvertID" Text='<%# Bind("AdvID") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
 
 
 
@@ -93,7 +97,26 @@
                                     <asp:BoundField DataField="StartDate" HeaderText="StartDate" SortExpression="StartDate"></asp:BoundField>
                                     <asp:BoundField DataField="EndDate" HeaderText="EndDate" SortExpression="EndDate"></asp:BoundField>
                                    
+                                    <asp:templatefield headertext="Delete">
 
+                                         
+                                        <itemtemplate>
+
+                                            
+                                        <asp:LinkButton ID="DeleteBtn"  OnClientClick="return deleteFunction();"  OnCommand="btnDelete_Command" runat="server" CommandName="DeleteAdMessage" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
+
+                                             <i class="fa fa-trash"></i>
+                                             
+
+                                             </asp:LinkButton>
+                                      
+
+                                                                                                             
+                                         </itemtemplate>
+                                        <ControlStyle Height="50%" />
+                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+                                        <ItemStyle Width="5%" HorizontalAlign="Center" Wrap="True" VerticalAlign="Middle" />
+                                  </asp:templatefield>
 
                                  
 

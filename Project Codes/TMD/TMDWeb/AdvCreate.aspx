@@ -262,7 +262,9 @@
 
                     </div>
                 </div>
-               
+            
+
+                            <contentTemplate>
                 <div class="col-lg-6">
 
                     <div class="form-group">
@@ -359,8 +361,7 @@
                                 <asp:LinkButton runat="server" class="btn btn-default" ID="BillboardSearch" Style="height: 34px;" Text="Confirm" OnClick="BillboardSearch_Click" autopostback="true"  />
 
                                         <asp:Button ID="Button3" class="btn btn-default" runat="server" Text="Close" data-dismiss="modal" />
-                                 
-                       
+                  
                                     </div>
                                 </div>
 
@@ -368,6 +369,8 @@
                         </div>
                 </div>
                 </div>
+                                                   
+          
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group" style="margin-top:20px;">

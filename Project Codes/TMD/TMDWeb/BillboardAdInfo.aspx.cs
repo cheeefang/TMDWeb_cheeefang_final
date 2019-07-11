@@ -64,7 +64,7 @@ namespace targeted_marketing_display
 
             GridView1.DataSource = dt;
             GridView1.DataBind();
-            
+        
             if (GridView1.Rows.Count == 0)
             {
                 ErrorMessage.Visible = true;

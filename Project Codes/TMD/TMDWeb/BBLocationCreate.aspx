@@ -4,6 +4,21 @@
     <style type="text/css">
        
     </style>
+    <script type="text/javascript">
+       //google.maps.event.addDomListener(window, 'load', initialize);
+       // function initialize() {
+       //     var autocomplete = new google.maps.places.Autocomplete(document.getElementById('LocationTB'));
+       //     google.maps.event.addListerner(autocomplete, 'place_changed', function () {
+       //         var place = autocomplete.getPlace();
+       //         var location = "<b>Address</b>:" + place.formatted_address + "<br/>";
+       //         location += "<b>Latitude</b>:" + place.geometry.location.A + "<br/>";
+       //         location += "<b>Longtitude</b>:" + place.geometry.location.F;
+       //         document.getElementById('lblResult').innerHTML = location
+       //     });
+       // }
+            
+        
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
@@ -19,7 +34,7 @@
             </div>
             <!-- /.row -->
 
-          
+         <asp:label runat="server" id="lblResult"></asp:label>
 
               <center> 
                   
@@ -53,16 +68,6 @@
                     </div>
 
                 </div>
-
-                <div class="col-lg-6">
-
-                    <div class="form-group">
-                        
-                        &nbsp;
-                    </div>
-
-                </div>
-
             
             </div>
 
@@ -81,6 +86,7 @@
 
                     <div class="form-group">
                         <label>Address Line 2</label>
+                         <label style="color: red">*</label>
                         <asp:TextBox class="form-control" ID="BbAddLn2" placeholder="Enter Address Line 2" runat="server"></asp:TextBox>
                         &nbsp;
                     </div>
@@ -365,12 +371,12 @@
 
             <div class="row">
                 <div class="col-lg-6">
-
-                    <div class="form-group">
-                        <label>Postal Code </label>
+                     <div class="form-group">
+                        <label>Longtitude </label>
                         <label style="color: red">*</label>
-                        <asp:TextBox class="form-control" ID="BbPostalCode" placeholder="Enter Postal Code" runat="server"></asp:TextBox>&nbsp;
+                        <asp:TextBox class="form-control" ID="BBLongtitude" placeholder="Enter Longtitude" runat="server"></asp:TextBox>&nbsp;
                     </div>
+                   
 
                 </div>
                 <div class="col-lg-6">
@@ -382,13 +388,14 @@
                     </div>
 
                 </div>
+                </div>
                   <div class="row">
                 <div class="col-lg-6">
 
                     <div class="form-group">
-                        <label>Longtitude </label>
+                        <label>Postal Code </label>
                         <label style="color: red">*</label>
-                        <asp:TextBox class="form-control" ID="BBLongtitude" placeholder="Enter Longtitude" runat="server"></asp:TextBox>&nbsp;
+                        <asp:TextBox class="form-control" ID="BbPostalCode" placeholder="Enter Postal Code" runat="server"></asp:TextBox>&nbsp;
                     </div>
 
                 </div>

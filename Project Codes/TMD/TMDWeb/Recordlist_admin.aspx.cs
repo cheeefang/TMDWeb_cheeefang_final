@@ -22,7 +22,49 @@ namespace targeted_marketing_display
         }
 
 
+        protected void btnDelete_Command(object sender, CommandEventArgs e)
+        {
+            if (e.CommandName == "DeleteAdMessage")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
 
+
+                // Retrieve the row that contains the button 
+                // from the Rows collection.
+                GridViewRow row = GridView1.Rows[index];
+                LinkButton btnButton1 = sender as LinkButton;
+                GridViewRow gvRow1 = (GridViewRow)btnButton1.NamingContainer;
+              //  Billboard bObj = new Billboard();
+                //User uObj = new User();
+                //UserManagement uDao = new UserManagement();
+               // Billboard_Management bDao = new Billboard_Management();
+
+
+
+                Label lb_msgId = (Label)gvRow1.FindControl("lb_AdvertID");
+
+             //   bObj = bDao.getBillboardByID(lb_msgId.Text);
+            //    string BBCode = bObj.BillboardCode;
+
+
+
+
+              //  Boolean insCnt = bDao.deleteBillboard(lb_msgId.Text);
+
+                //VIC: never inform if the delete is successful or not?
+                alertSuccess.Visible = true;
+                msgSuccess.Text = " Advert #" + AdvID + " Has Been Deleted Successfully!";
+
+                Database db = new Database();
+
+                SqlCommand cmd = new SqlCommand("Select * from [BillboardLocation] WHERE Status = 1");
+                DataSet ds = db.getDataSet(cmd);
+
+                //gvUser.DataSource = ds;
+                GridView1.DataBind();
+
+            }
+        }
 
 
 

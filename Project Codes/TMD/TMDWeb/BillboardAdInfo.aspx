@@ -22,7 +22,7 @@
                    <div class="input-group custom-search-form" style="width: 50%">
                   <div style="padding: 20px; float: left; width:30%;">
                                           <p class="input-group" style="width:350px;margin-left:-20px;">
-                                        <asp:TextBox ID="tbSearch" class="form-control" runat="server" placeholder="Search..."></asp:TextBox>
+                                        <asp:TextBox ID="txtSearch" class="form-control" runat="server" placeholder="Search..."></asp:TextBox>
                                         <%--<input type="submit" id="btSubmit" runat="server" />--%>
                                         <span class="input-group-btn" >
                                             <asp:LinkButton runat="server" class="btn btn-default" ID="btnRun" style="height:34px;" Text="<i class='fa fa-search'></i>"/>
@@ -67,7 +67,18 @@
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" HorizontalAlign="Center" />
                                 <SortedDescendingHeaderStyle BackColor="#00547E" HorizontalAlign="Center" />
         </asp:GridView>
- 
+        
+ <!--       <asp:objectdatasource id="ObjectDataSource1" runat="server" FilterExpression="Name LIKE '%{0}%' OR Item LIKE '%{0}%' OR Name1  LIKE '%{0}%' OR ItemType LIKE '%{0}%' OR convert(StartDate,'System.String') LIKE '%{0}%' OR convert(EndDate,'System.String') LIKE '%{0}%' ">
+            <Filterparameters>
+               <asp:ControlParameter ControlID="txtSearch" Name="Name" PropertyName="Text" />
+               <asp:ControlParameter ControlID="txtSearch" Name="Item" PropertyName="Text" />                                            
+               <asp:ControlParameter ControlID="txtSearch" Name="BillboardCode" PropertyName="Text" />
+               <asp:ControlParameter ControlID="txtSearch" Name="ItemType" PropertyName="Text" />
+               <asp:ControlParameter ControlID="txtSearch" Name="StartDate" PropertyName="Text" />
+               <asp:ControlParameter ControlID="txtSearch" Name="EndDate" PropertyName="Text" />
+            </Filterparameters>
+        </asp:objectdatasource>
+ -->
         
     
             
