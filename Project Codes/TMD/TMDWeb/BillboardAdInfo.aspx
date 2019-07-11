@@ -13,6 +13,27 @@
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
+
+
+        
+
+          <div class="row">
+                    <div class="col-lg-6">
+                   <div class="input-group custom-search-form" style="width: 50%">
+                  <div style="padding: 20px; float: left; width:30%;">
+                                          <p class="input-group" style="width:350px;margin-left:-20px;">
+                                        <asp:TextBox ID="tbSearch" class="form-control" runat="server" placeholder="Search..."></asp:TextBox>
+                                        <%--<input type="submit" id="btSubmit" runat="server" />--%>
+                                        <span class="input-group-btn" >
+                                            <asp:LinkButton runat="server" class="btn btn-default" ID="btnRun" style="height:34px;" Text="<i class='fa fa-search'></i>"/>
+                                       </span>
+                                            </p>
+                                    </div>
+                            </div>
+               </div>
+                
+                </div>
+
         <asp:GridView ID="GridView1" runat="server" CssClass="table table-striped table-bordered table-hover"   CellPadding ="3" ForeColor="#333333" GridLines="None" Height="100%" Width="100%" 
             OnPreRender="GridView1_PreRender" AllowPaging="True"  OnPageIndexChanging="GridView1_PageIndexChanging" AutoGenerateColumns="False" >
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
