@@ -57,12 +57,12 @@ namespace targeted_marketing_display
                 adNameTB.Text = AdvertObj.Name.ToString();
                 startDateTB.Text = AdvertObj.StartDate.ToString();
                 endDateTB.Text = AdvertObj.EndDate.ToString();
-                string sqlquery2 = "Select CategoryID from [AdvertisementCategory] where AdvID=@ID";
-                SqlParameter param = new SqlParameter();
-                param.ParameterName = "@ID";
-                param.Value = Session["AdvertID"].ToString();
-                SqlCommand cmdCategory = new SqlCommand(sqlquery2, sqlconn);
-                cmdCategory.Parameters.Add(param);
+                //string sqlquery2 = "Select CategoryID from [AdvertisementCategory] where AdvID=@ID";
+                //SqlParameter param = new SqlParameter();
+                //param.ParameterName = "@ID";
+                //param.Value = Session["AdvertID"].ToString();
+                //SqlCommand cmdCategory = new SqlCommand(sqlquery2, sqlconn);
+                //cmdCategory.Parameters.Add(param);
             }
         }
     }

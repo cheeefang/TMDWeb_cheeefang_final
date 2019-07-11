@@ -120,21 +120,7 @@
                                
                                     <asp:BoundField DataField="StartDate" HeaderText="StartDate" SortExpression="StartDate"></asp:BoundField>
                                     <asp:BoundField DataField="EndDate" HeaderText="EndDate" SortExpression="EndDate"></asp:BoundField>
-                                    <asp:templatefield headertext="Update">
-                                        <itemtemplate>
-                                 
-                                        <asp:LinkButton ID="editBtn" OnCommand="editBtn_Command" runat="server" CommandName="AdUpdateInfo" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
-
-                                        <i class="fa fa-edit"></i>
-                                            
-
-                                            </asp:LinkButton>
-                                  
-                                         </itemtemplate>
-                                        <ControlStyle Height="50%" />
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle Width="5%" HorizontalAlign="Center" Wrap="True" VerticalAlign="Middle" />
-                                  </asp:templatefield>
+                                    
                                     <asp:templatefield headertext="Delete">
 
                                          
