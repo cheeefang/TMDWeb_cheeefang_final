@@ -343,51 +343,32 @@
 
             </div>
 
-            
-            <div class="row">
-                <div class="col-lg-6">
 
-                    <div class="form-group">
-                        <label>Latitude</label>
-                        
-                        <asp:TextBox class="form-control" ID="BBLatitude" placeholder="Enter Billboard Latitude" runat="server"></asp:TextBox>&nbsp;
-                    </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Latitude</label>
 
+                    <asp:TextBox class="form-control" ID="BBLatitude" placeholder="Enter Billboard Latitude" runat="server"></asp:TextBox>&nbsp;
                 </div>
+                
 
-                <div class="col-lg-6">
-
-                            &nbsp;                       
-
-                </div>
             </div>
 
+            <div class="col-lg-6">
 
-            
-            <div class="row">
-                <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Longtitude </label>
 
-                    <div class="form-group">
-                        <label>Longtitude </label>
-                        
-                        <asp:TextBox class="form-control" ID="BBLongtitude" placeholder="Enter Billboard Longtitude" runat="server"></asp:TextBox>&nbsp;
-                    </div>
-
+                    <asp:TextBox class="form-control" ID="BBLongtitude" placeholder="Enter Billboard Longtitude" runat="server"></asp:TextBox>&nbsp;
                 </div>
+                
 
-                <div class="col-lg-6">
 
-                            &nbsp;                       
 
-                </div>
+            </div>             
+
             </div>
-
-
-
-
-
-
-
 
 
             <div class="row">
