@@ -9,7 +9,7 @@ using System.Data;
 using System.Data.SqlClient;
 using BBMgmt;
 using System.Text;
-using PagedList;
+
 using System.Threading.Tasks;
 using targeted_marketing_display.App_Code;
 namespace targeted_marketing_display
