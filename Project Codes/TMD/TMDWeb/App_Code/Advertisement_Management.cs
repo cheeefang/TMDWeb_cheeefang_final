@@ -66,18 +66,13 @@ namespace targeted_marketing_display.App_Code
 
         }
 
-        public Boolean AdvertUpdate(string AdvID, string Name, string Item, string ItemType, int Duration, int CompanyID, string StartDate, string EndDate,string LastUpdBy,string LastUpdOn)
+        public Boolean AdvertUpdate(string AdvID, string StartDate, string EndDate, string LastUpdBy, string LastUpdOn)
         {
             Boolean result;
 
-            SqlCommand cmd = new SqlCommand("UPDATE [Advertisement] SET Name = @paraName , Item = @paraItem ,ItemType=@paraItemType , Duration=@paraDuration ,CompanyID=@paraCompanyID,StartDate=@paraStartDate,EndDate=@paraEndDate, LastUpdBy = @paraLastUpdBy, LastUpdOn = @paraLastUpdOn WHERE AdvID=@paraAdvID");
+            SqlCommand cmd = new SqlCommand("UPDATE [Advertisement] SET StartDate=@paraStartDate,EndDate=@paraEndDate, LastUpdBy = @paraLastUpdBy, LastUpdOn = @paraLastUpdOn WHERE AdvID=@paraAdvID");
             cmd.Parameters.AddWithValue("@paraAdvID", AdvID);
 
-            cmd.Parameters.AddWithValue("@paraName", Name);
-            cmd.Parameters.AddWithValue("@paraItem", Item);
-            cmd.Parameters.AddWithValue("@paraItemType", ItemType);
-            cmd.Parameters.AddWithValue("@paraDuration", Duration);
-            cmd.Parameters.AddWithValue("@paraCompanyID", CompanyID);
             cmd.Parameters.AddWithValue("@paraStartDate", StartDate);
             cmd.Parameters.AddWithValue("@paraEndDate", EndDate);
 

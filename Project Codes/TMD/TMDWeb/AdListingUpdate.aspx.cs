@@ -22,39 +22,21 @@ namespace targeted_marketing_display
         {
             if (!IsPostBack)
             {
-                if ((string)Session["userType"] == "Admin")
-                {
-                    divCompany.Visible = true;
-                    DropDownListCompany.Visible = true;
-                    //  int companyID = Convert.ToInt32(DropDownListCompany.SelectedItem.Value);
-                }
-                else
-                {
-                    // User userObj = new User();
-                    //  UserManagement uDao = new UserManagement();
-                    divCompany.Visible = false;
-                    DropDownListCompany.Visible = false;
-                    // userObj = uDao.getUserByID(Session["userID"].ToString());
-                    // int companyID = userObj.CompanyID;
-                }
+                
                 Database db = new Database();
                 string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
-                SqlConnection sqlconn = new SqlConnection(dbConnStr);
-                string sqlquery = "SELECT * FROM [CodeReferece] WHERE ([CodeType] = @CodeType)";
-                SqlCommand cmd = new SqlCommand(sqlquery, sqlconn);
-                cmd.Parameters.AddWithValue("@CodeType", "Category");
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
+                //SqlConnection sqlconn = new SqlConnection(dbConnStr);
+                //string sqlquery = "SELECT * FROM [CodeReferece] WHERE ([CodeType] = @CodeType)";
+                //SqlCommand cmd = new SqlCommand(sqlquery, sqlconn);
+                //cmd.Parameters.AddWithValue("@CodeType", "Category");
+                //SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                //DataTable dt = new DataTable();
+                //sda.Fill(dt);
 
-                CheckBoxList1.DataSource = dt;
-                CheckBoxList1.DataBind();
                 Advertisement AdvertObj = new Advertisement();
                 Advertisement_Management aDao = new Advertisement_Management();
                 AdvertObj = aDao.getAdvByID(Session["AdvertID"].ToString());
-                DropDownListCompany.SelectedValue = AdvertObj.CompanyID.ToString();
-                videoDurationTB.Text = AdvertObj.Duration.ToString();
-                adNameTB.Text = AdvertObj.Name.ToString();
+             
                 startDateTB.Text = AdvertObj.StartDate.ToString();
                 endDateTB.Text = AdvertObj.EndDate.ToString();
                 //string sqlquery2 = "Select CategoryID from [AdvertisementCategory] where AdvID=@ID";
@@ -64,6 +46,38 @@ namespace targeted_marketing_display
                 //SqlCommand cmdCategory = new SqlCommand(sqlquery2, sqlconn);
                 //cmdCategory.Parameters.Add(param);
             }
+            CompareValidator1.ValueToCompare = DateTime.Now.ToShortDateString();
+            CompareValidator2.ValueToCompare = DateTime.Now.ToShortDateString();
+
+
+        }
+        protected void ButtonConfirm_Click(object sender, EventArgs e)
+        {
+            Advertisement AdvertObj = new Advertisement();
+            Advertisement_Management aDao = new Advertisement_Management();
+            AdvertObj = aDao.getAdvByID(Session["AdvertID"].ToString());
+            if (startDateTB.Text == "" || endDateTB.Text == "")
+            {
+                warningLocation.Visible = true;
+                if (CheckBox1.Checked == false)
+                {
+                    alertWarning.Visible = true;
+
+                    warningLocation.Text = "Please agree with T&C";
+                }
+            }
+           
+            else
+            {
+                string startdate = startDateTB.Text.ToString();
+                string enddate = endDateTB.Text.ToString();
+                string lastUpdBy = Session["userID"].ToString();
+                string lastUpdOn = DateTime.Now.ToString("MM/dd/yyyy h:mm tt");
+                aDao.AdvertUpdate(Session["AdvertID"].ToString(), startdate, enddate,lastUpdBy,lastUpdOn);
+                startDateTB.Text = string.Empty;
+                endDateTB.Text = string.Empty;
+            }
+
         }
     }
 }
