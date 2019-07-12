@@ -34,16 +34,20 @@
                     <asp:Label ID="warningLocation" runat="server"></asp:Label>
                 </div>
             </div>
+        <br />
         <div runat="server" class="alert alert-success" id="alertSuccess" visible="False">
-                    <strong>Success!</strong> Advertisement Date has been updated.
+
+                    <strong>Success!</strong> Advertisement has been updated.
                 </div>
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Update Advertisement</h1>
+                    <h1 class="page-header">Update Advertisement<asp:Label ID="AdvIDLabel" runat="server"></asp:Label></h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+            <!-- /.row -->
+    
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-6">

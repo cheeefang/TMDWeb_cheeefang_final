@@ -26,7 +26,7 @@
                        
                         </div>
                         <div class="panel-body">
-                            <p>Go on to our advertisement page and look for the 'Create Ads' button!</p>
+                            <p>Go on to our Advertisement Listing Page and look for the 'New Advertisement' button!</p>
                         </div>
                        
                     </div>

@@ -13,6 +13,8 @@ using targeted_marketing_display;
 using targeted_marketing_display.App_Code;
 using System.Net;
 using System.Xml.Linq;
+using System.Globalization;
+
 namespace targeted_marketing_display
 {
     public partial class AdListingUpdate : System.Web.UI.Page
@@ -36,9 +38,14 @@ namespace targeted_marketing_display
                 Advertisement AdvertObj = new Advertisement();
                 Advertisement_Management aDao = new Advertisement_Management();
                 AdvertObj = aDao.getAdvByID(Session["AdvertID"].ToString());
+                DateTime dt = Convert.ToDateTime(AdvertObj.StartDate);
+                String ConvertDate = dt.ToString("yyyy-MM-dd");
+                DateTime dt2 = Convert.ToDateTime(AdvertObj.EndDate);
+                String ConvertEndDate = dt2.ToString("yyyy-MM-dd");
+                AdvIDLabel.Text = " for " + ' ' + AdvertObj.Name.ToString();
              
-                startDateTB.Text = AdvertObj.StartDate.ToString();
-                endDateTB.Text = AdvertObj.EndDate.ToString();
+                startDateTB.Text = ConvertDate;
+                endDateTB.Text = ConvertEndDate;
                 //string sqlquery2 = "Select CategoryID from [AdvertisementCategory] where AdvID=@ID";
                 //SqlParameter param = new SqlParameter();
                 //param.ParameterName = "@ID";
@@ -59,12 +66,7 @@ namespace targeted_marketing_display
             if (startDateTB.Text == "" || endDateTB.Text == "")
             {
                 warningLocation.Visible = true;
-                if (CheckBox1.Checked == false)
-                {
-                    alertWarning.Visible = true;
-
-                    warningLocation.Text = "Please agree with T&C";
-                }
+               
             }
            
             else
@@ -76,8 +78,10 @@ namespace targeted_marketing_display
                 aDao.AdvertUpdate(Session["AdvertID"].ToString(), startdate, enddate,lastUpdBy,lastUpdOn);
                 startDateTB.Text = string.Empty;
                 endDateTB.Text = string.Empty;
+                alertWarning.Visible = false;
+                alertSuccess.Visible = true;
             }
-
+           
         }
     }
 }
