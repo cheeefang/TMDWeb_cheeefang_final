@@ -6,7 +6,100 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="jquery-1.4.3.js" type="text/javascript"></script>
 
-   
+ <script>
+        function showModal() {
+            $('#myModal2').modal('show');
+        }
+        function hideModal() {
+            $('#myModal2').modal('close');
+        }
+    </script>
+
+    <script type="text/javascript" language="javascript">
+
+        function CheckCheck() {
+
+            var chkBoxList = document.getElementById('<%=CheckBoxList1.ClientID %>');
+            var chkBoxCount = chkBoxList.getElementsByTagName("input");
+            var btn = document.getElementById('<%=CategoryButton.ClientID %>');
+            var i = 0;
+            var tot = 0;
+
+            for (i = 0; i < chkBoxCount.length; i++) {
+                if (chkBoxCount[i].checked) {
+                    tot = tot + 1;
+                }
+            }
+
+            if (tot > 8) {
+                alert('Cannot check more than 8 categpries');
+                btn.disabled = true;
+            }
+
+            else {
+                btn.disabled = false;
+            }
+
+        }
+        function HeaderCheckBoxClick(checkbox) {
+            var gridview = document.getElementById("GridView1");
+            for (var i = 1; i<gridview.rows.length; i++) {
+                gridview.rows[i].cells[0].getElementsByTagName("INPUT")[0].checked = checkbox.checked;
+            }
+        }
+
+        function ChildCheckBoxClick(checkbox) {
+            var atleastOneCheckBoxUnchecked = false;
+            var gridview = document.getElementById("GridView1");
+
+            for (var i = 1; i<gridview.rows.length; i++) {
+                if (gridview.rows[i].cells[0].getElementsByTagName("INPUT")[0].checked == false) {
+                    atleastOneCheckBoxUnchecked = true;
+                    break;
+                }
+            }
+
+            gridview.rows[0].cells[0].getElementsByTagName("INPUT")[0].checked = !atleastOneCheckBoxUnchecked;
+        }
+
+
+      
+    </script>
+
+ <script type="text/javascript">
+        function checkAll(objRef) {
+            var GridView = objRef.parentNode.parentNode.parentNode;
+            var inputList = GridView.getElementsByTagName("input");
+            for (var i = 0; i < inputList.length; i++) {
+                 var row = inputList[i].parentNode.parentNode;
+                if (inputList[i].type == "checkbox" && objRef != inputList[i]) {
+                     if (objRef.checked) {
+                       inputList[i].checked = true;
+                     }
+                     else {
+                         inputList[i].checked = false;
+                     }
+                 }
+             }
+         }
+
+         function Check_Click(objRef) {
+             var row = objRef.parentNode.parentNode;
+             var GridView = row.parentNode;
+             var inputList = GridView.getElementsByTagName("input");
+             for (var i = 0; i < inputList.length; i++) {
+                 var headerCheckBox = inputList[0];
+                 var checked = true;
+                 if (inputList[i].type == "checkbox" && inputList[i] != headerCheckBox) {
+                     if (!inputList[i].checked) {
+                       checked = false;
+                         break;
+                     }
+                 }
+             }
+             headerCheckBox.checked = checked;
+         }
+    </script>   
 
 
 

@@ -54,7 +54,7 @@ namespace targeted_marketing_display
                 adNameTB.Text = AdvertObj.Name.ToString();
                 videoDurationTB.Text = AdvertObj.Duration.ToString();
 
-                SqlCommand cmd = new SqlCommand("select AgeID,GenderID from [AdvertisementAudience]where AdvID=@ID", conn);
+                SqlCommand cmd = new SqlCommand("select * from [AdvertisementAudience] where AdvID=@ID", conn);
                 SqlParameter param = new SqlParameter();
                 param.ParameterName = "@ID";
                 param.Value = Session["AdvertID"].ToString();
@@ -117,6 +117,7 @@ namespace targeted_marketing_display
 
                 }
 
+
                 //string sqlquery2 = "Select CategoryID from [AdvertisementCategory] where AdvID=@ID";
                 //SqlParameter param = new SqlParameter();
                 //param.ParameterName = "@ID";
@@ -154,6 +155,52 @@ namespace targeted_marketing_display
                 alertSuccess.Visible = true;
             }
            
+        }
+        protected void CategoryButton_Click(object sender, EventArgs e)
+        {
+            string name = "";
+            for (int i = 0; i < CheckBoxList1.Items.Count; i++)
+            {
+
+                if (CheckBoxList1.Items[i].Selected)
+                {
+
+                    name = name + ", " + CheckBoxList1.Items[i].Value;
+
+                }
+
+
+            }
+
+            adCategoryTB.Text = (name).Substring(1);
+        }
+        protected void BillboardSearch_Click(object sender, EventArgs e)
+        {
+            List<int> lstBillboardID = new List<int>();
+
+            billboardDisplayTB.Text = "";
+            foreach (GridViewRow gvr in GridView1.Rows)
+
+            {
+                if (gvr.RowType == DataControlRowType.DataRow)
+                {
+                    CheckBox cb = (CheckBox)(gvr.FindControl("CheckBoxSelector"));
+                    if (cb.Checked == true)
+                    {
+                        billboardDisplayTB.Text = billboardDisplayTB.Text + "," + gvr.Cells[1].Text;
+
+                    }
+                }
+            }
+
+            billboardDisplayTB.Text = (billboardDisplayTB.Text).Substring(1);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "  hideModal();", true);
+
+        }
+
+        protected void btnRun_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showModal();", true);
         }
     }
 }
