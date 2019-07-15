@@ -24,9 +24,13 @@ namespace targeted_marketing_display
         {
             if (!IsPostBack)
             {
-                
+                SqlConnection conn = null;
+                SqlDataReader reader = null;
                 Database db = new Database();
                 string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
+                conn = new
+                SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                conn.Open();
                 //SqlConnection sqlconn = new SqlConnection(dbConnStr);
                 //string sqlquery = "SELECT * FROM [CodeReferece] WHERE ([CodeType] = @CodeType)";
                 //SqlCommand cmd = new SqlCommand(sqlquery, sqlconn);
@@ -46,6 +50,73 @@ namespace targeted_marketing_display
              
                 startDateTB.Text = ConvertDate;
                 endDateTB.Text = ConvertEndDate;
+                DropDownListCompany.SelectedValue = AdvertObj.CompanyID.ToString();
+                adNameTB.Text = AdvertObj.Name.ToString();
+                videoDurationTB.Text = AdvertObj.Duration.ToString();
+
+                SqlCommand cmd = new SqlCommand("select AgeID,GenderID from [AdvertisementAudience]where AdvID=@ID", conn);
+                SqlParameter param = new SqlParameter();
+                param.ParameterName = "@ID";
+                param.Value = Session["AdvertID"].ToString();
+                cmd.Parameters.Add(param);
+                SqlDataAdapter sda = new SqlDataAdapter();
+                DataTable datatable = new DataTable();
+                cmd.Connection = conn;
+                sda.SelectCommand = cmd;
+                sda.Fill(datatable);
+                //  string userName = dtLoginTable.Rows[0]["UserName"].ToString();
+                string AgeID = datatable.Rows[0]["AgeID"].ToString();
+                for (int i= 0;i<=datatable.Rows.Count;i++)
+                {
+                    int ageChecker = Convert.ToInt32(datatable.Rows[i][1]);
+                    string GenderChecker = datatable.Rows[i][2].ToString();
+                    if (ageChecker == 1)
+                    {
+                        if (GenderChecker=="M")
+                        {
+                            CheckBoxList2.Items[1].Selected = true;
+                        }
+                        else
+                        {
+                            CheckBoxList2.Items[5].Selected = true;
+                        }
+                    }
+                    if (ageChecker == 2)
+                    {
+                        if (GenderChecker == "M")
+                        {
+                            CheckBoxList2.Items[2].Selected = true;
+                        }
+                        else
+                        {
+                            CheckBoxList2.Items[6].Selected = true;
+                        }
+                    }
+                    if (ageChecker == 3)
+                    {
+                        if (GenderChecker == "M")
+                        {
+                            CheckBoxList2.Items[3].Selected = true;
+                        }
+                        else
+                        {
+                            CheckBoxList2.Items[7].Selected = true;
+                        }
+                    }
+                    if (ageChecker == 4)
+                    {
+                        if (GenderChecker == "M")
+                        {
+                            CheckBoxList2.Items[4].Selected = true;
+                        }
+                        else
+                        {
+                            CheckBoxList2.Items[8].Selected = true;
+                        }
+                    }
+
+                }
+
                 //string sqlquery2 = "Select CategoryID from [AdvertisementCategory] where AdvID=@ID";
                 //SqlParameter param = new SqlParameter();
                 //param.ParameterName = "@ID";
@@ -78,6 +149,7 @@ namespace targeted_marketing_display
                 aDao.AdvertUpdate(Session["AdvertID"].ToString(), startdate, enddate,lastUpdBy,lastUpdOn);
                 startDateTB.Text = string.Empty;
                 endDateTB.Text = string.Empty;
+                
                 alertWarning.Visible = false;
                 alertSuccess.Visible = true;
             }

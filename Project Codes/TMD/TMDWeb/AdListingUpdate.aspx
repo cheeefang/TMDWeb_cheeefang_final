@@ -48,6 +48,76 @@
             </div>
             <!-- /.row -->
     
+        <div class="row">
+                
+                <div class="col-lg-6">
+                   <div class="form-group">
+                 
+                        <label>Item(Image/Video) </label>
+                        <label style="color: red">*</label>
+                        &nbsp;
+                       
+                                       
+                               
+                              
+                    
+
+                        <asp:FileUpload ID="FileUpload1" runat="server" />
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ValidationExpression='(.*?)\.(jpg|jpeg|png|gif|avi|flv|wmv|mp4|mov|JPG|JPEG|PNG|GIF|AVI|FLV|WMV|MOV|MP4)$'
+                            ControlToValidate="FileUpload1" runat="server" ForeColor="Red" ErrorMessage="Please select valid image/video file."
+                            Display="Dynamic" />
+                        <asp:Literal ID="Literal1" runat="server"></asp:Literal>
+                        <asp:Literal ID="Literal2" runat="server"></asp:Literal>
+                        <br />
+                               
+                                   
+                    </div>
+                </div>
+
+                  <div class="col-lg-6" id="divCompany" runat="server" visible="false">
+                   <div class="form-group">
+                 <label>Company</label>
+                       <label style="color: red">*</label>
+                       </br>
+                 <asp:DropDownList class="form-control" ID="DropDownListCompany" runat="server" visible="false" >
+                     
+
+                    </asp:DropDownList>
+                     
+   <br />
+                      
+                    </div>
+                </div>
+            
+       
+            </div>
+           
+            <div class="row">
+                
+               
+                <div class="col-lg-6">
+
+                    <div class="form-group">
+                        <label>Duration</label> (only video file required)&nbsp;
+                        <asp:TextBox Class="form-control" ID="videoDurationTB" runat="server" />                        
+                        <br />
+                    </div>
+                </div>
+
+
+
+          <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Name </label>
+                        <label style="color: red">*</label>
+                        <asp:TextBox Class="form-control" ID="adNameTB" runat="server" AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>
+                    </div>
+                </div>
+            </div>
+
+
+
+
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-6">
@@ -76,7 +146,177 @@
             
 
                 
+        <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Category </label>
+                        <label style="color: red">*</label>
+                        &nbsp;
+                        <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
+
+                        <asp:UpdatePanel ID="updatepanel1" runat="server">
+
+                            <ContentTemplate>
+                                <p class="input-group">
+                                    <asp:TextBox ID="adCategoryTB" class="form-control" runat="server" AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>
+                                    <span class="input-group-btn">
+                                        <asp:LinkButton runat="server" class="btn btn-default" ID="CategoryButton" Style="height: 34px;" Text="<i class='fa fa-caret-square-o-down'></i>" OnClick="CategoryButton_Click" />
+                                    </span>
+                                </p>
+                                <ajaxToolkit:PopupControlExtender ID="PopupControlExtender1" runat="server"
+                                    Enabled="True" ExtenderControlID="" TargetControlID="adCategoryTB"
+                                    PopupControlID="Panel1" OffsetY="22">
+                                </ajaxToolkit:PopupControlExtender>
+                                <asp:Panel ID="Panel1" Class="form-control" runat="server" Height="116px" Width="450px"
+                                    BorderStyle="Solid" BorderColor="#435058" BorderWidth="1px" Direction="LeftToRight"
+                                    ScrollBars="Auto" BackColor="whitesmoke" Style="display: none; margin-top: 10px;">
+
+                                    <asp:CheckBoxList ID="CheckBoxList1" runat="server" DataTextField="CodeDesc" DataValueField="CodeValue" onclick="javascript:CheckCheck();"></asp:CheckBoxList>
+                                </asp:Panel>
+                            </ContentTemplate>
+
+                        </asp:UpdatePanel>
+
+
+
+                    </div>
+                </div>
+            
+
+                            <contentTemplate>
+                <div class="col-lg-6">
+
+                    <div class="form-group">
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [CompanyID], [Name] FROM [Company] where status=1"></asp:SqlDataSource>
+                        
+                        <label>Display Billboard </label>
+                        <label style="color: red">*</label>
+                        <asp:UpdatePanel ID="updatepanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+
+                            <ContentTemplate>
+                            <asp:TextBox ID="billboardDisplayTB" class="form-control" runat="server"   placeholder="Search..." data-toggle="modal" data-target="#myModal2" AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>
+                      </ContentTemplate>
+                                             <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="BillboardSearch" EventName="Click" />
+            </Triggers>
+                     </asp:UpdatePanel>
+                           
+                    </div>
+                    
+                     <div id="myModal2" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-lg" >
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                       
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title" style="font-size: xx-large;">Billboard Locations</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    
+                                        <p class="input-group" style="float:left; width:300px">
+                                            <asp:TextBox ID="txtSearch" class="form-control" runat="server" placeholder="Search..." AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>
+                                      
+                                            <span class="input-group-btn">
+                                                <asp:LinkButton runat="server" class="btn btn-default" ID="btnRun" Style="height: 34px;" Text="<i class='fa fa-search'></i>" OnClick="btnRun_Click"  />
+                                            </span>
+
+
+                                        </p>
+
+                                    <!-- Billboard Gridview-->
+
+                                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered table-hover" DataKeyNames="BillboardID" DataSourceID="SqlDataSource2" AllowPaging="True" Width="100%" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3">
+                                        <Columns>                                         
+                                           <asp:TemplateField>
+                                               <HeaderTemplate>
+                                                   <asp:CheckBox ID="checkboxSelectAll"  onclick="checkAll(this);" runat="server" />
+                                               </HeaderTemplate>
+                                                <ItemTemplate>
+                                                   <asp:Checkbox ID="CheckBoxSelector" onclick="Check_Click(this);"  runat ="server" />
+                                               </ItemTemplate>                                            
+                                           </asp:TemplateField>
+
+                                 
+                                            <asp:BoundField DataField="BillboardID" HeaderText="BillboardID" SortExpression="BillboardID" ReadOnly="True" InsertVisible="False"  />
+                                            <asp:BoundField DataField="BillboardCode" HeaderText="BillboardCode" SortExpression="BillboardCode" />
+                                            <asp:BoundField DataField="Latitude" HeaderText="Latitude" SortExpression="Latitude" />
+                                            <asp:BoundField DataField="Longtitude" HeaderText="Longtitude" SortExpression="Longtitude" />
+                                            <asp:BoundField DataField="Address" HeaderText="Address" SortExpression="Address" ReadOnly="True" />
+
+                                        </Columns>
+                                        <EditRowStyle HorizontalAlign="Center" CssClass="GridViewEditRow" />
+                                        <EmptyDataRowStyle HorizontalAlign="Center" />
+                                        <FooterStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Center" />
+                                        <HeaderStyle BackColor="#848c8E" Font-Bold="True" ForeColor="#f1f2ee" HorizontalAlign="Center" />
+                                        <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Center" />
+                                        <RowStyle ForeColor="#435058" Height="20px" Width="30px" HorizontalAlign="Center" />
+                                        <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
+                                        <SortedAscendingCellStyle BackColor="#F1F1F1" HorizontalAlign="Center" />
+                                        <SortedAscendingHeaderStyle BackColor="#007DBB" HorizontalAlign="Center" />
+                                        <SortedDescendingCellStyle BackColor="#CAC9C9" HorizontalAlign="Center" />
+                                        <SortedDescendingHeaderStyle BackColor="#00547E" HorizontalAlign="Center" />
+                                    </asp:GridView>
+                               
+                                      
+                                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" 
+                               FilterExpression="BillboardCode LIKE '%{0}%' OR AddressLn LIKE '%{0}%' OR City LIKE '%{0}%' OR Country LIKE '%{0}%' OR postalCode LIKE '%{0}%'" 
+                                        SelectCommand="SELECT BillboardID,BillboardCode, Latitude ,Longtitude ,(( AddressLn1) + ' '+( AddressLn2 )+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address FROM BillboardLocation where status=1 ">
+                                        <FilterParameters>
+                                            <asp:ControlParameter ControlID="txtSearch" Name="City" PropertyName="Text" />
+                                            <asp:ControlParameter ControlID="txtSearch" Name="AddressLn" PropertyName="Text" />
+                                            <asp:ControlParameter ControlID="txtSearch" Name="BillboardCode" PropertyName="Text" />
+                                            <asp:ControlParameter ControlID="txtSearch" Name="Country" PropertyName="Text" />
+                                            <asp:ControlParameter ControlID="txtSearch" Name="postalCode" PropertyName="Text" />
+
+                                        </FilterParameters>
+                                    </asp:SqlDataSource>
+                                         
+                                   
+                                    </div>
+                                    <div class="modal-footer">
+                                     
+                                <asp:LinkButton runat="server" class="btn btn-default" ID="BillboardSearch" Style="height: 34px;" Text="Confirm" OnClick="BillboardSearch_Click" autopostback="true"  />
+
+                                        <asp:Button ID="Button3" class="btn btn-default" runat="server" Text="Close" data-dismiss="modal" />
+                  
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                </div>
+                </div>
+                                                   
           
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group" style="margin-top:20px;">
+                            <label>Targeted Audience </label>
+                            <label style="color: red">*</label>
+                            <asp:CheckBoxList ID="CheckBoxList2" runat="server" Width="822px" Font-Size="small" Font-Bold="false" Height="92px" RepeatDirection="Horizontal" Style="margin-right: 10px; margin-left:18px; margin-top: 3px; margin-bottom: 10px;" RepeatColumns="4" >
+                                <asp:ListItem Value="1">Male Child(Age 0-15)</asp:ListItem>
+                                <asp:ListItem Value="2">Male Young Adult(Age 16-30)</asp:ListItem>
+                                <asp:ListItem Value="3">Male Adult(Age 31-65)</asp:ListItem>
+                                <asp:ListItem Value="4">Male Senior(Age 66+)</asp:ListItem>
+                                <asp:ListItem Value="5">Female Child(Age 0-15)</asp:ListItem>
+                                <asp:ListItem Value="6">Female Young Adult(Age 16-30)</asp:ListItem>
+                                <asp:ListItem Value="7">Female Adult(Age 31-65)</asp:ListItem>
+                                <asp:ListItem Value="8">Female Senior(Age 66+)</asp:ListItem>
+                            </asp:CheckBoxList>
+                          
+                 
+
+
+                        </div>
+
+                    </div>
+                    </div>  
+
+
+
+
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">

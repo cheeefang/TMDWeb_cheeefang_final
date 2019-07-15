@@ -121,6 +121,27 @@
                                     <asp:BoundField DataField="StartDate" HeaderText="StartDate" SortExpression="StartDate" DataFormatString="{0:D}"></asp:BoundField>
                                     <asp:BoundField DataField="EndDate" HeaderText="EndDate" SortExpression="EndDate" DataFormatString="{0:D}"></asp:BoundField>
                                     
+
+                                     <asp:templatefield headertext="View">
+                                        <itemtemplate>
+
+                                            <asp:LinkButton ID="viewBtn" OnCommand="infoBtn_Command" runat="server" CommandName="AdInfo" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
+
+
+                                        <i class="fas fa-eye"></i>
+
+                                            
+
+
+                                        </asp:LinkButton>
+                                      
+                                    </itemtemplate>
+                                        <ControlStyle Height="50%" />
+                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+                                        <ItemStyle Width="5%" HorizontalAlign="Center" Wrap="True" VerticalAlign="Middle" />
+                                  </asp:templatefield>
+
+
                                     <asp:templatefield headertext="Update">
                                         <itemtemplate>
                                  
