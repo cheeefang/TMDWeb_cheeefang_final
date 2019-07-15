@@ -78,7 +78,7 @@
 
                     <ul class="nav navbar-top-links navbar-right">
                         <li class="dropdown">
-                            <a class="dropdown-toggle" href="Logout.aspx">Logout <i class="fa fa-sign-out fa-fw"></i></a>
+                            <a class="dropdown-toggle" href="Logout.aspx">Logout <i class="fa fa-sign-out fa-fw" ></i></a>
                             <!-- /.dropdown-user -->
                         </li>
                         <!-- /.dropdown -->
@@ -193,7 +193,7 @@
 
                     <ul class="nav navbar-top-links navbar-right">
                         <li class="dropdown">
-                            <a class="dropdown-toggle" href="Logout.aspx">Logout <i class="fa fa-sign-out fa-fw"></i></a>
+                            <a class="dropdown-toggle" href="Logout.aspx">Logout <i class="fa fa-sign-out fa-fw" ></i></a>
                             <!-- /.dropdown-user -->
                         </li>
                         <!-- /.dropdown -->

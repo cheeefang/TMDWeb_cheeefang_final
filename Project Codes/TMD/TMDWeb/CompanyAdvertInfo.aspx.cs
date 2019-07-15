@@ -34,9 +34,13 @@ namespace targeted_marketing_display
 
 
             }
+            var rowIndex = 1;
+            var hiddenvalue = (string)GridView1.DataKeys[rowIndex]["Company"];
+            company_name_label.Text = " for " + hiddenvalue.ToString();
+
         }
 
-      
+
 
 
         public void BindGrid()

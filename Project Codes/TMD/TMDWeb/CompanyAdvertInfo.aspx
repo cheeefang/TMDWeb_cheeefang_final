@@ -10,8 +10,9 @@
  
           <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Company Advertisement Listing<asp:label runat="server" id="rowCountLabel"></asp:label>
+                        <h1 class="page-header">Company Advertisement Listing<asp:label runat="server" id="company_name_label"></asp:label>
                         </h1>
+                        <asp:label runat="server" id="rowCountLabel"></asp:label>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -40,7 +41,7 @@
 
 
 
-        <asp:GridView ID="GridView1" runat="server" CssClass="table table-striped table-bordered table-hover"   CellPadding ="3" ForeColor="#333333" GridLines="None" Height="100%" Width="100%" OnPageIndexChanging="GridView1_PageIndexChanging" OnPreRender="GridView1_PreRender" AllowPaging="True" AutoGenerateColumns="False" >
+        <asp:GridView ID="GridView1" runat="server" CssClass="table table-striped table-bordered table-hover"   CellPadding ="3" ForeColor="#333333" GridLines="None" Height="100%" Width="100%" OnPageIndexChanging="GridView1_PageIndexChanging" OnPreRender="GridView1_PreRender" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="Company" >
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 
@@ -49,7 +50,7 @@
                                     <asp:ImageField DataImageUrlField="Item" HeaderText="Advert Image" ControlStyle-Width="100" ControlStyle-Height = "100"> 
         
                                     </asp:ImageField>
-                                    <asp:BoundField DataField="Company" HeaderText="Company Name" SortExpression="Name"></asp:BoundField>
+                                    <asp:BoundField DataField="Company" visible="false" HeaderText="Company Name" SortExpression="Name"></asp:BoundField>
                                     
                                      <asp:BoundField DataField="Name" HeaderText="Advert Name" SortExpression="Name1"></asp:BoundField>
                                     <asp:BoundField DataField="ItemType" HeaderText="ItemType" SortExpression="ItemType"></asp:BoundField>

@@ -41,6 +41,12 @@ namespace TMDWeb
                     lbUserName.Text = userObj.Name;
                 }
             }
+
+        }
+        protected void logout_click(object sender,EventArgs e)
+        {
+            Session.RemoveAll();
+            Response.Redirect("login.aspx");
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-
+using System.Data;
 using System.Data.SqlClient;
 using BBMgmt;
 using System.Text;
@@ -22,10 +22,22 @@ namespace targeted_marketing_display
             if (!IsPostBack)
             {
                 this.BindGrid();
-
+               
             }
-        }
 
+            // Label lblBillboardCodelol = null;
+
+            //  lblBillboardCodelol = (Label)GridView1.FindControl("lb_BillboardCode");
+
+            // BillboardCodelabel.Text= lblBillboardCodelol.Text;
+            var rowIndex = 0;
+            var hiddenvalue = (string)GridView1.DataKeys[rowIndex]["BillboardCode"];
+            BillboardCodelabel.Text = " for "+hiddenvalue.ToString();
+
+
+
+
+        }
         protected void BindGrid()
         {
             SqlConnection conn = null;
@@ -77,6 +89,8 @@ namespace targeted_marketing_display
             Int32 numberOfRows = Convert.ToInt32(cmdCount.ExecuteScalar());
             rowCountLabel.Text = "("+numberOfRows.ToString()+" Ads)";
             conn.Close();
+          
+
         }
 
 
@@ -93,5 +107,7 @@ namespace targeted_marketing_display
            
             BindGrid();
         }
+
+
     }
 }

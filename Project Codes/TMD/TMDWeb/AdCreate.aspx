@@ -165,7 +165,7 @@
                  <label>Company</label>
                        <label style="color: red">*</label>
                        </br>
-                 <asp:DropDownList ID="DropDownListCompany" runat="server" visible="false" >
+                 <asp:DropDownList class="form-control" ID="DropDownListCompany" runat="server" visible="false" >
                      
 
                     </asp:DropDownList>

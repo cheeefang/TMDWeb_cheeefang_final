@@ -9,7 +9,8 @@
 
           <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Billboard Advertisement Listing<asp:label runat="server" id="rowCountLabel"></asp:label></h1>
+                        <h1 class="page-header">Billboard Advertisement Listing<asp:label runat="server" ID="BillboardCodelabel"></asp:label></h1>
+                        <asp:label runat="server" id="rowCountLabel"></asp:label>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -35,15 +36,15 @@
                 </div>
 
         <asp:GridView ID="GridView1" runat="server" CssClass="table table-striped table-bordered table-hover"   CellPadding ="3" ForeColor="#333333" GridLines="None" Height="100%" Width="100%" 
-            OnPreRender="GridView1_PreRender" AllowPaging="True"  OnPageIndexChanging="GridView1_PageIndexChanging" AutoGenerateColumns="False" >
+            OnPreRender="GridView1_PreRender" AllowPaging="True"  OnPageIndexChanging="GridView1_PageIndexChanging" AutoGenerateColumns="False" DataKeyNames="BillboardCode" >
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
-               
+                                    
     
                                     <asp:ImageField DataImageUrlField="Item" HeaderText="Advert Image" ControlStyle-Width="100" ControlStyle-Height = "100" /> 
         
-                            
-                                    <asp:BoundField DataField="BillboardCode" HeaderText="Billboard Code" sortExpression="BillboardCode" ></asp:BoundField>
+                                   
+                                    <asp:BoundField DataField="BillboardCode" HeaderText="Billboard Code" sortExpression="BillboardCode" Visible="false" ></asp:BoundField>
                                     <asp:BoundField DataField="Name" HeaderText="Advert Name" SortExpression="Name"></asp:BoundField>
                                     
                                      
