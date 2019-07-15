@@ -106,6 +106,20 @@
 
                                     </asp:BoundField>
 
+
+                                     <asp:TemplateField HeaderText="View">
+                                        <ItemTemplate>
+
+                                        <asp:LinkButton ID="adsBtn" OnCommand="adsBtn_Command" runat="server" CommandName="AdvertInfo" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
+                                        <i class="fas fa-eye"></i>
+                                            </asp:LinkButton>
+                                          <% %>
+                                       </ItemTemplate>
+                                           <ControlStyle Height="50%" />
+                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+                                        <ItemStyle Width="5%" HorizontalAlign="Center" Wrap="True" VerticalAlign="Middle" />
+                                          </asp:TemplateField>
+
                                     <asp:TemplateField HeaderText="Update">
                                         <ItemTemplate>
 
@@ -122,18 +136,7 @@
 
                                
 
-                                      <asp:TemplateField HeaderText="Adverts">
-                                        <ItemTemplate>
-
-                                        <asp:LinkButton ID="adsBtn" OnCommand="adsBtn_Command" runat="server" CommandName="AdvertInfo" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
-                                        <i class="fa fa-folder"></i>
-                                            </asp:LinkButton>
-                                          <% %>
-                                       </ItemTemplate>
-                                           <ControlStyle Height="50%" />
-                                        <HeaderStyle HorizontalAlign="Center" Wrap="False" />
-                                        <ItemStyle Width="5%" HorizontalAlign="Center" Wrap="True" VerticalAlign="Middle" />
-                                          </asp:TemplateField>
+                                     
 
                                     <asp:TemplateField HeaderText="Delete">
                                         <ItemTemplate>
