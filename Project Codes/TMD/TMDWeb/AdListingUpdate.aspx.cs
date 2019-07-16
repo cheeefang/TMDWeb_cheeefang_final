@@ -47,7 +47,7 @@ namespace targeted_marketing_display
                 DateTime dt2 = Convert.ToDateTime(AdvertObj.EndDate);
                 String ConvertEndDate = dt2.ToString("yyyy-MM-dd");
                 AdvIDLabel.Text = " for " + ' ' + AdvertObj.Name.ToString();
-             
+
                 startDateTB.Text = ConvertDate;
                 endDateTB.Text = ConvertEndDate;
                 DropDownListCompany.SelectedValue = AdvertObj.CompanyID.ToString();
@@ -59,20 +59,34 @@ namespace targeted_marketing_display
                 param.ParameterName = "@ID";
                 param.Value = Session["AdvertID"].ToString();
                 cmd.Parameters.Add(param);
+              
                 SqlDataAdapter sda = new SqlDataAdapter();
+                
                 DataTable datatable = new DataTable();
                 cmd.Connection = conn;
                 sda.SelectCommand = cmd;
                 sda.Fill(datatable);
+                cmd.Parameters.Clear();
                 //  string userName = dtLoginTable.Rows[0]["UserName"].ToString();
                 string AgeID = datatable.Rows[0]["AgeID"].ToString();
-                for (int i= 0;i<=datatable.Rows.Count;i++)
+                for (int i = 0; i < datatable.Rows.Count; i++)
                 {
-                    int ageChecker = Convert.ToInt32(datatable.Rows[i][1]);
-                    string GenderChecker = datatable.Rows[i][2].ToString();
+                    int ageChecker = Convert.ToInt32(datatable.Rows[i]["AgeID"]);
+                    string GenderChecker = datatable.Rows[i]["GenderID"].ToString();
                     if (ageChecker == 1)
                     {
-                        if (GenderChecker=="M")
+                        if (GenderChecker == "M")
+                        {
+                            CheckBoxList2.Items[0].Selected = true;
+                        }
+                        else
+                        {
+                            CheckBoxList2.Items[4].Selected = true;
+                        }
+                    }
+                    if (ageChecker == 2)
+                    {
+                        if (GenderChecker == "M")
                         {
                             CheckBoxList2.Items[1].Selected = true;
                         }
@@ -81,7 +95,7 @@ namespace targeted_marketing_display
                             CheckBoxList2.Items[5].Selected = true;
                         }
                     }
-                    if (ageChecker == 2)
+                    if (ageChecker == 3)
                     {
                         if (GenderChecker == "M")
                         {
@@ -92,7 +106,7 @@ namespace targeted_marketing_display
                             CheckBoxList2.Items[6].Selected = true;
                         }
                     }
-                    if (ageChecker == 3)
+                    if (ageChecker == 4)
                     {
                         if (GenderChecker == "M")
                         {
@@ -103,32 +117,41 @@ namespace targeted_marketing_display
                             CheckBoxList2.Items[7].Selected = true;
                         }
                     }
-                    if (ageChecker == 4)
-                    {
-                        if (GenderChecker == "M")
-                        {
-                            CheckBoxList2.Items[4].Selected = true;
-                        }
-                        else
-                        {
-                            CheckBoxList2.Items[8].Selected = true;
-                        }
-                    }
 
                 }
+                SqlCommand cmdCat = new SqlCommand("select * from [AdvertisementLocation] where AdvID=@ID", conn);
+                SqlParameter paramCat = new SqlParameter();
+                paramCat.ParameterName = "@ID";
+                paramCat.Value = Session["AdvertID"].ToString();
+                cmdCat.Parameters.Add(paramCat);
+                SqlDataAdapter sdaCat = new SqlDataAdapter();
+                DataTable datatableCat = new DataTable();
+                cmdCat.Connection = conn;
+                sdaCat.SelectCommand = cmdCat;
+                sdaCat.Fill(datatableCat);
+                for (int i = 0; i < datatableCat.Rows.Count; i++)
+                {
+                    int BillboardCheckID = Convert.ToInt32(datatableCat.Rows[i]["BillboardID"]);
+                    foreach (GridViewRow gvr in GridView1.Rows)
+
+                    {
+
+                        if (gvr.RowType == DataControlRowType.DataRow)
+                        {
+                            CheckBox cb = (CheckBox)(gvr.FindControl("CheckBoxSelector"));
+                            if (Convert.ToInt32(gvr.Cells[1].Text) == BillboardCheckID)
+                            {
+                                cb.Checked = true;
+                                billboardDisplayTB.Text = billboardDisplayTB.Text + "," + gvr.Cells[1].Text;
+                            }
+                        }
+                    }
+                    CompareValidator1.ValueToCompare = DateTime.Now.ToShortDateString();
+                    CompareValidator2.ValueToCompare = DateTime.Now.ToShortDateString();
 
 
-                //string sqlquery2 = "Select CategoryID from [AdvertisementCategory] where AdvID=@ID";
-                //SqlParameter param = new SqlParameter();
-                //param.ParameterName = "@ID";
-                //param.Value = Session["AdvertID"].ToString();
-                //SqlCommand cmdCategory = new SqlCommand(sqlquery2, sqlconn);
-                //cmdCategory.Parameters.Add(param);
+                }
             }
-            CompareValidator1.ValueToCompare = DateTime.Now.ToShortDateString();
-            CompareValidator2.ValueToCompare = DateTime.Now.ToShortDateString();
-
-
         }
         protected void ButtonConfirm_Click(object sender, EventArgs e)
         {

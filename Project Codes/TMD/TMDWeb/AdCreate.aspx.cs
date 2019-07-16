@@ -290,11 +290,11 @@ namespace targeted_marketing_display
                         }
 
                     
-                    sqlcn.Close();
-                }
-                
+                    
+                    }
 
-               
+                sqlcn.Close();
+
             }
             Response.Redirect("AdListing.aspx");
 
