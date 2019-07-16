@@ -114,9 +114,11 @@ namespace targeted_marketing_display
             for (int i = 0; i < CheckBoxList2.Items.Count; i++)
             {
                 if (CheckBoxList2.Items[i].Selected)
+                {
 
-                getvalue += CheckBoxList2.Items[i].Text + ",";
-                getvalue = getvalue.TrimEnd();
+                    getvalue += CheckBoxList2.Items[i].Text + ",";
+                    getvalue = getvalue.TrimEnd();
+                }
             }
 
             //if uploaded file then save

@@ -38,7 +38,7 @@ namespace targeted_marketing_display
                 // int companyID = userObj.CompanyID;
             }
 
-            if (!IsPostBack)
+            if (!Page.IsPostBack)
             {
                 SqlConnection conn = null;
                 SqlDataReader reader = null;
@@ -64,18 +64,7 @@ namespace targeted_marketing_display
                 DropDownListCompany.DataTextField = "Name";
                 DropDownListCompany.DataBind();
                 DropDownListCompany.Items.Insert(0, new ListItem("---Select A Company---", "0"));
-
-
-
-
-                //SqlConnection sqlconn = new SqlConnection(dbConnStr);
-                //string sqlquery = "SELECT * FROM [CodeReferece] WHERE ([CodeType] = @CodeType)";
-                //SqlCommand cmd = new SqlCommand(sqlquery, sqlconn);
-                //cmd.Parameters.AddWithValue("@CodeType", "Category");
-                //SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                //DataTable dt = new DataTable();
-                //sda.Fill(dt);
-
+     
                 Advertisement AdvertObj = new Advertisement();
                 Advertisement_Management aDao = new Advertisement_Management();
                 AdvertObj = aDao.getAdvByID(Session["AdvertID"].ToString());
@@ -166,7 +155,7 @@ namespace targeted_marketing_display
                 cmdLoc.Connection = conn;
                 sdaLoc.SelectCommand = cmdLoc;
                 sdaLoc.Fill(datatableLoc);
-
+                cmdLoc.Parameters.Clear();
                 for (int i = 0; i < datatableLoc.Rows.Count; i++)
                 {
                     int BillboardCheckID = Convert.ToInt32(datatableLoc.Rows[i]["BillboardID"]);
@@ -205,164 +194,169 @@ namespace targeted_marketing_display
                     //Auto,Bus,Career,Fin,Food,Gov,Health,Home,Ins,Int,Law,Mobile,Mother,Pets,Photo,Polit,
                     //Rec,Rest,Retail,Shop,Sport,Style,Tech,Tel,Travel,Wed,Women
                     //int ageChecker = Convert.ToInt32(datatable.Rows[i]["AgeID"]);
-                    string catChecker = datatableCat.Rows[i]["CategoryID"].ToString();
-                    if (catChecker == "Auto")
-                    {
-                        CheckBoxList1.Items[0].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[0].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }        
-                    if (catChecker == "Bus")
-                    {
-                        CheckBoxList1.Items[1].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[1].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Career")
-                    {
-                        CheckBoxList1.Items[2].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[2].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Fin")
-                    {
-                        CheckBoxList1.Items[3].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[3].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Food")
-                    {
-                        CheckBoxList1.Items[4].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[4].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Gov")
-                    {
-                        CheckBoxList1.Items[5].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[5].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Health")
-                    {
-                        CheckBoxList1.Items[6].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[6].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Home")
-                    {
-                        CheckBoxList1.Items[7].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[7].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Ins")
-                    {
-                        CheckBoxList1.Items[8].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[8].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
+                    string catChecker = ((String)datatableCat.Rows[i]["CategoryID"]);
+                    
+                        if (catChecker == " Auto")
+                        {
+                            CheckBoxList1.Items[0].Selected = true;
+                            //CheckBoxList1.Items[0].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[0].Value;
+                            //adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Bus")
+                        {
+                            CheckBoxList1.Items[1].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[1].Value;
+                           // adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Career")
+                        {
+                            CheckBoxList1.Items[2].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[2].Value;
+                           // adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Fin")
+                        {
+                            CheckBoxList1.Items[3].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[3].Value;
+                            //adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Food")
+                        {
+                           
+                            CheckBoxList1.Items[4].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[4].Value;
+                           // adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Gov")
+                        {
+                            CheckBoxList1.Items[5].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[5].Value;
+                           // adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Health")
+                        {
+                            CheckBoxList1.Items[6].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[6].Value;
+                           // adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Home")
+                        {
+                            CheckBoxList1.Items[7].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[7].Value;
+                           // adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Ins")
+                        {
+                            CheckBoxList1.Items[8].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[8].Value;
+                          //  adCategoryTB.Text = (name).Substring(1);
+                        }
 
-                    if (catChecker == "Law")
-                    {
-                        CheckBoxList1.Items[9].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[9].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Mobile")
-                    {
-                        CheckBoxList1.Items[10].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[10].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Mother")
-                    {
-                        CheckBoxList1.Items[11].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[11].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Pets")
-                    {
-                        CheckBoxList1.Items[12].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[12].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Photo")
-                    {
-                        CheckBoxList1.Items[13].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[13].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Polit")
-                    {
-                        CheckBoxList1.Items[14].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[14].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Rec")
-                    {
-                        CheckBoxList1.Items[15].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[15].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Rest")
-                    {
-                        CheckBoxList1.Items[16].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[16].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Retail")
-                    {
-                        CheckBoxList1.Items[17].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[17].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Shop")
-                    {
-                        CheckBoxList1.Items[18].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[18].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Sport")
-                    {
-                        CheckBoxList1.Items[19].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[19].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Style")
-                    {
-                        CheckBoxList1.Items[20].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[20].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Tech")
-                    {
-                        CheckBoxList1.Items[21].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[21].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Tel")
-                    {
-                        CheckBoxList1.Items[22].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[22].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Travel")
-                    {
-                        CheckBoxList1.Items[23].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[23].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Wed")
-                    {
-                        CheckBoxList1.Items[24].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[24].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
-                    if (catChecker == "Women")
-                    {
-                        CheckBoxList1.Items[25].Selected = true;
-                        name = name + ", " + CheckBoxList1.Items[25].Value;
-                        adCategoryTB.Text = (name).Substring(1);
-                    }
+                        if (catChecker == " Law")
+                        {
+                            CheckBoxList1.Items[9].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[9].Value;
+                          //  adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Mobile")
+                        {
+                            CheckBoxList1.Items[10].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[10].Value;
+                           // adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Mother")
+                        {
+                            CheckBoxList1.Items[11].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[11].Value;
+                           // adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Pets")
+                        {
+                            CheckBoxList1.Items[12].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[12].Value;
+                          //  adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Photo")
+                        {
+                            CheckBoxList1.Items[13].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[13].Value;
+                          //  adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Polit")
+                        {
+                            CheckBoxList1.Items[14].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[14].Value;
+                           // adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Rec")
+                        {
+                            CheckBoxList1.Items[15].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[15].Value;
+                          //  adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Rest")
+                        {
+                            CheckBoxList1.Items[16].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[16].Value;
+                         //   adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Retail")
+                        {
+                            CheckBoxList1.Items[17].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[17].Value;
+                            //adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Shop")
+                        {
+                            CheckBoxList1.Items[18].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[18].Value;
+                           // adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Sport")
+                        {
+                            CheckBoxList1.Items[19].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[19].Value;
+                            //adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Style")
+                        {
+                            CheckBoxList1.Items[20].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[20].Value;
+                           // adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Tech")
+                        {
+                            CheckBoxList1.Items[21].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[21].Value;
+                          //  adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Tel")
+                        {
+                            CheckBoxList1.Items[22].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[22].Value;
+                          //  adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Travel")
+                        {
+                            CheckBoxList1.Items[23].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[23].Value;
+                           // adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Wed")
+                        {
+                            CheckBoxList1.Items[24].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[24].Value;
+                          //  adCategoryTB.Text = (name).Substring(1);
+                        }
+                        if (catChecker == " Women")
+                        {
+                            CheckBoxList1.Items[25].Selected = true;
+                            name = name + ", " + CheckBoxList1.Items[25].Value;
+                           // adCategoryTB.Text = (name).Substring(1);
+                        }
+                    adCategoryTB.Text = name.ToString();
+                   
                     // adCategoryTB.Text = (name).Substring(1);
                     
                 }
@@ -373,6 +367,44 @@ namespace targeted_marketing_display
             Advertisement AdvertObj = new Advertisement();
             Advertisement_Management aDao = new Advertisement_Management();
             AdvertObj = aDao.getAdvByID(Session["AdvertID"].ToString());
+            //initialise imagelink and getvalue
+            string imagelink = "";
+            string getvalue = "";
+
+            for (int i = 0; i < CheckBoxList2.Items.Count; i++)
+            {
+                if (CheckBoxList2.Items[i].Selected)
+                {
+
+                    getvalue += CheckBoxList2.Items[i].Text + ",";
+                    getvalue = getvalue.TrimEnd();
+                }
+            }
+
+            //if uploaded file then save
+            if (FileUpload1.HasFile)
+            {
+                string fileExt = System.IO.Path.GetExtension(FileUpload1.FileName);
+                FileUpload1.SaveAs(Server.MapPath("~/Images/") + FileUpload1.FileName);
+
+            }
+
+            //if any field missing give warning!
+            if (Literal1.Text == "" || startDateTB.Text == ""
+                   || endDateTB.Text == "" || adCategoryTB.Text == "" || billboardDisplayTB.Text == "" || getvalue == "")
+            {
+                alertWarning.Visible = true;
+
+                warningLocation.Text = "Please ensure you have filled in all required fields";
+            }
+            //if never agree to terms and conditions,display warning
+            else if (CheckBox1.Checked == false)
+            {
+                alertWarning.Visible = true;
+
+                warningLocation.Text = "Please agree with T&C";
+            }
+
             if (startDateTB.Text == "" || endDateTB.Text == "")
             {
                 warningLocation.Visible = true;
@@ -381,11 +413,17 @@ namespace targeted_marketing_display
            
             else
             {
+                string NewAdvertName = adNameTB.Text.ToString();
+                int NewCompanyID = Convert.ToInt32(DropDownListCompany.SelectedValue);
+                int NewDuration = Convert.ToInt32(videoDurationTB.Text);
+
                 string startdate = startDateTB.Text.ToString();
                 string enddate = endDateTB.Text.ToString();
+                
                 string lastUpdBy = Session["userID"].ToString();
                 string lastUpdOn = DateTime.Now.ToString("MM/dd/yyyy h:mm tt");
-                aDao.AdvertUpdate(Session["AdvertID"].ToString(), startdate, enddate,lastUpdBy,lastUpdOn);
+                //string AdvID,int companyID,string Name,int duration, string StartDate, string EndDate, string LastUpdBy, string LastUpdOn
+                aDao.AdvertUpdate(Session["AdvertID"].ToString(),NewCompanyID,NewAdvertName,NewDuration, startdate, enddate,lastUpdBy,lastUpdOn);
                 startDateTB.Text = string.Empty;
                 endDateTB.Text = string.Empty;
                 

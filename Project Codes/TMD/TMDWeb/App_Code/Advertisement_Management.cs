@@ -66,13 +66,15 @@ namespace targeted_marketing_display.App_Code
 
         }
 
-        public Boolean AdvertUpdate(string AdvID, string StartDate, string EndDate, string LastUpdBy, string LastUpdOn)
+        public Boolean AdvertUpdate(string AdvID,int companyID,string Name,int duration, string StartDate, string EndDate, string LastUpdBy, string LastUpdOn)
         {
             Boolean result;
 
-            SqlCommand cmd = new SqlCommand("UPDATE [Advertisement] SET StartDate=@paraStartDate,EndDate=@paraEndDate, LastUpdBy = @paraLastUpdBy, LastUpdOn = @paraLastUpdOn WHERE AdvID=@paraAdvID");
+            SqlCommand cmd = new SqlCommand("UPDATE [Advertisement] SET CompanyID=@newCompID, Name=@AdName,Duration=@newduration, StartDate=@paraStartDate,EndDate=@paraEndDate, LastUpdBy = @paraLastUpdBy, LastUpdOn = @paraLastUpdOn WHERE AdvID=@paraAdvID");
             cmd.Parameters.AddWithValue("@paraAdvID", AdvID);
-
+            cmd.Parameters.AddWithValue("@newCompID", companyID);
+            cmd.Parameters.AddWithValue("@AdName", Name);
+            cmd.Parameters.AddWithValue("@newduration", duration);
             cmd.Parameters.AddWithValue("@paraStartDate", StartDate);
             cmd.Parameters.AddWithValue("@paraEndDate", EndDate);
 
@@ -83,6 +85,45 @@ namespace targeted_marketing_display.App_Code
             result = dbConnection.executeNonQuery(cmd);
             return result;
         }
+
+        public Boolean AdvertAudienceUpdate(string AdvID, int AgeID, string GenderID)
+        {
+            Boolean result;
+            SqlCommand cmd = new SqlCommand("update [AdvertisementAudience] set AgeID=@newAgeID,GenderID=@newGenderID where AdvID=@paraAdvID " +
+             "if @@rowcount=0 insert into [AdvertisementLocation] (AdvID,AgeID,GenderID) values (@newAdvID,@newAgeID,@newGenderID) ");
+            cmd.Parameters.AddWithValue("@newAgeID", AgeID);
+            cmd.Parameters.AddWithValue("@paraAdvID", AdvID);
+            cmd.Parameters.AddWithValue("@newGenderID", GenderID);
+            result = dbConnection.executeNonQuery(cmd);
+            return result;
+        }
+
+        public Boolean AdvertCategoryUpdate(string AdvID, string CategoryID)
+        {
+            Boolean result;
+            SqlCommand cmd = new SqlCommand("update [AdvertisementLocation] set CategoryID=@newCategoryID where AdvID=@paraAdvID " +
+              "if @@rowcount=0 insert into [AdvertisementLocation] (AdvID,CategoryID) values (@AdvID,@newCategoryID) ");
+            cmd.Parameters.AddWithValue("@newCategoryID", CategoryID);
+            cmd.Parameters.AddWithValue("@paraAdvID", AdvID);
+            result = dbConnection.executeNonQuery(cmd);
+            return result;
+        }
+
+
+        public Boolean AdvertLocationUpdate(string AdvID,int BillboardID)
+        {
+            Boolean result;
+            SqlCommand cmd = new SqlCommand("update [AdvertisementLocation] set BillboardID=@newBillboardID where AdvID=@paraAdvID " +
+               "if @@rowcount=0 insert into [AdvertisementLocation] (AdvID,BillboardID) values (@AdvID,@newBillboardID) ");
+            cmd.Parameters.AddWithValue("@newBillboardID", BillboardID);
+            cmd.Parameters.AddWithValue("@paraAdvID", AdvID);
+            result = dbConnection.executeNonQuery(cmd);
+            return result;
+        }
+
+       
+       
+
 
     }
 }

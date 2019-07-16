@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#"  MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="AdListingUpdate.aspx.cs" Inherits="targeted_marketing_display.AdListingUpdate" %>
+﻿<%@ Page Language="C#"  MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="AdListingUpdate.aspx.cs" EnableEventValidation="true" Inherits="targeted_marketing_display.AdListingUpdate" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -140,7 +140,10 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-    
+
+        <asp:label runat="server" id="testing1234"></asp:label>
+
+
         <div class="row">
                 
                 <div class="col-lg-6">
