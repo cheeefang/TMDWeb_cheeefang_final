@@ -22,15 +22,52 @@ namespace targeted_marketing_display
         string dbConnStr = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if ((string)Session["userType"] == "Admin")
+            {
+                divCompany.Visible = true;
+                DropDownListCompany.Visible = true;
+                //  int companyID = Convert.ToInt32(DropDownListCompany.SelectedItem.Value);
+            }
+            else
+            {
+                // User userObj = new User();
+                //  UserManagement uDao = new UserManagement();
+                divCompany.Visible = false;
+                DropDownListCompany.Visible = false;
+                // userObj = uDao.getUserByID(Session["userID"].ToString());
+                // int companyID = userObj.CompanyID;
+            }
+
             if (!IsPostBack)
             {
                 SqlConnection conn = null;
                 SqlDataReader reader = null;
-                Database db = new Database();
-                string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
                 conn = new
                 SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
                 conn.Open();
+                Database db = new Database();
+                string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
+                SqlConnection sqlconn = new SqlConnection(dbConnStr);
+                string sqlquery = "SELECT * FROM [CodeReferece] WHERE ([CodeType] = @CodeType)";
+                SqlCommand cmdCodeRef = new SqlCommand(sqlquery, sqlconn);
+                cmdCodeRef.Parameters.AddWithValue("@CodeType", "Category");
+                SqlDataAdapter sdaCodeRef = new SqlDataAdapter(cmdCodeRef);
+                DataTable dt = new DataTable();
+                sdaCodeRef.Fill(dt);
+
+                CheckBoxList1.DataSource = dt;
+                CheckBoxList1.DataBind();
+                SqlCommand cmdCompany = new SqlCommand("Select * from Company where status=1");
+                DataTable dtCompany = db.getDataTable(cmdCompany);
+                DropDownListCompany.DataSource = dtCompany;
+                DropDownListCompany.DataValueField = "CompanyID";
+                DropDownListCompany.DataTextField = "Name";
+                DropDownListCompany.DataBind();
+                DropDownListCompany.Items.Insert(0, new ListItem("---Select A Company---", "0"));
+
+
+
+
                 //SqlConnection sqlconn = new SqlConnection(dbConnStr);
                 //string sqlquery = "SELECT * FROM [CodeReferece] WHERE ([CodeType] = @CodeType)";
                 //SqlCommand cmd = new SqlCommand(sqlquery, sqlconn);
@@ -42,8 +79,8 @@ namespace targeted_marketing_display
                 Advertisement AdvertObj = new Advertisement();
                 Advertisement_Management aDao = new Advertisement_Management();
                 AdvertObj = aDao.getAdvByID(Session["AdvertID"].ToString());
-                DateTime dt = Convert.ToDateTime(AdvertObj.StartDate);
-                String ConvertDate = dt.ToString("yyyy-MM-dd");
+                DateTime startDatevar = Convert.ToDateTime(AdvertObj.StartDate);
+                String ConvertDate = startDatevar.ToString("yyyy-MM-dd");
                 DateTime dt2 = Convert.ToDateTime(AdvertObj.EndDate);
                 String ConvertEndDate = dt2.ToString("yyyy-MM-dd");
                 AdvIDLabel.Text = " for " + ' ' + AdvertObj.Name.ToString();
@@ -59,9 +96,9 @@ namespace targeted_marketing_display
                 param.ParameterName = "@ID";
                 param.Value = Session["AdvertID"].ToString();
                 cmd.Parameters.Add(param);
-              
+
                 SqlDataAdapter sda = new SqlDataAdapter();
-                
+
                 DataTable datatable = new DataTable();
                 cmd.Connection = conn;
                 sda.SelectCommand = cmd;
@@ -119,19 +156,20 @@ namespace targeted_marketing_display
                     }
 
                 }
-                SqlCommand cmdCat = new SqlCommand("select * from [AdvertisementLocation] where AdvID=@ID", conn);
-                SqlParameter paramCat = new SqlParameter();
-                paramCat.ParameterName = "@ID";
-                paramCat.Value = Session["AdvertID"].ToString();
-                cmdCat.Parameters.Add(paramCat);
-                SqlDataAdapter sdaCat = new SqlDataAdapter();
-                DataTable datatableCat = new DataTable();
-                cmdCat.Connection = conn;
-                sdaCat.SelectCommand = cmdCat;
-                sdaCat.Fill(datatableCat);
-                for (int i = 0; i < datatableCat.Rows.Count; i++)
+                SqlCommand cmdLoc = new SqlCommand("select * from [AdvertisementLocation] where AdvID=@ID", conn);
+                SqlParameter paramLoc = new SqlParameter();
+                paramLoc.ParameterName = "@ID";
+                paramLoc.Value = Session["AdvertID"].ToString();
+                cmdLoc.Parameters.Add(paramLoc);
+                SqlDataAdapter sdaLoc = new SqlDataAdapter();
+                DataTable datatableLoc = new DataTable();
+                cmdLoc.Connection = conn;
+                sdaLoc.SelectCommand = cmdLoc;
+                sdaLoc.Fill(datatableLoc);
+
+                for (int i = 0; i < datatableLoc.Rows.Count; i++)
                 {
-                    int BillboardCheckID = Convert.ToInt32(datatableCat.Rows[i]["BillboardID"]);
+                    int BillboardCheckID = Convert.ToInt32(datatableLoc.Rows[i]["BillboardID"]);
                     foreach (GridViewRow gvr in GridView1.Rows)
 
                     {
@@ -150,6 +188,183 @@ namespace targeted_marketing_display
                     CompareValidator2.ValueToCompare = DateTime.Now.ToShortDateString();
 
 
+                }
+                SqlCommand cmdCat = new SqlCommand("select * from [AdvertisementCategory] where AdvID=@ID", conn);
+                SqlParameter paramCat = new SqlParameter();
+                paramCat.ParameterName = "@ID";
+                paramCat.Value = Session["AdvertID"].ToString();
+                cmdCat.Parameters.Add(paramCat);
+                SqlDataAdapter sdaCat = new SqlDataAdapter();
+                DataTable datatableCat = new DataTable();
+                cmdCat.Connection = conn;
+                sdaCat.SelectCommand = cmdCat;
+                sdaCat.Fill(datatableCat);
+                string name = "";
+                for (int i = 0; i < datatableCat.Rows.Count; i++)
+                {
+                    //Auto,Bus,Career,Fin,Food,Gov,Health,Home,Ins,Int,Law,Mobile,Mother,Pets,Photo,Polit,
+                    //Rec,Rest,Retail,Shop,Sport,Style,Tech,Tel,Travel,Wed,Women
+                    //int ageChecker = Convert.ToInt32(datatable.Rows[i]["AgeID"]);
+                    string catChecker = datatableCat.Rows[i]["CategoryID"].ToString();
+                    if (catChecker == "Auto")
+                    {
+                        CheckBoxList1.Items[0].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[0].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }        
+                    if (catChecker == "Bus")
+                    {
+                        CheckBoxList1.Items[1].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[1].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Career")
+                    {
+                        CheckBoxList1.Items[2].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[2].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Fin")
+                    {
+                        CheckBoxList1.Items[3].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[3].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Food")
+                    {
+                        CheckBoxList1.Items[4].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[4].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Gov")
+                    {
+                        CheckBoxList1.Items[5].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[5].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Health")
+                    {
+                        CheckBoxList1.Items[6].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[6].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Home")
+                    {
+                        CheckBoxList1.Items[7].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[7].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Ins")
+                    {
+                        CheckBoxList1.Items[8].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[8].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+
+                    if (catChecker == "Law")
+                    {
+                        CheckBoxList1.Items[9].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[9].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Mobile")
+                    {
+                        CheckBoxList1.Items[10].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[10].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Mother")
+                    {
+                        CheckBoxList1.Items[11].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[11].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Pets")
+                    {
+                        CheckBoxList1.Items[12].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[12].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Photo")
+                    {
+                        CheckBoxList1.Items[13].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[13].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Polit")
+                    {
+                        CheckBoxList1.Items[14].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[14].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Rec")
+                    {
+                        CheckBoxList1.Items[15].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[15].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Rest")
+                    {
+                        CheckBoxList1.Items[16].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[16].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Retail")
+                    {
+                        CheckBoxList1.Items[17].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[17].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Shop")
+                    {
+                        CheckBoxList1.Items[18].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[18].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Sport")
+                    {
+                        CheckBoxList1.Items[19].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[19].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Style")
+                    {
+                        CheckBoxList1.Items[20].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[20].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Tech")
+                    {
+                        CheckBoxList1.Items[21].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[21].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Tel")
+                    {
+                        CheckBoxList1.Items[22].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[22].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Travel")
+                    {
+                        CheckBoxList1.Items[23].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[23].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Wed")
+                    {
+                        CheckBoxList1.Items[24].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[24].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    if (catChecker == "Women")
+                    {
+                        CheckBoxList1.Items[25].Selected = true;
+                        name = name + ", " + CheckBoxList1.Items[25].Value;
+                        adCategoryTB.Text = (name).Substring(1);
+                    }
+                    // adCategoryTB.Text = (name).Substring(1);
+                    
                 }
             }
         }
