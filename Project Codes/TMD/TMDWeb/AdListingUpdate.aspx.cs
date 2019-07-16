@@ -22,6 +22,11 @@ namespace targeted_marketing_display
         string dbConnStr = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+            conn = new
+            SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+            conn.Open();
             if ((string)Session["userType"] == "Admin")
             {
                 divCompany.Visible = true;
@@ -40,11 +45,7 @@ namespace targeted_marketing_display
 
             if (!Page.IsPostBack)
             {
-                SqlConnection conn = null;
-                SqlDataReader reader = null;
-                conn = new
-                SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
-                conn.Open();
+                
                 Database db = new Database();
                 string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
                 SqlConnection sqlconn = new SqlConnection(dbConnStr);
@@ -413,6 +414,8 @@ namespace targeted_marketing_display
            
             else
             {
+
+                
                 string NewAdvertName = adNameTB.Text.ToString();
                 int NewCompanyID = Convert.ToInt32(DropDownListCompany.SelectedValue);
                 int NewDuration = Convert.ToInt32(videoDurationTB.Text);
@@ -422,8 +425,13 @@ namespace targeted_marketing_display
                 
                 string lastUpdBy = Session["userID"].ToString();
                 string lastUpdOn = DateTime.Now.ToString("MM/dd/yyyy h:mm tt");
-                //string AdvID,int companyID,string Name,int duration, string StartDate, string EndDate, string LastUpdBy, string LastUpdOn
+                SqlConnection sqlcn = new SqlConnection(dbConnStr);
+              
                 aDao.AdvertUpdate(Session["AdvertID"].ToString(),NewCompanyID,NewAdvertName,NewDuration, startdate, enddate,lastUpdBy,lastUpdOn);
+                SqlCommand cmd = new SqlCommand("update [AdvertisementAudience] set AgeID=@newAgeID,GenderID=@newGenderID where AdvID=@paraAdvID " +
+             "if @@rowcount=0 insert into [AdvertisementLocation] (AdvID,AgeID,GenderID) values (@newAdvID,@newAgeID,@newGenderID)", sqlcn);
+                sqlcn.Open();
+
                 startDateTB.Text = string.Empty;
                 endDateTB.Text = string.Empty;
                 

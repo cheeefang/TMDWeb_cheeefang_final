@@ -62,11 +62,7 @@
             </div>
                 </div>
           
-                <div class="col-lg-6">
-                    </br>
-                    <a href="AdCreate.aspx" class="btn btn-primary nextBtn pull-right" type="button"> <b> New Advertisement </b> </a>
-                  
-                </div>
+                
                  </div>
         
 
