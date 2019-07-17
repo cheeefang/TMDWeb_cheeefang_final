@@ -26,13 +26,13 @@ namespace targeted_marketing_display
             Advertisement_Management adObjectClass = new Advertisement_Management();
             adObject = adObjectClass.getAdvByID(Session["AdvertID"].ToString());
             string previousimagepath = adObject.Item.ToString();
-            imgLogo.ImageUrl = ResolveUrl(previousimagepath);
+            imgLogo.ImageUrl = ResolveUrl(previousimagepath) ;   
             SqlConnection conn = null;
             SqlDataReader reader = null;
             conn = new
             SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
             conn.Open();
-            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            
             if ((string)Session["userType"] == "Admin")
             {
                 divCompany.Visible = true;
@@ -578,16 +578,42 @@ namespace targeted_marketing_display
                 }
 
                 sqlcnAudience.Close();
+                adNameTB.Text = string.Empty;
+                DropDownListCompany.SelectedIndex=0;
                 startDateTB.Text = string.Empty;
                 endDateTB.Text = string.Empty;
-                
+                videoDurationTB.Text = string.Empty;
+                adCategoryTB.Text = string.Empty;
+                billboardDisplayTB.Text = string.Empty;
+                for (int i = 0; i < CheckBoxList1.Items.Count; i++)
+                {
+                    CheckBoxList1.Items[i].Selected = false;
+                }
+                for(int i = 0; i > CheckBoxList2.Items.Count; i++)
+                {
+                    CheckBoxList2.Items[i].Selected = false;
+                }
                 alertWarning.Visible = false;
                 alertSuccess.Visible = true;
 
             }
-            //Response.Redirect(Request.RawUrl);
+
+            //ScriptManager.RegisterStartupScript(this, this.GetType(),
+            //"alert",
+            //"alert('Advertisement Successfully Updated');window.location ='AdListing.aspx';",
+            // true);
+            //Response.Write("<script language='javascript'>window.alert('Advertisement Successfully Updated');window.location='AdListingUpdate.aspx';</script>");
+            string adNamenew = AdvertObj.Name;
+            Response.Write("<script language='javascript'>alert('Successfully Updated Advertisement');</script>");
+            Server.Transfer("AdListing.aspx", true);
+            // Response.Redirect("AdListing.aspx");
             //alertSuccess.Visible = true;
+           // Response.Redirect("AdListing.aspx?showSuccessMessage = 1");
+       
         }
+
+      
+
         protected void CategoryButton_Click(object sender, EventArgs e)
         {
             string name = "";

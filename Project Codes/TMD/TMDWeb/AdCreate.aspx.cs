@@ -296,6 +296,21 @@ namespace targeted_marketing_display
                     }
 
                 sqlcn.Close();
+                adNameTB.Text = string.Empty;
+                DropDownListCompany.SelectedIndex = 0;
+                startDateTB.Text = string.Empty;
+                endDateTB.Text = string.Empty;
+                videoDurationTB.Text = string.Empty;
+                adCategoryTB.Text = string.Empty;
+                billboardDisplayTB.Text = string.Empty;
+                for (int i = 0; i < CheckBoxList1.Items.Count; i++)
+                {
+                    CheckBoxList1.Items[i].Selected = false;
+                }
+                for (int i = 0; i > CheckBoxList2.Items.Count; i++)
+                {
+                    CheckBoxList2.Items[i].Selected = false;
+                }
                 alertWarning.Visible = false;
                 alertSuccess.Visible = true;
 

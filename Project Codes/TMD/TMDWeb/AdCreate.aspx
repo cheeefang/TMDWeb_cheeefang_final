@@ -140,7 +140,7 @@
         <br />
         <div runat="server" class="alert alert-success" id="alertSuccess" visible="False">
 
-                    <strong>Success!</strong> Advertisement has been updated.
+                    <strong>Success!</strong> Advertisement has been Created.
                 </div>
             <div class="row">
                 <div class="col-lg-12">
