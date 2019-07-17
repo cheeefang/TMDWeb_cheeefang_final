@@ -27,6 +27,11 @@ namespace targeted_marketing_display
             conn = new
             SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
             conn.Open();
+            Advertisement adObject = new Advertisement();
+            Advertisement_Management adObjectClass  = new Advertisement_Management();
+            adObject = adObjectClass.getAdvByID(Session["AdvertID"].ToString());
+            string previousimagepath = adObject.Item.ToString();
+            imgLogo.ImageUrl = ResolveUrl(previousimagepath);
             if ((string)Session["userType"] == "Admin")
             {
                 divCompany.Visible = true;
@@ -42,7 +47,25 @@ namespace targeted_marketing_display
                 // userObj = uDao.getUserByID(Session["userID"].ToString());
                 // int companyID = userObj.CompanyID;
             }
+            if (FileUpload1.HasFile)
+            {
+                Literal1.Text = Convert.ToString(FileUpload1.PostedFile.FileName);
+                if (Literal1.Text.EndsWith(".png") || Literal1.Text.EndsWith(".jpg") || Literal1.Text.EndsWith(".jpeg") || Literal1.Text.EndsWith(".gif") || Literal1.Text.EndsWith(".PNG") || Literal1.Text.EndsWith(".JPG") || Literal1.Text.EndsWith(".JPEG") || Literal1.Text.EndsWith(".GIF"))
+                {
+                    Literal2.Text = "image";
+                }
+                else
+                {
+                    Literal2.Text = "video";
 
+
+
+
+                }
+
+
+
+            }
             if (!Page.IsPostBack)
             {
                 
@@ -556,7 +579,7 @@ namespace targeted_marketing_display
                 alertWarning.Visible = false;
                 alertSuccess.Visible = true;
             }
-           
+            Response.Redirect("AdListing.aspx");
         }
         protected void CategoryButton_Click(object sender, EventArgs e)
         {

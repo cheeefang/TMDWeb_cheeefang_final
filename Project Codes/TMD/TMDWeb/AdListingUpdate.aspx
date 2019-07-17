@@ -99,6 +99,19 @@
              }
              headerCheckBox.checked = checked;
          }
+
+     function ImagePreview(input) {
+         if (input.files && input.files[0]) {
+             var reader = new FileReader();
+             reader.onload = function (e) {
+                 $('#<%=imgLogo.ClientID%>').prop('src', e.target.result)
+                     .width(200)
+                     .height(200);
+             };
+             reader.readAsDataURL(input.files[0]);
+         }
+     }
+
     </script>   
 
 
@@ -143,6 +156,18 @@
 
         <asp:label runat="server" id="testing1234"></asp:label>
 
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <asp:label  runat="server"><b>Advertisement Image </b></asp:label>
+                    <br />
+                    <asp:image id="imgLogo" runat="server" ImageUrl="" Width="200" Height="200"></asp:image>
+                </div>
+            </div>
+        </div>
+
+
+
 
         <div class="row">
                 
@@ -158,7 +183,7 @@
                               
                     
 
-                        <asp:FileUpload ID="FileUpload1" runat="server" />
+                        <asp:FileUpload ID="FileUpload1" runat="server" onchange="ImagePreview(this);" />
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ValidationExpression='(.*?)\.(jpg|jpeg|png|gif|avi|flv|wmv|mp4|mov|JPG|JPEG|PNG|GIF|AVI|FLV|WMV|MOV|MP4)$'
                             ControlToValidate="FileUpload1" runat="server" ForeColor="Red" ErrorMessage="Please select valid image/video file."
                             Display="Dynamic" />
@@ -166,7 +191,9 @@
                         <asp:Literal ID="Literal2" runat="server"></asp:Literal>
                         <br />
                                
-                                   
+                             <td class="auto-style1">
+                                 <asp:Image ID="imgnew" runat="server"></asp:Image>
+                             </td>
                     </div>
                 </div>
 

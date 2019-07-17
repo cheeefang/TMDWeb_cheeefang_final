@@ -29,6 +29,9 @@
     <!-- Custom fonts for fontawesome(DONT TOUCH)-->
      <link href="Content/fontawesome-free-5.9.0-web/css/all.css" rel="stylesheet">
 
+    <!--Import jquery-->
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script> 
+
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
