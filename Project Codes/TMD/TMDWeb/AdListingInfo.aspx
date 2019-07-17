@@ -83,7 +83,7 @@
            <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label id="StartDateLabel"  runat="server"> </asp:label>
+                    <asp:label id="StartDateLabel"  runat="server" text="Start Date:"> </asp:label>
                     
                 </div>
             </div>
@@ -91,7 +91,7 @@
            <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label id="EndDateLabel"  runat="server"> </asp:label>
+                    <asp:label id="EndDateLabel"  runat="server" text="End Date:"> </asp:label>
                     
                 </div>
             </div>
@@ -100,7 +100,15 @@
           <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label id="AudienceLabel"  runat="server" text="Targeted Audience:"> </asp:label>
+                    <asp:label id="AudienceLabel"  runat="server" text="Targeted Audience(s):"> </asp:label>
+                    
+                </div>
+            </div>
+        </div>
+           <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <asp:label id="CategoryLabel"  runat="server" text="Advertisement Categorie(s):"> </asp:label>
                     
                 </div>
             </div>
