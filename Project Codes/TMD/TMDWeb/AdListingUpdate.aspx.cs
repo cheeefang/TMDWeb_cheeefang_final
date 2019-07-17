@@ -415,7 +415,7 @@ namespace targeted_marketing_display
             else
             {
 
-                
+                imagelink = "Images/" + Literal1.Text;
                 string NewAdvertName = adNameTB.Text.ToString();
                 int NewCompanyID = Convert.ToInt32(DropDownListCompany.SelectedValue);
                 int NewDuration = Convert.ToInt32(videoDurationTB.Text);
@@ -426,12 +426,130 @@ namespace targeted_marketing_display
                 string lastUpdBy = Session["userID"].ToString();
                 string lastUpdOn = DateTime.Now.ToString("MM/dd/yyyy h:mm tt");
                 SqlConnection sqlcn = new SqlConnection(dbConnStr);
-              
-                aDao.AdvertUpdate(Session["AdvertID"].ToString(),NewCompanyID,NewAdvertName,NewDuration, startdate, enddate,lastUpdBy,lastUpdOn);
-                SqlCommand cmd = new SqlCommand("update [AdvertisementAudience] set AgeID=@newAgeID,GenderID=@newGenderID where AdvID=@paraAdvID " +
-             "if @@rowcount=0 insert into [AdvertisementLocation] (AdvID,AgeID,GenderID) values (@newAdvID,@newAgeID,@newGenderID)", sqlcn);
-                sqlcn.Open();
+                
+                aDao.AdvertUpdate(Session["AdvertID"].ToString(),imagelink,NewCompanyID,NewAdvertName,NewDuration, startdate, enddate,lastUpdBy,lastUpdOn);
+                //SqlCommand cmd = new SqlCommand("update [AdvertisementAudience] set AgeID=@newAgeID,GenderID=@newGenderID where AdvID=@paraAdvID " +
+                // "if @@rowcount=0 insert into [AdvertisementLocation] (AdvID,AgeID,GenderID) values (@newAdvID,@newAgeID,@newGenderID)", sqlcn);
+                // sqlcn.Open();
+                aDao.AdvertAudienceDeleteExisting(Session["AdvertID"].ToString());
+                aDao.AdvertCategoryDeleteExisting(Session["AdvertID"].ToString());
+                aDao.AdvertLocationDeleteExisting(Session["AdvertID"].ToString());
+                SqlConnection sqlcon = new SqlConnection(dbConnStr);
+                string sqlquery = "Insert into [AdvertisementCategory](AdvID,CategoryID) values(@AdvID,@CategoryID)";
+                SqlCommand sqlcom = new SqlCommand(sqlquery, sqlcon);
+                sqlcon.Open();
+                string str = adCategoryTB.Text;
+                string[] splitstr = str.Split(',');
+                //int id = GetMaxIDAdvertisement();
 
+
+                foreach (string s in splitstr)
+                {
+                    sqlcom.Parameters.AddWithValue("@AdvID", Session["AdvertID"]);
+                    sqlcom.Parameters.AddWithValue("@CategoryID", s);
+                    sqlcom.ExecuteNonQuery();
+                    sqlcom.Parameters.Clear();
+                }
+
+
+                sqlcon.Close();
+
+
+
+
+                SqlConnection sqlconnn = new SqlConnection(dbConnStr);
+                string sqlqueryy = "Insert into [AdvertisementLocation](AdvID,BillboardID) values(@AdvID,@BillboardID)";
+                SqlCommand sqlcommm = new SqlCommand(sqlqueryy, sqlconnn);
+                sqlconnn.Open();
+
+                //int AdvId = GetMaxIDAdvertisement();
+
+                for (int i = 0; i < GridView1.Rows.Count; i++)
+                {
+                    GridViewRow row = GridView1.Rows[i];
+                    bool chkbx = ((CheckBox)row.FindControl("CheckBoxSelector")).Checked;
+                    if (chkbx)
+                    {
+                        sqlcommm.Parameters.AddWithValue("@BillboardID", GridView1.Rows[i].Cells[1].Text);
+                        sqlcommm.Parameters.AddWithValue("@AdvID", Session["AdvertID"]);
+                        sqlcommm.ExecuteNonQuery();
+                        sqlcommm.Parameters.Clear();
+                    }
+                }
+                sqlconnn.Close();
+
+
+
+
+                SqlConnection sqlcnAudience = new SqlConnection(dbConnStr);
+                string sqlque = "Insert into [AdvertisementAudience](AdvID,AgeID,GenderID) values(@AdvID,@AgeID,@GenderID)";
+                SqlCommand sqlcm = new SqlCommand(sqlque, sqlcnAudience);
+                sqlcnAudience.Open();
+
+                //int ID_audience = GetMaxIDAdvertisement();
+
+
+                for (int i = 0; i < CheckBoxList2.Items.Count; i++)
+                {
+                    if (CheckBoxList2.Items[i].Selected == true)
+                    {
+
+                        string stri = string.Empty;
+                        stri = CheckBoxList2.Items[i].ToString();
+
+                        if (stri.Contains("Male") & stri.Contains("Child"))
+                        {
+                            sqlcm.Parameters.AddWithValue("@GenderID", "M");
+                            sqlcm.Parameters.AddWithValue("@AgeID", "1");
+                        }
+                        else if (stri.Contains("Male") & stri.Contains("Young Adult"))
+                        {
+                            sqlcm.Parameters.AddWithValue("@GenderID", "M");
+                            sqlcm.Parameters.AddWithValue("@AgeID", "2");
+                        }
+                        else if (stri.Contains("Male") & stri.Contains("Age 31-65"))
+                        {
+                            sqlcm.Parameters.AddWithValue("@GenderID", "M");
+                            sqlcm.Parameters.AddWithValue("@AgeID", "3");
+                        }
+                        else if (stri.Contains("Male") & stri.Contains("Senior"))
+                        {
+                            sqlcm.Parameters.AddWithValue("@GenderID", "M");
+                            sqlcm.Parameters.AddWithValue("@AgeID", "4");
+                        }
+                        else if (stri.Contains("Female") & stri.Contains("Child"))
+                        {
+                            sqlcm.Parameters.AddWithValue("@GenderID", "F");
+                            sqlcm.Parameters.AddWithValue("@AgeID", "1");
+                        }
+                        else if (stri.Contains("Female") & stri.Contains("Young Adult"))
+                        {
+                            sqlcm.Parameters.AddWithValue("@GenderID", "F");
+                            sqlcm.Parameters.AddWithValue("@AgeID", "2");
+                        }
+                        else if (stri.Contains("Female") & stri.Contains("Age 31-65"))
+                        {
+                            sqlcm.Parameters.AddWithValue("@GenderID", "F");
+                            sqlcm.Parameters.AddWithValue("@AgeID", "3");
+                        }
+                        else if (stri.Contains("Female") & stri.Contains("Senior"))
+                        {
+                            sqlcm.Parameters.AddWithValue("@GenderID", "F");
+                            sqlcm.Parameters.AddWithValue("@AgeID", "4");
+                        }
+
+
+                        sqlcm.Parameters.AddWithValue("@AdvID", Session["AdvertID"]);
+                        sqlcm.ExecuteNonQuery();
+                        sqlcm.Parameters.Clear();
+
+                    }
+
+
+
+                }
+
+                sqlcnAudience.Close();
                 startDateTB.Text = string.Empty;
                 endDateTB.Text = string.Empty;
                 

@@ -66,19 +66,19 @@ namespace targeted_marketing_display.App_Code
 
         }
 
-        public Boolean AdvertUpdate(string AdvID,int companyID,string Name,int duration, string StartDate, string EndDate, string LastUpdBy, string LastUpdOn)
+        public Boolean AdvertUpdate(string AdvID,string itemUpload,int companyID,string Name,int duration, string StartDate, string EndDate, string LastUpdBy, string LastUpdOn)
         {
             Boolean result;
 
-            SqlCommand cmd = new SqlCommand("UPDATE [Advertisement] SET CompanyID=@newCompID, Name=@AdName,Duration=@newduration, StartDate=@paraStartDate,EndDate=@paraEndDate, LastUpdBy = @paraLastUpdBy, LastUpdOn = @paraLastUpdOn WHERE AdvID=@paraAdvID");
+            SqlCommand cmd = new SqlCommand("UPDATE [Advertisement] SET item=@newItem, CompanyID=@newCompID, Name=@AdName,Duration=@newduration, StartDate=@paraStartDate,EndDate=@paraEndDate, LastUpdBy = @paraLastUpdBy, LastUpdOn = @paraLastUpdOn WHERE AdvID=@paraAdvID");
             cmd.Parameters.AddWithValue("@paraAdvID", AdvID);
+            cmd.Parameters.AddWithValue("@newItem", itemUpload);
             cmd.Parameters.AddWithValue("@newCompID", companyID);
             cmd.Parameters.AddWithValue("@AdName", Name);
             cmd.Parameters.AddWithValue("@newduration", duration);
             cmd.Parameters.AddWithValue("@paraStartDate", StartDate);
             cmd.Parameters.AddWithValue("@paraEndDate", EndDate);
-
-
+            
             cmd.Parameters.AddWithValue("@paraLastUpdBy", LastUpdBy);
             cmd.Parameters.AddWithValue("@paraLastUpdOn", LastUpdOn);
 
@@ -98,6 +98,16 @@ namespace targeted_marketing_display.App_Code
             return result;
         }
 
+        public Boolean AdvertAudienceDeleteExisting(string AdvID)
+        {
+            Boolean result;
+            SqlCommand cmd = new SqlCommand("Delete from [AdvertisementAudience] where AdvID=@ID");
+            cmd.Parameters.AddWithValue("@ID", AdvID);
+            result = dbConnection.executeNonQuery(cmd);
+            return result;
+        }
+
+
         public Boolean AdvertCategoryUpdate(string AdvID, string CategoryID)
         {
             Boolean result;
@@ -109,6 +119,14 @@ namespace targeted_marketing_display.App_Code
             return result;
         }
 
+        public Boolean AdvertCategoryDeleteExisting(string AdvID)
+        {
+            Boolean result;
+            SqlCommand cmd = new SqlCommand("Delete from [AdvertisementCategory] where AdvID=@ID");
+            cmd.Parameters.AddWithValue("@ID", AdvID);
+            result = dbConnection.executeNonQuery(cmd);
+            return result;
+        }
 
         public Boolean AdvertLocationUpdate(string AdvID,int BillboardID)
         {
@@ -121,8 +139,15 @@ namespace targeted_marketing_display.App_Code
             return result;
         }
 
-       
-       
+        public Boolean AdvertLocationDeleteExisting(string AdvID)
+        {
+            Boolean result;
+            SqlCommand cmd = new SqlCommand("Delete from [AdvertisementLocation] where AdvID=@ID");
+            cmd.Parameters.AddWithValue("@ID", AdvID);
+            result = dbConnection.executeNonQuery(cmd);
+            return result;
+        }
+
 
 
     }
