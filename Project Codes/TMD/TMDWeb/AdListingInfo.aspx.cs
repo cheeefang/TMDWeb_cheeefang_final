@@ -27,16 +27,28 @@ namespace targeted_marketing_display
             if (!IsPostBack)
             {
 
-                //SqlCommand cmd0 = new SqlCommand("select c.Name from [Advertisement] as a inner join [Company] as c on a.companyID=c.CompanyID where a.companyID=@ID");
-                //SqlParameter param0 = new SqlParameter();
-                //param0.ParameterName = "@ID";
-                //param0.Value=
+                SqlCommand cmd0 = new SqlCommand("select c.Name from [Advertisement] as a inner join [Company] as c on a.companyID=c.CompanyID where a.AdvID=@ID");
+                SqlParameter param0 = new SqlParameter();
+                param0.ParameterName = "@ID";
+                param0.Value = Session["AdvertID"].ToString();
+                cmd0.Parameters.Add(param0);
+                SqlDataAdapter sda0 = new SqlDataAdapter();
+                DataTable dt0 = new DataTable();
+                cmd0.Connection = conn;
+                sda0.SelectCommand = cmd0;
+                sda0.Fill(dt0);
+                cmd0.Parameters.Clear();
+                for (int i = 0; i < dt0.Rows.Count; i++)
+                {
+                    string companynameChecker = dt0.Rows[i]["Name"].ToString();
+                    CompanyNameLabel.Text = "Company: " + companynameChecker;
+                }
                 Advertisement AdvertObj = new Advertisement();
                 Advertisement_Management aDao = new Advertisement_Management();
                 AdvertObj = aDao.getAdvByID(Session["AdvertID"].ToString());
                 string previousimagepath = AdvertObj.Item.ToString();
                 imgLogo.ImageUrl = ResolveUrl(previousimagepath);
-               // CompanyNameLabel.Text="Company: "+AdvertObj.
+               
                 AdNameLabel.Text = "for " + AdvertObj.Name.ToString();
                 AdName2.Text = "Advertisement Name: " + AdvertObj.Name.ToString();
                 ItemTypeLabel.Text = "File Type: " + AdvertObj.ItemType.ToString();
