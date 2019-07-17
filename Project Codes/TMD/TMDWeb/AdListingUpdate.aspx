@@ -132,7 +132,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
- 
+  <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
             <div class="container" style="height: 100%">            
                 <div runat="server" class="alert alert-danger" id="alertWarning" visible="False" style="margin-top: 10px;">
                     
@@ -145,6 +145,7 @@
 
                     <strong>Success!</strong> Advertisement has been updated.
                 </div>
+       
 
             <div class="row">
                 <div class="col-lg-12">
@@ -155,17 +156,19 @@
             <!-- /.row -->
 
         <asp:label runat="server" id="testing1234"></asp:label>
-
+       
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
                     <asp:label  runat="server"><b>Advertisement Image </b></asp:label>
                     <br />
+                   
+                    
                     <asp:image id="imgLogo" runat="server" ImageUrl="" Width="200" Height="200"></asp:image>
+                       
                 </div>
             </div>
         </div>
-
 
 
 
@@ -275,7 +278,7 @@
                         <label>Category </label>
                         <label style="color: red">*</label>
                         &nbsp;
-                        <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
+          
 
                         <asp:UpdatePanel ID="updatepanel1" runat="server">
 
@@ -306,7 +309,7 @@
                 </div>
             
 
-                            <contentTemplate>
+                      
                 <div class="col-lg-6">
 
                     <div class="form-group">

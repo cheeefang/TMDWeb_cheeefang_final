@@ -83,23 +83,36 @@
              }
          }
 
-         function Check_Click(objRef) {
-             var row = objRef.parentNode.parentNode;
-             var GridView = row.parentNode;
-             var inputList = GridView.getElementsByTagName("input");
-             for (var i = 0; i < inputList.length; i++) {
-                 var headerCheckBox = inputList[0];
-                 var checked = true;
-                 if (inputList[i].type == "checkbox" && inputList[i] != headerCheckBox) {
-                     if (!inputList[i].checked) {
-                       checked = false;
-                         break;
-                     }
+     function Check_Click(objRef) {
+         var row = objRef.parentNode.parentNode;
+         var GridView = row.parentNode;
+         var inputList = GridView.getElementsByTagName("input");
+         for (var i = 0; i < inputList.length; i++) {
+             var headerCheckBox = inputList[0];
+             var checked = true;
+             if (inputList[i].type == "checkbox" && inputList[i] != headerCheckBox) {
+                 if (!inputList[i].checked) {
+                     checked = false;
+                     break;
                  }
              }
-             headerCheckBox.checked = checked;
          }
-    </script>
+         headerCheckBox.checked = checked;
+     }
+
+
+     function ImagePreview(input) {
+         if (input.files && input.files[0]) {
+             var reader = new FileReader();
+             reader.onload = function (e) {
+                 $('#<%=imgLogo.ClientID%>').prop('src', e.target.result)
+                          .width(200)
+                          .height(200);
+                  };
+                  reader.readAsDataURL(input.files[0]);
+              }
+          }
+ </script>
 
 
     <style>
@@ -116,8 +129,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form runat="server">
- 
+    <form runat="server">  
             <div class="container" style="height: 100%">            
                 <div runat="server" class="alert alert-danger" id="alertWarning" visible="False" style="margin-top: 10px;">
                     
@@ -125,7 +137,11 @@
                     <asp:Label ID="warningLocation" runat="server"></asp:Label>
                 </div>
             </div>
+        <br />
+        <div runat="server" class="alert alert-success" id="alertSuccess" visible="False">
 
+                    <strong>Success!</strong> Advertisement has been updated.
+                </div>
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">New Advertisement</h1>
@@ -134,6 +150,22 @@
             </div>
             <!-- /.row -->
         
+
+         <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <asp:label  runat="server"><b>Advertisement Image </b></asp:label>
+                    <br />
+                   
+                    
+                    <asp:image id="imgLogo" runat="server" ImageUrl="Images/NoImageAvailable.png" Width="200" Height="200"></asp:image>
+                       
+                </div>
+            </div>
+        </div>
+
+
+
              <div class="row">
                 
                 <div class="col-lg-6">
@@ -148,7 +180,7 @@
                               
                     
 
-                        <asp:FileUpload ID="FileUpload1" runat="server" />
+                        <asp:FileUpload ID="FileUpload1" runat="server" onchange="ImagePreview(this);" />
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ValidationExpression='(.*?)\.(jpg|jpeg|png|gif|avi|flv|wmv|mp4|mov|JPG|JPEG|PNG|GIF|AVI|FLV|WMV|MOV|MP4)$'
                             ControlToValidate="FileUpload1" runat="server" ForeColor="Red" ErrorMessage="Please select valid image/video file."
                             Display="Dynamic" />

@@ -296,9 +296,11 @@ namespace targeted_marketing_display
                     }
 
                 sqlcn.Close();
+                alertWarning.Visible = false;
+                alertSuccess.Visible = true;
 
             }
-            Response.Redirect("AdListing.aspx");
+            //Response.Redirect("AdListing.aspx");
 
         }
 

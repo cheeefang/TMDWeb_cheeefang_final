@@ -22,16 +22,17 @@ namespace targeted_marketing_display
         string dbConnStr = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
+            Advertisement adObject = new Advertisement();
+            Advertisement_Management adObjectClass = new Advertisement_Management();
+            adObject = adObjectClass.getAdvByID(Session["AdvertID"].ToString());
+            string previousimagepath = adObject.Item.ToString();
+            imgLogo.ImageUrl = ResolveUrl(previousimagepath);
             SqlConnection conn = null;
             SqlDataReader reader = null;
             conn = new
             SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
             conn.Open();
-            Advertisement adObject = new Advertisement();
-            Advertisement_Management adObjectClass  = new Advertisement_Management();
-            adObject = adObjectClass.getAdvByID(Session["AdvertID"].ToString());
-            string previousimagepath = adObject.Item.ToString();
-            imgLogo.ImageUrl = ResolveUrl(previousimagepath);
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
             if ((string)Session["userType"] == "Admin")
             {
                 divCompany.Visible = true;
@@ -68,7 +69,7 @@ namespace targeted_marketing_display
             }
             if (!Page.IsPostBack)
             {
-                
+            
                 Database db = new Database();
                 string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
                 SqlConnection sqlconn = new SqlConnection(dbConnStr);
@@ -578,8 +579,10 @@ namespace targeted_marketing_display
                 
                 alertWarning.Visible = false;
                 alertSuccess.Visible = true;
+
             }
-            Response.Redirect("AdListing.aspx");
+            //Response.Redirect(Request.RawUrl);
+            //alertSuccess.Visible = true;
         }
         protected void CategoryButton_Click(object sender, EventArgs e)
         {
