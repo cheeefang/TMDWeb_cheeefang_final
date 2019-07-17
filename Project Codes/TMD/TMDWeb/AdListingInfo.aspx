@@ -65,7 +65,7 @@
            <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label id="AdName2"  runat="server"> </asp:label>
+                    <asp:label id="CompanyNameLabel"  runat="server" Font-Bold="true"> </asp:label>
                     
                 </div>
             </div>
@@ -74,7 +74,7 @@
            <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label id="ItemTypeLabel"  runat="server"> </asp:label>
+                    <asp:label id="AdName2"  runat="server" Font-Bold="true"> </asp:label>
                     
                 </div>
             </div>
@@ -83,7 +83,16 @@
            <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label id="StartDateLabel"  runat="server" text="Start Date:"> </asp:label>
+                    <asp:label id="ItemTypeLabel"  runat="server" Font-Bold="true"> </asp:label>
+                    
+                </div>
+            </div>
+        </div>
+
+           <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <asp:label id="StartDateLabel"  runat="server" text="Start Date:" Font-Bold="true"> </asp:label>
                     
                 </div>
             </div>
@@ -91,7 +100,7 @@
            <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label id="EndDateLabel"  runat="server" text="End Date:"> </asp:label>
+                    <asp:label id="EndDateLabel"  runat="server" text="End Date:" Font-Bold="true"> </asp:label>
                     
                 </div>
             </div>
@@ -100,7 +109,7 @@
           <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label id="AudienceLabel"  runat="server" text="Targeted Audience(s):"> </asp:label>
+                    <asp:label id="AudienceLabel"  runat="server" text="Targeted Audience(s):" Font-Bold="true"> </asp:label>
                     
                 </div>
             </div>
@@ -108,7 +117,15 @@
            <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label id="CategoryLabel"  runat="server" text="Advertisement Category(s):"> </asp:label>
+                    <asp:label id="CategoryLabel"  runat="server" text="Advertisement Category(s):" Font-Bold="true"> </asp:label>
+                    
+                </div>
+            </div>
+        </div>
+          <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <asp:label id="LocationLabel"  runat="server" text="Connected Billboard(s):" Font-Bold="true"> </asp:label>
                     
                 </div>
             </div>

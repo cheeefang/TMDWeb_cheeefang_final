@@ -26,22 +26,29 @@ namespace targeted_marketing_display
             conn.Open();
             if (!IsPostBack)
             {
+
+                //SqlCommand cmd0 = new SqlCommand("select c.Name from [Advertisement] as a inner join [Company] as c on a.companyID=c.CompanyID where a.companyID=@ID");
+                //SqlParameter param0 = new SqlParameter();
+                //param0.ParameterName = "@ID";
+                //param0.Value=
                 Advertisement AdvertObj = new Advertisement();
                 Advertisement_Management aDao = new Advertisement_Management();
-                
                 AdvertObj = aDao.getAdvByID(Session["AdvertID"].ToString());
                 string previousimagepath = AdvertObj.Item.ToString();
                 imgLogo.ImageUrl = ResolveUrl(previousimagepath);
+               // CompanyNameLabel.Text="Company: "+AdvertObj.
                 AdNameLabel.Text = "for " + AdvertObj.Name.ToString();
                 AdName2.Text = "Advertisement Name: " + AdvertObj.Name.ToString();
                 ItemTypeLabel.Text = "File Type: " + AdvertObj.ItemType.ToString();
                 DateTime StartDateVar = Convert.ToDateTime(AdvertObj.StartDate);
                 DateTime EndDateVar = Convert.ToDateTime(AdvertObj.EndDate);
-                string niceStartDate =StartDateVar.ToString("dd MMM yyyy");
+                string niceStartDate = StartDateVar.ToString("dd MMM yyyy");
                 string niceEndDate = EndDateVar.ToString("dd MMM yyyy");
-                StartDateLabel.Text = StartDateLabel.Text+niceStartDate;
-                EndDateLabel.Text = EndDateLabel.Text+niceEndDate;
-                SqlCommand cmd1 = new SqlCommand("select * from [AdvertisementAudience] where AdvID=@ID ",conn);
+                StartDateLabel.Text = StartDateLabel.Text + niceStartDate;
+                EndDateLabel.Text = EndDateLabel.Text + niceEndDate;
+
+
+                SqlCommand cmd1 = new SqlCommand("select * from [AdvertisementAudience] where AdvID=@ID ", conn);
                 SqlParameter param1 = new SqlParameter();
                 param1.ParameterName = "@ID";
                 param1.Value = Session["AdvertID"].ToString();
@@ -54,7 +61,7 @@ namespace targeted_marketing_display
                 cmd1.Parameters.Clear();
                 for (int i = 0; i < dt1.Rows.Count; i++)
                 {
-                    int ageChecker= Convert.ToInt32(dt1.Rows[i]["AgeID"]);
+                    int ageChecker = Convert.ToInt32(dt1.Rows[i]["AgeID"]);
                     string GenderChecker = dt1.Rows[i]["GenderID"].ToString();
                     if (ageChecker == 1)
                     {
@@ -71,7 +78,7 @@ namespace targeted_marketing_display
                     {
                         if (GenderChecker == "M")
                         {
-                           AudienceLabel.Text= AudienceLabel.Text+"Male Young Adult(Age 16-30),";
+                            AudienceLabel.Text = AudienceLabel.Text + "Male Young Adult(Age 16-30),";
                         }
                         else
                         {
@@ -156,7 +163,7 @@ namespace targeted_marketing_display
                     {
                         CategoryLabel.Text = CategoryLabel.Text + "Insurance,";
                     }
-                    if(catChecker== " Int")
+                    if (catChecker == " Int")
                     {
                         CategoryLabel.Text = CategoryLabel.Text + "Internet,";
                     }
@@ -229,13 +236,40 @@ namespace targeted_marketing_display
                     {
                         CategoryLabel.Text = CategoryLabel.Text + "Women,";
                     }
-                    
+
 
                 }
+                //SqlCommand cmd2 = new SqlCommand("Select * from [AdvertisementCategory] where AdvID=@ID", conn);
+                //SqlParameter param2 = new SqlParameter();
+                //param2.ParameterName = "@ID";
+                //param2.Value = Session["AdvertID"].ToString();
+                //cmd2.Parameters.Add(param2);
+                //SqlDataAdapter sda2 = new SqlDataAdapter();
+                //DataTable dt2 = new DataTable();
+                //cmd2.Connection = conn;
+                //sda2.SelectCommand = cmd2;
+                //sda2.Fill(dt2);
+                //cmd2.Parameters.Clear();
+                //for (int i = 0; i < dt2.Rows.Count; i++)
+                //{
 
-
-
-
+                //}
+                SqlCommand cmd3 = new SqlCommand("select b.BillboardCode from [AdvertisementLocation] as a inner join [BillboardLocation] as b on a.BillboardID=b.BillboardID where AdvID=@ID", conn);
+                SqlParameter param3 = new SqlParameter();
+                param3.ParameterName = "@ID";
+                param3.Value = Session["AdvertID"].ToString();
+                cmd3.Parameters.Add(param3);
+                SqlDataAdapter sda3 = new SqlDataAdapter();
+                DataTable dt3 = new DataTable();
+                cmd3.Connection = conn;
+                sda3.SelectCommand = cmd3;
+                sda3.Fill(dt3);
+                cmd3.Parameters.Clear();
+                for (int i = 0; i < dt3.Rows.Count; i++)
+                {
+                    string BillboardCodeChecker = ((String)dt3.Rows[i]["BillboardCode"] + ",");
+                    LocationLabel.Text = LocationLabel.Text + BillboardCodeChecker;
+                }
             }
         }
     }
