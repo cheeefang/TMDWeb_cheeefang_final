@@ -40,7 +40,7 @@ namespace targeted_marketing_display
                 string niceStartDate =StartDateVar.ToString("dd MMM yyyy");
                 string niceEndDate = EndDateVar.ToString("dd MMM yyyy");
                 StartDateLabel.Text = StartDateLabel.Text+niceStartDate;
-                EndDateLabel.Text = StartDateLabel.Text+niceEndDate;
+                EndDateLabel.Text = EndDateLabel.Text+niceEndDate;
                 SqlCommand cmd1 = new SqlCommand("select * from [AdvertisementAudience] where AdvID=@ID ",conn);
                 SqlParameter param1 = new SqlParameter();
                 param1.ParameterName = "@ID";

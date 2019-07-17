@@ -108,7 +108,7 @@
            <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label id="CategoryLabel"  runat="server" text="Advertisement Categorie(s):"> </asp:label>
+                    <asp:label id="CategoryLabel"  runat="server" text="Advertisement Category(s):"> </asp:label>
                     
                 </div>
             </div>
