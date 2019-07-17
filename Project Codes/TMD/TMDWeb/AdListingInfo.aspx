@@ -47,53 +47,65 @@
         
                 <br />
               
-             <div class="row">
+           
+
+  <div class="row">
             <div class="col-lg-6">
-            <div class="input-group custom-search-form" style="width: 50%">
-                  <div style="padding: 20px; float: left; width:30%;">
-                                          <p class="input-group" style="width:350px;margin-left:-20px;">
-                                        <asp:TextBox ID="txtSearch" class="form-control" runat="server" placeholder="Search..."></asp:TextBox>
-                                        <%--<input type="submit" id="btSubmit" runat="server" />--%>
-                                        <span class="input-group-btn" >
-                                            <asp:LinkButton runat="server" class="btn btn-default" ID="btnRun" style="height:34px;" Text="<i class='fa fa-search'></i>"/>
-                                       </span>
-                                            </p>
-                                    </div>
-            </div>
+                <div class="form-group">
+                    <asp:label  runat="server"><b>Advertisement Image </b></asp:label>
+                    <br />
+                   
+                    
+                    <asp:image id="imgLogo" runat="server" ImageUrl="" Width="200" Height="200"></asp:image>
+                       
                 </div>
+            </div>
+        </div>
+
+           <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <asp:label id="AdName2"  runat="server"> </asp:label>
+                    
+                </div>
+            </div>
+        </div>
+
+           <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <asp:label id="ItemTypeLabel"  runat="server"> </asp:label>
+                    
+                </div>
+            </div>
+        </div>
+
+           <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <asp:label id="StartDateLabel"  runat="server"> </asp:label>
+                    
+                </div>
+            </div>
+        </div>
+           <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <asp:label id="EndDateLabel"  runat="server"> </asp:label>
+                    
+                </div>
+            </div>
+        </div>
+
+          <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <asp:label id="AudienceLabel"  runat="server" text="Targeted Audience:"> </asp:label>
+                    
+                </div>
+            </div>
+        </div>
           
-                
-                 </div>
-        
-
-          <div runat="server" class="alert alert-success" id="alertSuccess" visible="False">
-                    <strong>Success!</strong> 
-                    <asp:Label runat="server" ID="msgSuccess"></asp:Label>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-
-
-
-            <div id="all" runat="server">
-                <div class="row">
-                    <div class="col-lg-12">
-
-                        <div class="table-responsive">
-                            <%--                        <table class="table table-striped table-bordered table-hover" style="width: 100%">--%>
-                            <%--                            </table>--%>
-                        </div>
-                        <!-- /.table-responsive -->
-                    </div>
-                </div>
-            </div>
-     
-
-
-
-
-
+          
     </form>
 </asp:Content>
