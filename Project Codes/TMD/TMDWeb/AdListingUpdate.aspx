@@ -156,10 +156,13 @@
             <!-- /.row -->
 
         <asp:label runat="server" id="testing1234"></asp:label>
-       
+        <asp:UpdatePanel ID="UpdatePanel7" runat="server"
+               UpdateMode="Conditional">
+               <ContentTemplate>
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
+                     
                     <asp:label  runat="server"><b>Advertisement Image </b></asp:label>
                     <br />
                    
@@ -169,7 +172,12 @@
                 </div>
             </div>
         </div>
+                   </ContentTemplate>
+            <Triggers>
+                <asp:PostBackTrigger ControlID="Button1" />
+            </Triggers>
 
+            </asp:UpdatePanel>
 
 
         <div class="row">
