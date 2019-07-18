@@ -30,6 +30,17 @@ namespace targeted_marketing_display
                 adminDiv.Visible = false;
                 userDiv.Visible = true;
             }
+            if (Convert.ToInt32(Session["BBUpdate"]) == 2)
+            {
+                updateSuccess.Visible = true;
+                Session.Remove("BBUpdate");
+
+            }
+            if (Convert.ToInt32(Session["BBCreate"]) == 2)
+            {
+                createSuccess.Visible = true;
+                Session.Remove("BBCreate");
+            }
             //SqlConnection conn = null;
             //SqlDataReader reader = null;
 

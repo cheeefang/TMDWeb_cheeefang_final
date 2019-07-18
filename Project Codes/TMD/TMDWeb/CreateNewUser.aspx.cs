@@ -185,6 +185,8 @@ namespace targeted_marketing_display
                         }
                     
                 }
+                Session["CreateUser"] = 2;
+                Response.Redirect("ViewUser.aspx");
             }
         }
     }

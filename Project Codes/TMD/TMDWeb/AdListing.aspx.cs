@@ -19,7 +19,17 @@ namespace targeted_marketing_display
 
         protected void Page_Load(object sender, EventArgs e)
         {
+           if( Convert.ToInt32(Session["AdvertUpdate"]) == 2)
+            {
+                alertSuccessUpdate.Visible = true;
+                Session.Remove("AdvertUpdate");
+            }
 
+            if (Convert.ToInt32(Session["AdvertCreate"]) == 2)
+            {
+                alertSuccessCreate.Visible = true;
+                Session.Remove("AdvertCreate");
+            }
         }
 
         protected void infoBtn_Command(object sender, CommandEventArgs e)
@@ -97,8 +107,8 @@ namespace targeted_marketing_display
                 //Boolean insCnt = bDao.deleteBillboard(lb_msgId.Text);
                 Boolean DeleteAd = aDao.deleteAdvert(lb_msgId.Text);
                 //VIC: never inform if the delete is successful or not?
-                alertSuccess.Visible = true;
-                msgSuccess.Text = " Advert# " + aObj.AdvID + " Has Been Deleted Successfully!";
+                alertSuccessDelete.Visible = true;
+                Label3.Text = " Advert# " + aObj.AdvID + " Has Been Deleted Successfully!";
 
                 Database db = new Database();
 

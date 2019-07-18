@@ -80,8 +80,21 @@
                         <a href="BBLocationCreate.aspx" class="btn btn-primary nextBtn pull-right" type="button"> <b>New Billboard </b> </a>
                     </div>
                 </div>
-
-
+            <div runat="server" class="alert alert-success" id="createSuccess" visible="False">
+                    <strong>Successfully Created Billboard!</strong> 
+                    <asp:Label runat="server" ID="CreateLabel"></asp:Label>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            
+                 <div runat="server" class="alert alert-success" id="updateSuccess" visible="False">
+                    <strong>Successfully Updated Billboard!</strong> 
+                    <asp:Label runat="server" ID="updatelabel"></asp:Label>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 
 
                  <div runat="server" class="alert alert-success" id="alertSuccess" visible="False">

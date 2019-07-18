@@ -67,16 +67,29 @@
                   
                 </div>
                  </div>
-        
+         <div runat="server" class="alert alert-success" id="alertSuccessCreate" visible="False">
+                    <strong>Successfully Created Advertisement</strong> 
+                    <asp:Label runat="server" ID="Label2"></asp:Label>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
-          <div runat="server" class="alert alert-success" id="alertSuccess" visible="False">
-                    <strong>Success!</strong> 
+          <div runat="server" class="alert alert-success" id="alertSuccessUpdate" visible="False">
+                    <strong>Successfully Updated Advertisement</strong> 
                     <asp:Label runat="server" ID="msgSuccess"></asp:Label>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
+           <div runat="server" class="alert alert-success" id="alertSuccessDelete" visible="False">
+                    <strong></strong> 
+                    <asp:Label runat="server" ID="Label3"></asp:Label>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
 
 

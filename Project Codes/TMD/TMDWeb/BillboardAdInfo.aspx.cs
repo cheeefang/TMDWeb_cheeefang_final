@@ -87,8 +87,10 @@ namespace targeted_marketing_display
             paramCount.Value = Session["BillboardID"].ToString();
             cmdCount.Parameters.Add(paramCount);
             Int32 numberOfRows = Convert.ToInt32(cmdCount.ExecuteScalar());
-            rowCountLabel.Text = "("+numberOfRows.ToString()+" Ads)";
-            conn.Close();
+            rowCountLabel.Text = "(Total:"+numberOfRows.ToString()+" Advertisement(s))";
+            
+
+            
           
 
         }

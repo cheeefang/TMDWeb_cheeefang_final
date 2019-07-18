@@ -56,6 +56,22 @@
                     </div>               
             </div>
 
+            
+                 <div runat="server" class="alert alert-success" id="createSuccess" visible="False">
+                    <strong>Successfully Created Company!</strong> 
+                    <asp:Label runat="server" ID="createLabel"></asp:Label>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            
+                 <div runat="server" class="alert alert-success" id="updateSuccess" visible="False">
+                    <strong>Success!</strong> 
+                    <asp:Label runat="server" ID="updateLabel"></asp:Label>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
              
 
                  <div runat="server" class="alert alert-success" id="alertSuccess" visible="False">

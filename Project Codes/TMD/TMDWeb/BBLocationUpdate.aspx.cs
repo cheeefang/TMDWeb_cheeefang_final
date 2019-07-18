@@ -86,7 +86,10 @@ namespace targeted_marketing_display
                 BBLongtitude.Text = String.Empty;
 
             }
+            Session["BBUpdate"] =2;
+            Response.Redirect("BBLocationRead");
         }
+        
 
     }
 }

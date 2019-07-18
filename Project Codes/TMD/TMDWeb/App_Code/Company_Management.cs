@@ -16,7 +16,11 @@ namespace CoInfoMgmt
     public class Company_Management
     {
         Database dbConnection = new Database();
-
+        //SqlConnection conn = null;
+        //SqlDataReader reader = null;
+        //conn = new
+        //SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+        //conn.Open();
         public Boolean CoInfoInsert(String CompanyName, String Industry, DateTime CreatedOn)
         {
             bool result = false;    // Execute NonQuery return boolean 
@@ -108,7 +112,18 @@ namespace CoInfoMgmt
         public Boolean deleteCompany(string CompanyID)
         {
             Boolean result;
+            //SqlCommand cmdCount = new SqlCommand("select count(*) from Advertisement as a inner join Company as c on a.companyID=c.CompanyID where c.CompanyID=@ID");
+            //SqlParameter param1 = new SqlParameter();
+            //param1.ParameterName = "@ID";
+            //param1.Value = CompanyID;
+            //cmdCount.Parameters.Add(param1);
+            //SqlDataAdapter sda1 = new SqlDataAdapter();
+            //DataTable dt = new DataTable();
+            //cmdCount.Connection = conn;
+            //sda1.SelectCommand = cmdCount;
 
+            //sda1.Fill(dt);
+            
             //sqlStr.AppendLine("DELETE FROM [User] where UserID = @paraUserId");
             SqlCommand cmd = new SqlCommand("Update [Company] set Status = 0 where CompanyID = @paraCompanyID");
 

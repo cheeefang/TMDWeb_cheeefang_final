@@ -11,6 +11,7 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">Billboard Advertisement Listing<asp:label runat="server" ID="BillboardCodelabel"></asp:label></h1>
                         <asp:label runat="server" id="rowCountLabel"></asp:label>
+                        <asp:label runat="server" id="LabelIndustry"></asp:label>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>

@@ -18,6 +18,17 @@ namespace targeted_marketing_display
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Convert.ToInt32(Session["UpdateUser"]) == 2)
+            {
+                updateSuccess.Visible = true;
+                Session.Remove("UpdateUser");
+            }
+
+            if (Convert.ToInt32(Session["CreateUser"]) == 2)
+            {
+                createSuccess.Visible = true;
+                Session.Remove("CreateUser");
+            }
 
             if (!IsPostBack)
             {

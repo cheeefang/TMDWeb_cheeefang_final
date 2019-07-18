@@ -101,30 +101,12 @@ namespace targeted_marketing_display
                                     warningLocation.Text = "Please enter Latitude";
                                 }
                             }
-                                else
-                                {
-                                    alertWarning.Visible = true;
-                                    alertSuccess.Visible = false;
-                                    alertDanger.Visible = false;
-                                    warningLocation.Text = "Please enter postal code";
-                                }
-                            }
-
-                                else
-                                {
-                                    alertWarning.Visible = true;
-                                    alertSuccess.Visible = false;
-                                    alertDanger.Visible = false;
-                                    warningLocation.Text = "Please select a country";
-                                }
-                            }
-
                             else
                             {
                                 alertWarning.Visible = true;
                                 alertSuccess.Visible = false;
                                 alertDanger.Visible = false;
-                                warningLocation.Text = "Please enter a city";
+                                warningLocation.Text = "Please enter postal code";
                             }
                         }
 
@@ -133,20 +115,40 @@ namespace targeted_marketing_display
                             alertWarning.Visible = true;
                             alertSuccess.Visible = false;
                             alertDanger.Visible = false;
-                            warningLocation.Text = "Please enter an Address";
+                            warningLocation.Text = "Please select a country";
                         }
                     }
+
                     else
                     {
                         alertWarning.Visible = true;
                         alertSuccess.Visible = false;
                         alertDanger.Visible = false;
-                        warningLocation.Text = "Please enter a unique Billboard code";
+                        warningLocation.Text = "Please enter a city";
                     }
+                }
 
-
+                else
+                {
+                    alertWarning.Visible = true;
+                    alertSuccess.Visible = false;
+                    alertDanger.Visible = false;
+                    warningLocation.Text = "Please enter an Address";
                 }
             }
+            else
+            {
+                alertWarning.Visible = true;
+                alertSuccess.Visible = false;
+                alertDanger.Visible = false;
+                warningLocation.Text = "Please enter a unique Billboard code";
+            }
+            Session["BBCreate"] = 2;
+            Response.Redirect("BBLocationRead.aspx");
+
         }
-    
+
+    }
+}
+
 

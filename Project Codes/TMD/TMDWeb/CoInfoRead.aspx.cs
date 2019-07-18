@@ -18,11 +18,17 @@ namespace targeted_marketing_display
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            SqlConnection conn = null;
-            SqlDataReader reader = null;
-            conn = new
-            SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
-            conn.Open();
+            if (Convert.ToInt32(Session["CoUpdate"]) == 2)
+            {
+                updateSuccess.Visible = true;
+                Session.Remove("CoUpdate");
+            }
+            if (Convert.ToInt32(Session["CoCreate"]) == 2)
+            {
+                createSuccess.Visible = true;
+                Session.Remove("CoCreate");
+            }
+            
             if (!IsPostBack)
             {
                 
@@ -59,6 +65,7 @@ namespace targeted_marketing_display
         {
             if (e.CommandName == "DeleteMessage")
             {
+
                 int index = Convert.ToInt32(e.CommandArgument);
 
 
@@ -74,6 +81,8 @@ namespace targeted_marketing_display
                 Label lb_msgId = (Label)gvRow1.FindControl("lb_CompanyID");
               
                 Obj = cDao.getCompanyByID(lb_msgId.Text);
+
+                //SqlCommand cmdCount = new SqlCommand("select count(*) from Advertisement as a inner join Company as c on a.companyID=c.CompanyID where c.CompanyID=@ID", conn);
                 string CompanyName = Obj.Name;
 
                 Boolean insCnt = cDao.deleteCompany(lb_msgId.Text);

@@ -51,6 +51,8 @@ namespace targeted_marketing_display
                 CoIndustry.SelectedValue = "";
 
             }
+            Session["CoUpdate"] = 2;
+            Response.Redirect("CoInfoRead.aspx");
         }
     }
 }

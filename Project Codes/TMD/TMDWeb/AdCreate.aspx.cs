@@ -191,8 +191,12 @@ namespace targeted_marketing_display
 
                     foreach (string s in splitstr)
                     {
+                        //trim the string, i.e. remove the space if any
+                        string _s = s;
+                        _s = _s.Trim();
                         sqlcom.Parameters.AddWithValue("@AdvID", id);
-                        sqlcom.Parameters.AddWithValue("@CategoryID", s);
+                        //sqlcom.Parameters.AddWithValue("@CategoryID", s);
+                        sqlcom.Parameters.AddWithValue("@CategoryID", _s);
                         sqlcom.ExecuteNonQuery();
                         sqlcom.Parameters.Clear();
                     }
@@ -315,7 +319,8 @@ namespace targeted_marketing_display
                 alertSuccess.Visible = true;
 
             }
-            //Response.Redirect("AdListing.aspx");
+            Session["AdvertCreate"] = 2;
+            Response.Redirect("AdListing.aspx");
 
         }
 

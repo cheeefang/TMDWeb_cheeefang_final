@@ -473,8 +473,11 @@ namespace targeted_marketing_display
 
                 foreach (string s in splitstr)
                 {
+                    //trim the string, i.e. remove the space if any
+                    string _s = s;
+                    _s = _s.Trim();
                     sqlcom.Parameters.AddWithValue("@AdvID", Session["AdvertID"]);
-                    sqlcom.Parameters.AddWithValue("@CategoryID", s);
+                    sqlcom.Parameters.AddWithValue("@CategoryID", _s);
                     sqlcom.ExecuteNonQuery();
                     sqlcom.Parameters.Clear();
                 }
@@ -604,10 +607,10 @@ namespace targeted_marketing_display
             // true);
             //Response.Write("<script language='javascript'>window.alert('Advertisement Successfully Updated');window.location='AdListingUpdate.aspx';</script>");
             //string adNamenew = AdvertObj.Name;
-            Response.Write("<script language='javascript'>alert('Successfully Updated Advertisement');</script>");
-            Server.Transfer("AdListing.aspx", true);
-           
-            
+            //Response.Write("<script language='javascript'>alert('Successfully Updated Advertisement');</script>");
+            //Server.Transfer("AdListing.aspx", true);
+            Session["AdvertUpdate"] = 2;
+            Response.Redirect("AdListing.aspx");
             // Response.Redirect(Request.RawUrl);
            // alertSuccess.Visible = true;
            // Response.Redirect("AdListing.aspx?showSuccessMessage = 1");
