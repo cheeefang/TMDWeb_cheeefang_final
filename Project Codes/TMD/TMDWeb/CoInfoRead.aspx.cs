@@ -18,6 +18,11 @@ namespace targeted_marketing_display
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+            conn = new
+            SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+            conn.Open();
             if (!IsPostBack)
             {
                 
@@ -80,7 +85,7 @@ namespace targeted_marketing_display
                 Database db = new Database();
 
                 SqlCommand cmd = new SqlCommand("Select * from [Company] where Status = 1");
-
+                
               //  cmd.Parameters.AddWithValue("@paraType", (string)Session["userType"]);
                 DataSet ds = db.getDataSet(cmd);
 
