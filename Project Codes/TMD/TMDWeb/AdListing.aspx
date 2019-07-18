@@ -122,7 +122,7 @@
 
 <ItemStyle CssClass="hiddencol"></ItemStyle>
                                     </asp:BoundField>
-                                    <asp:ImageField DataImageUrlField="Item" HeaderText="Advert Image" ControlStyle-Width="100" ControlStyle-Height = "100"> 
+                                    <asp:ImageField DataImageUrlField="Item" HeaderText="Advertisement" ControlStyle-Width="100" ControlStyle-Height = "100"> 
         
                                     </asp:ImageField>
                                     <asp:BoundField DataField="Name" HeaderText="Company Name" SortExpression="Name"></asp:BoundField>
