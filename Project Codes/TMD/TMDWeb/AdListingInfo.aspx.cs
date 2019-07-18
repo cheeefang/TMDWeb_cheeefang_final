@@ -59,11 +59,10 @@ namespace targeted_marketing_display
                 StartDateLabel.Text = StartDateLabel.Text + niceStartDate;
                 EndDateLabel.Text = EndDateLabel.Text + niceEndDate;
 
-
-                SqlCommand cmd1 = new SqlCommand("select * from [AdvertisementAudience] where AdvID=@ID ", conn);
+                SqlCommand cmd1 = new SqlCommand("select * from [advertisementaudience] where advid=@id ", conn);
                 SqlParameter param1 = new SqlParameter();
-                param1.ParameterName = "@ID";
-                param1.Value = Session["AdvertID"].ToString();
+                param1.ParameterName = "@id";
+                param1.Value = Session["advertid"].ToString();
                 cmd1.Parameters.Add(param1);
                 SqlDataAdapter sda1 = new SqlDataAdapter();
                 DataTable dt1 = new DataTable();
@@ -73,33 +72,33 @@ namespace targeted_marketing_display
                 cmd1.Parameters.Clear();
                 for (int i = 0; i < dt1.Rows.Count; i++)
                 {
-                    int ageChecker = Convert.ToInt32(dt1.Rows[i]["AgeID"]);
-                    string GenderChecker = dt1.Rows[i]["GenderID"].ToString();
-                    if (ageChecker == 1)
+                    int agechecker = Convert.ToInt32(dt1.Rows[i]["AgeId"]);
+                    string genderchecker = dt1.Rows[i]["GenderId"].ToString();
+                    if (agechecker == 1)
                     {
-                        if (GenderChecker == "M")
+                        if (genderchecker == "M")
                         {
-                            AudienceLabel.Text = AudienceLabel.Text + "Male Children(Age 0-15),";
+                            AudienceLabel.Text = AudienceLabel.Text + "Male children(age 0-15),";
                         }
                         else
                         {
                             AudienceLabel.Text = AudienceLabel.Text + "Female Children(Age 0-15),";
                         }
                     }
-                    if (ageChecker == 2)
+                    if (agechecker == 2)
                     {
-                        if (GenderChecker == "M")
+                        if (genderchecker == "M")
                         {
-                            AudienceLabel.Text = AudienceLabel.Text + "Male Young Adult(Age 16-30),";
+                            AudienceLabel.Text = AudienceLabel.Text + "Male Young AdultS(Age 16-30),";
                         }
                         else
                         {
                             AudienceLabel.Text = AudienceLabel.Text + "Female Young Adults(Age 16-30),";
                         }
                     }
-                    if (ageChecker == 3)
+                    if (agechecker == 3)
                     {
-                        if (GenderChecker == "M")
+                        if (genderchecker == "M")
                         {
                             AudienceLabel.Text = AudienceLabel.Text + "Male Adults(Age 31-65),";
                         }
@@ -108,9 +107,9 @@ namespace targeted_marketing_display
                             AudienceLabel.Text = AudienceLabel.Text + "Female Adults(Age 31-65),";
                         }
                     }
-                    if (ageChecker == 4)
+                    if (agechecker == 4)
                     {
-                        if (GenderChecker == "M")
+                        if (genderchecker == "M")
                         {
                             AudienceLabel.Text = AudienceLabel.Text + "Male Seniors(Age 66+),";
                         }
@@ -121,136 +120,154 @@ namespace targeted_marketing_display
                     }
 
                 }
-                SqlCommand cmd2 = new SqlCommand("Select * from [AdvertisementCategory] where AdvID=@ID", conn);
-                SqlParameter param2 = new SqlParameter();
-                param2.ParameterName = "@ID";
-                param2.Value = Session["AdvertID"].ToString();
-                cmd2.Parameters.Add(param2);
-                SqlDataAdapter sda2 = new SqlDataAdapter();
-                DataTable dt2 = new DataTable();
-                cmd2.Connection = conn;
-                sda2.SelectCommand = cmd2;
-                sda2.Fill(dt2);
-                cmd2.Parameters.Clear();
-                for (int i = 0; i < dt2.Rows.Count; i++)
+                SqlCommand cmdAud = new SqlCommand("SELECT a.[AdvID], a.[Name], a.[Item], b.CategoryID, c.CodeDesc FROM [Advertisement] a INNER JOIN [AdvertisementCategory] b ON a.AdvID = b.AdvID FULL OUTER JOIN [CodeReferece] c ON b.CategoryID = c.CodeValue WHERE a.AdvID = @ID", conn);
+                SqlParameter paramAud = new SqlParameter();
+                paramAud.ParameterName = "@ID";
+                paramAud.Value = Session["AdvertID"].ToString();
+                cmdAud.Parameters.Add(paramAud);
+                SqlDataAdapter sdaAud = new SqlDataAdapter();
+                DataTable dtAud = new DataTable();
+                cmdAud.Connection = conn;
+                sdaAud.SelectCommand = cmdAud;
+                sdaAud.Fill(dtAud);
+                cmdAud.Parameters.Clear();
+                for (int i = 0; i < dtAud.Rows.Count; i++)
                 {
-                    //Auto,Bus,Career,Fin,Food,Gov,Health,Home,Ins,Int,Law,Mobile,Mother,Pets,Photo,Polit,
-                    //Rec,Rest,Retail,Shop,Sport,Style,Tech,Tel,Travel,Wed,Women
-                    //int ageChecker = Convert.ToInt32(datatable.Rows[i]["AgeID"]);
-                    string catChecker = ((String)dt2.Rows[i]["CategoryID"]);
-
-                    if (catChecker == " Auto")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Automotive,";
-                    }
-                    if (catChecker == " Bus")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Business,";
-                    }
-                    if (catChecker == " Career")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Career,";
-                    }
-                    if (catChecker == " Fin")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Financial,";
-                    }
-                    if (catChecker == " Food")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Food,";
-                    }
-                    if (catChecker == " Gov")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Government,";
-                    }
-                    if (catChecker == " Health")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Health,";
-                    }
-                    if (catChecker == " Home")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Home Garden,";
-                    }
-                    if (catChecker == " Ins")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Insurance,";
-                    }
-                    if (catChecker == " Int")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Internet,";
-                    }
-
-                    if (catChecker == " Law")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Legal,";
-                    }
-                    if (catChecker == " Mobile")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Mobile & wireless,";
-                    }
-                    if (catChecker == " Mother")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Mothers,";
-                    }
-                    if (catChecker == " Pets")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Pets,";
-                    }
-                    if (catChecker == " Photo")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Photography,";
-                    }
-                    if (catChecker == " Polit")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Political,";
-                    }
-                    if (catChecker == " Rec")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Recreation,";
-                    }
-                    if (catChecker == " Rest")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Restaurant,";
-                    }
-                    if (catChecker == " Retail")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Retail,";
-                    }
-                    if (catChecker == " Shop")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Shopping,";
-                    }
-                    if (catChecker == " Sport")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Sports,";
-                    }
-                    if (catChecker == " Style")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Lifestyle,";
-                    }
-                    if (catChecker == " Tech")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Technology,";
-                    }
-                    if (catChecker == " Tel")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Telecom,";
-                    }
-                    if (catChecker == " Travel")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Travel & tourism,";
-                    }
-                    if (catChecker == " Wed")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Wedding,";
-                    }
-                    if (catChecker == " Women")
-                    {
-                        CategoryLabel.Text = CategoryLabel.Text + "Women,";
-                    }
-
-
+                    string codedesc = dtAud.Rows[i]["CodeDesc"].ToString() + ",";
+                    CategoryLabel.Text = CategoryLabel.Text + codedesc;
                 }
+
+                
+                //SqlCommand cmd2 = new SqlCommand("Select * from [AdvertisementCategory] where AdvID=@ID", conn);
+                //SqlParameter param2 = new SqlParameter();
+                //param2.ParameterName = "@ID";
+                //param2.Value = Session["AdvertID"].ToString();
+                //cmd2.Parameters.Add(param2);
+                //SqlDataAdapter sda2 = new SqlDataAdapter();
+                //DataTable dt2 = new DataTable();
+                //cmd2.Connection = conn;
+                //sda2.SelectCommand = cmd2;
+                //sda2.Fill(dt2);
+                //cmd2.Parameters.Clear();
+                //for (int i = 0; i < dt2.Rows.Count; i++)
+                //{
+                //    //Auto,Bus,Career,Fin,Food,Gov,Health,Home,Ins,Int,Law,Mobile,Mother,Pets,Photo,Polit,
+                //    //Rec,Rest,Retail,Shop,Sport,Style,Tech,Tel,Travel,Wed,Women
+                //    //int ageChecker = Convert.ToInt32(datatable.Rows[i]["AgeID"]);
+                //    string catChecker = ((String)dt2.Rows[i]["CategoryID"]);
+
+                //    if (catChecker == "Auto")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Automotive,";
+                //    }
+                //    if (catChecker == "Bus")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Business,";
+                //    }
+                //    if (catChecker == "Career")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Career,";
+                //    }
+                //    if (catChecker == "Fin")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Financial,";
+                //    }
+                //    if (catChecker == "Food")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Food,";
+                //    }
+                //    if (catChecker == "Gov")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Government,";
+                //    }
+                //    if (catChecker == "Health")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Health,";
+                //    }
+                //    if (catChecker == "Home")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Home Garden,";
+                //    }
+                //    if (catChecker == "Ins")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Insurance,";
+                //    }
+                //    if (catChecker == "Int")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Internet,";
+                //    }
+
+                //    if (catChecker == "Law")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Legal,";
+                //    }
+                //    if (catChecker == "Mobile")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Mobile & wireless,";
+                //    }
+                //    if (catChecker == "Mother")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Mothers,";
+                //    }
+                //    if (catChecker == "Pets")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Pets,";
+                //    }
+                //    if (catChecker == "Photo")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Photography,";
+                //    }
+                //    if (catChecker == "Polit")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Political,";
+                //    }
+                //    if (catChecker == "Rec")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Recreation,";
+                //    }
+                //    if (catChecker == "Rest")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Restaurant,";
+                //    }
+                //    if (catChecker == "Retail")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Retail,";
+                //    }
+                //    if (catChecker == "Shop")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Shopping,";
+                //    }
+                //    if (catChecker == "Sport")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Sports,";
+                //    }
+                //    if (catChecker == "Style")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Lifestyle,";
+                //    }
+                //    if (catChecker == "Tech")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Technology,";
+                //    }
+                //    if (catChecker == "Tel")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Telecom,";
+                //    }
+                //    if (catChecker == "Travel")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Travel & tourism,";
+                //    }
+                //    if (catChecker == "Wed")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Wedding,";
+                //    }
+                //    if (catChecker == "Women")
+                //    {
+                //        CategoryLabel.Text = CategoryLabel.Text + "Women,";
+                //    }
+
+
+                //}
                 //SqlCommand cmd2 = new SqlCommand("Select * from [AdvertisementCategory] where AdvID=@ID", conn);
                 //SqlParameter param2 = new SqlParameter();
                 //param2.ParameterName = "@ID";
