@@ -65,7 +65,8 @@
            <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label id="CompanyNameLabel"  runat="server" Font-Bold="true"> </asp:label>
+                    <asp:label id="CompanyNameLabel"  runat="server" Font-Bold="true" />
+
                     
                 </div>
             </div>
@@ -109,7 +110,8 @@
           <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label id="AudienceLabel"  runat="server" text="Targeted Audience(s):" Font-Bold="true"> </asp:label>
+                    <asp:label id="AudienceLabel"  runat="server" text="Targeted Audience(s):" Font-Bold="true" />
+                      <ul runat="server" id="AudienceList"> </ul>
                     
                 </div>
             </div>
@@ -117,15 +119,16 @@
            <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label id="CategoryLabel"  runat="server" text="Advertisement Category(s):" Font-Bold="true"> </asp:label>
-                    
+                    <asp:label id="CategoryLabel"  runat="server" text="Advertisement Category(s):" Font-Bold="true" />
+                    <ul runat="server" id="CategoryList"></ul>
                 </div>
             </div>
         </div>
           <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label id="LocationLabel"  runat="server" text="Connected Billboard(s):" Font-Bold="true"> </asp:label>
+                    <asp:label id="LocationLabel"  runat="server" text="Connected Billboard(s):" Font-Bold="true" />
+                    <ul runat="server" id="BBCodeList"></ul>
                     
                 </div>
             </div>
