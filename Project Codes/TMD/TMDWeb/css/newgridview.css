@@ -1,4 +1,4 @@
-/*gridview*/
+﻿/*gridview*/
 .table table tbody tr td a,
 .table table tbody tr td span {
     position: relative;
@@ -16,30 +16,30 @@
     z-index: 3;
     color: #fff;
     cursor: default;
-    background-color:#000080;
-    border-color:#000080;
+    background-color: #000080;
+    border-color: #000080;
 }
 
 .table table > tbody > tr > td:first-child > a,
 .table table > tbody > tr > td:first-child > span {
-margin-left: 0;
-border-top-left-radius: 4px;
-border-bottom-left-radius: 4px;
+    margin-left: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
 }
 
 .table table > tbody > tr > td:last-child > a,
 .table table > tbody > tr > td:last-child > span {
-border-top-right-radius: 4px;
-border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 
 .table table > tbody > tr > td > a:hover,
-.table   table > tbody > tr > td > span:hover,
+.table table > tbody > tr > td > span:hover,
 .table table > tbody > tr > td > a:focus,
 .table table > tbody > tr > td > span:focus {
-z-index: 2;
-color: #23527c;
-background-color: #eee;
-border-color: #ddd;
+    z-index: 2;
+    color: #23527c;
+    background-color: #eee;
+    border-color: #ddd;
 }
 /*end gridview */
