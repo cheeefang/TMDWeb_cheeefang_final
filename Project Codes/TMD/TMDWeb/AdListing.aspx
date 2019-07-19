@@ -100,9 +100,9 @@
                         <div class="table-responsive">
                             <%--                        <table class="table table-striped table-bordered table-hover" style="width: 100%">--%>
                             <asp:GridView ID="GridView1" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Width="100%" 
-                                BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px"
-                                CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" HorizontalAlign="Center" DataKeyNames="AdvID"  OnPreRender="GridView1_PreRender">
-                                <AlternatingRowStyle HorizontalAlign="Center" />
+                                BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px"
+                                CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" HorizontalAlign="Center" DataKeyNames="AdvID"  OnPreRender="GridView1_PreRender" ForeColor="Black" GridLines="Vertical">
+                                <AlternatingRowStyle HorizontalAlign="Center" BackColor="#CCCCCC" />
                                 <Columns>
                                     <asp:TemplateField visible="false">
                                         <ItemTemplate>
@@ -123,6 +123,8 @@
 <ItemStyle CssClass="hiddencol"></ItemStyle>
                                     </asp:BoundField>
                                     <asp:ImageField DataImageUrlField="Item" HeaderText="Advertisement" ControlStyle-Width="100" ControlStyle-Height = "100"> 
+        
+<ControlStyle Height="100px" Width="100px"></ControlStyle>
         
                                     </asp:ImageField>
                                     <asp:BoundField DataField="Name" HeaderText="Company Name" SortExpression="Name"></asp:BoundField>
@@ -199,15 +201,15 @@
                                 </Columns>
                                 <EditRowStyle HorizontalAlign="Center" CssClass="GridViewEditRow" />
                                 <EmptyDataRowStyle HorizontalAlign="Center" />
-                                <FooterStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Center" />
-                                <HeaderStyle BackColor="#848c8E" Font-Bold="True" ForeColor="#f1f2ee" HorizontalAlign="Center" />
-                                <PagerStyle BackColor="White"  ForeColor="#85C1E9" HorizontalAlign="Left"  />
-                                <RowStyle ForeColor="#435058" Height="20px" Width="30px" HorizontalAlign="Center" />
-                                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
+                                <FooterStyle BackColor="#CCCCCC" HorizontalAlign="Center" />
+                                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
+                                <PagerStyle BackColor="#999999"  ForeColor="Black" HorizontalAlign="Center"  />
+                                <RowStyle Height="20px" Width="30px" HorizontalAlign="Center" />
+                                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
                                 <SortedAscendingCellStyle BackColor="#F1F1F1" HorizontalAlign="Center" />
-                                <SortedAscendingHeaderStyle BackColor="#007DBB" HorizontalAlign="Center" />
+                                <SortedAscendingHeaderStyle BackColor="#808080" HorizontalAlign="Center" />
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" HorizontalAlign="Center" />
-                                <SortedDescendingHeaderStyle BackColor="#00547E" HorizontalAlign="Center" />
+                                <SortedDescendingHeaderStyle BackColor="#383838" HorizontalAlign="Center" />
                             </asp:GridView>
                             <asp:Label ID="Label1" style="color:darkslateblue" runat="server" Text="Label"></asp:Label>
                             <%--                            </table>--%>

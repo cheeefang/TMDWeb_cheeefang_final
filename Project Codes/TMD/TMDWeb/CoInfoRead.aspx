@@ -87,9 +87,13 @@
 
                           <%--                        <table class="table table-striped table-bordered table-hover" style="width: 100%">--%>
                             <asp:GridView ID="GridView3" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Height="100%" Width="100%"
-                                BackColor="White" BorderColor="#CCCCCC" BorderStyle="None"
+                                BackColor="White" BorderColor="#999999" BorderStyle="Solid"
                                 BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" OnPreRender="GridView3_PreRender" 
-                                OnSelectedIndexChanged="GridView3_SelectedIndexChanged">
+                                OnSelectedIndexChanged="GridView3_SelectedIndexChanged" ForeColor="Black" GridLines="Vertical">
+
+                           
+
+                                <AlternatingRowStyle BackColor="#CCCCCC" />
 
                            
 
@@ -166,15 +170,14 @@
                                         </asp:TemplateField>
 
                                 </Columns>
-                                <FooterStyle BackColor="White" ForeColor="#000066" />
-                                <HeaderStyle BackColor="#848c8E" Font-Bold="True" ForeColor="#f1f2ee" HorizontalAlign="Center" Wrap="False" />
-                                <PagerStyle BackColor="White" ForeColor="#85C1E9" HorizontalAlign="Left" />
-                                <RowStyle ForeColor="#435058" />
-                                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                                <FooterStyle BackColor="#CCCCCC" />
+                                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                                 <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                                <SortedAscendingHeaderStyle BackColor="#007DBB" />
+                                <SortedAscendingHeaderStyle BackColor="#808080" />
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                                <SortedDescendingHeaderStyle BackColor="#00547E" />
+                                <SortedDescendingHeaderStyle BackColor="#383838" />
                             </asp:GridView>
                             <asp:Label ID="Label1" style="color:darkslateblue" runat="server" Text="Label"></asp:Label>
                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="select [Company].CompanyID,[CodeReferece].CodeValue,[Company].Name,[CodeReferece].CodeDesc from [Company] 

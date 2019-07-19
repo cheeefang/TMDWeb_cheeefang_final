@@ -124,8 +124,10 @@
 
 
 
-                            <asp:GridView ID="gvUser" runat="server" CssClass="table table-striped table-bordered table-hover" AutoGenerateColumns="False" Height="100%" Width="100%" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1"
-                                AllowPaging="true"  PageSize="10" OnPreRender="gvUser_PreRender">
+                            <asp:GridView ID="gvUser" runat="server" CssClass="table table-striped table-bordered table-hover" AutoGenerateColumns="False" Height="100%" Width="100%" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1"
+                                AllowPaging="True" OnPreRender="gvUser_PreRender" ForeColor="Black" GridLines="Vertical">
+                               
+                                <AlternatingRowStyle BackColor="#CCCCCC" />
                                
                                 <Columns>
 
@@ -195,15 +197,14 @@
                                   </asp:templatefield>                                    
 
                                 </Columns>
-                                <FooterStyle BackColor="White" ForeColor="#000066" />
-                                <HeaderStyle BackColor="#848c8E" Font-Bold="True" ForeColor="#f1f2ee" />
-                                <PagerStyle BackColor="White" ForeColor="#85C1E9" HorizontalAlign="Left" />
-                                <RowStyle ForeColor="#435058" />
-                                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                                <FooterStyle BackColor="#CCCCCC" />
+                                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                                 <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                                <SortedAscendingHeaderStyle BackColor="#007DBB" />
+                                <SortedAscendingHeaderStyle BackColor="#808080" />
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                                <SortedDescendingHeaderStyle BackColor="#00547E" />
+                                <SortedDescendingHeaderStyle BackColor="#383838" />
                             </asp:GridView>
 
                 <asp:Label ID="LabelPaging" runat="server" Text="Label"></asp:Label>

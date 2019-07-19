@@ -36,13 +36,17 @@
                 
                 </div>
 
-        <asp:GridView ID="GridView1" runat="server" CssClass="table table-striped table-bordered table-hover"   CellPadding ="3" ForeColor="#333333" GridLines="None" Height="100%" Width="100%" 
-            OnPreRender="GridView1_PreRender" AllowPaging="True"  OnPageIndexChanging="GridView1_PageIndexChanging" AutoGenerateColumns="False" DataKeyNames="BillboardCode" >
-            <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+        <asp:GridView ID="GridView1" runat="server" CssClass="table table-striped table-bordered table-hover"   CellPadding ="3" ForeColor="Black" GridLines="Vertical" Height="100%" Width="100%" 
+            OnPreRender="GridView1_PreRender" AllowPaging="True"  OnPageIndexChanging="GridView1_PageIndexChanging" AutoGenerateColumns="False" DataKeyNames="BillboardCode" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" >
+            <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                                     
     
-                                    <asp:ImageField DataImageUrlField="Item" HeaderText="Advertisement" ControlStyle-Width="100" ControlStyle-Height = "100" /> 
+                                    <asp:ImageField DataImageUrlField="Item" HeaderText="Advertisement" ControlStyle-Width="100" ControlStyle-Height = "100" > 
+        
+                                   
+<ControlStyle Height="100px" Width="100px"></ControlStyle>
+                                    </asp:ImageField>
         
                                    
                                     <asp:BoundField DataField="BillboardCode" HeaderText="Billboard Code" sortExpression="BillboardCode" Visible="false" ></asp:BoundField>
@@ -57,17 +61,17 @@
                                    
 
             </Columns>
-           <EditRowStyle HorizontalAlign="Center" CssClass="GridViewEditRow" />
+           <EditRowStyle HorizontalAlign="Center" CssClass="GridViewEditRow" BackColor="#999999" />
                                 <EmptyDataRowStyle HorizontalAlign="Center" />
-                                <FooterStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Center" />
-                                <HeaderStyle BackColor="#848c8E" Font-Bold="True" ForeColor="#f1f2ee" HorizontalAlign="Center" />
-                                <PagerStyle BackColor="White"  ForeColor="#85C1E9" HorizontalAlign="Left"  />
-                                <RowStyle ForeColor="#435058" Height="20px" Width="30px" HorizontalAlign="Center" />
-                                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
+                                <FooterStyle BackColor="#CCCCCC" HorizontalAlign="Center" Font-Bold="True" />
+                                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
+                                <PagerStyle BackColor="#999999"  ForeColor="Black" HorizontalAlign="Center"  />
+                                <RowStyle Height="20px" Width="30px" HorizontalAlign="Center" BackColor="#F7F6F3" />
+                                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
                                 <SortedAscendingCellStyle BackColor="#F1F1F1" HorizontalAlign="Center" />
-                                <SortedAscendingHeaderStyle BackColor="#007DBB" HorizontalAlign="Center" />
+                                <SortedAscendingHeaderStyle BackColor="#808080" HorizontalAlign="Center" />
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" HorizontalAlign="Center" />
-                                <SortedDescendingHeaderStyle BackColor="#00547E" HorizontalAlign="Center" />
+                                <SortedDescendingHeaderStyle BackColor="#383838" HorizontalAlign="Center" />
         </asp:GridView>
         
  <!--       <asp:objectdatasource id="ObjectDataSource1" runat="server" FilterExpression="Name LIKE '%{0}%' OR Item LIKE '%{0}%' OR Name1  LIKE '%{0}%' OR ItemType LIKE '%{0}%' OR convert(StartDate,'System.String') LIKE '%{0}%' OR convert(EndDate,'System.String') LIKE '%{0}%' ">
