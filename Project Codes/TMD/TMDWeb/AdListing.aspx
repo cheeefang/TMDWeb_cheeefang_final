@@ -203,7 +203,7 @@
                                 <EmptyDataRowStyle HorizontalAlign="Center" />
                                 <FooterStyle BackColor="#CCCCCC" HorizontalAlign="Center" />
                                 <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
-                                <PagerStyle BackColor="#999999"  ForeColor="Black" HorizontalAlign="Center"  />
+                                <PagerStyle BackColor="#999999"  ForeColor="Black" HorizontalAlign="left"  />
                                 <RowStyle Height="20px" Width="30px" HorizontalAlign="Center" />
                                 <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
                                 <SortedAscendingCellStyle BackColor="#F1F1F1" HorizontalAlign="Center" />

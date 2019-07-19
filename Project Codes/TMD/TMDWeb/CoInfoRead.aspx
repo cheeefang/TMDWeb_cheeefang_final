@@ -172,7 +172,7 @@
                                 </Columns>
                                 <FooterStyle BackColor="#CCCCCC" />
                                 <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="left" />
                                 <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
                                 <SortedAscendingCellStyle BackColor="#F1F1F1" />
                                 <SortedAscendingHeaderStyle BackColor="#808080" />
