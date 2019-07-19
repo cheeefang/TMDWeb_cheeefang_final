@@ -45,7 +45,7 @@ namespace targeted_marketing_display
                 for (int i = 0; i < dt0.Rows.Count; i++)
                 {
                     string companynameChecker = dt0.Rows[i]["Name"].ToString();
-                    CompanyNameLabel.Text = "Company: " + companynameChecker;
+                    CompanyNameLiteral.Text = companynameChecker;
                 }
 
 
@@ -56,7 +56,7 @@ namespace targeted_marketing_display
                 imgLogo.ImageUrl = ResolveUrl(previousimagepath);
                
                 AdNameLabel.Text = "for " + AdvertObj.Name.ToString();
-                AdName2.Text = "Advertisement Name: " + AdvertObj.Name.ToString();
+                AdNameLiteral.Text = AdvertObj.Name.ToString();
                 ItemTypeLabel.Text = "File Type: " + AdvertObj.ItemType.ToString();
                 DateTime StartDateVar = Convert.ToDateTime(AdvertObj.StartDate);
                 DateTime EndDateVar = Convert.ToDateTime(AdvertObj.EndDate);
