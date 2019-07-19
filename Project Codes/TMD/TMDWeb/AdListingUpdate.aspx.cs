@@ -488,8 +488,6 @@ namespace targeted_marketing_display
                 sqlcon.Close();
 
 
-
-
                 SqlConnection sqlconnn = new SqlConnection(dbConnStr);
                 string sqlqueryy = "Insert into [AdvertisementLocation](AdvID,BillboardID) values(@AdvID,@BillboardID)";
                 SqlCommand sqlcommm = new SqlCommand(sqlqueryy, sqlconnn);

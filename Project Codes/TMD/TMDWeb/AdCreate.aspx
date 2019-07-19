@@ -350,9 +350,13 @@
                                                    <asp:Checkbox ID="CheckBoxSelector" onclick="Check_Click(this);"  runat ="server" />
                                                </ItemTemplate>                                            
                                            </asp:TemplateField>
-
+                                              <asp:TemplateField visible="false">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" visible="false"  ID="lb_BillboardID" Text='<%# Bind("BillboardID") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                  
-                                            <asp:BoundField DataField="BillboardID" HeaderText="BillboardID" SortExpression="BillboardID" ReadOnly="True" InsertVisible="False"  />
+                                            <asp:BoundField DataField="BillboardID" HeaderText="BillboardID" SortExpression="BillboardID" ReadOnly="True" InsertVisible="False" visible="false"  />
                                             <asp:BoundField DataField="BillboardCode" HeaderText="BillboardCode" SortExpression="BillboardCode" />
                                             <asp:BoundField DataField="Latitude" HeaderText="Latitude" SortExpression="Latitude" />
                                             <asp:BoundField DataField="Longtitude" HeaderText="Longtitude" SortExpression="Longtitude" />
@@ -372,7 +376,6 @@
                                         <SortedDescendingHeaderStyle BackColor="#00547E" HorizontalAlign="Center" />
                                     </asp:GridView>
                                
-                                      
                                     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" 
                                FilterExpression="BillboardCode LIKE '%{0}%' OR AddressLn LIKE '%{0}%' OR City LIKE '%{0}%' OR Country LIKE '%{0}%' OR postalCode LIKE '%{0}%'" 
                                         SelectCommand="SELECT BillboardID,BillboardCode, Latitude ,Longtitude ,(( AddressLn1) + ' '+( AddressLn2 )+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address FROM BillboardLocation where status=1 ">

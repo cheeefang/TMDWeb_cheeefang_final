@@ -213,8 +213,8 @@ namespace targeted_marketing_display
                     sqlconnn.Open();
 
                     int AdvId = GetMaxIDAdvertisement();
-
-                    for (int i = 0; i < GridView1.Rows.Count; i++)
+                //Label bblabel = (Label)gvr.FindControl("lb_BillboardID");
+                for (int i = 0; i < GridView1.Rows.Count; i++)
                     {
                         GridViewRow row = GridView1.Rows[i];
                         bool chkbx = ((CheckBox)row.FindControl("CheckBoxSelector")).Checked;
@@ -354,7 +354,7 @@ namespace targeted_marketing_display
            
 
         }
-
+        List<int> ListOfID = new List<int>();
         protected void BillboardSearch_Click(object sender, EventArgs e)
         {
             List<int> lstBillboardID = new List<int>();
@@ -365,10 +365,14 @@ namespace targeted_marketing_display
             {
                 if (gvr.RowType == DataControlRowType.DataRow)
                 {
+                    
                     CheckBox cb = (CheckBox)(gvr.FindControl("CheckBoxSelector"));
                     if (cb.Checked == true)
                     {
+                        //Label bblabel = (Label)gvr.FindControl("lb_BillboardID");
                         billboardDisplayTB.Text = billboardDisplayTB.Text + "," + gvr.Cells[1].Text;
+                       
+                      //  ListOfID.Add(Convert.ToInt32(bblabel.Text));
 
                     }
                 }
