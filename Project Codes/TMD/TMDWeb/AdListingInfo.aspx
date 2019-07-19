@@ -84,7 +84,7 @@
            <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label id="ItemTypeLabel"  runat="server" Font-Bold="true" />
+                    <asp:label id="ItemTypeLabel"  runat="server" Font-Bold="true" text="File Type:" />
                     <asp:literal runat="server" id="ItemTypeLiteral"></asp:literal>
                     
                 </div>
@@ -94,16 +94,16 @@
            <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label id="StartDateLabel"  runat="server" text="Start Date:" Font-Bold="true"> </asp:label>
-                    
+                    <asp:label id="StartDateLabel"  runat="server" text="Start Date:" Font-Bold="true" />
+                    <asp:literal runat="server" id="StartDateLiteral"></asp:literal>
                 </div>
             </div>
         </div>
            <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label id="EndDateLabel"  runat="server" text="End Date:" Font-Bold="true"> </asp:label>
-                    
+                    <asp:label id="EndDateLabel"  runat="server" text="End Date:" Font-Bold="true" />
+                    <asp:literal runat="server" id="EndDateLiteral"></asp:literal>
                 </div>
             </div>
         </div>

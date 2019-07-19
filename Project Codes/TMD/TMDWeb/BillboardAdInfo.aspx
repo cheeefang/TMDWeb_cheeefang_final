@@ -10,8 +10,8 @@
           <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">Billboard Advertisement Listing<asp:label runat="server" ID="BillboardCodelabel"></asp:label></h1>
-                        <asp:label runat="server" id="rowCountLabel"></asp:label>
-                        <asp:label runat="server" id="LabelIndustry"></asp:label>
+                        <asp:label runat="server" id="rowCountLabel" Font-Bold="true" text="Total:" /><asp:literal runat="server" id="rowcounttext"></asp:literal>
+                       
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>

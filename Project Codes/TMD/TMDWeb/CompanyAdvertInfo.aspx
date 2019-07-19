@@ -12,8 +12,9 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">Company Advertisement Listing<asp:label runat="server" id="company_name_label"></asp:label>
                         </h1>
-                         <asp:label runat="server" id="labelIndustry"></asp:label>
-                        <asp:label runat="server" id="rowCountLabel"></asp:label>
+                         <asp:label runat="server" id="labelIndustry" Font-Bold="true" text="Industry:" /><asp:literal runat="server" id="industrytext"></asp:literal>
+                        </br>
+                        <asp:label runat="server" id="rowCountLabel"  Font-Bold="true" text="Total:" /><asp:literal runat="server" id="counttext"></asp:literal>
                        
                     </div>
                     <!-- /.col-lg-12 -->

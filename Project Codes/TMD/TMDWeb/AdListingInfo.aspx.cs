@@ -57,13 +57,13 @@ namespace targeted_marketing_display
                
                 AdNameLabel.Text = "for " + AdvertObj.Name.ToString();
                 AdNameLiteral.Text = AdvertObj.Name.ToString();
-                ItemTypeLabel.Text = "File Type: " + AdvertObj.ItemType.ToString();
+                ItemTypeLiteral.Text = AdvertObj.ItemType.ToString();
                 DateTime StartDateVar = Convert.ToDateTime(AdvertObj.StartDate);
                 DateTime EndDateVar = Convert.ToDateTime(AdvertObj.EndDate);
-                string niceStartDate = StartDateVar.ToString("dd MMM yyyy");
-                string niceEndDate = EndDateVar.ToString("dd MMM yyyy");
-                StartDateLabel.Text = StartDateLabel.Text + niceStartDate;
-                EndDateLabel.Text = EndDateLabel.Text + niceEndDate;
+                string niceStartDate = StartDateVar.ToString("dddd, dd MMMM yyyy");
+                string niceEndDate = EndDateVar.ToString("dddd, dd MMMM yyyy");
+                StartDateLiteral.Text= niceStartDate;
+                EndDateLiteral.Text= niceEndDate;
 
 
                 SqlCommand cmd1 = new SqlCommand("select a.AdvID,a.AgeID,a.GenderID,coderefage.CodeDesc as agedesc,coderefgender.CodeDesc as genderdesc from AdvertisementAudience  a full outer join CodeReferece as coderefage on coderefage.CodeValue = a.AgeID  full outer join CodeReferece as coderefgender on coderefgender.CodeValue = a.GenderID where a.advid = 5003 and coderefage.CodeType = 'AgeID' and coderefgender.CodeType = 'GenderID' ", conn);

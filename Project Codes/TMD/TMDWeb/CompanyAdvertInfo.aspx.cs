@@ -98,20 +98,22 @@ namespace targeted_marketing_display
             paramCount.Value = Session["CompanyID"].ToString();
             cmdCount.Parameters.Add(paramCount);
             Int32 numberOfRows = Convert.ToInt32(cmdCount.ExecuteScalar());
-            rowCountLabel.Text = "(Total:" + numberOfRows.ToString() + " Advertisement(s))";
+            counttext.Text = numberOfRows.ToString() + " Advertisement(s)";
 
-            SqlCommand cmdIndustry = new SqlCommand("select c.Industry from Advertisement a inner join Company c on a.companyID=c.CompanyID where a.companyID=@ID and a.status=1;");
+            SqlCommand cmdIndustry = new SqlCommand("select c.Industry from Advertisement a inner join Company c on a.companyID=c.CompanyID where a.companyID=@ID and a.status=1",conn);
             SqlParameter paramIndustry = new SqlParameter();
             paramIndustry.ParameterName = "@ID";
             paramIndustry.Value = Session["CompanyID"].ToString();
             cmdIndustry.Parameters.Add(paramIndustry);
             SqlDataAdapter sdaIndustry = new SqlDataAdapter();
             DataTable dtIndustry = new DataTable();
+            cmdIndustry.Connection = conn;
+            sdaIndustry.SelectCommand = cmdIndustry;
             sdaIndustry.Fill(dtIndustry);
             for (int x = 0; x < dtIndustry.Rows.Count; x++)
             {
                 string IndustryCheck = (dtIndustry.Rows[x]["Industry"]).ToString();
-                labelIndustry.Text = "Industry:" + IndustryCheck;
+                industrytext.Text = IndustryCheck;
             }
 
         }
