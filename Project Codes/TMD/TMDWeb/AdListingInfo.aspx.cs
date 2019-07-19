@@ -66,7 +66,7 @@ namespace targeted_marketing_display
                 EndDateLiteral.Text= niceEndDate;
 
 
-                SqlCommand cmd1 = new SqlCommand("select a.AdvID,a.AgeID,a.GenderID,coderefage.CodeDesc as agedesc,coderefgender.CodeDesc as genderdesc from AdvertisementAudience  a full outer join CodeReferece as coderefage on coderefage.CodeValue = a.AgeID  full outer join CodeReferece as coderefgender on coderefgender.CodeValue = a.GenderID where a.advid = 5003 and coderefage.CodeType = 'AgeID' and coderefgender.CodeType = 'GenderID' ", conn);
+                SqlCommand cmd1 = new SqlCommand("select a.AdvID,a.AgeID,a.GenderID,coderefage.CodeDesc as agedesc,coderefgender.CodeDesc as genderdesc from AdvertisementAudience  a full outer join CodeReferece as coderefage on coderefage.CodeValue = a.AgeID  full outer join CodeReferece as coderefgender on coderefgender.CodeValue = a.GenderID where a.advid =@ID and coderefage.CodeType = 'AgeID' and coderefgender.CodeType = 'GenderID' ", conn);
                 SqlParameter param1 = new SqlParameter();
                 param1.ParameterName = "@ID";
                 param1.Value = Session["AdvertID"].ToString();
