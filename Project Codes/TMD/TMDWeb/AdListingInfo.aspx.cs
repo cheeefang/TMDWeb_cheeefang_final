@@ -137,7 +137,7 @@ namespace targeted_marketing_display
 
                 for (int i = 0; i < dt3.Rows.Count; i++)
                 {
-                    string BillboardCode = ((String)dt3.Rows[i]["BillboardCode"];
+                    string BillboardCode = ((String)dt3.Rows[i]["BillboardCode"]);
                     HtmlGenericControl li = new HtmlGenericControl("li");
                     //tabs.Controls.Add(li);
                     //AudienceList.Controls.Add(li);
