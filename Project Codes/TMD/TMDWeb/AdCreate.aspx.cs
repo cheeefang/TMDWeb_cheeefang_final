@@ -206,8 +206,8 @@ namespace targeted_marketing_display
 
 
 
-
-                    SqlConnection sqlconnn = new SqlConnection(dbConnStr);
+                List<int> ListOfID = new List<int>();
+                SqlConnection sqlconnn = new SqlConnection(dbConnStr);
                     string sqlqueryy = "Insert into [AdvertisementLocation](AdvID,BillboardID) values(@AdvID,@BillboardID)";
                     SqlCommand sqlcommm = new SqlCommand(sqlqueryy, sqlconnn);
                     sqlconnn.Open();
@@ -216,11 +216,14 @@ namespace targeted_marketing_display
                 //Label bblabel = (Label)gvr.FindControl("lb_BillboardID");
                 for (int i = 0; i < GridView1.Rows.Count; i++)
                     {
-                        GridViewRow row = GridView1.Rows[i];
+                    //Label bblabel = (Label)gvr.FindControl("lb_BillboardID");
+                   // billboardDisplayTB.Text = billboardDisplayTB.Text + "," + bblabel.Text;
+                    GridViewRow row = GridView1.Rows[i];
                         bool chkbx = ((CheckBox)row.FindControl("CheckBoxSelector")).Checked;
                         if (chkbx)
                         {
-                            sqlcommm.Parameters.AddWithValue("@BillboardID", GridView1.Rows[i].Cells[1].Text);
+                            Label bblabel = (Label)GridView1.Rows[i].FindControl("lb_BillboardID");
+                            sqlcommm.Parameters.AddWithValue("@BillboardID", Convert.ToInt32(bblabel.Text));
                             sqlcommm.Parameters.AddWithValue("@AdvID", AdvId);
                             sqlcommm.ExecuteNonQuery();
                             sqlcommm.Parameters.Clear();
@@ -354,7 +357,7 @@ namespace targeted_marketing_display
            
 
         }
-        List<int> ListOfID = new List<int>();
+      
         protected void BillboardSearch_Click(object sender, EventArgs e)
         {
             List<int> lstBillboardID = new List<int>();
@@ -369,8 +372,8 @@ namespace targeted_marketing_display
                     CheckBox cb = (CheckBox)(gvr.FindControl("CheckBoxSelector"));
                     if (cb.Checked == true)
                     {
-                        //Label bblabel = (Label)gvr.FindControl("lb_BillboardID");
-                        billboardDisplayTB.Text = billboardDisplayTB.Text + "," + gvr.Cells[1].Text;
+                       // Label bblabel = (Label)gvr.FindControl("lb_BillboardID");
+                        billboardDisplayTB.Text = billboardDisplayTB.Text + "," +gvr.Cells[2].Text;
                        
                       //  ListOfID.Add(Convert.ToInt32(bblabel.Text));
 

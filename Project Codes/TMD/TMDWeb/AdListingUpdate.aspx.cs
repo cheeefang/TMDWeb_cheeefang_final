@@ -171,7 +171,7 @@ namespace targeted_marketing_display
 
                 }
                 CompareValidator2.ValueToCompare = DateTime.Now.ToShortDateString();
-                SqlCommand cmdLoc = new SqlCommand("select * from [AdvertisementLocation] where AdvID=@ID", conn);
+                SqlCommand cmdLoc = new SqlCommand("select a.AdvID,a.BillboardID,b.BillboardCode from AdvertisementLocation a inner join BillboardLocation b on a.BillboardID = b.BillboardID where a.AdvID = @ID", conn);
                 SqlParameter paramLoc = new SqlParameter();
                 paramLoc.ParameterName = "@ID";
                 paramLoc.Value = Session["AdvertID"].ToString();
@@ -184,7 +184,7 @@ namespace targeted_marketing_display
                 cmdLoc.Parameters.Clear();
                 for (int i = 0; i < datatableLoc.Rows.Count; i++)
                 {
-                    int BillboardCheckID = Convert.ToInt32(datatableLoc.Rows[i]["BillboardID"]);
+                    string BillboardCodefromdb = datatableLoc.Rows[i]["BillboardCode"].ToString();
                     foreach (GridViewRow gvr in GridView1.Rows)
 
                     {
@@ -192,10 +192,10 @@ namespace targeted_marketing_display
                         if (gvr.RowType == DataControlRowType.DataRow)
                         {
                             CheckBox cb = (CheckBox)(gvr.FindControl("CheckBoxSelector"));
-                            if (Convert.ToInt32(gvr.Cells[1].Text) == BillboardCheckID)
+                            if (gvr.Cells[2].Text.ToString() == BillboardCodefromdb)
                             {
                                 cb.Checked = true;
-                                billboardDisplayTB.Text = billboardDisplayTB.Text + "," + gvr.Cells[1].Text;
+                                billboardDisplayTB.Text = billboardDisplayTB.Text + "," + gvr.Cells[2].Text;
                                
                             }
                         }
@@ -501,7 +501,8 @@ namespace targeted_marketing_display
                     bool chkbx = ((CheckBox)row.FindControl("CheckBoxSelector")).Checked;
                     if (chkbx)
                     {
-                        sqlcommm.Parameters.AddWithValue("@BillboardID", GridView1.Rows[i].Cells[1].Text);
+                        Label bblabel = (Label)GridView1.Rows[i].FindControl("lb_BillboardID");
+                        sqlcommm.Parameters.AddWithValue("@BillboardID", Convert.ToInt32(bblabel.Text));
                         sqlcommm.Parameters.AddWithValue("@AdvID", Session["AdvertID"]);
                         sqlcommm.ExecuteNonQuery();
                         sqlcommm.Parameters.Clear();
@@ -651,7 +652,7 @@ namespace targeted_marketing_display
                     CheckBox cb = (CheckBox)(gvr.FindControl("CheckBoxSelector"));
                     if (cb.Checked == true)
                     {
-                        billboardDisplayTB.Text = billboardDisplayTB.Text + "," + gvr.Cells[1].Text;
+                        billboardDisplayTB.Text = billboardDisplayTB.Text + "," + gvr.Cells[2].Text;
 
                     }
                 }

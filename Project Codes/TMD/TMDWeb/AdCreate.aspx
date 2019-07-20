@@ -356,7 +356,7 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                  
-                                            <asp:BoundField DataField="BillboardID" HeaderText="BillboardID" SortExpression="BillboardID" ReadOnly="True" InsertVisible="False" visible="false"  />
+                                          
                                             <asp:BoundField DataField="BillboardCode" HeaderText="BillboardCode" SortExpression="BillboardCode" />
                                             <asp:BoundField DataField="Latitude" HeaderText="Latitude" SortExpression="Latitude" />
                                             <asp:BoundField DataField="Longtitude" HeaderText="Longtitude" SortExpression="Longtitude" />
@@ -367,7 +367,7 @@
                                         <EmptyDataRowStyle HorizontalAlign="Center" />
                                         <FooterStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Center" />
                                         <HeaderStyle BackColor="#848c8E" Font-Bold="True" ForeColor="#f1f2ee" HorizontalAlign="Center" />
-                                        <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Center" />
+                                        <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="left" />
                                         <RowStyle ForeColor="#435058" Height="20px" Width="30px" HorizontalAlign="Center" />
                                         <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
                                         <SortedAscendingCellStyle BackColor="#F1F1F1" HorizontalAlign="Center" />
