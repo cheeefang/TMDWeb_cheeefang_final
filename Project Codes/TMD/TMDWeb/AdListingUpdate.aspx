@@ -361,7 +361,8 @@
 
                                     <!-- Billboard Gridview-->
 
-                                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered table-hover" DataKeyNames="BillboardID" DataSourceID="SqlDataSource2" AllowPaging="True" Width="100%" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3">
+                                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered table-hover" DataKeyNames="BillboardID" DataSourceID="SqlDataSource2" AllowPaging="True" Width="100%" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3">
+                                         <AlternatingRowStyle BackColor="#CCCCCC" />
                                         <Columns>                                         
                                            <asp:TemplateField>
                                                <HeaderTemplate>
@@ -387,16 +388,21 @@
                                         </Columns>
                                         <EditRowStyle HorizontalAlign="Center" CssClass="GridViewEditRow" />
                                         <EmptyDataRowStyle HorizontalAlign="Center" />
-                                        <FooterStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Center" />
-                                        <HeaderStyle BackColor="#848c8E" Font-Bold="True" ForeColor="#f1f2ee" HorizontalAlign="Center" />
-                                        <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="left" />
-                                        <RowStyle ForeColor="#435058" Height="20px" Width="30px" HorizontalAlign="Center" />
-                                        <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" />
-                                        <SortedAscendingCellStyle BackColor="#F1F1F1" HorizontalAlign="Center" />
-                                        <SortedAscendingHeaderStyle BackColor="#007DBB" HorizontalAlign="Center" />
-                                        <SortedDescendingCellStyle BackColor="#CAC9C9" HorizontalAlign="Center" />
-                                        <SortedDescendingHeaderStyle BackColor="#00547E" HorizontalAlign="Center" />
-                                    </asp:GridView>
+                                        <FooterStyle BackColor="#CCCCCC" />
+                                        <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                                         <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="left" />
+                               <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+
+                               <SortedAscendingCellStyle BackColor="#F1F1F1" />
+
+                               <SortedAscendingHeaderStyle BackColor="#808080" />
+
+                               <SortedDescendingCellStyle BackColor="#CAC9C9" />
+
+                               <SortedDescendingHeaderStyle BackColor="#383838" />
+
+                           </asp:GridView>
+
                                
                                       
                                     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" 

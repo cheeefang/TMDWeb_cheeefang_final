@@ -82,7 +82,7 @@ namespace targeted_marketing_display
               
                 Obj = cDao.getCompanyByID(lb_msgId.Text);
 
-                //SqlCommand cmdCount = new SqlCommand("select count(*) from Advertisement as a inner join Company as c on a.companyID=c.CompanyID where c.CompanyID=@ID", conn);
+                SqlCommand cmdCount = new SqlCommand("select count(*) from Advertisement as a inner join Company as c on a.companyID=c.CompanyID where c.CompanyID=@ID", conn);
                 string CompanyName = Obj.Name;
 
                 Boolean insCnt = cDao.deleteCompany(lb_msgId.Text);
