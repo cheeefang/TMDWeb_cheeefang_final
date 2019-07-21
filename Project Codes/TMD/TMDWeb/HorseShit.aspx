@@ -7,7 +7,7 @@
     <title>Google Places Autocomplete textbox using google maps api</title>
 </head>
 <body>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+    <script src=https://maps.googleapis.com/maps/api/js?key=AIzaSyCaVFLG7U_cenIbYpch-k7dNar6I1g3cbo&callback=initMap"></script>
     <script type="text/javascript">
         google.maps.event.addDomListener(window, 'load', intilize);
         function intilize() {
