@@ -1810,6 +1810,7 @@
     <Content Include="font-awesome\scss\_spinning.scss" />
     <Content Include="font-awesome\scss\_stacked.scss" />
     <Content Include="font-awesome\scss\_variables.scss" />
+    <Content Include="HorseShit.aspx" />
     <Content Include="Images\1.jpg" />
     <Content Include="Images\2.jpg" />
     <Content Include="Images\250px-Bewear_anime.png" />
@@ -2154,6 +2155,13 @@
     </Compile>
     <Compile Include="FeedBackBillboard.aspx.designer.cs">
       <DependentUpon>FeedBackBillboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HorseShit.aspx.cs">
+      <DependentUpon>HorseShit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HorseShit.aspx.designer.cs">
+      <DependentUpon>HorseShit.aspx</DependentUpon>
     </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
