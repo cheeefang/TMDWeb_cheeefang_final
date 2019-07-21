@@ -6,11 +6,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using BBMgmt;
 using System.Text;
-using CoInfoMgmt;
-
+using targeted_marketing_display;
+using System.Threading.Tasks;
 using targeted_marketing_display.App_Code;
 using System.Configuration;
+using CoInfoMgmt;
+
 namespace targeted_marketing_display
    
 {
@@ -18,6 +21,7 @@ namespace targeted_marketing_display
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (Convert.ToInt32(Session["CoUpdate"]) == 2)
             {
                 updateSuccess.Visible = true;
@@ -65,7 +69,15 @@ namespace targeted_marketing_display
         {
             if (e.CommandName == "DeleteMessage")
             {
+                SqlConnection conn = null;
+                SqlDataReader reader = null;
 
+
+
+                // instantiate and open connection
+                conn = new
+                    SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                conn.Open();
                 int index = Convert.ToInt32(e.CommandArgument);
 
 
@@ -79,17 +91,41 @@ namespace targeted_marketing_display
                 Company_Management cDao = new Company_Management();
 
                 Label lb_msgId = (Label)gvRow1.FindControl("lb_CompanyID");
-              
+                
                 Obj = cDao.getCompanyByID(lb_msgId.Text);
 
-                SqlCommand cmdCount = new SqlCommand("select count(*) from Advertisement as a inner join Company as c on a.companyID=c.CompanyID where c.CompanyID=@ID", conn);
+                SqlCommand cmdCount = new SqlCommand("select count(*) as total from Advertisement as a inner join Company as c on a.companyID=c.CompanyID where c.CompanyID=@ID", conn);
                 string CompanyName = Obj.Name;
+                SqlParameter param1 = new SqlParameter();
+                param1.ParameterName = "@ID";
+                param1.Value = Obj.CompanyID.ToString();
+                cmdCount.Parameters.Add(param1);
+                SqlDataAdapter sda1 = new SqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmdCount.Connection = conn;
+                sda1.SelectCommand = cmdCount;
+                sda1.Fill(dt);
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    int count = (Convert.ToInt32(dt.Rows[i]["total"]));
+                    if (count ==0)
+                    {
+                        Boolean insCnt = cDao.deleteCompany(lb_msgId.Text);
+                        //VIC: never inform if the delete is successful or not?
+                        alertSuccess.Visible = true;
+                        DeleteError.Visible = false;
+                        msgSuccess.Text = CompanyName + " Has Been Deleted Successfully!";
+                    }
+                    else
+                    {
+                        DeleteError.Visible = true;
+                        alertSuccess.Visible = false;
+                        DeleteLabel.Text = "Please delete all " + count + " Adverts from " + CompanyName + " first.";
+                    }
+                }
+                
 
-                Boolean insCnt = cDao.deleteCompany(lb_msgId.Text);
-
-                //VIC: never inform if the delete is successful or not?
-                alertSuccess.Visible = true;
-                msgSuccess.Text = CompanyName + " Has Been Deleted Successfully!";
+               
 
                 Database db = new Database();
 

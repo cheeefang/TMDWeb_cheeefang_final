@@ -55,7 +55,13 @@
                         <a href="CoInfoCreate.aspx" class="btn btn-primary nextBtn pull-right" type="button"> <b>New Company </b></a>                  
                     </div>               
             </div>
-
+             <div runat="server" class="alert alert-danger" id="DeleteError" visible="False">
+                    <strong>Error! </strong> 
+                    <asp:Label runat="server" ID="DeleteLabel"></asp:Label>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             
                  <div runat="server" class="alert alert-success" id="createSuccess" visible="False">
                     <strong>Successfully Created Company!</strong> 
