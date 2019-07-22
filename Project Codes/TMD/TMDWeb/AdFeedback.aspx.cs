@@ -93,7 +93,7 @@ namespace targeted_marketing_display
         public void btnBbSearch_OnClick(Object sender, EventArgs e)
         {
             Database db = new Database();
-            SqlCommand command = new SqlCommand("Select LocationId,Concat(AddressLn1, ',' ,AddressLn2) As Address,Status From BillboardLocation Where BillboardLocation.LocationId Like '%' + @pBb + '%'");
+            SqlCommand command = new SqlCommand("Select BillboardID,Concat(AddressLn1, ',' ,AddressLn2) As Address,Status From BillboardLocation Where BillboardLocation.BillboardID Like '%' + @pBb + '%'");
             command.Parameters.AddWithValue("@pBB", txtBb.Text);
             DataTable bb = db.getDataTable(command);
             gvBb.DataSource = bb;
@@ -303,7 +303,7 @@ namespace targeted_marketing_display
                         if (rbNo.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select Sum(People) As Peoples From AdvertisementFeedback Where AdvId Like '%' + @pId + '%' Group By AdvId");
+                            SqlCommand command = new SqlCommand("Select Sum(NoOfPax) As totalPax From AdvertisementFeedback Where AdvId Like '%' + @pId + '%' Group By AdvId");
                             command.Parameters.AddWithValue("@pId", id.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
@@ -311,7 +311,7 @@ namespace targeted_marketing_display
                             while (dr.Read())
                             {
                                 string name = r.Cells[2].Text;
-                                int no = Convert.ToInt32(dr["Peoples"]);
+                                int no = Convert.ToInt32(dr["totalPax"]);
                                 chartAdv.Rows.Add(name, no);
 
                                 chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
@@ -337,7 +337,7 @@ namespace targeted_marketing_display
                         else if (rbTs.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select People,TimeStamp From AdvertisementFeedback Where AdvID Like '%' + @pId + '%'");
+                            SqlCommand command = new SqlCommand("Select NoOfPax,TimeStamp From AdvertisementFeedback Where AdvID Like '%' + @pId + '%'");
                             command.Parameters.AddWithValue("@pId", id.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
@@ -345,7 +345,7 @@ namespace targeted_marketing_display
                             while (dr.Read())
                             {
                                 string name = r.Cells[2].Text;
-                                int no = Convert.ToInt32(dr["People"]);
+                                int no = Convert.ToInt32(dr["NoOfPax"]);
                                 string timestamp = name + "\n\n" + dr["TimeStamp"].ToString();
                                 chartAdvTs.Rows.Add(name, no, timestamp);
 
@@ -372,7 +372,7 @@ namespace targeted_marketing_display
                         else if (rbAge.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select People,AgeGroup From AdvertisementFeedback Where AdvID Like '%' + @pId + '%'");
+                            SqlCommand command = new SqlCommand("Select NoOfPax,AgeGroup From AdvertisementFeedback Where AdvID Like '%' + @pId + '%'");
                             command.Parameters.AddWithValue("@pId", id.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
@@ -380,7 +380,7 @@ namespace targeted_marketing_display
                             while (dr.Read())
                             {
                                 string name = r.Cells[2].Text;
-                                int no = Convert.ToInt32(dr["People"]);
+                                int no = Convert.ToInt32(dr["NoOfPax"]);
                                 int ageGroup = Convert.ToInt32(dr["AgeGroup"]);
 
                                 if (ageGroup == 1)
@@ -485,7 +485,7 @@ namespace targeted_marketing_display
                         else if (rbGender.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select People,Gender From AdvertisementFeedback Where AdvID Like '%' + @pId + '%'");
+                            SqlCommand command = new SqlCommand("Select NoOfPax,Gender From AdvertisementFeedback Where AdvID Like '%' + @pId + '%'");
                             command.Parameters.AddWithValue("@pId", id.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
@@ -493,7 +493,7 @@ namespace targeted_marketing_display
                             while (dr.Read())
                             {
                                 string name = r.Cells[2].Text;
-                                int no = Convert.ToInt32(dr["People"]);
+                                int no = Convert.ToInt32(dr["NoOfPax"]);
                                 string gender = name + "\n\n" + dr["Gender"].ToString();
                                 chartAdvGender.Rows.Add(name, no, gender);
 
@@ -520,7 +520,7 @@ namespace targeted_marketing_display
                         else if (rbEmotion.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select People,Emotion From AdvertisementFeedback Where AdvID Like '%' + @pId + '%'");
+                            SqlCommand command = new SqlCommand("Select NoOfPax,Emotion From AdvertisementFeedback Where AdvID Like '%' + @pId + '%'");
                             command.Parameters.AddWithValue("@pId", id.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
@@ -528,7 +528,7 @@ namespace targeted_marketing_display
                             while (dr.Read())
                             {
                                 string name = r.Cells[2].Text;
-                                int no = Convert.ToInt32(dr["People"]);
+                                int no = Convert.ToInt32(dr["NoOfPax"]);
                                 int emotionRange = Convert.ToInt32(dr["Emotion"]);
 
                                 if (emotionRange == 1)
@@ -696,7 +696,7 @@ namespace targeted_marketing_display
                         if (rbNo.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select Sum(People) As Peoples From AdvertisementFeedback Where LocationId Like '%' + @pId + '%' Group By LocationId");
+                            SqlCommand command = new SqlCommand("Select Sum(NoOfPax) As NoOfPaxs From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' Group By BillboardID");
                             command.Parameters.AddWithValue("@pId", id.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
@@ -704,7 +704,7 @@ namespace targeted_marketing_display
                             while (dr.Read())
                             {
                                 string name = r.Cells[2].Text;
-                                int no = Convert.ToInt32(dr["Peoples"]);
+                                int no = Convert.ToInt32(dr["NoOfPaxs"]);
                                 chartBb.Rows.Add(name, no);
 
                                 chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
@@ -731,7 +731,7 @@ namespace targeted_marketing_display
                         else if (rbTs.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select People,TimeStamp From AdvertisementFeedback Where LocationId Like '%' + @pId + '%'");
+                            SqlCommand command = new SqlCommand("Select NoOfPax,TimeStamp From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%'");
                             command.Parameters.AddWithValue("@pId", id.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
@@ -739,7 +739,7 @@ namespace targeted_marketing_display
                             while (dr.Read())
                             {
                                 string name = r.Cells[2].Text;
-                                int no = Convert.ToInt32(dr["People"]);
+                                int no = Convert.ToInt32(dr["NoOfPax"]);
                                 string timestamp = name + "\n\n" + dr["TimeStamp"].ToString();
                                 chartBbTs.Rows.Add(name, no, timestamp);
 
@@ -767,7 +767,7 @@ namespace targeted_marketing_display
                         else if (rbAge.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select People,AgeGroup From AdvertisementFeedback Where LocationId Like '%' + @pId + '%'");
+                            SqlCommand command = new SqlCommand("Select NoOfPax,AgeGroup From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%'");
                             command.Parameters.AddWithValue("@pId", id.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
@@ -775,7 +775,7 @@ namespace targeted_marketing_display
                             while (dr.Read())
                             {
                                 string name = r.Cells[2].Text;
-                                int no = Convert.ToInt32(dr["People"]);
+                                int no = Convert.ToInt32(dr["NoOfPax"]);
                                 int ageGroup = Convert.ToInt32(dr["AgeGroup"]);
 
                                 if (ageGroup == 1)
@@ -880,7 +880,7 @@ namespace targeted_marketing_display
                         else if (rbGender.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select People,Gender From AdvertisementFeedback Where LocationId Like '%' + @pId + '%'");
+                            SqlCommand command = new SqlCommand("Select NoOfPax,Gender From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%'");
                             command.Parameters.AddWithValue("@pId", id.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
@@ -888,7 +888,7 @@ namespace targeted_marketing_display
                             while (dr.Read())
                             {
                                 string name = r.Cells[2].Text;
-                                int no = Convert.ToInt32(dr["People"]);
+                                int no = Convert.ToInt32(dr["NoOfPax"]);
                                 string gender = name + "\n\n" + dr["Gender"].ToString();
                                 chartBbGender.Rows.Add(name, no, gender);
 
@@ -915,7 +915,7 @@ namespace targeted_marketing_display
                         else if (rbEmotion.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select People,Emotion From AdvertisementFeedback Where LocationId Like '%' + @pId + '%'");
+                            SqlCommand command = new SqlCommand("Select NoOfPax,Emotion From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%'");
                             command.Parameters.AddWithValue("@pId", id.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
@@ -923,7 +923,7 @@ namespace targeted_marketing_display
                             while (dr.Read())
                             {
                                 string name = r.Cells[2].Text;
-                                int no = Convert.ToInt32(dr["People"]);
+                                int no = Convert.ToInt32(dr["NoOfPax"]);
                                 int emotionRange = Convert.ToInt32(dr["Emotion"]);
 
                                 if (emotionRange == 1)
@@ -1003,7 +1003,6 @@ namespace targeted_marketing_display
                                     string emotion = "Unhappy";
                                     string emo = name + "\n\n" + emotion;
                                     chartBbEmotion.Rows.Add(name, no, emo);
-
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
@@ -1084,14 +1083,14 @@ namespace targeted_marketing_display
                 if (rbNo.Checked == true)
                 {
                     con.Open();
-                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, LocationId, Name From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where AdvertisementFeedback.CompanyId Like '%' + @pComId + '%'");
+                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where Advertisement.CompanyId Like '%' + @pComId + '%'");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
                     DataTable gvComp = new DataTable();
                     gvComp.Columns.Add("ID", typeof(int));
-                    gvComp.Columns.Add("LocationID", typeof(int));
+                    gvComp.Columns.Add("BillboardID", typeof(int));
                     gvComp.Columns.Add("Name", typeof(string));
                     gvComp.Columns.Add("Age", typeof(int));
                     gvComp.Columns.Add("Gender", typeof(string));
@@ -1100,7 +1099,7 @@ namespace targeted_marketing_display
                     while (drGvCmd.Read())
                     {
                         int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
-                        int locationGv = Convert.ToInt32(drGvCmd["LocationId"]);
+                        int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
                         string name = drGvCmd["Name"].ToString();
                         int ageGv = 0;
                         string genderGv = "";
@@ -1117,7 +1116,7 @@ namespace targeted_marketing_display
                         int advId = Convert.ToInt32(row.Cells[0].Text);
 
                         con.Open();
-                        SqlCommand command = new SqlCommand("Select Sum(People) As Peoples From AdvertisementFeedback Where CompanyId Like '%' + @pComId + '%' And AdvId Like '%' + @pAdvId + '%' Group By AdvId");
+                        SqlCommand command = new SqlCommand("Select Sum(NoOfPax) As NoOfPaxs From AdvertisementFeedback Where CompanyId Like '%' + @pComId + '%' And AdvId Like '%' + @pAdvId + '%' Group By AdvId");
                         command.Parameters.AddWithValue("@pComId", companyId.ToString());
                         command.Parameters.AddWithValue("@pAdvId", advId.ToString());
                         command.Connection = con;
@@ -1128,7 +1127,7 @@ namespace targeted_marketing_display
                             int location = Convert.ToInt32(row.Cells[1].Text);
                             string name = row.Cells[2].Text;
                             string com = name + "\nBillboard:\n" + location.ToString();
-                            int no = Convert.ToInt32(dr["Peoples"]);
+                            int no = Convert.ToInt32(dr["NoOfPaxs"]);
                             chartCom.Rows.Add(com, no);
 
                             chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
@@ -1155,14 +1154,14 @@ namespace targeted_marketing_display
                 else if (rbTs.Checked == true)
                 {
                     con.Open();
-                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, LocationId, Name From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where AdvertisementFeedback.CompanyId Like '%' + @pComId + '%'");
+                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where AdvertisementFeedback.CompanyId Like '%' + @pComId + '%'");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
                     DataTable gvComp = new DataTable();
                     gvComp.Columns.Add("ID", typeof(int));
-                    gvComp.Columns.Add("LocationID", typeof(int));
+                    gvComp.Columns.Add("BillboardID", typeof(int));
                     gvComp.Columns.Add("Name", typeof(string));
                     gvComp.Columns.Add("Age", typeof(int));
                     gvComp.Columns.Add("Gender", typeof(string));
@@ -1171,7 +1170,7 @@ namespace targeted_marketing_display
                     while (drGvCmd.Read())
                     {
                         int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
-                        int locationGv = Convert.ToInt32(drGvCmd["LocationId"]);
+                        int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
                         string name = drGvCmd["Name"].ToString();
                         int ageGv = 0;
                         string genderGv = "";
@@ -1188,7 +1187,7 @@ namespace targeted_marketing_display
                         int advId = Convert.ToInt32(row.Cells[0].Text);
 
                         con.Open();
-                        SqlCommand command = new SqlCommand("Select People, TimeStamp From AdvertisementFeedback Where CompanyId Like '%' + @pComId + '%' And AdvId Like '%' + @pAdvId + '%'");
+                        SqlCommand command = new SqlCommand("Select NoOfPax, TimeStamp From AdvertisementFeedback Where CompanyId Like '%' + @pComId + '%' And AdvId Like '%' + @pAdvId + '%'");
                         command.Parameters.AddWithValue("@pComId", companyId.ToString());
                         command.Parameters.AddWithValue("@pAdvId", advId.ToString());
                         command.Connection = con;
@@ -1200,7 +1199,7 @@ namespace targeted_marketing_display
                             string name = row.Cells[2].Text;
                             string ts = dr["TimeStamp"].ToString();
                             string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + ts;
-                            int no = Convert.ToInt32(dr["People"]);
+                            int no = Convert.ToInt32(dr["NoOfPax"]);
                             chartComTs.Rows.Add(com, no);
 
                             chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
@@ -1227,14 +1226,14 @@ namespace targeted_marketing_display
                 else if (rbAge.Checked == true)
                 {
                     con.Open();
-                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, LocationId, Name, AgeGroup From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where AdvertisementFeedback.CompanyId Like '%' + @pComId + '%'");
+                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name, AgeGroup From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where AdvertisementFeedback.CompanyId Like '%' + @pComId + '%'");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
                     DataTable gvComp = new DataTable();
                     gvComp.Columns.Add("ID", typeof(int));
-                    gvComp.Columns.Add("LocationID", typeof(int));
+                    gvComp.Columns.Add("BillboardID", typeof(int));
                     gvComp.Columns.Add("Name", typeof(string));
                     gvComp.Columns.Add("Age", typeof(int));
                     gvComp.Columns.Add("Gender", typeof(string));
@@ -1243,7 +1242,7 @@ namespace targeted_marketing_display
                     while (drGvCmd.Read())
                     {
                         int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
-                        int locationGv = Convert.ToInt32(drGvCmd["LocationId"]);
+                        int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
                         string name = drGvCmd["Name"].ToString();
                         int ageGv = Convert.ToInt32(drGvCmd["AgeGroup"]);
                         string genderGv = "";
@@ -1261,7 +1260,7 @@ namespace targeted_marketing_display
                         int ageId = Convert.ToInt32(row.Cells[3].Text);
 
                         con.Open();
-                        SqlCommand command = new SqlCommand("Select People, AgeGroup From AdvertisementFeedback Where CompanyId Like '%' + @pComId + '%' And AdvId Like '%' + @pAdvId + '%' And AgeGroup Like '%' + @pAgeId + '%'");
+                        SqlCommand command = new SqlCommand("Select NoOfPax, AgeGroup From AdvertisementFeedback Where CompanyId Like '%' + @pComId + '%' And AdvId Like '%' + @pAdvId + '%' And AgeGroup Like '%' + @pAgeId + '%'");
                         command.Parameters.AddWithValue("@pComId", companyId.ToString());
                         command.Parameters.AddWithValue("@pAdvId", advId.ToString());
                         command.Parameters.AddWithValue("@pAgeId", ageId.ToString());
@@ -1276,7 +1275,7 @@ namespace targeted_marketing_display
                                 int location = Convert.ToInt32(row.Cells[1].Text);
                                 string name = row.Cells[2].Text;
                                 string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + age;
-                                int no = Convert.ToInt32(dr["People"]);
+                                int no = Convert.ToInt32(dr["NoOfPax"]);
                                 chartComAge.Rows.Add(com, no);
                             }
                             else if (Convert.ToInt32(dr["AgeGroup"]) == 2)
@@ -1285,7 +1284,7 @@ namespace targeted_marketing_display
                                 int location = Convert.ToInt32(row.Cells[1].Text);
                                 string name = row.Cells[2].Text;
                                 string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + age;
-                                int no = Convert.ToInt32(dr["People"]);
+                                int no = Convert.ToInt32(dr["NoOfPax"]);
                                 chartComAge.Rows.Add(com, no);
                             }
                             else if (Convert.ToInt32(dr["AgeGroup"]) == 3)
@@ -1294,7 +1293,7 @@ namespace targeted_marketing_display
                                 int location = Convert.ToInt32(row.Cells[1].Text);
                                 string name = row.Cells[2].Text;
                                 string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + age;
-                                int no = Convert.ToInt32(dr["People"]);
+                                int no = Convert.ToInt32(dr["NoOfPax"]);
                                 chartComAge.Rows.Add(com, no);
                             }
                             else if (Convert.ToInt32(dr["AgeGroup"]) == 4)
@@ -1303,7 +1302,7 @@ namespace targeted_marketing_display
                                 int location = Convert.ToInt32(row.Cells[1].Text);
                                 string name = row.Cells[2].Text;
                                 string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + age;
-                                int no = Convert.ToInt32(dr["People"]);
+                                int no = Convert.ToInt32(dr["NoOfPax"]);
                                 chartComAge.Rows.Add(com, no);
                             }
                             chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
@@ -1330,14 +1329,14 @@ namespace targeted_marketing_display
                 else if (rbGender.Checked == true)
                 {
                     con.Open();
-                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, LocationId, Name, Gender From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where AdvertisementFeedback.CompanyId Like '%' + @pComId + '%'");
+                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name, Gender From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where AdvertisementFeedback.CompanyId Like '%' + @pComId + '%'");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
                     DataTable gvComp = new DataTable();
                     gvComp.Columns.Add("ID", typeof(int));
-                    gvComp.Columns.Add("LocationID", typeof(int));
+                    gvComp.Columns.Add("BillboardID", typeof(int));
                     gvComp.Columns.Add("Name", typeof(string));
                     gvComp.Columns.Add("Age", typeof(int));
                     gvComp.Columns.Add("Gender", typeof(string));
@@ -1346,7 +1345,7 @@ namespace targeted_marketing_display
                     while (drGvCmd.Read())
                     {
                         int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
-                        int locationGv = Convert.ToInt32(drGvCmd["LocationId"]);
+                        int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
                         string name = drGvCmd["Name"].ToString();
                         int ageGv = 0;
                         string genderGv = drGvCmd["Gender"].ToString();
@@ -1364,7 +1363,7 @@ namespace targeted_marketing_display
                         string genderId = row.Cells[4].Text;
 
                         con.Open();
-                        SqlCommand command = new SqlCommand("Select People, Gender From AdvertisementFeedback Where CompanyId Like '%' + @pComId + '%' And AdvId Like '%' + @pAdvId + '%' And Gender Like '%' + @pGenderId + '%'");
+                        SqlCommand command = new SqlCommand("Select NoOfPax, Gender From AdvertisementFeedback Where CompanyId Like '%' + @pComId + '%' And AdvId Like '%' + @pAdvId + '%' And Gender Like '%' + @pGenderId + '%'");
                         command.Parameters.AddWithValue("@pComId", companyId.ToString());
                         command.Parameters.AddWithValue("@pAdvId", advId.ToString());
                         command.Parameters.AddWithValue("@pGenderId", genderId.ToString());
@@ -1377,7 +1376,7 @@ namespace targeted_marketing_display
                             string name = row.Cells[2].Text;
                             string gender = dr["Gender"].ToString();
                             string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + gender;
-                            int no = Convert.ToInt32(dr["People"]);
+                            int no = Convert.ToInt32(dr["NoOfPax"]);
                             chartComGender.Rows.Add(com, no);
 
                             chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
@@ -1404,14 +1403,14 @@ namespace targeted_marketing_display
                 else if (rbEmotion.Checked == true)
                 {
                     con.Open();
-                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, LocationId, Name, Emotion From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where AdvertisementFeedback.CompanyId Like '%' + @pComId + '%'");
+                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name, Emotion From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where AdvertisementFeedback.CompanyId Like '%' + @pComId + '%'");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
                     DataTable gvComp = new DataTable();
                     gvComp.Columns.Add("ID", typeof(int));
-                    gvComp.Columns.Add("LocationID", typeof(int));
+                    gvComp.Columns.Add("BillboardID", typeof(int));
                     gvComp.Columns.Add("Name", typeof(string));
                     gvComp.Columns.Add("Age", typeof(int));
                     gvComp.Columns.Add("Gender", typeof(string));
@@ -1420,7 +1419,7 @@ namespace targeted_marketing_display
                     while (drGvCmd.Read())
                     {
                         int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
-                        int locationGv = Convert.ToInt32(drGvCmd["LocationId"]);
+                        int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
                         string name = drGvCmd["Name"].ToString();
                         int ageGv = 0;
                         string genderGv = "";
@@ -1438,7 +1437,7 @@ namespace targeted_marketing_display
                         int emotionId = Convert.ToInt32(row.Cells[5].Text);
 
                         con.Open();
-                        SqlCommand command = new SqlCommand("Select People, Emotion From AdvertisementFeedback Where CompanyId Like '%' + @pComId + '%' And AdvId Like '%' + @pAdvId + '%' And Emotion Like '%' + @pEmotionId + '%'");
+                        SqlCommand command = new SqlCommand("Select NoOfPax, Emotion From AdvertisementFeedback Where CompanyId Like '%' + @pComId + '%' And AdvId Like '%' + @pAdvId + '%' And Emotion Like '%' + @pEmotionId + '%'");
                         command.Parameters.AddWithValue("@pComId", companyId.ToString());
                         command.Parameters.AddWithValue("@pAdvId", advId.ToString());
                         command.Parameters.AddWithValue("@pEmotionId", emotionId.ToString());
@@ -1453,7 +1452,7 @@ namespace targeted_marketing_display
                                 int location = Convert.ToInt32(row.Cells[1].Text);
                                 string name = row.Cells[2].Text;
                                 string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + emo;
-                                int no = Convert.ToInt32(dr["People"]);
+                                int no = Convert.ToInt32(dr["NoOfPax"]);
                                 chartComEmotion.Rows.Add(com, no);
                             }
                             else if (Convert.ToInt32(dr["Emotion"]) == 2)
@@ -1462,7 +1461,7 @@ namespace targeted_marketing_display
                                 int location = Convert.ToInt32(row.Cells[1].Text);
                                 string name = row.Cells[2].Text;
                                 string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + emo;
-                                int no = Convert.ToInt32(dr["People"]);
+                                int no = Convert.ToInt32(dr["NoOfPax"]);
                                 chartComEmotion.Rows.Add(com, no);
                             }
                             else if (Convert.ToInt32(dr["Emotion"]) == 3)
@@ -1471,7 +1470,7 @@ namespace targeted_marketing_display
                                 int location = Convert.ToInt32(row.Cells[1].Text);
                                 string name = row.Cells[2].Text;
                                 string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + emo;
-                                int no = Convert.ToInt32(dr["People"]);
+                                int no = Convert.ToInt32(dr["NoOfPax"]);
                                 chartComEmotion.Rows.Add(com, no);
                             }
                             else if (Convert.ToInt32(dr["Emotion"]) == 4)
@@ -1480,7 +1479,7 @@ namespace targeted_marketing_display
                                 int location = Convert.ToInt32(row.Cells[1].Text);
                                 string name = row.Cells[2].Text;
                                 string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + emo;
-                                int no = Convert.ToInt32(dr["People"]);
+                                int no = Convert.ToInt32(dr["NoOfPax"]);
                                 chartComEmotion.Rows.Add(com, no);
                             }
                             else if (Convert.ToInt32(dr["Emotion"]) == 5)
@@ -1489,7 +1488,7 @@ namespace targeted_marketing_display
                                 int location = Convert.ToInt32(row.Cells[1].Text);
                                 string name = row.Cells[2].Text;
                                 string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + emo;
-                                int no = Convert.ToInt32(dr["People"]);
+                                int no = Convert.ToInt32(dr["NoOfPax"]);
                                 chartComEmotion.Rows.Add(com, no);
                             }
                             chartFb.Series["Series1"].ChartType = SeriesChartType.Column;

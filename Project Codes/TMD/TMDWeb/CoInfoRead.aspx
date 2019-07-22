@@ -56,7 +56,7 @@
                     </div>               
             </div>
              <div runat="server" class="alert alert-danger" id="DeleteError" visible="False">
-                    <strong>Error! </strong> 
+                    
                     <asp:Label runat="server" ID="DeleteLabel"></asp:Label>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>

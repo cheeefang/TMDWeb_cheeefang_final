@@ -120,7 +120,7 @@ namespace targeted_marketing_display
                     {
                         DeleteError.Visible = true;
                         alertSuccess.Visible = false;
-                        DeleteLabel.Text = "Please delete all " + count + " Advertisement(s) from " + CompanyName + " first.";
+                        DeleteLabel.Text = "Hi, there is/are " + count + " Advertisement(s) under " + CompanyName + ".Please Delete existing advertisement(s) first before proceeding to delete the company.";
                     }
                 }
                 

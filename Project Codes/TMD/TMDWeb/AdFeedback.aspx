@@ -83,13 +83,13 @@
             <div class="col-lg-6">
                 <div class="form-group">
                      <asp:TextBox ID="txtFrom" runat="server" CssClass="form-control pickdate"></asp:TextBox>
-                     <asp:LinkButton ID="lBtnFrom" runat="server" CssClass="btn btn-default calendar pickdate"><span aria-hidden="true" class="glyphicon glyphicon-calendar"></span></asp:LinkButton>
+                     <asp:LinkButton ID="lBtnFrom" runat="server" CssClass="btn btn-default calendar pickdate"><span aria-hidden="false" class="glyphicon glyphicon-calendar"></span></asp:LinkButton>
                 </div>   
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
                     <asp:TextBox ID="txtTo" runat="server" CssClass="form-control pickdate"></asp:TextBox>
-                    <asp:LinkButton ID="lBtnTo" runat="server" CssClass="btn btn-default calendar pickdate"><span aria-hidden="true" class="glyphicon glyphicon-calendar"></span></asp:LinkButton>
+                    <asp:LinkButton ID="lBtnTo" runat="server" CssClass="btn btn-default calendar pickdate"><span aria-hidden="false" class="glyphicon glyphicon-calendar"></span></asp:LinkButton>
                 </div>
             </div>
             </div>
@@ -153,7 +153,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <asp:Panel runat="server" CssClass="panel">
-                    <asp:Chart ID="chartFb" class="chartFb" runat="server" Visible="false">
+                    <asp:Chart ID="chartFb" class="chartFb" runat="server" Visible="true">
                         <Series>
                             <asp:Series Name="Series1"></asp:Series>
                         </Series>
@@ -170,7 +170,7 @@
                 </div>
             </div>
             <div class="row">
-                <asp:GridView ID="gvCom" runat="server" Visible="false" Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover">
+                <asp:GridView ID="gvCom" runat="server" Visible="true" Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover">
                             <Columns>
                                 <asp:BoundField DataField="ID" HeaderText="Advertisement ID" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
                                         <ItemStyle HorizontalAlign="Center" Width="2%"></ItemStyle>
@@ -219,7 +219,7 @@
                         </div>
                                 &nbsp
                                 &nbsp
-                        <asp:GridView ID="gvAdv" runat="server" Visible="false" Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover" OnRowDataBound="gvAdv_RowDataBound">
+                        <asp:GridView ID="gvAdv" runat="server" Visible="true" Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover" OnRowDataBound="gvAdv_RowDataBound">
                             <Columns>
                                 <asp:TemplateField>
                                     <ItemTemplate>
@@ -277,7 +277,7 @@
                         </div>
                                 &nbsp
                                 &nbsp
-                        <asp:GridView ID="gvBb" runat="server" Visible="false" Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover" OnRowDataBound="gvBb_RowDataBound">
+                        <asp:GridView ID="gvBb" runat="server" Visible="true" Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover" OnRowDataBound="gvBb_RowDataBound">
                             <Columns>
                                 <asp:TemplateField>
                                     <ItemTemplate>
@@ -285,7 +285,7 @@
                                     </ItemTemplate>
                                     <ItemStyle Width="3%" />
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="LocationId" HeaderText="Billboard ID" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
+                                <asp:BoundField DataField="BillboardID" HeaderText="Billboard ID" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
                                         <ItemStyle HorizontalAlign="Left" Width="7%"></ItemStyle>
                                 </asp:BoundField>
                                 <asp:BoundField DataField="Address" HeaderText="Address" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="200px">
