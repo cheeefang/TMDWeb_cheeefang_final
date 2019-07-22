@@ -134,5 +134,10 @@ namespace targeted_marketing_display
         {
 
         }
+
+        protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+
+        }
     }
 }

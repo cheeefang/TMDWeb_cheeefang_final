@@ -31,6 +31,14 @@
             }
         }
 </script>
+<script language="javascript" type="text/javascript" >
+    $().ready(function () {
+        //alert("I am in the ready");
+        //alert($("img").length);
+        $("img").mouseover(function () { $(this).width(200); $(this).height(200) });
+        $("img").mouseleave(function () { $(this).width(50); $(this).height(50) });
+    })
+</script>
 
 
         
@@ -101,7 +109,7 @@
                             <%--                        <table class="table table-striped table-bordered table-hover" style="width: 100%">--%>
                             <asp:GridView ID="GridView1" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Width="100%" 
                                 BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px"
-                                CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" HorizontalAlign="Center" DataKeyNames="AdvID"  OnPreRender="GridView1_PreRender" ForeColor="Black" GridLines="Vertical">
+                                CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" HorizontalAlign="Center" DataKeyNames="AdvID"  OnPreRender="GridView1_PreRender" ForeColor="Black" GridLines="Vertical" OnRowDataBound="GridView1_RowDataBound">
                                 <AlternatingRowStyle HorizontalAlign="Center" BackColor="#CCCCCC" />
                                 <Columns>
                                     <asp:TemplateField visible="false">
@@ -122,7 +130,7 @@
 
 <ItemStyle CssClass="hiddencol"></ItemStyle>
                                     </asp:BoundField>
-                                    <asp:ImageField DataImageUrlField="Item" HeaderText="Advertisement" ControlStyle-Width="100" ControlStyle-Height = "100"> 
+                                    <asp:ImageField DataImageUrlField="Item"  HeaderText="Advertisement" ControlStyle-Width="100" ControlStyle-Height = "100"> 
         
 <ControlStyle Height="100px" Width="100px"></ControlStyle>
         

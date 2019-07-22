@@ -16,7 +16,13 @@
 
     <!--Google maps api-->
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
-
+    <!-- required stuff-->
+    <!-- required -->
+<script type="text/javascript" src="js/jquery.js"></script>
+<!-- optional -->
+<script type="text/javascript" src="js/jquery.shadow.js"></script>
+<script type="text/javascript" src="js/jquery.ifixpng.js"></script>
+<script type="text/javascript" src="js/jquery.fancyzoom.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/jquery.min.js"></script>
     <script src="js/sb-admin-2.js"></script>
