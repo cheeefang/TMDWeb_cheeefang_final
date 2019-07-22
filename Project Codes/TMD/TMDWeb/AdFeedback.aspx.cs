@@ -98,7 +98,7 @@ namespace targeted_marketing_display
             DataTable bb = db.getDataTable(command);
             gvBb.DataSource = bb;
             gvBb.DataBind();
-                
+                          
             gvBb.Visible = true;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showBbModal();", true);
         }
@@ -372,7 +372,7 @@ namespace targeted_marketing_display
                         else if (rbAge.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select NoOfPax,AgeGroup From AdvertisementFeedback Where AdvID Like '%' + @pId + '%'");
+                            SqlCommand command = new SqlCommand("Select NoOfPax,AgeID From AdvertisementFeedback Where AdvID Like '%' + @pId + '%'");
                             command.Parameters.AddWithValue("@pId", id.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
@@ -381,7 +381,7 @@ namespace targeted_marketing_display
                             {
                                 string name = r.Cells[2].Text;
                                 int no = Convert.ToInt32(dr["NoOfPax"]);
-                                int ageGroup = Convert.ToInt32(dr["AgeGroup"]);
+                                int ageGroup = Convert.ToInt32(dr["AgeID"]);
 
                                 if (ageGroup == 1)
                                 {
@@ -485,7 +485,7 @@ namespace targeted_marketing_display
                         else if (rbGender.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select NoOfPax,Gender From AdvertisementFeedback Where AdvID Like '%' + @pId + '%'");
+                            SqlCommand command = new SqlCommand("Select NoOfPax,GenderID From AdvertisementFeedback Where AdvID Like '%' + @pId + '%'");
                             command.Parameters.AddWithValue("@pId", id.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
@@ -494,7 +494,7 @@ namespace targeted_marketing_display
                             {
                                 string name = r.Cells[2].Text;
                                 int no = Convert.ToInt32(dr["NoOfPax"]);
-                                string gender = name + "\n\n" + dr["Gender"].ToString();
+                                string gender = name + "\n\n" + dr["GenderID"].ToString();
                                 chartAdvGender.Rows.Add(name, no, gender);
 
                                 chartFb.Series["Series1"].ChartType = SeriesChartType.Column;

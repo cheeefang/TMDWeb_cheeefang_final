@@ -114,7 +114,7 @@ namespace targeted_marketing_display
         {
             if (e.CommandName == "BillboardUpdateInfo")
             {
-               
+                int index = Convert.ToInt32(e.CommandArgument);
 
 
                 // Retrieve the row that contains the link button from the Rows collection.
@@ -122,7 +122,7 @@ namespace targeted_marketing_display
                 LinkButton lbButton1 = sender as LinkButton;
                 GridViewRow gvRow1 = (GridViewRow)lbButton1.NamingContainer;
 
-               
+                Label lb_BillboardID = (Label)gvRow1.FindControl("lb_BillboardID");
                 Session["BillboardID"] = lb_BillboardID.Text;
 
                 Response.Redirect("BBLocationUpdate.aspx");
@@ -189,7 +189,7 @@ namespace targeted_marketing_display
                     {
                         DeleteFailure.Visible = true;
                         alertSuccess.Visible = false;
-                        LabelError.Text = "There are " + count + "Advertisement(s) in Billboard " + BBCode + ".Please Delete existing advertisement(s) first before proceeding to delete the Billboard.";
+                        LabelError.Text = "There are " + count + " Advertisement(s) in Billboard " + BBCode + ".Please Delete existing advertisement(s) first before proceeding to delete the Billboard.";
                     }
                 }
 
