@@ -111,7 +111,22 @@
                   };
                   reader.readAsDataURL(input.files[0]);
               }
-          }
+     }
+
+     function ValidateModuleList(source, args)
+{
+  var chkListModules= document.getElementById ('<%= CheckBoxList2.ClientID %>');
+  var chkListinputs = chkListModules.getElementsByTagName("input");
+  for (var i=0;i<chkListinputs .length;i++)
+  {
+    if (chkListinputs [i].checked)
+    {
+      args.IsValid = true;
+      return;
+    }
+  }
+  args.IsValid = false;
+}
  </script>
 
 
@@ -229,6 +244,8 @@
                         <label>Name </label>
                         <label style="color: red">*</label>
                         <asp:TextBox Class="form-control" ID="adNameTB" runat="server" AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>
+                                     <asp:RequiredFieldValidator runat="server" id="RequiredFieldValidator3" controltovalidate="adNameTB" errormessage="Please Enter Advertisement Name" ForeColor="Red"/>
+    <br /><br />
                     </div>
                 </div>
             </div>
@@ -308,6 +325,8 @@
 
                             <ContentTemplate>
                             <asp:TextBox ID="billboardDisplayTB" class="form-control" runat="server"   placeholder="Search..." data-toggle="modal" data-target="#myModal2" AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>
+                                <asp:RequiredFieldValidator runat="server" id="reqName" controltovalidate="billboardDisplayTB" errormessage="Please select a Billboard" ForeColor="Red"/>
+    <br /><br />
                       </ContentTemplate>
                                              <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="BillboardSearch" EventName="Click" />
@@ -430,8 +449,11 @@
                                 <asp:ListItem Value="7">Female Adult(Age 31-65)</asp:ListItem>
                                 <asp:ListItem Value="8">Female Senior(Age 66+)</asp:ListItem>
                             </asp:CheckBoxList>
-                          
-                 
+                          <asp:CustomValidator runat="server" ID="cvmodulelist"
+  ClientValidationFunction="ValidateModuleList"
+  ErrorMessage="Please Select Atleast one Audience" ForeColor="Red" ></asp:CustomValidator>
+
+                            
 
 
                         </div>

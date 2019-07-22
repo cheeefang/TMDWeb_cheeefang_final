@@ -34,10 +34,7 @@ namespace targeted_marketing_display
 
 
             }
-            var rowIndex = 1;
-            var hiddenvalue = (string)GridView1.DataKeys[rowIndex]["Company"];
-            company_name_label.Text = " for " + hiddenvalue.ToString();
-
+            
         }
 
 
@@ -45,11 +42,12 @@ namespace targeted_marketing_display
 
         public void BindGrid()
         {
+            try
+            {
 
-
-            // conn and reader declared outside try
-            // block for visibility in finally block
-            SqlConnection conn = null;
+                // conn and reader declared outside try
+                // block for visibility in finally block
+                SqlConnection conn = null;
             SqlDataReader reader = null;
 
 
@@ -90,7 +88,7 @@ namespace targeted_marketing_display
             GridView1.DataBind();
             if (GridView1.Rows.Count == 0)
             {
-                ErrorMessage.Visible = true;
+               
             }
             SqlCommand cmdCount = new SqlCommand("select count(*) from Advertisement where companyID=@CompanyID and status=1", conn);
             SqlParameter paramCount = new SqlParameter();
@@ -113,7 +111,18 @@ namespace targeted_marketing_display
             for (int x = 0; x < dtIndustry.Rows.Count; x++)
             {
                 string IndustryCheck = (dtIndustry.Rows[x]["Industry"]).ToString();
+               
                 industrytext.Text = IndustryCheck;
+            }
+            
+
+
+               
+            }
+            catch (System.ArgumentOutOfRangeException ArgumentOutOfRangeException)
+            {
+                //ErrorHandler.Text = "This Company does not have any Advertisements";
+                labelIndustry.Visible = false;
             }
 
         }
@@ -122,6 +131,34 @@ namespace targeted_marketing_display
         protected void GridView1_PreRender(object sender, EventArgs e)
         {
             LabelPaging.Text = "Displaying Page " + (GridView1.PageIndex + 1).ToString() + " of " + GridView1.PageCount.ToString();
+            //SqlConnection conn123 = null;
+            //SqlDataReader reader123 = null;
+
+
+
+            //// instantiate and open connection
+            //conn123 = new
+            //    SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+            //conn123.Open();
+            
+
+            //SqlCommand cmdIndustry123 = new SqlCommand("select c.Industry from Advertisement a inner join Company c on a.companyID=c.CompanyID where a.companyID=@ID and a.status=1", conn123);
+            //SqlParameter paramIndustry123 = new SqlParameter();
+            //paramIndustry123.ParameterName = "@ID";
+            //paramIndustry123.Value = Session["CompanyID"].ToString();
+            //cmdIndustry123.Parameters.Add(paramIndustry123);
+            //SqlDataAdapter sdaIndustry123 = new SqlDataAdapter();
+            //DataTable dtIndustry123 = new DataTable();
+            //cmdIndustry123.Connection = conn123;
+            //sdaIndustry123.SelectCommand = cmdIndustry123;
+            //sdaIndustry123.Fill(dtIndustry123);
+            //for (int x = 0; x < dtIndustry123.Rows.Count; x++)
+            //{
+            //    string IndustryCheck = (dtIndustry123.Rows[x]["Industry"]).ToString();
+
+            //    industrytext.Text = IndustryCheck;
+            //}
+
         }
 
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)

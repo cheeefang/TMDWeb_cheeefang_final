@@ -15,7 +15,7 @@
                          <asp:label runat="server" id="labelIndustry" Font-Bold="true" text="Industry:" /><asp:literal runat="server" id="industrytext"></asp:literal>
                         </br>
                         <asp:label runat="server" id="rowCountLabel"  Font-Bold="true" text="Total:" /><asp:literal runat="server" id="counttext"></asp:literal>
-                       
+                        <asp:label runat="server" id="ErrorHandler" visible="false"></asp:label>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -96,7 +96,7 @@
        
             
 
-          <asp:Label ID="ErrorMessage" runat="server" visible="false" Text="This Company has yet to create an Advertisement."></asp:Label>
+         
  
         
        

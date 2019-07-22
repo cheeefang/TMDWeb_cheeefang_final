@@ -188,7 +188,7 @@
                             <asp:Label ID="Label1" style="color:darkslateblue" runat="server" Text="Label"></asp:Label>
                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="select [Company].CompanyID,[CodeReferece].CodeValue,[Company].Name,[CodeReferece].CodeDesc from [Company] 
 inner join [CodeReferece] on [Company].Industry=[CodeReferece].CodeValue
-where [Company].Status=1" FilterExpression="Name LIKE '%{0}%' OR CodeDesc LIKE '%{0}%'">
+where [Company].Status=1 and [CodeReferece].CodeType='Industry'" FilterExpression="Name LIKE '%{0}%' OR CodeDesc LIKE '%{0}%'">
                                 <FilterParameters>
                                             <asp:ControlParameter ControlID="tbSearch" Name="Name" PropertyName="Text" />
                                             <asp:ControlParameter ControlID="tbSearch" Name="CodeValue" PropertyName="Text" />                                            

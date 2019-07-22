@@ -23,7 +23,7 @@ namespace targeted_marketing_display
                 CompanyObj=CDao.getCompanyByID(Session["CompanyID"].ToString());
 
                 CoName.Text = CompanyObj.Name;
-                CoIndustry.Text = CompanyObj.Industry;
+                CoIndustry.SelectedValue = CompanyObj.Industry;
 
             }
         }

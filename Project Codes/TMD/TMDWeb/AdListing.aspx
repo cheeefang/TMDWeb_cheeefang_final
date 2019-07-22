@@ -31,14 +31,7 @@
             }
         }
 </script>
-<script language="javascript" type="text/javascript" >
-    $().ready(function () {
-        //alert("I am in the ready");
-        //alert($("img").length);
-        $("img").mouseover(function () { $(this).width(200); $(this).height(200) });
-        $("img").mouseleave(function () { $(this).width(50); $(this).height(50) });
-    })
-</script>
+
 
 
         
@@ -133,6 +126,7 @@
                                     <asp:ImageField DataImageUrlField="Item"  HeaderText="Advertisement" ControlStyle-Width="100" ControlStyle-Height = "100"> 
         
 <ControlStyle Height="100px" Width="100px"></ControlStyle>
+
         
                                     </asp:ImageField>
                                     <asp:BoundField DataField="Name" HeaderText="Company Name" SortExpression="Name"></asp:BoundField>

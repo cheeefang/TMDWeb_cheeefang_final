@@ -30,11 +30,19 @@ namespace targeted_marketing_display
             //  lblBillboardCodelol = (Label)GridView1.FindControl("lb_BillboardCode");
 
             // BillboardCodelabel.Text= lblBillboardCodelol.Text;
-            var rowIndex = 0;
-            var hiddenvalue = (string)GridView1.DataKeys[rowIndex]["BillboardCode"];
-            BillboardCodelabel.Text = " for "+hiddenvalue.ToString();
+            try
+            {
 
 
+                var rowIndex = 0;
+                var hiddenvalue = (string)GridView1.DataKeys[rowIndex]["BillboardCode"];
+                BillboardCodelabel.Text = " for " + hiddenvalue.ToString();
+
+            }
+            catch (System.ArgumentOutOfRangeException ArgumentOutOfRangeException)
+            {
+                
+            }
 
 
         }

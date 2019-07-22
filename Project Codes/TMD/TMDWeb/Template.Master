@@ -142,8 +142,23 @@
                                                 
 
                         
+                        <li>
+                            <a href="AdFeedback.aspx">><i class="fa fa-sitemap fa-fw"></i></a> 
+                        </li>
                         
-                        
+                                <li>
+                                    <a href="FeedbackAd.aspx"><i class="fa fa-sitemap fa-fw"></i></a>
+                                </li>
+
+                                
+                                <li>
+                                    <a href="FeedbackAnalyticsIndiv.aspx"><i class="fa fa-sitemap fa-fw"></i></a>
+                                </li>
+
+                                
+                                <li>
+                                    <a href="FeedBackBillboard.aspx"><i class="fa fa-sitemap fa-fw"></i></a>
+                                </li>
 
                         <li>
 
@@ -168,6 +183,7 @@
                                 </li>
 
                             </ul>
+
                             <!-- /.nav-first-level -->
 
                         </li>
