@@ -26,7 +26,20 @@ namespace targeted_marketing_display
             Advertisement_Management adObjectClass = new Advertisement_Management();
             adObject = adObjectClass.getAdvByID(Session["AdvertID"].ToString());
             string previousimagepath = adObject.Item.ToString();
-            imgLogo.ImageUrl = ResolveUrl(previousimagepath) ;   
+            if (adObject.ItemType == "image")
+            {
+                imgLogo.Visible = true;
+                videoThumbnail.Visible = false;
+                imgLogo.ImageUrl = ResolveUrl(previousimagepath);
+            }
+            if (adObject.ItemType == "video")
+            {
+                videoThumbnail.Visible = true;
+                imgLogo.Visible = false;
+                videoThumbnail.Src = ResolveUrl(previousimagepath);
+            }
+            
+              
             SqlConnection conn = null;
             SqlDataReader reader = null;
             conn = new

@@ -113,6 +113,17 @@
               }
      }
 
+     function VideoPreview(input) {
+         if (input.files && input.files[0]) {
+             var reader = new FileReader();
+             reader.onload = function (e) {
+                 $('#<%=videoThumbnail.ClientID%>').prop('src', e.target.result)
+                          .width(200)
+                          .height(200);
+                  };
+                  reader.readAsDataURL(input.files[0]);
+              }
+     }
 
  </script>
 
@@ -161,7 +172,9 @@
                    
                     
                     <asp:image id="imgLogo" runat="server" ImageUrl="Images/NoImageAvailable.png" Width="200" Height="200"></asp:image>
-                       
+                       <video id="videoThumbnail" width="200" height="200" runat="server" visible="true" controls>  
+                                            <source id="vidSource" runat="server" src="" type="video/mp4">  
+                                        </video>  
                 </div>
             </div>
         </div>
