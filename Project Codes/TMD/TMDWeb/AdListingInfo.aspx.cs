@@ -53,7 +53,19 @@ namespace targeted_marketing_display
                 Advertisement_Management aDao = new Advertisement_Management();
                 AdvertObj = aDao.getAdvByID(Session["AdvertID"].ToString());
                 string previousimagepath = AdvertObj.Item.ToString();
-                imgLogo.ImageUrl = ResolveUrl(previousimagepath);
+                if (AdvertObj.ItemType == "image")
+                {
+                    imgLogo.ImageUrl = ResolveUrl(previousimagepath);
+                    imgLogo.Visible = true;
+                    videoThumbnail.Visible = false;
+                }
+                if (AdvertObj.ItemType == "video")
+                {
+                    videoThumbnail.Src = ResolveUrl(previousimagepath);
+                    videoThumbnail.Visible = true;
+                    imgLogo.Visible = false;
+                }
+              
                
                 AdNameLabel.Text = "for " + AdvertObj.Name.ToString();
                 AdNameLiteral.Text = AdvertObj.Name.ToString();
