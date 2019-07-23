@@ -186,9 +186,12 @@ function HideDiv() {
 
 
 
-                                    <%-- <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" ReadOnly="True">
-                                    </asp:BoundField>--%>
-
+                                 
+                                     <asp:TemplateField visible="false">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" visible="false"  ID="AdvertItem" Text='<%# Bind("Item") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
 
 
                                     <asp:BoundField DataField="AdvID" HeaderText="AdvID" SortExpression="AdvID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" InsertVisible="False" ReadOnly="True">
@@ -199,17 +202,19 @@ function HideDiv() {
                                     <asp:TemplateField HeaderText="Advertisement">
                                        
                                         <ItemTemplate>
-                                           
-                                           <asp:ImageButton ID="Image1" runat="server" ImageUrl='<%# Eval("Item") %>' OnClientClick="return LoadDiv(this.src);" />
-                                        </ItemTemplate>
-                                        <controlstyle height="130px" width="130px" />
-                                          <ItemTemplate>  
-                                        <video width="200" height="200" controls>  
-                                            <source src='<%#Eval("Item")%>' type="video/mp4">  
+                                          
+                                        
+                                      <asp:ImageButton ID="Image1" runat="server" ImageUrl='<%# Eval("Item") %>' OnClientClick="return LoadDiv(this.src);" Visible='<%# Eval("ItemType").ToString() =="image" %>'  />
+                                      
+                                        <video width="150" height="150" runat="server" controls visible='<%# Eval("ItemType").ToString()!="image" %>'>  
+                                            <source runat="server" src='<%#Eval("Item")%>' type="video/mp4" visible='<%# Eval("ItemType").ToString()!="image" %>' >  
                                         </video>  
-                                    </ItemTemplate>  
-
-                                    </asp:TemplateField>
+                                           
+                                              
+                                            </ItemTemplate>
+                                        <controlstyle height="150px" width="150px"  />
+                                        </asp:TemplateField>
+                             
 
                                              
 

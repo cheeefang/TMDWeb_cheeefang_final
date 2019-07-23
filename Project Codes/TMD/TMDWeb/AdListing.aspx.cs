@@ -30,6 +30,18 @@ namespace targeted_marketing_display
                 alertSuccessCreate.Visible = true;
                 Session.Remove("AdvertCreate");
             }
+            // Label lb_msgId = (Label)gvRow1.FindControl("AdvertItem");.jpeg
+            //for (int i = 0; i < GridView1.Rows.Count; i++)
+            //{
+            //    Label lb_AdvertType = (Label)GridView1.Rows[i].FindControl("AdvertItem");
+            //    if (lb_AdvertType.Text.EndsWith(".png") || lb_AdvertType.Text.EndsWith(".jpg") || lb_AdvertType.Text.EndsWith(".jpeg")||
+            //         lb_AdvertType.Text.EndsWith(".PNG") || lb_AdvertType.Text.EndsWith(".JPG") || lb_AdvertType.Text.EndsWith(".JPEG") 
+            //         || lb_AdvertType.Text.EndsWith(".GIF"))
+            //    {
+                    
+
+            //    }
+            //}
         }
 
         protected void infoBtn_Command(object sender, CommandEventArgs e)
@@ -128,6 +140,18 @@ namespace targeted_marketing_display
         protected void GridView1_PreRender(object sender, EventArgs e)
         {
             Label1.Text = "Displaying Page " + (GridView1.PageIndex + 1).ToString() + " of " + GridView1.PageCount.ToString();
+            // Label lb_msgId = (Label)gvRow1.FindControl("AdvertItem");.jpeg
+            //for (int i = 0; i < GridView1.Rows.Count; i++)
+            //{
+            //    Label lb_AdvertType = (Label)GridView1.Rows[i].FindControl("AdvertItem");
+            //    if (lb_AdvertType.Text.EndsWith(".png") || lb_AdvertType.Text.EndsWith(".jpg") || lb_AdvertType.Text.EndsWith(".jpeg")||
+            //         lb_AdvertType.Text.EndsWith(".PNG") || lb_AdvertType.Text.EndsWith(".JPG") || lb_AdvertType.Text.EndsWith(".JPEG") 
+            //         || lb_AdvertType.Text.EndsWith(".GIF"))
+            //    {
+
+
+            //    }
+            //}
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
