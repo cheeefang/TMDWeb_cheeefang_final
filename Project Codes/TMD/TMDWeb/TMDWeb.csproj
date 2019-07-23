@@ -1769,6 +1769,7 @@
     <Content Include="css\gridview.css" />
     <Content Include="css\newgridview.css" />
     <Content Include="css\TMD.css" />
+    <Content Include="DiuLeiLoMo.aspx" />
     <Content Include="FAQ.aspx" />
     <Content Include="FeedbackAd.aspx" />
     <Content Include="FeedbackAnalyticsIndiv.aspx" />
@@ -2135,6 +2136,13 @@
     </Compile>
     <Compile Include="CreateNewUser.aspx.designer.cs">
       <DependentUpon>CreateNewUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DiuLeiLoMo.aspx.cs">
+      <DependentUpon>DiuLeiLoMo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DiuLeiLoMo.aspx.designer.cs">
+      <DependentUpon>DiuLeiLoMo.aspx</DependentUpon>
     </Compile>
     <Compile Include="FAQ.aspx.cs">
       <DependentUpon>FAQ.aspx</DependentUpon>

@@ -15,6 +15,40 @@
     display: none;
   }
     </style>
+<style type="text/css">
+body
+{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.modal
+{
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: black;
+    z-index: 100;
+    opacity: 0.8;
+    filter: alpha(opacity=60);
+    -moz-opacity: 0.8;
+    min-height: 100%;
+}
+#divImage
+{
+    display: none;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: White;
+    height: 550px;
+    width: 600px;
+    padding: 3px;
+    border: solid 1px black;
+}
+</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       <form runat="server">
@@ -31,7 +65,46 @@
             }
         }
 </script>
-
+<script type="text/javascript">
+    function LoadDiv(url) {
+    var img = new Image();
+    var bcgDiv = document.getElementById("divBackground");
+    var imgDiv = document.getElementById("divImage");
+    var imgFull = document.getElementById("imgFull");
+    var imgLoader = document.getElementById("imgLoader");
+    imgLoader.style.display = "block";
+    img.onload = function () {
+        imgFull.src = img.src;
+        imgFull.style.display = "block";
+        imgLoader.style.display = "none";
+   };
+    img.src = url;
+    var width = document.body.clientWidth;
+    if (document.body.clientHeight > document.body.scrollHeight) {
+        bcgDiv.style.height = document.body.clientHeight + "px";
+    }
+    else {
+        bcgDiv.style.height = document.body.scrollHeight + "px";
+    }
+    imgDiv.style.left = (width - 650) / 2 + "px";
+    imgDiv.style.top = "20px";
+    bcgDiv.style.width = "100%";
+ 
+    bcgDiv.style.display = "block";
+    imgDiv.style.display = "block";
+    return false;
+}
+function HideDiv() {
+    var bcgDiv = document.getElementById("divBackground");
+    var imgDiv = document.getElementById("divImage");
+    var imgFull = document.getElementById("imgFull");
+    if (bcgDiv != null) {
+        bcgDiv.style.display = "none";
+        imgDiv.style.display = "none";
+        imgFull.style.display = "none";
+    }
+}
+</script>
 
 
         
@@ -124,14 +197,22 @@
 <ItemStyle CssClass="hiddencol"></ItemStyle>
                                     </asp:BoundField>
                                     <asp:TemplateField HeaderText="Advertisement">
-                                        <EditItemTemplate>
-                                            <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("Item") %>'></asp:TextBox>
-                                        </EditItemTemplate>
+                                       
                                         <ItemTemplate>
-                                            <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("Item") %>' />
+                                           
+                                           <asp:ImageButton ID="Image1" runat="server" ImageUrl='<%# Eval("Item") %>' OnClientClick="return LoadDiv(this.src);" />
                                         </ItemTemplate>
-                                        <controlstyle height="100px" width="100px" />
+                                        <controlstyle height="130px" width="130px" />
+                                          <ItemTemplate>  
+                                        <video width="200" height="200" controls>  
+                                            <source src='<%#Eval("Item")%>' type="video/mp4">  
+                                        </video>  
+                                    </ItemTemplate>  
+
                                     </asp:TemplateField>
+
+                                             
+
                                     <asp:BoundField DataField="Name" HeaderText="Company Name" SortExpression="Name"></asp:BoundField>
                                     
                                      <asp:BoundField DataField="Name1" HeaderText="Advert Name" SortExpression="Name1"></asp:BoundField>
@@ -217,7 +298,21 @@
                                 <SortedDescendingHeaderStyle BackColor="#383838" HorizontalAlign="Center" />
                             </asp:GridView>
                             <asp:Label ID="Label1" style="color:darkslateblue" runat="server" Text="Label"></asp:Label>
-                            <%--                            </table>--%>
+
+                           <div id="divBackground" class="modal">
+</div>
+<div id="divImage">
+    <button type="button" class="close" onclick="HideDiv()">×</button>
+<table style="height: 100%; width: 100%">
+    <tr>
+        <td valign="middle" align="center">
+            <img id="imgLoader" alt="" src="images/loader.gif" />
+            <img id="imgFull" alt="" src="" style="display: none; height: 500px; width: 500px" />
+        </td>
+    </tr>
+    
+</table>
+</div>
                         </div>
                         <!-- /.table-responsive -->
                     </div>
@@ -226,7 +321,7 @@
      
 
 
-
+          
 
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [Advertisement].AdvID,[Company].Name, [Advertisement].Name, [Advertisement].Item, [Advertisement].ItemType,[StartDate], [EndDate]FROM [Advertisement] inner join [Company] on Company.CompanyID=[Advertisement].CompanyID where [Advertisement].status=1 and [Company].status=1" FilterExpression="Name LIKE '%{0}%' OR Item LIKE '%{0}%' OR Name1  LIKE '%{0}%' OR ItemType LIKE '%{0}%' OR convert(StartDate,'System.String') LIKE '%{0}%' OR convert(EndDate,'System.String') LIKE '%{0}%' ">

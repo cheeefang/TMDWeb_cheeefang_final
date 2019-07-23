@@ -52,7 +52,7 @@
   <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label  runat="server"><b>Advertisement Image </b></asp:label>
+                    <asp:label  runat="server"><b>Advertisement</b></asp:label>
                     <br />
                    
                     
