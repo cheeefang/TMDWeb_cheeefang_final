@@ -121,8 +121,8 @@
              reader.readAsDataURL(input.files[0]);
                              
              }
-             document.getElementById("videoDog").style.visibility = "visible";
-             document.getElementById("imgLogo").style.visibility = "hidden";
+             document.getElementById("videoDog").style.display = "block";
+             document.getElementById("imgLogo").style.display = "none";
          }
          else {
 
@@ -138,8 +138,8 @@
                 
          }
 
-             document.getElementById("videoDog").style.visibility = "hidden";
-             document.getElementById("imgLogo").style.visibility = "visible";
+             document.getElementById("videoDog").style.display = "none";
+             document.getElementById("imgLogo").style.display = "block";
           
              
          }
@@ -159,7 +159,7 @@
     display: none;
   }
       #videoDog{
-          visibility:hidden;
+          display:none;
       }
     </style>
 </asp:Content>
