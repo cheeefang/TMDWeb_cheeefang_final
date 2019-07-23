@@ -102,26 +102,32 @@
 
 
      function ImagePreview(input) {
+        
          if (input.files && input.files[0]) {
+             
              var reader = new FileReader();
              reader.onload = function (e) {
                  $('#<%=imgLogo.ClientID%>').prop('src', e.target.result)
                           .width(200)
                           .height(200);
                   };
-                  reader.readAsDataURL(input.files[0]);
+             reader.readAsDataURL(input.files[0]);
+          
               }
      }
 
      function VideoPreview(input) {
+        
          if (input.files && input.files[0]) {
+             
              var reader = new FileReader();
              reader.onload = function (e) {
                  $('#<%=videoThumbnail.ClientID%>').prop('src', e.target.result)
                           .width(200)
                           .height(200);
                   };
-                  reader.readAsDataURL(input.files[0]);
+             reader.readAsDataURL(input.files[0]);
+             
               }
      }
 
@@ -195,7 +201,7 @@
                               
                     
 
-                        <asp:FileUpload ID="FileUpload1" runat="server" onchange="ImagePreview(this);" />
+                        <asp:FileUpload ID="FileUpload1" runat="server" onchange="ImagePreview(this);VideoPreview(this);" />
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ValidationExpression='(.*?)\.(jpg|jpeg|png|gif|avi|flv|wmv|mp4|mov|JPG|JPEG|PNG|GIF|AVI|FLV|WMV|MOV|MP4)$'
                             ControlToValidate="FileUpload1" runat="server" ForeColor="Red" ErrorMessage="Please select valid image/video file."
                             Display="Dynamic" />
