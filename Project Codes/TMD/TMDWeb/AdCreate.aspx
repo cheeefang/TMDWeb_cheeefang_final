@@ -108,7 +108,7 @@
          if (!validImageTypes.includes(fileType)) {
               
              // invalid file type code goes here.
-             alert("victoria")
+    
              
              if (input.files && input.files[0]) {
 
@@ -125,7 +125,7 @@
              document.getElementById("imgLogo").style.visibility = "hidden";
          }
          else {
-        alert("veronica")
+
              if (input.files && input.files[0]) {
                   
              var reader = new FileReader();
