@@ -206,13 +206,13 @@ function HideDiv() {
                                         
                                       <asp:ImageButton ID="Image1" runat="server" ImageUrl='<%# Eval("Item") %>' OnClientClick="return LoadDiv(this.src);" Visible='<%# Eval("ItemType").ToString() =="image" %>'  />
                                       
-                                        <video width="150" height="150" runat="server" controls visible='<%# Eval("ItemType").ToString()!="image" %>'>  
+                                        <video width="200" height="200" runat="server" controls visible='<%# Eval("ItemType").ToString()!="image" %>'>  
                                             <source runat="server" src='<%#Eval("Item")%>' type="video/mp4" visible='<%# Eval("ItemType").ToString()!="image" %>' >  
                                         </video>  
                                            
                                               
                                             </ItemTemplate>
-                                        <controlstyle height="150px" width="150px"  />
+                                        <controlstyle height="200px" width="200px"  />
                                         </asp:TemplateField>
                              
 

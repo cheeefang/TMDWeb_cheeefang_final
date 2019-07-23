@@ -100,34 +100,8 @@
              headerCheckBox.checked = checked;
          }
 
-    function ImagePreview(input) {
-         const file = input.files[0];
-         const fileType = file['type'];
-         const validImageTypes = ['image/gif', 'image/jpeg', 'image/png','image/jpg','image/PNG','image/JPEG','image/JPG'];
-         if (!validImageTypes.includes(fileType)) {
-          
-             // invalid file type code goes here.
-             
-              document.getElementById("videoThumbnail").style.visibility = "visible";
-             document.getElementById("imgLogo").style.visibility = "hidden";
-             if (input.files && input.files[0]) {
-
-             var reader = new FileReader();
-             reader.onload = function (e) {
-                 $('#<%=videoThumbnail.ClientID%>').prop('src', e.target.result)
-                     .width(200)
-                     .height(200);
-             };
-             reader.readAsDataURL(input.files[0]);
-                             
-             }
-
-         }
-         else {
-           
-             if (input.files && input.files[0]) {
-                   document.getElementById("videoThumbnail").style.visibility = "hidden";
-             document.getElementById("imgLogo").style.visibility = "visible";
+     function ImagePreview(input) {
+         if (input.files && input.files[0]) {
              var reader = new FileReader();
              reader.onload = function (e) {
                  $('#<%=imgLogo.ClientID%>').prop('src', e.target.result)
@@ -135,12 +109,7 @@
                      .height(200);
              };
              reader.readAsDataURL(input.files[0]);
-                
          }
-
-            
-         }
-         
      }
 
     </script>   
