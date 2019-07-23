@@ -123,12 +123,15 @@
 
 <ItemStyle CssClass="hiddencol"></ItemStyle>
                                     </asp:BoundField>
-                                    <asp:ImageField DataImageUrlField="Item"  HeaderText="Advertisement" ControlStyle-Width="100" ControlStyle-Height = "100"> 
-        
-<ControlStyle Height="100px" Width="100px"></ControlStyle>
-
-        
-                                    </asp:ImageField>
+                                    <asp:TemplateField HeaderText="Advertisement">
+                                        <EditItemTemplate>
+                                            <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("Item") %>'></asp:TextBox>
+                                        </EditItemTemplate>
+                                        <ItemTemplate>
+                                            <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("Item") %>' />
+                                        </ItemTemplate>
+                                        <controlstyle height="100px" width="100px" />
+                                    </asp:TemplateField>
                                     <asp:BoundField DataField="Name" HeaderText="Company Name" SortExpression="Name"></asp:BoundField>
                                     
                                      <asp:BoundField DataField="Name1" HeaderText="Advert Name" SortExpression="Name1"></asp:BoundField>
