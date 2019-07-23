@@ -106,7 +106,7 @@
          const fileType = file['type'];
          const validImageTypes = ['image/gif', 'image/jpeg', 'image/png','image/jpg','image/PNG','image/JPEG','image/JPG'];
          if (!validImageTypes.includes(fileType)) {
-          
+              
              // invalid file type code goes here.
              
               document.getElementById("videoThumbnail").style.visibility = "visible";
@@ -125,7 +125,7 @@
 
          }
          else {
-           
+        
              if (input.files && input.files[0]) {
                    document.getElementById("videoThumbnail").style.visibility = "hidden";
              document.getElementById("imgLogo").style.visibility = "visible";
@@ -186,13 +186,13 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <asp:label  runat="server"><b>Advertisement</b></asp:label>
-               
+               <br />
                    
                  
                     <asp:image id="imgLogo" runat="server" ImageUrl="Images/NoImageAvailable.png" Width="200" Height="200" visible="true"></asp:image>
                      
                  
-                       <video id="videoThumbnail" width="200" height="200" runat="server" visible="true" controls visible="false">  
+                       <video id="videoThumbnail" width="200" height="200" runat="server" controls visible="false">  
                                             <source id="vidSource" src="" type="video/mp4">  
                                         </video>  
                        

@@ -198,7 +198,7 @@
                     <br />
                    
                     
-                    <asp:image id="imgLogo" runat="server" ImageUrl="" Width="200" Height="200" visible="false"></asp:image>
+                    <asp:image id="imgLogo" runat="server" ImageUrl="" Width="200" Height="200" ></asp:image>
                        <video id="videoThumbnail" width="200" height="200" runat="server" visible="false" controls>  
                                             <source id="vidSource" runat="server" src="" type="video/mp4">  
                                         </video>  
