@@ -160,6 +160,10 @@
   }
       #videoDog{
           display:none;
+             object-fit: cover;
+      }
+      #vidDiv{
+       
       }
     </style>
 </asp:Content>
@@ -195,11 +199,11 @@
                  
                     <asp:image id="imgLogo" runat="server" ImageUrl="Images/NoImageAvailable.png" Width="200" Height="200" visible="true" ClientIDMode="static"></asp:image>
                      
-                 
+                 <div id="vidDiv" runat="server">
                        <video ClientIDMode="static" id="videoDog" width="200" height="200" runat="server" controls visible="true"  >  
                                             <source  id="vidSource" runat="server" src="" type="video/mp4">  
                                         </video>  
-                       
+                       </div>
                 </div>
             </div>
         </div>
