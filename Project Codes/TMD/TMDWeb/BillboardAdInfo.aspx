@@ -4,6 +4,46 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <script type="text/javascript">
+    function LoadDiv(url) {
+    var img = new Image();
+    var bcgDiv = document.getElementById("divBackground");
+    var imgDiv = document.getElementById("divImage");
+    var imgFull = document.getElementById("imgFull");
+    var imgLoader = document.getElementById("imgLoader");
+    imgLoader.style.display = "block";
+    img.onload = function () {
+        imgFull.src = img.src;
+        imgFull.style.display = "block";
+        imgLoader.style.display = "none";
+   };
+    img.src = url;
+    var width = document.body.clientWidth;
+    if (document.body.clientHeight > document.body.scrollHeight) {
+        bcgDiv.style.height = document.body.clientHeight + "px";
+    }
+    else {
+        bcgDiv.style.height = document.body.scrollHeight + "px";
+    }
+    imgDiv.style.left = (width - 650) / 2 + "px";
+    imgDiv.style.top = "20px";
+    bcgDiv.style.width = "100%";
+ 
+    bcgDiv.style.display = "block";
+    imgDiv.style.display = "block";
+    return false;
+}
+function HideDiv() {
+    var bcgDiv = document.getElementById("divBackground");
+    var imgDiv = document.getElementById("divImage");
+    var imgFull = document.getElementById("imgFull");
+    if (bcgDiv != null) {
+        bcgDiv.style.display = "none";
+        imgDiv.style.display = "none";
+        imgFull.style.display = "none";
+    }
+}
+</script>
     <form runat="server">       
             
 
@@ -42,11 +82,21 @@
             <Columns>
                                     
     
-                                    <asp:ImageField DataImageUrlField="Item" HeaderText="Advertisement" ControlStyle-Width="100" ControlStyle-Height = "100" > 
-        
-                                   
-<ControlStyle Height="100px" Width="100px"></ControlStyle>
-                                    </asp:ImageField>
+                                  <asp:TemplateField HeaderText="Advertisement">
+                                       
+                                        <ItemTemplate>
+                                          
+                                        
+                                      <asp:ImageButton ID="Image1" runat="server" ImageUrl='<%# Eval("Item") %>' OnClientClick="return LoadDiv(this.src);" Visible='<%# Eval("ItemType").ToString() =="image" %>'  />
+                                      
+                                        <video width="150" height="150" runat="server" controls visible='<%# Eval("ItemType").ToString()!="image" %>'>  
+                                            <source runat="server" src='<%#Eval("Item")%>' type="video/mp4" visible='<%# Eval("ItemType").ToString()!="image" %>' >  
+                                        </video>  
+                                           
+                                              
+                                            </ItemTemplate>
+                                        <controlstyle height="150px" width="150px"  />
+                                        </asp:TemplateField>
         
                                    
                                     <asp:BoundField DataField="BillboardCode" HeaderText="Billboard Code" sortExpression="BillboardCode" Visible="false" ></asp:BoundField>

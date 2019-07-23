@@ -102,35 +102,47 @@
 
 
      function ImagePreview(input) {
-        
-         if (input.files && input.files[0]) {
-             
-             var reader = new FileReader();
-             reader.onload = function (e) {
-                 $('#<%=imgLogo.ClientID%>').prop('src', e.target.result)
-                          .width(200)
-                          .height(200);
-                  };
-             reader.readAsDataURL(input.files[0]);
+         const file = input.files[0];
+         const fileType = file['type'];
+         const validImageTypes = ['image/gif', 'image/jpeg', 'image/png','image/jpg','image/PNG','image/JPEG','image/JPG'];
+         if (!validImageTypes.includes(fileType)) {
           
-              }
-     }
-
-     function VideoPreview(input) {
-        
-         if (input.files && input.files[0]) {
+             // invalid file type code goes here.
              
+              document.getElementById("videoThumbnail").style.visibility = "visible";
+             document.getElementById("imgLogo").style.visibility = "hidden";
+             if (input.files && input.files[0]) {
+
              var reader = new FileReader();
              reader.onload = function (e) {
                  $('#<%=videoThumbnail.ClientID%>').prop('src', e.target.result)
-                          .width(200)
-                          .height(200);
-                  };
+                     .width(200)
+                     .height(200);
+             };
              reader.readAsDataURL(input.files[0]);
-             
-              }
-     }
+                             
+             }
 
+         }
+         else {
+           
+             if (input.files && input.files[0]) {
+                   document.getElementById("videoThumbnail").style.visibility = "hidden";
+             document.getElementById("imgLogo").style.visibility = "visible";
+             var reader = new FileReader();
+             reader.onload = function (e) {
+                 $('#<%=imgLogo.ClientID%>').prop('src', e.target.result)
+                     .width(200)
+                     .height(200);
+             };
+             reader.readAsDataURL(input.files[0]);
+                
+         }
+
+            
+         }
+         
+     }
  </script>
 
 
@@ -173,14 +185,17 @@
          <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label  runat="server"><b>Advertisement Image </b></asp:label>
-                    <br />
+                    <asp:label  runat="server"><b>Advertisement</b></asp:label>
+               
                    
-                    
-                    <asp:image id="imgLogo" runat="server" ImageUrl="Images/NoImageAvailable.png" Width="200" Height="200"></asp:image>
-                       <video id="videoThumbnail" width="200" height="200" runat="server" visible="true" controls>  
-                                            <source id="vidSource" runat="server" src="" type="video/mp4">  
+                 
+                    <asp:image id="imgLogo" runat="server" ImageUrl="Images/NoImageAvailable.png" Width="200" Height="200" visible="true"></asp:image>
+                     
+                 
+                       <video id="videoThumbnail" width="200" height="200" runat="server" visible="true" controls visible="false">  
+                                            <source id="vidSource" src="" type="video/mp4">  
                                         </video>  
+                       
                 </div>
             </div>
         </div>
@@ -201,7 +216,7 @@
                               
                     
 
-                        <asp:FileUpload ID="FileUpload1" runat="server" onchange="ImagePreview(this);VideoPreview(this);" />
+                        <asp:FileUpload ID="FileUpload1" runat="server" onchange="ImagePreview(this);" />
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ValidationExpression='(.*?)\.(jpg|jpeg|png|gif|avi|flv|wmv|mp4|mov|JPG|JPEG|PNG|GIF|AVI|FLV|WMV|MOV|MP4)$'
                             ControlToValidate="FileUpload1" runat="server" ForeColor="Red" ErrorMessage="Please select valid image/video file."
                             Display="Dynamic" />
