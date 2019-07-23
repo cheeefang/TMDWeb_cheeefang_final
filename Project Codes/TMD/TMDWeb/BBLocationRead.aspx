@@ -76,6 +76,7 @@
                </div>
 
                     <div class="col-lg-6">
+                        <br>
                         </br>
                         <a href="BBLocationCreate.aspx" class="btn btn-primary nextBtn pull-right" type="button"> <b>New Billboard </b> </a>
                     </div>
