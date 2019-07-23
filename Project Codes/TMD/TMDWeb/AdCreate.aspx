@@ -108,27 +108,26 @@
          if (!validImageTypes.includes(fileType)) {
               
              // invalid file type code goes here.
+             alert("victoria")
              
-              document.getElementById("videoThumbnail").style.visibility = "visible";
-             document.getElementById("imgLogo").style.visibility = "hidden";
              if (input.files && input.files[0]) {
 
              var reader = new FileReader();
              reader.onload = function (e) {
-                 $('#<%=videoThumbnail.ClientID%>').prop('src', e.target.result)
+                 $('#<%=videoDog.ClientID%>').prop('src', e.target.result)
                      .width(200)
                      .height(200);
              };
              reader.readAsDataURL(input.files[0]);
                              
              }
-
+             document.getElementById("videoDog").style.visibility = "visible";
+             document.getElementById("imgLogo").style.visibility = "hidden";
          }
          else {
-        
+        alert("veronica")
              if (input.files && input.files[0]) {
-                   document.getElementById("videoThumbnail").style.visibility = "hidden";
-             document.getElementById("imgLogo").style.visibility = "visible";
+                  
              var reader = new FileReader();
              reader.onload = function (e) {
                  $('#<%=imgLogo.ClientID%>').prop('src', e.target.result)
@@ -139,7 +138,10 @@
                 
          }
 
-            
+             document.getElementById("videoDog").style.visibility = "hidden";
+             document.getElementById("imgLogo").style.visibility = "visible";
+          
+             
          }
          
      }
@@ -189,11 +191,11 @@
                <br />
                    
                  
-                    <asp:image id="imgLogo" runat="server" ImageUrl="Images/NoImageAvailable.png" Width="200" Height="200" visible="true"></asp:image>
+                    <asp:image id="imgLogo" runat="server" ImageUrl="Images/NoImageAvailable.png" Width="200" Height="200" visible="true" ClientIDMode="static"></asp:image>
                      
                  
-                       <video id="videoThumbnail" width="200" height="200" runat="server" controls visible="false">  
-                                            <source id="vidSource" src="" type="video/mp4">  
+                       <video ClientIDMode="static" id="videoDog" width="200" height="200" runat="server" controls visible="true"  >  
+                                            <source  id="vidSource" runat="server" src="" type="video/mp4">  
                                         </video>  
                        
                 </div>
