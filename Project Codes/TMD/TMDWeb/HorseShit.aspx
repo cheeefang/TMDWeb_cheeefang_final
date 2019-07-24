@@ -28,6 +28,14 @@
 
     
             <label id="lblresult"></label>
+    <div id='map' style='width: 400px; height: 300px;'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlZWVmYW5nIiwiYSI6ImNqeWdydHB1azA0NjIzbXF0dHBkcTF5YmkifQ.WP34kRL0jWSEJgkQ8B5jRg';
+var map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/mapbox/streets-v11'
+});
+</script>
    
 </body>
 

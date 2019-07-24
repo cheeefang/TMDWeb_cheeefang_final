@@ -9,7 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Targeted Marketing Display Administration">
     <meta name="author" content="NYP SIT">
-
+<!--mapbox api-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
     <title>Targeted Marketing Display Administration</title>
     <!-- Custom Pagination CSS-->
     <link href="css/newgridview.css" rel="stylesheet" type="text/css"/>
