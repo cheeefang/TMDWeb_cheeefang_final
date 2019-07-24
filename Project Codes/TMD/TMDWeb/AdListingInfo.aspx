@@ -62,9 +62,9 @@
                     <br />
                    
                     
-                    <asp:image id="imgLogo" runat="server" ImageUrl="" Width="200" Height="200" visible="false" ></asp:image>
+                    <asp:image id="imgLogo" runat="server" ImageUrl="" Width="250" Height="250" visible="false" ClientIDMode="static"></asp:image>
                     <div id="vidDiv" runat="server">
-                     <video ClientIDMode="static" id="videoThumbnail" width="200" height="200" runat="server" visible="true" controls >  
+                     <video ClientIDMode="static" id="videoThumbnail" width="250" height="250" runat="server" visible="true" controls >  
                                             <source id="vidSource" runat="server" src="" type="video/mp4">  
                                         </video>  
                         </div>
