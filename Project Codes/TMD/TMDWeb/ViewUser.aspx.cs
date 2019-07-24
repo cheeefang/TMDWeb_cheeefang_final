@@ -50,6 +50,15 @@ namespace targeted_marketing_display
         {
             if (e.CommandName == "DeleteMessage")
             {
+                SqlConnection conn = null;
+                SqlDataReader reader = null;
+
+
+
+                // instantiate and open connection
+                conn = new
+                    SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                conn.Open();
                 int index = Convert.ToInt32(e.CommandArgument);
 
 
@@ -59,6 +68,10 @@ namespace targeted_marketing_display
                 LinkButton btnButton1 = sender as LinkButton;
                 GridViewRow gvRow1 = (GridViewRow)btnButton1.NamingContainer;
 
+
+
+
+                //SqlCommand cmdCount = new SqlCommand("select count(*) as total from Advertisement as a inner join Company as c on a.companyID=c.CompanyID where c.CompanyID=@ID", conn);
                 User uObj = new User();
                 UserManagement uDao = new UserManagement();
 
@@ -68,12 +81,25 @@ namespace targeted_marketing_display
                 
                 uObj = uDao.getUserByID(lb_msgId.Text);
                 string userName = uObj.Name;
-
-                Boolean insCnt = uDao.deleteQns(lb_msgId.Text);
+                if (lb_msgId.Text.ToString() == Session["UserID"].ToString())
+                {
+                    deleteFailure.Visible = true;
+                    alertSuccess.Visible = false;
+                    
+                    labelDelete.Text = "You cannot delete your Current Session";
+                }
+                else
+                {
+                    deleteFailure.Visible = false;
+                    alertSuccess.Visible = true;
+                    msgSuccess.Text = userName + " Has Been Deleted Successfully!";
+                    Boolean insCnt = uDao.deleteQns(lb_msgId.Text);
+                }
+               
 
                 //VIC: never inform if the delete is successful or not?
-                alertSuccess.Visible = true;
-                msgSuccess.Text = userName + " Has Been Deleted Successfully!";
+              
+               
 
                 Database db = new Database();
 

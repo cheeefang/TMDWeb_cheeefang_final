@@ -63,6 +63,13 @@
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->
+            <div runat="server" class="alert alert-danger" id="deleteFailure" visible="False">
+                    <strong>Error!</strong> 
+                    <asp:Label runat="server" ID="labelDelete"></asp:Label>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             <div runat="server" class="alert alert-success" id="createSuccess" visible="False">
                     <strong>Successfully Created New Account!</strong> 
                     <asp:Label runat="server" ID="LabelCreate"></asp:Label>
