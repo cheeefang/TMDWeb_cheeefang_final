@@ -81,9 +81,11 @@ map.on('load', function() {
   //  Add a marker at the result's coordinates
     geocoder.on('result', function (e) {
         console.log(e);
-
-        document.getElementById("TextBox1").value = 9876;
-        document.getElementById("TextBox2").value = e.result.geometry(2);;
+        var e2 = e.result.geometry.coordinates[0];
+        var e3 = e.result.geometry.coordinates[1]
+        console.log(e.result.geometry.coordinates);
+        document.getElementById("TextBox1").value = e2;
+        document.getElementById("TextBox2").value =  e3;
 
     map.getSource('single-point').setData(e.result.geometry);
   });
