@@ -86,7 +86,7 @@ namespace targeted_marketing_display
                     deleteFailure.Visible = true;
                     alertSuccess.Visible = false;
                     
-                    labelDelete.Text = "You cannot delete your Current Session";
+                    labelDelete.Text = "You cannot delete yourself";
                 }
                 else
                 {
