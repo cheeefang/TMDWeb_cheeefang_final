@@ -81,12 +81,15 @@ map.on('load', function() {
   //  Add a marker at the result's coordinates
     geocoder.on('result', function (e) {
         console.log(e);
+        console.log(e.result.context["0"].text);
         var longtitude = e.result.geometry.coordinates[0];
-        var latitude = e.result.geometry.coordinates[1]
+        var latitude = e.result.geometry.coordinates[1];
+        var pCode = e.result.context["0"].text;
+        
         console.log(e.result.geometry.coordinates);
         document.getElementById("LatTB").value = latitude;
-        document.getElementById("LongTB").value = longtitude ;
-
+        document.getElementById("LongTB").value = longtitude;
+        document.getElementById("PostalCodeTB").value = pCode;
     map.getSource('single-point').setData(e.result.geometry);
   });
 });
@@ -95,6 +98,7 @@ map.on('load', function() {
    Latitude <asp:TextBox ID="LatTB" runat="server" ClientIDMode="Static"></asp:TextBox>
     <br />
    Longtitude <asp:TextBox ID="LongTB" runat="server" ClientIDMode="Static"></asp:TextBox>
+   Postal Code<asp:TextBox ID="PostalCodeTB" runat="server" ClientIDMode="Static"></asp:TextBox>
         </form>
 </body>
 </html>
