@@ -5,11 +5,7 @@
 <head>
   <meta charset='utf-8' />
   <title>Local search app</title>
-  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.2.0/mapbox-gl-geocoder.min.js'></script>
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.2.0/mapbox-gl-geocoder.css' type='text/css' />
-  <script src='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
-  <link href='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
+
   <style>
     body {
       margin: 0;
@@ -27,7 +23,8 @@
 </head>
 <body>
 
-    <div id='map' style="zoom:.5;-o-transform: scale(.5);-moz-transform: scale(.5)"></div>
+    <div id='map' style="width:300px;height:300px" align="center"></div>
+
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlZWVmYW5nIiwiYSI6ImNqeWdyd3ozeDAzejQzZGwzMjY0MzhzYzcifQ.BN7hdcRRbZT02s4h8QR-iw';
       
@@ -94,6 +91,28 @@ map.on('load', function() {
   });
 });
     </script>
+    <br />
+    <br />
+    <br />
+     <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+     <br />
+    <br />
+    <br />
+        <br />
+     <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+     <br />
+    <br />
+    <br />
     <form runat="server">
    Latitude <asp:TextBox ID="LatTB" runat="server" ClientIDMode="Static"></asp:TextBox>
     <br />
