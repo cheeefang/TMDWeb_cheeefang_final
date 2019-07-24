@@ -48,6 +48,12 @@ body
     padding: 3px;
     border: solid 1px black;
 }
+#videoDog{
+     object-fit: cover;
+}
+#vidDiv{
+
+}
 </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -205,11 +211,11 @@ function HideDiv() {
                                           
                                         
                                       <asp:ImageButton ID="Image1" runat="server" ImageUrl='<%# Eval("Item") %>' OnClientClick="return LoadDiv(this.src);" Visible='<%# Eval("ItemType").ToString() =="image" %>'  />
-                                      
-                                        <video width="200" height="200" runat="server" controls visible='<%# Eval("ItemType").ToString()!="image" %>'>  
+                                      <div id="vidDiv" runat="server">
+                                        <video ClientIDMode="static" id="videoDog" width="200" height="200" runat="server" controls visible='<%# Eval("ItemType").ToString()!="image" %>'>  
                                             <source runat="server" src='<%#Eval("Item")%>' type="video/mp4" visible='<%# Eval("ItemType").ToString()!="image" %>' >  
                                         </video>  
-                                           
+                                           </div>
                                               
                                             </ItemTemplate>
                                         <controlstyle height="200px" width="200px"  />

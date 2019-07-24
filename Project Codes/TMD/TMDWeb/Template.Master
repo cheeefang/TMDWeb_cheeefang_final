@@ -141,24 +141,12 @@
 
                                                 
 
+                   
                         
-                        <li>
-                            <a href="AdFeedback.aspx">><i class="fa fa-sitemap fa-fw"></i></a> 
-                        </li>
-                        
-                                <li>
-                                    <a href="FeedbackAd.aspx"><i class="fa fa-sitemap fa-fw"></i></a>
-                                </li>
+                           
 
                                 
-                                <li>
-                                    <a href="FeedbackAnalyticsIndiv.aspx"><i class="fa fa-sitemap fa-fw"></i></a>
-                                </li>
-
                                 
-                                <li>
-                                    <a href="FeedBackBillboard.aspx"><i class="fa fa-sitemap fa-fw"></i></a>
-                                </li>
 
                         <li>
 
@@ -170,23 +158,21 @@
                                     <a href="AdListing.aspx"><i class="fa fa-sitemap fa-fw"></i> Advertisement Listing </a>
                                 </li>
 
-                                <li>
+                                     
+                        <li>
+                            <a href="AdFeedback.aspx"><i class="fa fa-sitemap fa-fw"></i>Advertisement Feedback</a> 
+                        </li>
 
-                            <a href="#"><i class="fa fa-envelope fa-fw"></i> Contact Us<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+                                
                                 <li>
-                                    <a href="FAQ.aspx"><i class='fa fa-question-circle fa-fw'></i> FAQ</a>
+                                    <a href="FAQ.aspx"><i class="fas fa-comments-dollar"></i> FAQ</a>
                                 </li>
 
                                 <li>
                                     <a href="mailto:tmdboss2019@gmail.com?Subject=Feedback%20about%20Targeted%20Marketing%20Display"><i class='fa fa-send-o fa-fw'></i> Email Us</a>
                                 </li>
 
-                            </ul>
-
-                            <!-- /.nav-first-level -->
-
-                        </li>
+                            
                                                       
 
 

@@ -107,7 +107,7 @@
          if (!validImageTypes.includes(fileType)) {
               
              // invalid file type code goes here.
-             
+    
              
              if (input.files && input.files[0]) {
 
@@ -120,11 +120,11 @@
              reader.readAsDataURL(input.files[0]);
                              
              }
-             document.getElementById("videoDog").style.visibility = "visible";
-             document.getElementById("imgLogo").style.visibility = "hidden";
+             document.getElementById("videoDog").style.display = "block";
+             document.getElementById("imgLogo").style.display = "none";
          }
          else {
-      
+
              if (input.files && input.files[0]) {
                   
              var reader = new FileReader();
@@ -137,8 +137,8 @@
                 
          }
 
-             document.getElementById("videoDog").style.visibility = "hidden";
-             document.getElementById("imgLogo").style.visibility = "visible";
+             document.getElementById("videoDog").style.display = "none";
+             document.getElementById("imgLogo").style.display = "block";
           
              
          }
@@ -160,8 +160,13 @@
   {
     display: none;
   }
+     
        #videoDog{
-          visibility:hidden;
+          display:none;
+             object-fit: cover;
+      }
+      #vidDiv{
+       
       }
     </style>
 </asp:Content>
@@ -204,10 +209,11 @@
                     
                       <asp:image id="imgLogo" runat="server" ImageUrl="Images/NoImageAvailable.png" Width="200" Height="200" visible="true" ClientIDMode="static"></asp:image>
                      
-                 
+ <div id="vidDiv" runat="server">
                        <video ClientIDMode="static" id="videoDog" width="200" height="200" runat="server" controls visible="true"  >  
                                             <source  id="vidSource" runat="server" src="" type="video/mp4">  
                                         </video>  
+                       </div>
                 </div>
             </div>
         </div>

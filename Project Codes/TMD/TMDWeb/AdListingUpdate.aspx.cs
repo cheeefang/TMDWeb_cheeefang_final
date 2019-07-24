@@ -22,21 +22,26 @@ namespace targeted_marketing_display
         string dbConnStr = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
+            //login_div.Attributes.Add("style","display:none");
             Advertisement adObject = new Advertisement();
             Advertisement_Management adObjectClass = new Advertisement_Management();
             adObject = adObjectClass.getAdvByID(Session["AdvertID"].ToString());
             string previousimagepath = adObject.Item.ToString();
             if (adObject.ItemType == "image")
             {
-                imgLogo.Visible = true;
-                videoThumbnail.Visible = false;
+                imgLogo.Attributes.Add("style", "display:block");
+                videoDog.Attributes.Add("style", "display:none");
+                //imgLogo.Visible = true;
+                //videoDog.Visible = false;
                 imgLogo.ImageUrl = ResolveUrl(previousimagepath);
             }
             if (adObject.ItemType == "video")
             {
-                videoThumbnail.Visible = true;
-                imgLogo.Visible = false;
-                videoThumbnail.Src = ResolveUrl(previousimagepath);
+                imgLogo.Attributes.Add("style", "display:none");
+                videoDog.Attributes.Add("style", "display:block");
+                //videoDog.Visible = true;
+                //imgLogo.Visible = false;
+                videoDog.Src = ResolveUrl(previousimagepath);
             }
             
               
@@ -459,6 +464,7 @@ namespace targeted_marketing_display
             {
 
                 imagelink = "Images/" + Literal1.Text;
+                string newItemType = Literal2.Text;
                 string NewAdvertName = adNameTB.Text.ToString();
                 int NewCompanyID = Convert.ToInt32(DropDownListCompany.SelectedValue);
                 int NewDuration = Convert.ToInt32(videoDurationTB.Text);
@@ -470,7 +476,7 @@ namespace targeted_marketing_display
                 string lastUpdOn = DateTime.Now.ToString("MM/dd/yyyy h:mm tt");
                 SqlConnection sqlcn = new SqlConnection(dbConnStr);
                 
-                aDao.AdvertUpdate(Session["AdvertID"].ToString(),imagelink,NewCompanyID,NewAdvertName,NewDuration, startdate, enddate,lastUpdBy,lastUpdOn);
+                aDao.AdvertUpdate(Session["AdvertID"].ToString(),imagelink,newItemType,NewCompanyID,NewAdvertName,NewDuration, startdate, enddate,lastUpdBy,lastUpdOn);
                 //SqlCommand cmd = new SqlCommand("update [AdvertisementAudience] set AgeID=@newAgeID,GenderID=@newGenderID where AdvID=@paraAdvID " +
                 // "if @@rowcount=0 insert into [AdvertisementLocation] (AdvID,AgeID,GenderID) values (@newAdvID,@newAgeID,@newGenderID)", sqlcn);
                 // sqlcn.Open();
