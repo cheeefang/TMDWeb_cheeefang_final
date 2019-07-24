@@ -27,7 +27,7 @@
 </head>
 <body>
 
-    <div id='map'></div>
+    <div id='map' style="zoom:.5;-o-transform: scale(.5);-moz-transform: scale(.5)"></div>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlZWVmYW5nIiwiYSI6ImNqeWdyd3ozeDAzejQzZGwzMjY0MzhzYzcifQ.BN7hdcRRbZT02s4h8QR-iw';
       
@@ -81,20 +81,20 @@ map.on('load', function() {
   //  Add a marker at the result's coordinates
     geocoder.on('result', function (e) {
         console.log(e);
-        var e2 = e.result.geometry.coordinates[0];
-        var e3 = e.result.geometry.coordinates[1]
+        var longtitude = e.result.geometry.coordinates[0];
+        var latitude = e.result.geometry.coordinates[1]
         console.log(e.result.geometry.coordinates);
-        document.getElementById("TextBox1").value = e2;
-        document.getElementById("TextBox2").value =  e3;
+        document.getElementById("LatTB").value = latitude;
+        document.getElementById("LongTB").value = longtitude ;
 
     map.getSource('single-point').setData(e.result.geometry);
   });
 });
     </script>
     <form runat="server">
-   Latitude <asp:TextBox ID="TextBox1" runat="server" ClientIDMode="Static"></asp:TextBox>
+   Latitude <asp:TextBox ID="LatTB" runat="server" ClientIDMode="Static"></asp:TextBox>
     <br />
-   Longtitude <asp:TextBox ID="TextBox2" runat="server" ClientIDMode="Static"></asp:TextBox>
+   Longtitude <asp:TextBox ID="LongTB" runat="server" ClientIDMode="Static"></asp:TextBox>
         </form>
 </body>
 </html>
