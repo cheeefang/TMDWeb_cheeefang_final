@@ -27,32 +27,32 @@ namespace targeted_marketing_display
         protected void SubmitBtn_Click(object sender, EventArgs e)
         {
 
-            String BillboardCode = BbLocationCode.Text.ToString();
-            String AddressLn1 = BbAddLn1.Text.ToString();
-            String AddressLn2 = BbAddLn2.Text.ToString();
-            String City = BbCity.Text.ToString();
+            String BillboardCode = BBLocationCode.Text.ToString();
+            String AddressLn1 = BBAddLn1.Text.ToString();
+            String AddressLn2 = BBAddLn2.Text.ToString();
+            String City = BBCity.Text.ToString();
             String Country = (BBCountry.SelectedValue.ToString());
-            String PostalCode = BbPostalCode.Text.ToString();
+            String PostalCode = BBPostalCode.Text.ToString();
             DateTime CreatedOn = DateTime.Now;
             int Status = 1;
-            string latitude = BbLatitude.Text.ToString();
+            string latitude = BBLatitude.Text.ToString();
             int CreatedBy = 1;
             string Longtitude = BBLongtitude.Text.ToString();
 
             Billboard_Management bbMgmt = new Billboard_Management();
             Boolean record = bbMgmt.BBcheck(BillboardCode, PostalCode);
 
-            if (BbLocationCode.Text != "")
+            if (BBLocationCode.Text != "")
             {
-                if (BbAddLn1.Text != "")
+                if (BBAddLn1.Text != "")
                 {
-                    if (BbCity.Text != "")
+                    if (BBCity.Text != "")
                     {
                         if (BBCountry.SelectedValue != "")
                         {
-                            if (BbPostalCode.Text != "")
+                            if (BBPostalCode.Text != "")
                             {
-                                if (BbLatitude.Text != "")
+                                if (BBLatitude.Text != "")
                                 {
 
                                     if (BBLongtitude.Text != "")
@@ -66,12 +66,12 @@ namespace targeted_marketing_display
                                             {
                                                 alertWarning.Visible = false;
                                                 alertSuccess.Visible = true;
-                                                BbLocationCode.Text = String.Empty;
-                                                BbAddLn1.Text = String.Empty;
-                                                BbAddLn2.Text = String.Empty;
+                                                BBLocationCode.Text = String.Empty;
+                                                BBAddLn1.Text = String.Empty;
+                                                BBAddLn2.Text = String.Empty;
                                                 BBCountry.SelectedValue = "";
-                                                BbCity.Text = String.Empty;
-                                                BbPostalCode.Text = String.Empty;
+                                                BBCity.Text = String.Empty;
+                                                BBPostalCode.Text = String.Empty;
                                             }
                                         }
 

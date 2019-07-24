@@ -44,7 +44,7 @@
         var map = new mapboxgl.Map({
             container: 'map', // Container ID
             style: 'mapbox://styles/mapbox/streets-v11', // Map style to use
-            center: [-122.25948, 37.87221], // Starting position [lng, lat]
+            center: [103.819839,1.352083], // Starting position [lng, lat]
             zoom: 12, // Starting zoom level
         });
         var marker = new mapboxgl.Marker() // initialize a new marker
@@ -94,16 +94,16 @@ map.on('load', function() {
         var address = e.result.place_name;
         var longtitude = e.result.geometry.coordinates[0];
         var latitude = e.result.geometry.coordinates[1];
-        var pCode = e.result.context["1"].text;
+        var pCode = e.result.context["0"].text;
         var City = e.result.context["3"].text;
-        var Country = e.result.context["4"].text;
+    
         console.log(e.result.geometry.coordinates);
-        document.getElementById("BbLatitude").value = latitude;
+        document.getElementById("BBLatitude").value = latitude;
         document.getElementById("BBLongtitude").value = longtitude;
-        document.getElementById("BbPostalCode").value = pCode;
-        document.getElementById("BbCity").value = City;
-        document.getElementById("BbAddLn1").value = address;
-        document.getElementById("BBCountry").value = US;
+        document.getElementById("BBPostalCode").value = pCode;
+        document.getElementById("BBCity").value = City;
+        document.getElementById("BBAddLn1").value = address;
+    
     map.getSource('single-point').setData(e.result.geometry);
   });
 });
@@ -137,7 +137,7 @@ map.on('load', function() {
                     <div class="form-group">
                         <label>Billboard Code </label>
                         <label style="color: red">*</label>
-                        <asp:TextBox class="form-control" ID="BbLocationCode" placeholder="Enter Location Code" runat="server" ClientIDMode="Static"></asp:TextBox>&nbsp;
+                        <asp:TextBox class="form-control" ID="BBLocationCode" placeholder="Enter Location Code" runat="server" ClientIDMode="Static"></asp:TextBox>&nbsp;
                     </div>
 
                 </div>
@@ -151,7 +151,7 @@ map.on('load', function() {
                         <label>Address Line 1 </label>
                         <label style="color: red">*</label>
                         &nbsp;
-                    <asp:TextBox class="form-control" ID="BbAddLn1" placeholder="Enter Address Line 1" runat="server" ClientIDMode="Static"></asp:TextBox>&nbsp;
+                    <asp:TextBox class="form-control" ID="BBAddLn1" placeholder="Enter Address Line 1" runat="server" ClientIDMode="Static"></asp:TextBox>&nbsp;
                     </div>
                 </div>
 
@@ -160,7 +160,7 @@ map.on('load', function() {
                     <div class="form-group">
                         <label>Address Line 2</label>
                          <label style="color: red">*</label>
-                        <asp:TextBox class="form-control" ID="BbAddLn2" placeholder="Enter Address Line 2" runat="server" ClientIDMode="Static"></asp:TextBox>
+                        <asp:TextBox class="form-control" ID="BBAddLn2" placeholder="Enter Address Line 2" runat="server" ClientIDMode="Static"></asp:TextBox>
                         &nbsp;
                     </div>
                 </div>
@@ -172,7 +172,7 @@ map.on('load', function() {
 
                         <label>City </label>
                         <label style="color: red">*</label>
-                        <asp:TextBox class="form-control" ID="BbCity" placeholder="Enter City" runat="server" ClientIDMode="Static"></asp:TextBox>&nbsp;
+                        <asp:TextBox class="form-control" ID="BBCity" placeholder="Enter City" runat="server" ClientIDMode="Static"></asp:TextBox>&nbsp;
                     </div>
                 </div>
 
@@ -447,7 +447,7 @@ map.on('load', function() {
                      <div class="form-group">
                         <label>Latitude </label>
                         <label style="color: red">*</label>
-                        <asp:TextBox class="form-control" ID="BbLatitude" placeholder="Enter Latitude" runat="server" ClientIDMode="Static"></asp:TextBox>&nbsp;
+                        <asp:TextBox class="form-control" ID="BBLatitude" placeholder="Enter Latitude" runat="server" ClientIDMode="Static"></asp:TextBox>&nbsp;
                     </div>
                      
                    
@@ -469,7 +469,7 @@ map.on('load', function() {
                     <div class="form-group">
                         <label>Postal Code </label>
                         <label style="color: red">*</label>
-                        <asp:TextBox class="form-control" ID="BbPostalCode" placeholder="Enter Postal Code" runat="server" ClientIDMode="Static"></asp:TextBox>&nbsp;
+                        <asp:TextBox class="form-control" ID="BBPostalCode" placeholder="Enter Postal Code" runat="server" ClientIDMode="Static"></asp:TextBox>&nbsp;
                     </div>
 
                 </div>
