@@ -79,10 +79,20 @@ map.on('load', function() {
   // Listen for the `result` event from the Geocoder
   // `result` event is triggered when a user makes a selection
   //  Add a marker at the result's coordinates
-  geocoder.on('result', function(e) {
+    geocoder.on('result', function (e) {
+        console.log(e);
+
+        document.getElementById("TextBox1").value = 9876;
+        document.getElementById("TextBox2").value = e.result.geometry(2);;
+
     map.getSource('single-point').setData(e.result.geometry);
   });
 });
     </script>
+    <form runat="server">
+   Latitude <asp:TextBox ID="TextBox1" runat="server" ClientIDMode="Static"></asp:TextBox>
+    <br />
+   Longtitude <asp:TextBox ID="TextBox2" runat="server" ClientIDMode="Static"></asp:TextBox>
+        </form>
 </body>
 </html>
