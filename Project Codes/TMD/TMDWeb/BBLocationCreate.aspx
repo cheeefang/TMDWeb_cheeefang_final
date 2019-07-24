@@ -103,7 +103,7 @@ map.on('load', function() {
         document.getElementById("BbPostalCode").value = pCode;
         document.getElementById("BbCity").value = City;
         document.getElementById("BbAddLn1").value = address;
-        document.getElementById("BBCountry").value = Country;
+        document.getElementById("BBCountry").value = US;
     map.getSource('single-point').setData(e.result.geometry);
   });
 });
