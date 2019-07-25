@@ -158,8 +158,8 @@ map.on('load', function() {
                 <div class="col-lg-6">
 
                     <div class="form-group">
-                        <label>Address Line 2</label>
-                         <label style="color: red">*</label>
+                        <label>Address Line 2(Optional)</label>
+                      
                         <asp:TextBox class="form-control" ID="BBAddLn2" placeholder="Enter Address Line 2" runat="server" ClientIDMode="Static"></asp:TextBox>
                         &nbsp;
                     </div>
