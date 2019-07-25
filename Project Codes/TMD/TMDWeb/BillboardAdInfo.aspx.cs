@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Data;
+
 using System.Data.SqlClient;
 using BBMgmt;
 using System.Text;
@@ -16,11 +16,23 @@ namespace targeted_marketing_display
 {
     public partial class BillboardAdInfo : System.Web.UI.Page
     {
-    
+        protected string latitude;
+        protected string longtitude;
         protected void Page_Load(object sender, EventArgs e)
         {
+          
+            
             if (!IsPostBack)
             {
+               
+                Billboard BillboardObj = new Billboard();
+                Billboard_Management bDao = new Billboard_Management();
+
+                BillboardObj = bDao.getBillboardByID(Session["BillboardID"].ToString());
+                latitude = BillboardObj.latitude;
+                longtitude = BillboardObj.Longtitude;
+              
+                
                 this.BindGrid();
                
             }
@@ -107,6 +119,7 @@ namespace targeted_marketing_display
         protected void GridView1_PreRender(object sender, EventArgs e)
         {
             LabelPaging.Text = "Displaying Page " + (GridView1.PageIndex + 1).ToString() + " of " + GridView1.PageCount.ToString();
+
         }
 
 
