@@ -120,6 +120,8 @@ namespace targeted_marketing_display
                 Boolean DeleteAd = aDao.deleteAdvert(lb_msgId.Text);
                 //VIC: never inform if the delete is successful or not?
                 alertSuccessDelete.Visible = true;
+                alertSuccessCreate.Visible = false;
+                alertSuccessUpdate.Visible = false;
                 Label3.Text = " Advert# " + aObj.AdvID + " Has Been Deleted Successfully!";
 
                 Database db = new Database();

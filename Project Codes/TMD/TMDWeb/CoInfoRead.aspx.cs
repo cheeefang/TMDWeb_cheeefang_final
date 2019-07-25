@@ -114,12 +114,16 @@ namespace targeted_marketing_display
                         //VIC: never inform if the delete is successful or not?
                         alertSuccess.Visible = true;
                         DeleteError.Visible = false;
+                        createSuccess.Visible = false;
+                        updateSuccess.Visible = false;
                         msgSuccess.Text = CompanyName + " Has Been Deleted Successfully!";
                     }
                     else
                     {
                         DeleteError.Visible = true;
                         alertSuccess.Visible = false;
+                        createSuccess.Visible = false;
+                        updateSuccess.Visible = false;
                         DeleteLabel.Text = "Hi, there is/are " + count + " Advertisement(s) under " + CompanyName + ".Please Delete existing advertisement(s) first before proceeding to delete the company.";
                     }
                 }

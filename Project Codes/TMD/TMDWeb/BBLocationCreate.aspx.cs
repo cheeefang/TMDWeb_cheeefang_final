@@ -22,7 +22,7 @@ namespace targeted_marketing_display
         protected void Page_Load(object sender, EventArgs e)
         {
 
-          
+
         }
         protected void SubmitBtn_Click(object sender, EventArgs e)
         {
@@ -50,150 +50,73 @@ namespace targeted_marketing_display
             Billboard_Management bbMgmt = new Billboard_Management();
             //che ee was here
             // Boolean record = bbMgmt.BBcheck(BillboardCode);
-            int BBChecker = 0;
-
-
-
-            SqlCommand sCmd = new SqlCommand("SELECT count(*) as total FROM BillboardLocation WHERE BillboardCode ='@BCode' ", conn);
-            SqlParameter param = new SqlParameter();
-            param.ParameterName = "'@BCode'";
-            param.Value = BillboardCode;
-            sCmd.Parameters.AddWithValue("@BillboardCode", BillboardCode);
-            SqlDataAdapter sda = new SqlDataAdapter();
-            DataTable dt = new DataTable();
-            sCmd.Connection = conn;
-            sda.SelectCommand = sCmd;
-            sda.Fill(dt);
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                int count = Convert.ToInt32(dt.Rows[i]["total"]);
-                if (count == 0)
-                {
-                    BBChecker = 0;
-                }
-                else
-                {
-                    BBChecker = 1;
-                }
-            }
-
-
-
-
           
 
-            if (BBLocationCode.Text != "" )
+
+
+            SqlCommand sCmd = new SqlCommand("SELECT Count(*) FROM BillboardLocation WHERE BillboardCode=@BCode and status=1", conn);
+            SqlParameter param = new SqlParameter();
+            param.ParameterName = "@BCode";
+            param.Value = BillboardCode;
+            sCmd.Parameters.Add(param);
+            Int32 totalcount = Convert.ToInt32(sCmd.ExecuteScalar());
+            
+            
+
+
+
+
+
+
+            if (BBLocationCode.Text != "" || BBAddLn1.Text != "" || BBCity.Text != "" || BBCountry.SelectedValue != "" ||
+                BBPostalCode.Text != "" || BBLatitude.Text != "" || BBLongtitude.Text != "")
             {
-                if (BBAddLn1.Text != "")
+
+                if (totalcount==0)
                 {
-                    if (BBCity.Text != "")
+                    
+                    Boolean result = bbMgmt.BBinsert(BillboardCode, AddressLn1, AddressLn2, City, Country, PostalCode, CreatedOn, Status, latitude, Longtitude, CreatedBy);
+                    if (result == true)
                     {
-                        if (BBCountry.SelectedValue != "")
-                        {
-                            if (BBPostalCode.Text != "")
-                            {
-                                if (BBLatitude.Text != "")
-                                {
 
-                                    if (BBLongtitude.Text != "")
-                                    {
+                        //alertWarning.Visible = false;
+                        //alertSuccess.Visible = true;
+                        //BBLocationCode.Text = String.Empty;
+                        //BBAddLn1.Text = String.Empty;
+                        //BBAddLn2.Text = String.Empty;
+                        //BBCountry.SelectedValue = "";
+                        //BBCity.Text = String.Empty;
+                        //BBPostalCode.Text = String.Empty;
 
-
-                                        if (BBChecker==0)
-                                        {
-                                            testing123.Text = "Unique!";
-                                            Boolean result = bbMgmt.BBinsert(BillboardCode, AddressLn1, AddressLn2, City, Country, PostalCode, CreatedOn, Status, latitude, Longtitude, CreatedBy);
-                                            if (result == true)
-                                            {
-                                           
-                                                //alertWarning.Visible = false;
-                                                //alertSuccess.Visible = true;
-                                                //BBLocationCode.Text = String.Empty;
-                                                //BBAddLn1.Text = String.Empty;
-                                                //BBAddLn2.Text = String.Empty;
-                                                //BBCountry.SelectedValue = "";
-                                                //BBCity.Text = String.Empty;
-                                                //BBPostalCode.Text = String.Empty;
-
-                                                Session["BBCreate"] = 2;
-                                                Response.Redirect("BBLocationRead.aspx");
-                                            }
-                                        }
-
-                                        if(BBChecker!=0)
-                                        {
-                                            testing123.Text = " not Unique!";
-                                            alertWarning.Visible = false;
-                                            alertSuccess.Visible = false;
-                                            alertDanger.Visible = true;
-                                            dangerLocation.Text = "Billboard Code already exist";
-                                        }
-                                    }
-
-                                    else
-                                    {
-                                        alertWarning.Visible = true;
-                                        alertSuccess.Visible = false;
-                                        alertDanger.Visible = false;
-                                        warningLocation.Text = "Please enter Longtitude";
-                                    }
-                                }
-
-                                else
-                                {
-                                    alertWarning.Visible = true;
-                                    alertSuccess.Visible = false;
-                                    alertDanger.Visible = false;
-                                    warningLocation.Text = "Please enter Latitude";
-                                }
-                            }
-                            else
-                            {
-                                alertWarning.Visible = true;
-                                alertSuccess.Visible = false;
-                                alertDanger.Visible = false;
-                                warningLocation.Text = "Please enter postal code";
-                            }
-                        }
-
-                        else
-                        {
-                            alertWarning.Visible = true;
-                            alertSuccess.Visible = false;
-                            alertDanger.Visible = false;
-                            warningLocation.Text = "Please select a country";
-                        }
-                    }
-
-                    else
-                    {
-                        alertWarning.Visible = true;
-                        alertSuccess.Visible = false;
-                        alertDanger.Visible = false;
-                        warningLocation.Text = "Please enter a city";
+                       Session["BBCreate"] = 2;
+                       Response.Redirect("BBLocationRead.aspx");
                     }
                 }
 
                 else
                 {
-                    alertWarning.Visible = true;
+                    testing123.Text = " not Unique!";
+                    alertWarning.Visible = false;
                     alertSuccess.Visible = false;
-                    alertDanger.Visible = false;
-                    warningLocation.Text = "Please enter an Address";
+                    alertDanger.Visible = true;
+                    dangerLocation.Text = "Billboard Code already exist";
                 }
             }
+
             else
             {
                 alertWarning.Visible = true;
                 alertSuccess.Visible = false;
                 alertDanger.Visible = false;
-                warningLocation.Text = "Please enter a unique Billboard code";
+                warningLocation.Text = "Please enter All Required Fields";
             }
-
-
         }
-
     }
 }
 
+
+               
+
+                                    
+                            
 

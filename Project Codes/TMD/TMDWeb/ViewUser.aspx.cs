@@ -85,13 +85,16 @@ namespace targeted_marketing_display
                 {
                     deleteFailure.Visible = true;
                     alertSuccess.Visible = false;
-                    
+                    updateSuccess.Visible = false;
+                    createSuccess.Visible = false;
                     labelDelete.Text = "You cannot delete yourself";
                 }
                 else
                 {
                     deleteFailure.Visible = false;
                     alertSuccess.Visible = true;
+                    updateSuccess.Visible = false;
+                    createSuccess.Visible = false;
                     msgSuccess.Text = userName + " Has Been Deleted Successfully!";
                     Boolean insCnt = uDao.deleteQns(lb_msgId.Text);
                 }

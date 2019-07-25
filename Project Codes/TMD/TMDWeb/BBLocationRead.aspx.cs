@@ -181,6 +181,8 @@ namespace targeted_marketing_display
                         //VIC: never inform if the delete is successful or not?
                         alertSuccess.Visible = true;
                         DeleteFailure.Visible = false;
+                        createSuccess.Visible = false;
+                        updateSuccess.Visible = false;
                         msgSuccess.Text = " Billboard #" + BBCode + " Has Been Deleted Successfully!";
 
                     }
@@ -188,6 +190,8 @@ namespace targeted_marketing_display
                     {
                         DeleteFailure.Visible = true;
                         alertSuccess.Visible = false;
+                        createSuccess.Visible = false;
+                        updateSuccess.Visible = false;
                         LabelError.Text = "There are " + count + " Advertisement(s) in Billboard " + BBCode + ".Please Delete existing advertisement(s) first before proceeding to delete the Billboard.";
                     }
                 }
