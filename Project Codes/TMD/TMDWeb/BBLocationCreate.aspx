@@ -138,7 +138,7 @@ map.on('load', function() {
                     <div class="form-group">
                         <label>Billboard Code </label>
                         <label style="color: red">*</label>
-                        <asp:TextBox class="form-control" ID="BBLocationCode" placeholder="Enter Location Code" runat="server" ClientIDMode="Static"></asp:TextBox>&nbsp;
+                        <asp:TextBox class="form-control" ID="BBLocationCode" placeholder="Enter Location Code" runat="server" ClientIDMode="Static" MaxLength="10"></asp:TextBox>&nbsp;
                     </div>
 
                 </div>
