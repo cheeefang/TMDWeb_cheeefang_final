@@ -30,6 +30,8 @@ namespace targeted_marketing_display
                 alertSuccessCreate.Visible = true;
                 Session.Remove("AdvertCreate");
             }
+            //DataGridColumn dgcolumn = new DataGridColumn();
+
             // Label lb_msgId = (Label)gvRow1.FindControl("AdvertItem");.jpeg
             //for (int i = 0; i < GridView1.Rows.Count; i++)
             //{
