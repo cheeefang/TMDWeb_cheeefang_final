@@ -168,16 +168,17 @@ namespace BBMgmt
             return result;
         }
 
-        public Boolean BBcheck(String BillboardCode, String postalCode)
+        //if bb and postal code
+        public Boolean BBcheck(String BillboardCode)
         {
             bool record = false; 
 
-            string sqlStatement = @"SELECT * FROM BillboardLocation WHERE (BillboardCode = '@BillboardCode' and postalCode = '@postalCode')";
+            string sqlStatement = @"SELECT * FROM BillboardLocation WHERE (BillboardCode = '@BillboardCode')";
 
             SqlCommand sCmd = new SqlCommand(sqlStatement);
 
             sCmd.Parameters.AddWithValue("@BillboardCode", BillboardCode);
-            sCmd.Parameters.AddWithValue("@postalCode", postalCode);
+          
 
             dbConnection.executeNonQuery(sCmd);
             record = dbConnection.executeScalar(sCmd);
@@ -224,21 +225,7 @@ namespace BBMgmt
             return dt;
             
         }
-        public Boolean BBdelete(String BillboardCode)
-        {
-            bool result = false;
-
-            string sqlStatement = @"update BillboardLocation Set status = 0 WHERE BillboardCode = 'BBintang10'";
-
-            SqlCommand sCmd = new SqlCommand(sqlStatement);
-
-            sCmd.Parameters.AddWithValue("@BillboardCode", BillboardCode);
-
-            result = dbConnection.executeNonQuery(sCmd);
-
-
-            return result;
-        }
+      
 
         public Boolean BBsearch()
         {

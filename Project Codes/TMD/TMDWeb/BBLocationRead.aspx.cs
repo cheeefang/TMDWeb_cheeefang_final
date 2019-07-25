@@ -48,8 +48,7 @@ namespace targeted_marketing_display
             //conn = new
             //    SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
             //conn.Open();
-            Billboard_Management bbMgmt = new Billboard_Management();
-                DataTable dt = bbMgmt.BBread();
+            
             
             //GridView1.DataSource = dt;
             GridView1.DataBind();

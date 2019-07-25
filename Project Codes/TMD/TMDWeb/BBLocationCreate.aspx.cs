@@ -40,8 +40,9 @@ namespace targeted_marketing_display
             string Longtitude = BBLongtitude.Text.ToString();
 
             Billboard_Management bbMgmt = new Billboard_Management();
-            Boolean record = bbMgmt.BBcheck(BillboardCode, PostalCode);
-
+            //che ee was here
+            Boolean record = bbMgmt.BBcheck(BillboardCode);
+            
             if (BBLocationCode.Text != "")
             {
                 if (BBAddLn1.Text != "")
@@ -61,9 +62,11 @@ namespace targeted_marketing_display
 
                                         if (record == false)
                                         {
+                                            
                                             Boolean result = bbMgmt.BBinsert(BillboardCode, AddressLn1, AddressLn2, City, Country, PostalCode, CreatedOn, Status, latitude, Longtitude, CreatedBy);
                                             if (result == true)
                                             {
+                                            
                                                 alertWarning.Visible = false;
                                                 alertSuccess.Visible = true;
                                                 BBLocationCode.Text = String.Empty;
@@ -143,8 +146,9 @@ namespace targeted_marketing_display
                 alertDanger.Visible = false;
                 warningLocation.Text = "Please enter a unique Billboard code";
             }
-            Session["BBCreate"] = 2;
-            Response.Redirect("BBLocationRead.aspx");
+
+           // Session["BBCreate"] = 2;
+         //   Response.Redirect("BBLocationRead.aspx");
 
         }
 

@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="BBLocationRead.aspx.cs" Inherits="targeted_marketing_display.BBLocationRead" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server" align="left">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server" >
     <style type="text/css">
         .auto-style2 {
             height: 42px;
@@ -29,7 +29,7 @@
         }
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" align="left">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" >
     <form runat="server">
 
     <script>
