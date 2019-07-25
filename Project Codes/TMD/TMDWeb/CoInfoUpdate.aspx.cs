@@ -49,10 +49,11 @@ namespace targeted_marketing_display
                 alertSuccess.Visible = true;
                 CoName.Text = String.Empty;
                 CoIndustry.SelectedValue = "";
+                Session["CoUpdate"] = 2;
+                Response.Redirect("CoInfoRead.aspx");
 
             }
-            Session["CoUpdate"] = 2;
-            Response.Redirect("CoInfoRead.aspx");
+          
         }
     }
 }

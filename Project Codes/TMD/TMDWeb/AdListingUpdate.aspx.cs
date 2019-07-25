@@ -618,7 +618,8 @@ namespace targeted_marketing_display
                 }
                 alertWarning.Visible = false;
                 alertSuccess.Visible = true;
-
+                Session["AdvertUpdate"] = 2;
+                Response.Redirect("AdListing.aspx");
             }
 
             //ScriptManager.RegisterStartupScript(this, this.GetType(),
@@ -629,8 +630,7 @@ namespace targeted_marketing_display
             //string adNamenew = AdvertObj.Name;
             //Response.Write("<script language='javascript'>alert('Successfully Updated Advertisement');</script>");
             //Server.Transfer("AdListing.aspx", true);
-            Session["AdvertUpdate"] = 2;
-            Response.Redirect("AdListing.aspx");
+          
             // Response.Redirect(Request.RawUrl);
            // alertSuccess.Visible = true;
            // Response.Redirect("AdListing.aspx?showSuccessMessage = 1");

@@ -320,10 +320,10 @@ namespace targeted_marketing_display
                 }
                 alertWarning.Visible = false;
                 alertSuccess.Visible = true;
-
+                Session["AdvertCreate"] = 2;
+                Response.Redirect("AdListing.aspx");
             }
-            Session["AdvertCreate"] = 2;
-            Response.Redirect("AdListing.aspx");
+            
 
         }
 

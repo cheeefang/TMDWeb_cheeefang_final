@@ -17,8 +17,8 @@ namespace targeted_marketing_display
     public partial class CompanyAdvertInfo : System.Web.UI.Page
     {
 
+        Database dbConnection = new Database();
 
-        
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -29,7 +29,7 @@ namespace targeted_marketing_display
             {
 
                 this.BindGrid();
-
+                //this.SearchCompAds();
                    
 
 
@@ -38,8 +38,40 @@ namespace targeted_marketing_display
         }
 
 
-
-
+        //private void SearchCompAds()
+        //{
+        //    string constr = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
+        //    using (SqlConnection con = new SqlConnection(constr))
+        //    {
+        //        using (SqlCommand cmd = new SqlCommand())
+        //        {
+        //            string sql = "select [Company].Name as Company,[Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
+        //        "";
+        //            if (!string.IsNullOrEmpty(txtSearch.Text.Trim()))
+        //            {
+        //                sql += "where [ComPany].CompanyID=@ID and [Advertisement].status=1 and Name LIKE @Name OR Item LIKE @Item OR Name1  LIKE @Name1 OR ItemType LIKE @ItemType OR convert(StartDate,'System.String') LIKE @sDate OR convert(EndDate,'System.String') LIKE @eDate +%";
+        //                cmd.Parameters.AddWithValue("@ID", Session["CompanyID"].ToString());
+        //                cmd.Parameters.AddWithValue("@Name", txtSearch.Text.Trim());
+        //                cmd.Parameters.AddWithValue("@Name1", txtSearch.Text.Trim());
+        //                cmd.Parameters.AddWithValue("@Item", txtSearch.Text.Trim());
+        //                cmd.Parameters.AddWithValue("@ItemType", txtSearch.Text.Trim());
+        //                cmd.Parameters.AddWithValue("@sDate", txtSearch.Text.Trim());
+        //                cmd.Parameters.AddWithValue("@eDate", txtSearch.Text.Trim());
+        //            }
+        //            cmd.CommandText = sql;
+        //            cmd.Connection = con;
+        //            using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+        //            {
+        //                DataTable dt = new DataTable();
+        //                sda.Fill(dt);
+        //                //gvCustomers.DataSource = dt;
+        //                //gvCustomers.DataBind();
+        //                GridView1.DataSource = dt;
+        //                GridView1.DataBind();
+        //            }
+        //        }
+        //    }
+        //}
         public void BindGrid()
         {
             try

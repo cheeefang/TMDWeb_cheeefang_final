@@ -88,10 +88,11 @@ namespace targeted_marketing_display
                 BBPostalCode.Text = String.Empty;
                 BBLatitude.Text = String.Empty;
                 BBLongtitude.Text = String.Empty;
+                Session["BBUpdate"] = 2;
+                Response.Redirect("BBLocationRead.aspx");
 
             }
-            Session["BBUpdate"] =2;
-            Response.Redirect("BBLocationRead.aspx");
+           
         }
         
 

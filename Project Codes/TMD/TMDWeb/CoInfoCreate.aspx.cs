@@ -43,10 +43,10 @@ namespace targeted_marketing_display
                 alertSuccess.Visible = true;
                 CoName.Text = String.Empty;
                 CoIndustry.SelectedValue = "";
-
+                Session["CoCreate"] = 2;
+                Response.Redirect("CoInfoRead.aspx");
             }
-            Session["CoCreate"] = 2;
-            Response.Redirect("CoInfoRead.aspx");
+            
         }
     }
 }
