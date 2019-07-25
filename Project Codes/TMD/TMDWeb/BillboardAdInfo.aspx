@@ -29,9 +29,13 @@
             
             center: ["<%= longtitude %>","<%= latitude %>"], // Starting position [lng, lat]
             zoom: 12, // Starting zoom level
+            
+       
+ 
+    //map.getSource('single-point').setData(center);
         });
         var marker = new mapboxgl.Marker() // initialize a new marker
-            .setLngLat([-122.25948, 37.87221]) // Marker [lng, lat] coordinates
+            .setLngLat(["<%= longtitude %>","<%= latitude %>"]) // Marker [lng, lat] coordinates
             .addTo(map); // Add the marker to the map
         var geocoder = new MapboxGeocoder({ // Initialize the geocoder
   accessToken: mapboxgl.accessToken, // Set the access token
