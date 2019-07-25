@@ -62,7 +62,7 @@ namespace targeted_marketing_display
 
                                         if (record == false)
                                         {
-                                         
+                                            testing123.Text = "Unique!";
                                             Boolean result = bbMgmt.BBinsert(BillboardCode, AddressLn1, AddressLn2, City, Country, PostalCode, CreatedOn, Status, latitude, Longtitude, CreatedBy);
                                             if (result == true)
                                             {
@@ -75,15 +75,19 @@ namespace targeted_marketing_display
                                                 BBCountry.SelectedValue = "";
                                                 BBCity.Text = String.Empty;
                                                 BBPostalCode.Text = String.Empty;
+
+                                                Session["BBCreate"] = 2;
+                                                Response.Redirect("BBLocationRead.aspx");
                                             }
                                         }
 
-                                        else
+                                        if(record==true)
                                         {
+                                            testing123.Text = " not Unique!";
                                             alertWarning.Visible = false;
                                             alertSuccess.Visible = false;
                                             alertDanger.Visible = true;
-                                            dangerLocation.Text = "Location already exist";
+                                            dangerLocation.Text = "Billboard Code already exist";
                                         }
                                     }
 
@@ -147,8 +151,6 @@ namespace targeted_marketing_display
                 warningLocation.Text = "Please enter a unique Billboard code";
             }
 
-            Session["BBCreate"] = 2;
-            Response.Redirect("BBLocationRead.aspx");
 
         }
 

@@ -111,7 +111,7 @@ map.on('load', function() {
     </script>
 
               <center> 
-               
+               <asp:label ID="testing123" runat="server"></asp:label>
                   <div runat="server" class="alert alert-success" id="alertSuccess" visible="False">
                     <strong>Success!</strong> New Location has been created.
                 </div> 
