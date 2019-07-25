@@ -22,11 +22,19 @@ namespace targeted_marketing_display
         protected void Page_Load(object sender, EventArgs e)
         {
 
-
+          
         }
         protected void SubmitBtn_Click(object sender, EventArgs e)
         {
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
 
+
+
+            // instantiate and open connection
+            conn = new
+                SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+            conn.Open();
             String BillboardCode = BBLocationCode.Text.ToString();
             String AddressLn1 = BBAddLn1.Text.ToString();
             String AddressLn2 = BBAddLn2.Text.ToString();
@@ -41,8 +49,39 @@ namespace targeted_marketing_display
 
             Billboard_Management bbMgmt = new Billboard_Management();
             //che ee was here
-            Boolean record = bbMgmt.BBcheck(BillboardCode);
-            
+            // Boolean record = bbMgmt.BBcheck(BillboardCode);
+            bool record = false;
+
+
+
+            SqlCommand sCmd = new SqlCommand("SELECT count(*) as total FROM BillboardLocation WHERE BillboardCode ='@BCode' ", conn);
+            SqlParameter param = new SqlParameter();
+            param.ParameterName = "'@BCode'";
+            param.Value = BillboardCode;
+            sCmd.Parameters.AddWithValue("@BillboardCode", BillboardCode);
+            SqlDataAdapter sda = new SqlDataAdapter();
+            DataTable dt = new DataTable();
+            sCmd.Connection = conn;
+            sda.SelectCommand = sCmd;
+            sda.Fill(dt);
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                int count = Convert.ToInt32(dt.Rows[i]["total"]);
+                if (count == 0)
+                {
+                    record = false;
+                }
+                else
+                {
+                    record = true;
+                }
+            }
+
+
+
+
+          
+
             if (BBLocationCode.Text != "" )
             {
                 if (BBAddLn1.Text != "")

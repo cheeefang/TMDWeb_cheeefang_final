@@ -168,51 +168,8 @@ namespace BBMgmt
             return result;
         }
 
-        //if bb and postal code
-        public Boolean BBcheck(String BillboardCode)
-        {
-            SqlConnection conn = null;
-            SqlDataReader reader = null;
-
-
-
-            // instantiate and open connection
-            conn = new
-                SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
-            conn.Open();
-            bool record = false; 
-
+    
         
-
-            SqlCommand sCmd = new SqlCommand("SELECT count(*) as total FROM BillboardLocation WHERE BillboardCode =@BCode",conn);
-            SqlParameter param = new SqlParameter();
-            param.ParameterName = "@BCode";
-            param.Value = BillboardCode;
-            sCmd.Parameters.AddWithValue("@BillboardCode", BillboardCode);
-            SqlDataAdapter sda = new SqlDataAdapter();
-            DataTable dt = new DataTable();
-            sCmd.Connection = conn;
-            sda.SelectCommand = sCmd;
-            sda.Fill(dt);
-            for(int i = 0; i < dt.Rows.Count; i++)
-            {
-                int count = Convert.ToInt32(dt.Rows[i]["total"]);
-                if (count == 0)
-                {
-                    record = false;
-                }
-                else
-                {
-                    record = true;
-                }
-            }
-            
-          
-
-
-            return record;
-            
-        }
         public DataTable BBread()
         {
             DataTable dt = new DataTable();
