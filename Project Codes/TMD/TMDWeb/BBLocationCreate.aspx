@@ -96,14 +96,15 @@ map.on('load', function() {
         var latitude = e.result.geometry.coordinates[1];
         var pCode = e.result.context["0"].text;
         var City = e.result.context["3"].text;
-    
+        var Country = e.result.context["3"].short_code;
+        var CapsCountry = Country.toUpperCase();
         console.log(e.result.geometry.coordinates);
         document.getElementById("BBLatitude").value = latitude;
         document.getElementById("BBLongtitude").value = longtitude;
         document.getElementById("BBPostalCode").value = pCode;
         document.getElementById("BBCity").value = City;
         document.getElementById("BBAddLn1").value = address;
-    
+        document.getElementById("BBCountry").value = CapsCountry;
     map.getSource('single-point').setData(e.result.geometry);
   });
 });
