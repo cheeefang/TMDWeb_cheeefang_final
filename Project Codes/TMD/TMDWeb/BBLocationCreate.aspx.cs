@@ -50,7 +50,7 @@ namespace targeted_marketing_display
             Billboard_Management bbMgmt = new Billboard_Management();
             //che ee was here
             // Boolean record = bbMgmt.BBcheck(BillboardCode);
-            bool record = false;
+            int BBChecker = 0;
 
 
 
@@ -69,11 +69,11 @@ namespace targeted_marketing_display
                 int count = Convert.ToInt32(dt.Rows[i]["total"]);
                 if (count == 0)
                 {
-                    record = false;
+                    BBChecker = 0;
                 }
                 else
                 {
-                    record = true;
+                    BBChecker = 1;
                 }
             }
 
@@ -99,28 +99,28 @@ namespace targeted_marketing_display
                                     {
 
 
-                                        if (record == false)
+                                        if (BBChecker==0)
                                         {
                                             testing123.Text = "Unique!";
                                             Boolean result = bbMgmt.BBinsert(BillboardCode, AddressLn1, AddressLn2, City, Country, PostalCode, CreatedOn, Status, latitude, Longtitude, CreatedBy);
                                             if (result == true)
                                             {
                                            
-                                                alertWarning.Visible = false;
-                                                alertSuccess.Visible = true;
-                                                BBLocationCode.Text = String.Empty;
-                                                BBAddLn1.Text = String.Empty;
-                                                BBAddLn2.Text = String.Empty;
-                                                BBCountry.SelectedValue = "";
-                                                BBCity.Text = String.Empty;
-                                                BBPostalCode.Text = String.Empty;
+                                                //alertWarning.Visible = false;
+                                                //alertSuccess.Visible = true;
+                                                //BBLocationCode.Text = String.Empty;
+                                                //BBAddLn1.Text = String.Empty;
+                                                //BBAddLn2.Text = String.Empty;
+                                                //BBCountry.SelectedValue = "";
+                                                //BBCity.Text = String.Empty;
+                                                //BBPostalCode.Text = String.Empty;
 
                                                 Session["BBCreate"] = 2;
                                                 Response.Redirect("BBLocationRead.aspx");
                                             }
                                         }
 
-                                        if(record==true)
+                                        if(BBChecker!=0)
                                         {
                                             testing123.Text = " not Unique!";
                                             alertWarning.Visible = false;
