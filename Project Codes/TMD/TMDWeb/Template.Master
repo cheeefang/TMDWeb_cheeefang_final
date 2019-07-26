@@ -18,7 +18,7 @@
   <script src='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
   <link href='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
     <!- -->
-
+  
 <link href='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
     <title>Targeted Marketing Display Administration</title>
     <!-- Custom Pagination CSS-->
@@ -227,7 +227,7 @@
                     <!--User Sidebar-->
                     <div class="navbar-default sidebar" role="navigation">
                         <div class="sidebar-nav navbar-collapse">
-                            <ul class="nav" id="side-menu">
+                            <ul class="nav" id="side-menu2">
                                 <li>
                                     <div class="auto-style1">
                                         <!--user welcome-->
