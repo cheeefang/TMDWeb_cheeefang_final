@@ -175,7 +175,7 @@
                                 <asp:BoundField DataField="ID" HeaderText="Advertisement ID" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
                                         <ItemStyle HorizontalAlign="Center" Width="2%"></ItemStyle>
                                 </asp:BoundField>
-                                <asp:BoundField DataField="LocationID" HeaderText="Location ID" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
+                                <asp:BoundField DataField="BillboardID" HeaderText="Billboard ID" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
                                         <ItemStyle HorizontalAlign="Center" Width="2%"></ItemStyle>
                                 </asp:BoundField>
                                 <asp:BoundField DataField="Name" HeaderText="Name" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">

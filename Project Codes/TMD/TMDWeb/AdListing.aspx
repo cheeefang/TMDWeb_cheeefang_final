@@ -231,7 +231,7 @@ function HideDiv() {
                                     
                                      <asp:BoundField DataField="Name1" HeaderText="Advert Name" SortExpression="Name1"></asp:BoundField>
                                     
-                             
+                                    <asp:BoundField DataField="ItemType" HeaderText="Advert Type" SortExpression="Name1"></asp:BoundField>
                                
                                     <asp:BoundField DataField="StartDate" HeaderText="StartDate" SortExpression="StartDate" DataFormatString="{0:D}"></asp:BoundField>
                                     <asp:BoundField DataField="EndDate" HeaderText="EndDate" SortExpression="EndDate" DataFormatString="{0:D}"></asp:BoundField>
