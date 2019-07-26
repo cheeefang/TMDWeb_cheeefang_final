@@ -4,27 +4,6 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <style type="text/css">
-        #divImage
-{
-    display: none;
-    z-index: 1000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: White;
-    height: 550px;
-    width: 600px;
-    padding: 3px;
-    border: solid 1px black;
-}
-#videoDog{
-     object-fit: cover;
-}
-#vidDiv{
-
-}
-        </style>
     <form runat="server">       
             
 
@@ -37,7 +16,7 @@
                     <!-- /.col-lg-12 -->
                 </div>
 
-        <asp:label id="labelMap" runat="server" font-bold="true">Billboard Location</asp:label>
+        <asp:label id="labelMap" runat="server" font-bold="true">Map</asp:label>
          <div id='map' style="width:300px;height:300px" align="center"></div>
 
     <script>
@@ -128,21 +107,11 @@ map.on('load', function() {
             <Columns>
                                     
     
-                                  <asp:TemplateField HeaderText="Advertisement">
-                                       
-                                        <ItemTemplate>
-                                          
-                                        
-                                      <asp:ImageButton ID="Image1" runat="server" ImageUrl='<%# Eval("Item") %>' OnClientClick="return LoadDiv(this.src);" Visible='<%# Eval("ItemType").ToString() =="image" %>'  />
-                                      <div id="vidDiv" runat="server">
-                                        <video ClientIDMode="static" id="videoDog" width="200" height="200" runat="server" controls visible='<%# Eval("ItemType").ToString()!="image" %>'>  
-                                            <source runat="server" src='<%#Eval("Item")%>' type="video/mp4" visible='<%# Eval("ItemType").ToString()!="image" %>' >  
-                                        </video>  
-                                           </div>
-                                              
-                                            </ItemTemplate>
-                                        <controlstyle height="200px" width="200px"  />
-                                        </asp:TemplateField>
+                                    <asp:ImageField DataImageUrlField="Item" HeaderText="Advertisement" ControlStyle-Width="100" ControlStyle-Height = "100" > 
+        
+                                   
+<ControlStyle Height="100px" Width="100px"></ControlStyle>
+                                    </asp:ImageField>
         
                                    
                                     <asp:BoundField DataField="BillboardCode" HeaderText="Billboard Code" sortExpression="BillboardCode" Visible="false" ></asp:BoundField>
