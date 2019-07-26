@@ -387,7 +387,9 @@
                                         </p>
 
                                     <!-- Billboard Gridview-->
+ <asp:UpdatePanel ID="updatepanel20" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
 
+                            <ContentTemplate>
                                     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
                                         CssClass="table table-striped table-bordered table-hover" DataKeyNames="BillboardID" 
                                         DataSourceID="SqlDataSource2" AllowPaging="True" Width="100%" BackColor="White" 
@@ -432,7 +434,8 @@
                                <SortedDescendingHeaderStyle BackColor="#383838" />
 	
                            </asp:GridView>
-                               
+                                   </ContentTemplate>
+     </asp:UpdatePanel>
                                     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" 
                                FilterExpression="BillboardCode LIKE '%{0}%' OR AddressLn LIKE '%{0}%' OR City LIKE '%{0}%' OR Country LIKE '%{0}%' OR postalCode LIKE '%{0}%'" 
                                         SelectCommand="SELECT BillboardID,BillboardCode, Latitude ,Longtitude ,(( AddressLn1) + ' '+( AddressLn2 )+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address FROM BillboardLocation where status=1 ">
@@ -445,7 +448,8 @@
 
                                         </FilterParameters>
                                     </asp:SqlDataSource>
-                                         
+                                     
+
                                    
                                     </div>
                                     <div class="modal-footer">
