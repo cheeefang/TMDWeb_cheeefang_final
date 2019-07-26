@@ -183,7 +183,7 @@ namespace targeted_marketing_display
                         DeleteFailure.Visible = false;
                         createSuccess.Visible = false;
                         updateSuccess.Visible = false;
-                        msgSuccess.Text = " Billboard #" + BBCode + " Has Been Deleted Successfully!";
+                        msgSuccess.Text = " Billboard #" + BBCode + " has been deleted successfully!";
 
                     }
                     else
@@ -192,7 +192,7 @@ namespace targeted_marketing_display
                         alertSuccess.Visible = false;
                         createSuccess.Visible = false;
                         updateSuccess.Visible = false;
-                        LabelError.Text = "There are " + count + " Advertisement(s) in Billboard " + BBCode + ".Please Delete existing advertisement(s) first before proceeding to delete the Billboard.";
+                        LabelError.Text = "There are " + count + " Advertisement(s) in Billboard " + BBCode + ".Please delete existing advertisement(s) first before proceeding to delete the Billboard.";
                     }
                 }
 

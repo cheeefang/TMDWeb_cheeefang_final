@@ -193,7 +193,8 @@
          <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <asp:label  runat="server"><b>Advertisement</b></asp:label>
+                    <label>Advertisement Image/Video</label>
+                      <label style="color: red">*</label>
                <br />
                    
                  
@@ -215,8 +216,8 @@
                 <div class="col-lg-6">
                    <div class="form-group">
                  
-                        <label>Item(Image/Video) </label>
-                        <label style="color: red">*</label>
+                        
+                      
                         &nbsp;
                        
                                        

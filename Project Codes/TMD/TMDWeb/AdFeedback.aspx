@@ -58,6 +58,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
+          <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
         <div id="adminDiv" runat="server">
      
                 <!--button-->
@@ -246,9 +247,15 @@
                         </asp:GridView>
                     </div>
                 </div>
+                    <asp:UpdatePanel ID="updatepanel1" runat="server">
+
+                            <ContentTemplate>
                     <div class="modal-footer">
                     <asp:Button ID="addAdv" runat="server" CssClass="btn btn-primary" Text="Add" OnClick="addAdv_Click"/>
+                        
                     </div>
+                                </ContentTemplate>
+                        </asp:UpdatePanel>
                     </div>
                 </div>
             </div>

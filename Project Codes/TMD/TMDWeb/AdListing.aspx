@@ -182,7 +182,7 @@ function HideDiv() {
                             <asp:GridView ID="GridView1" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Width="100%" 
                                 BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px"
                                 CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" HorizontalAlign="Center" DataKeyNames="AdvID" 
-                                OnPreRender="GridView1_PreRender" ForeColor="Black" GridLines="Vertical" OnRowDataBound="GridView1_RowDataBound"  cellspacing="5">
+                                OnPreRender="GridView1_PreRender" ForeColor="Black" GridLines="Vertical" OnRowDataBound="GridView1_RowDataBound"  cellspacing="5" PageSize="3">
                                 <AlternatingRowStyle HorizontalAlign="Center" BackColor="#CCCCCC" />
                                 <Columns>
                                     <asp:TemplateField visible="false">
@@ -215,7 +215,7 @@ function HideDiv() {
                                           Visible='<%# Eval("ItemType").ToString() =="image" %>' ClientIDMode="static" style="display:block;"   />
                                       <div id="vidDiv" runat="server">
                                         <video ClientIDMode="static" id="videoDog" width="200" height="200" runat="server" controls visible='<%# Eval("ItemType").ToString()!="image" %>'>  
-                                            <source runat="server" src='<%#Eval("Item")%>' type="video/mp4" visible='<%# Eval("ItemType").ToString()!="image" %>' >  
+                                            <source runat="server" src='<%#Eval("Item")%>' type="video/mp4" visible='<%# Eval("ItemType").ToString()!="image" %>' />  
                                         </video>  
                                            </div>
                                               
@@ -227,14 +227,14 @@ function HideDiv() {
 
                                              
 
-                                    <asp:BoundField DataField="Name" HeaderText="Company Name" SortExpression="Name"></asp:BoundField>
+                                    <asp:BoundField DataField="Name" HeaderText="Company" SortExpression="Name"></asp:BoundField>
                                     
-                                     <asp:BoundField DataField="Name1" HeaderText="Advert Name" SortExpression="Name1"></asp:BoundField>
+                                     <asp:BoundField DataField="Name1" HeaderText="Name" SortExpression="Name1"></asp:BoundField>
                                     
-                                    <asp:BoundField DataField="ItemType" HeaderText="Advert Type" SortExpression="Name1"></asp:BoundField>
+                                    <asp:BoundField DataField="ItemType" HeaderText="Type" SortExpression="Name1"></asp:BoundField>
                                
-                                    <asp:BoundField DataField="StartDate" HeaderText="StartDate" SortExpression="StartDate" DataFormatString="{0:D}"></asp:BoundField>
-                                    <asp:BoundField DataField="EndDate" HeaderText="EndDate" SortExpression="EndDate" DataFormatString="{0:D}"></asp:BoundField>
+                                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" SortExpression="StartDate" DataFormatString="{0:D}"></asp:BoundField>
+                                    <asp:BoundField DataField="EndDate" HeaderText="End Date" SortExpression="EndDate" DataFormatString="{0:D}"></asp:BoundField>
                                     
 
                                      <asp:templatefield headertext="View">
@@ -312,7 +312,8 @@ function HideDiv() {
                                 <SortedDescendingHeaderStyle BackColor="#383838" HorizontalAlign="Center" />
                             </asp:GridView>
                             <asp:Label ID="Label1" style="color:darkslateblue" runat="server" Text="Label"></asp:Label>
-
+                            <br />
+                            <br />
                            <div id="divBackground" class="modal">
 </div>
 <div id="divImage">

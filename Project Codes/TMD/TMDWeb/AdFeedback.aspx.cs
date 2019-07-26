@@ -767,7 +767,7 @@ namespace targeted_marketing_display
                         else if (rbAge.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select NoOfPax,AgeGroup From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%'");
+                            SqlCommand command = new SqlCommand("Select NoOfPax,AgeID as AgeGroup From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%'");
                             command.Parameters.AddWithValue("@pId", id.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
@@ -880,7 +880,7 @@ namespace targeted_marketing_display
                         else if (rbGender.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select NoOfPax,Gender From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%'");
+                            SqlCommand command = new SqlCommand("Select NoOfPax,GenderID as Gender From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%'");
                             command.Parameters.AddWithValue("@pId", id.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
@@ -1154,7 +1154,7 @@ namespace targeted_marketing_display
                 else if (rbTs.Checked == true)
                 {
                     con.Open();
-                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where AdvertisementFeedback.CompanyId Like '%' + @pComId + '%'");
+                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where Advertisement.CompanyId Like '%' + @pComId + '%'");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
@@ -1226,7 +1226,7 @@ namespace targeted_marketing_display
                 else if (rbAge.Checked == true)
                 {
                     con.Open();
-                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name, AgeGroup From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where AdvertisementFeedback.CompanyId Like '%' + @pComId + '%'");
+                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name, AgeID as AgeGroup From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where Advertisement.CompanyId Like '%' + @pComId + '%'");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
@@ -1329,7 +1329,7 @@ namespace targeted_marketing_display
                 else if (rbGender.Checked == true)
                 {
                     con.Open();
-                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name, Gender From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where AdvertisementFeedback.CompanyId Like '%' + @pComId + '%'");
+                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name, Gender From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where Advertisement.CompanyId Like '%' + @pComId + '%'");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
@@ -1403,7 +1403,7 @@ namespace targeted_marketing_display
                 else if (rbEmotion.Checked == true)
                 {
                     con.Open();
-                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name, Emotion From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where AdvertisementFeedback.CompanyId Like '%' + @pComId + '%'");
+                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name, Emotion From AdvertisementFeedback Full Outer Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId Where Advertisement.CompanyId Like '%' + @pComId + '%' and AdvertisementFeedback.AdvID is not null");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
@@ -1437,7 +1437,9 @@ namespace targeted_marketing_display
                         int emotionId = Convert.ToInt32(row.Cells[5].Text);
 
                         con.Open();
-                        SqlCommand command = new SqlCommand("Select NoOfPax, Emotion From AdvertisementFeedback Where CompanyId Like '%' + @pComId + '%' And AdvId Like '%' + @pAdvId + '%' And Emotion Like '%' + @pEmotionId + '%'");
+                        SqlCommand command = new SqlCommand("Select NoOfPax, Emotion From AdvertisementFeedback inner join" +
+                            " Advertisement on Advertisement.AdvID=AdvertisementFeedback.AdvID" +
+                            " Where CompanyId Like '%' + @pComId + '%' And AdvertisementFeedback.AdvId Like '%' + @pAdvId + '%' And Emotion Like '%' + @pEmotionId + '%'");
                         command.Parameters.AddWithValue("@pComId", companyId.ToString());
                         command.Parameters.AddWithValue("@pAdvId", advId.ToString());
                         command.Parameters.AddWithValue("@pEmotionId", emotionId.ToString());
