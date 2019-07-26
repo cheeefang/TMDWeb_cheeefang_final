@@ -141,7 +141,8 @@ map.on('load', function() {
                                            </div>
                                               
                                             </ItemTemplate>
-                                        <controlstyle height="200px" width="200px"  />
+                                        <controlstyle width="200px" height="200px"  />
+                                        <ItemStyle Width="200px" height="200px" />
                                         </asp:TemplateField>
         
                                    

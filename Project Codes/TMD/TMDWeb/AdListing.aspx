@@ -181,7 +181,8 @@ function HideDiv() {
                             <%--                        <table class="table table-striped table-bordered table-hover" style="width: 100%">--%>
                             <asp:GridView ID="GridView1" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Width="100%" 
                                 BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px"
-                                CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" HorizontalAlign="Center" DataKeyNames="AdvID"  OnPreRender="GridView1_PreRender" ForeColor="Black" GridLines="Vertical" OnRowDataBound="GridView1_RowDataBound">
+                                CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" HorizontalAlign="Center" DataKeyNames="AdvID" 
+                                OnPreRender="GridView1_PreRender" ForeColor="Black" GridLines="Vertical" OnRowDataBound="GridView1_RowDataBound"  cellspacing="5">
                                 <AlternatingRowStyle HorizontalAlign="Center" BackColor="#CCCCCC" />
                                 <Columns>
                                     <asp:TemplateField visible="false">
@@ -210,7 +211,8 @@ function HideDiv() {
                                         <ItemTemplate>
                                           
                                         
-                                      <asp:ImageButton ID="Image1" runat="server" ImageUrl='<%# Eval("Item") %>' OnClientClick="return LoadDiv(this.src);" Visible='<%# Eval("ItemType").ToString() =="image" %>'  />
+                                      <asp:ImageButton ID="Image1" runat="server" ImageUrl='<%# Eval("Item") %>' OnClientClick="return LoadDiv(this.src);" 
+                                          Visible='<%# Eval("ItemType").ToString() =="image" %>' ClientIDMode="static" style="display:block;"   />
                                       <div id="vidDiv" runat="server">
                                         <video ClientIDMode="static" id="videoDog" width="200" height="200" runat="server" controls visible='<%# Eval("ItemType").ToString()!="image" %>'>  
                                             <source runat="server" src='<%#Eval("Item")%>' type="video/mp4" visible='<%# Eval("ItemType").ToString()!="image" %>' >  
@@ -218,7 +220,8 @@ function HideDiv() {
                                            </div>
                                               
                                             </ItemTemplate>
-                                        <controlstyle height="200px" width="200px"  />
+                                        <controlstyle width="200px" height="200px"  />
+                                        <ItemStyle Width="200px" height="200px" />
                                         </asp:TemplateField>
                              
 
@@ -227,7 +230,7 @@ function HideDiv() {
                                     <asp:BoundField DataField="Name" HeaderText="Company Name" SortExpression="Name"></asp:BoundField>
                                     
                                      <asp:BoundField DataField="Name1" HeaderText="Advert Name" SortExpression="Name1"></asp:BoundField>
-                                    <asp:BoundField DataField="ItemType" HeaderText="ItemType" SortExpression="ItemType" ></asp:BoundField>
+                                    
                              
                                
                                     <asp:BoundField DataField="StartDate" HeaderText="StartDate" SortExpression="StartDate" DataFormatString="{0:D}"></asp:BoundField>

@@ -84,7 +84,8 @@
                                            </div>
                                               
                                             </ItemTemplate>
-                                        <controlstyle height="200px" width="200px"  />
+                                        <controlstyle width="200px" height="200px"  />
+                                        <ItemStyle Width="200px" height="200px" />
                                         </asp:TemplateField>
                                     <asp:BoundField DataField="Company" visible="false" HeaderText="Company Name" SortExpression="Name"></asp:BoundField>
                                     
