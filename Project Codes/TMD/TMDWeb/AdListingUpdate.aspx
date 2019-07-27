@@ -405,7 +405,9 @@
                                         </p>
 
                                     <!-- Billboard Gridview-->
+                                         <asp:UpdatePanel ID="updatepanel20" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
 
+                            <ContentTemplate>
                                     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered table-hover" DataKeyNames="BillboardID" DataSourceID="SqlDataSource2" AllowPaging="True" Width="100%" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3">
                                          <AlternatingRowStyle BackColor="#CCCCCC" />
                                         <Columns>                                         
@@ -447,7 +449,8 @@
                                <SortedDescendingHeaderStyle BackColor="#383838" />
 
                            </asp:GridView>
-
+                                </ContentTemplate>
+                                             </asp:UpdatePanel>
                                
                                       
                                     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" 

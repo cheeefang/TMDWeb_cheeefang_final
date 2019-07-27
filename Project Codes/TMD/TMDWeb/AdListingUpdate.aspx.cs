@@ -200,13 +200,14 @@ namespace targeted_marketing_display
                 sdaLoc.SelectCommand = cmdLoc;
                 sdaLoc.Fill(datatableLoc);
                 cmdLoc.Parameters.Clear();
+                GridView1.AllowPaging = false;
                 for (int i = 0; i < datatableLoc.Rows.Count; i++)
                 {
                     string BillboardCodefromdb = datatableLoc.Rows[i]["BillboardCode"].ToString();
                     foreach (GridViewRow gvr in GridView1.Rows)
 
                     {
-
+                        
                         if (gvr.RowType == DataControlRowType.DataRow)
                         {
                             CheckBox cb = (CheckBox)(gvr.FindControl("CheckBoxSelector"));
@@ -224,6 +225,7 @@ namespace targeted_marketing_display
 
 
                 }
+                GridView1.AllowPaging = true;
                 billboardDisplayTB.Text = (billboardDisplayTB.Text).Substring(1);
                 SqlCommand cmdCat = new SqlCommand("select * from [AdvertisementCategory] where AdvID=@ID", conn);
                 SqlParameter paramCat = new SqlParameter();
