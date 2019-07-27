@@ -47,7 +47,7 @@
                    <div class="input-group custom-search-form" style="width: 50%">
                   <div style="padding: 20px; float: left; width:30%;">
                                           <p class="input-group" style="width:350px;margin-left:-20px;">
-                                        <asp:TextBox ID="txtSearch" class="form-control" runat="server" placeholder="Search..."></asp:TextBox>
+                                        <asp:TextBox ID="txtSearch" class="form-control" runat="server" placeholder="Search..." OnTextChanged="Search" AutoPostBack="true"></asp:TextBox>
                                         <%--<input type="submit" id="btSubmit" runat="server" />--%>
                                         <span class="input-group-btn" >
                                             <asp:LinkButton runat="server" class="btn btn-default" ID="btnRun" style="height:34px;" Text="<i class='fa fa-search'></i>" onclick="btnRun_click"/>

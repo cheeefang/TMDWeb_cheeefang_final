@@ -29,13 +29,14 @@ namespace targeted_marketing_display
             {
 
                 this.BindGrid();
-               
-                   
+                this.SearchCompAds();
+
 
 
             }
             
         }
+
 
         protected void btnRun_click(object sender, EventArgs e)
         {
@@ -49,15 +50,15 @@ namespace targeted_marketing_display
             {
                 using (SqlCommand cmd2 = new SqlCommand())
                 {
-                    string sql = "select [Company].Name as Company,[Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID where [Company].CompanyID=@ID and [Advertisement].status=1" +
+                    string sql = "select [Company].Name as Company,[Advertisement].Name AS adName,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID  " +
                 "";
-                    cmd2.Parameters.AddWithValue("@ID", Session["CompanyID"].ToString());
+                    
                     if (!string.IsNullOrEmpty(txtSearch.Text.Trim()))
                     {
-                        sql += " and Name LIKE @Name OR Item LIKE @Item OR Name1 LIKE @Name1 OR ItemType LIKE @ItemType OR convert(StartDate,'System.String') LIKE @sDate OR convert(EndDate,'System.String') LIKE @eDate +%";
-                     
-                        cmd2.Parameters.AddWithValue("@Name", txtSearch.Text.Trim());
-                        cmd2.Parameters.AddWithValue("@Name1", txtSearch.Text.Trim());
+                        sql += "[Company].Name LIKE @CName OR Item LIKE @Item OR [Advertisement].Name LIKE @adName OR ItemType LIKE @ItemType OR convert(StartDate,'System.String') LIKE @sDate + '%' OR convert(EndDate,'System.String') LIKE @eDate + '%' and [Company].CompanyID=@ID and [Advertisement].status=1";
+                        cmd2.Parameters.AddWithValue("@ID", Session["CompanyID"].ToString());
+                        cmd2.Parameters.AddWithValue("@CName", txtSearch.Text.Trim());
+                        cmd2.Parameters.AddWithValue("@adName", txtSearch.Text.Trim());
                         cmd2.Parameters.AddWithValue("@Item", txtSearch.Text.Trim());
                         cmd2.Parameters.AddWithValue("@ItemType", txtSearch.Text.Trim());
                         cmd2.Parameters.AddWithValue("@sDate", txtSearch.Text.Trim());
@@ -204,6 +205,7 @@ namespace targeted_marketing_display
             GridView1.PageIndex = e.NewPageIndex;
             GridView1.DataBind();
             BindGrid();
+            this.SearchCompAds();
         }
     }
 
