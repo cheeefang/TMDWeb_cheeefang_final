@@ -16,6 +16,9 @@ namespace targeted_marketing_display
 {
     public partial class BillboardAdInfo : System.Web.UI.Page
     {
+        SqlConnection vid= new
+                SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+        
         protected string latitude;
         protected string longtitude;
         protected void Page_Load(object sender, EventArgs e)
@@ -132,5 +135,29 @@ namespace targeted_marketing_display
         }
 
 
+
+        protected void btnRun_Click(object sender, EventArgs e)
+        {
+            
+            string str = " select [BillboardLocation].BillboardCode, [Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join" +
+                " [AdvertisementLocation] on [Advertisement].AdvID=[AdvertisementLocation].AdvID join " +
+                "[BillboardLocation] on[AdvertisementLocation].BillboardID =[BillboardLocation].BillboardID " +
+                "where [Advertisement].status=1 and [BillboardLocation].BillboardID=@ID and (Name like '%' + @search + '%' OR ItemType like '%' + @search + '%' ) ";
+            SqlCommand xp = new SqlCommand(str, vid);
+            xp.Parameters.Add("@ID", SqlDbType.NVarChar).Value = Session["BillboardID"].ToString();
+            xp.Parameters.Add("@search", SqlDbType.NVarChar).Value = txtSearch.Text;
+      
+            vid.Open();
+            xp.ExecuteNonQuery();
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.SelectCommand = xp;
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            GridView1.DataSource = ds;
+            GridView1.DataBind();
+            
+
+
+        }
     }
 }

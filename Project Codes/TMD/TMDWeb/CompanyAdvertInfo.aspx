@@ -1,27 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="CompanyAdvertInfo.aspx.cs" Inherits="targeted_marketing_display.CompanyAdvertInfo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-        <script type="text/javascript">
-            function Search_Gridview(strKey, strGV) {
-               // document.getElementById("Gridview1").setAttribute["AllowPaging"] = false;
-                var strData = strKey.value.toLowerCase().split(" ");
-                var tblData = document.getElementById(strGV);
-                var rowData;
-                for (var i = 1; i < tblData.rows.length; i++) {
-                    rowData = tblData.rows[i].innerHTML;
-                    var styleDisplay = 'none';
-                    for (var j = 0; j < strData.length; j++) {
-                        if (rowData.toLowerCase().indexOf(strData[j]) >= 0)
-                            styleDisplay = '';
-                        else {
-                            styleDisplay = 'none';
-                            break;
-                        }
-                    }
-                    tblData.rows[i].style.display = styleDisplay;
-                }
-            }    
-</script>
+     
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -69,7 +49,7 @@
                    <div class="input-group custom-search-form" style="width: 50%">
                   <div style="padding: 20px; float: left; width:30%;">
                                           <p class="input-group" style="width:350px;margin-left:-20px;">
-                                        <asp:TextBox ID="txtSearch" class="form-control" runat="server" placeholder="Search..." onkeyup="Search_Gridview(this, 'GridView1')" ClientIDMode="static"></asp:TextBox>
+                                        <asp:TextBox ID="txtSearch" class="form-control" runat="server" placeholder="Search..." ClientIDMode="static"></asp:TextBox>
                                         <%--<input type="submit" id="btSubmit" runat="server" />--%>
                                         <span class="input-group-btn" >
                                             <asp:LinkButton runat="server" class="btn btn-default" ID="btnRun" style="height:34px;" Text="<i class='fa fa-search'></i>" OnClick="btnRun_Click"/>
@@ -90,7 +70,7 @@
             <ContentTemplate>
 
          
-        <asp:GridView ID="GridView1" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover"   CellPadding ="3" ForeColor="Black" GridLines="Vertical" Height="100%" Width="100%" OnPageIndexChanging="GridView1_PageIndexChanging" OnPreRender="GridView1_PreRender" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="Company" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" >
+        <asp:GridView ID="GridView1" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover"   CellPadding ="3" ForeColor="Black" GridLines="Vertical" Height="100%" Width="100%" OnPageIndexChanging="GridView1_PageIndexChanging" OnPreRender="GridView1_PreRender" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="Company" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" PageSize="3" >
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 
