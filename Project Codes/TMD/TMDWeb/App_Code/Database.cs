@@ -40,7 +40,7 @@ namespace targeted_marketing_display
         {
             cmd.Connection = getDBConnection();
             cmd.Connection.Open();
-            cmd.CommandTimeout = 1200;
+            cmd.CommandTimeout = 0;
 
             SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();

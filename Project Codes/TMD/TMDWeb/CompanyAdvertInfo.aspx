@@ -1,6 +1,27 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="CompanyAdvertInfo.aspx.cs" Inherits="targeted_marketing_display.CompanyAdvertInfo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+        <script type="text/javascript">
+            function Search_Gridview(strKey, strGV) {
+               // document.getElementById("Gridview1").setAttribute["AllowPaging"] = false;
+                var strData = strKey.value.toLowerCase().split(" ");
+                var tblData = document.getElementById(strGV);
+                var rowData;
+                for (var i = 1; i < tblData.rows.length; i++) {
+                    rowData = tblData.rows[i].innerHTML;
+                    var styleDisplay = 'none';
+                    for (var j = 0; j < strData.length; j++) {
+                        if (rowData.toLowerCase().indexOf(strData[j]) >= 0)
+                            styleDisplay = '';
+                        else {
+                            styleDisplay = 'none';
+                            break;
+                        }
+                    }
+                    tblData.rows[i].style.display = styleDisplay;
+                }
+            }    
+</script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -25,8 +46,9 @@
 
 }
         </style>
+
     <form runat="server">       
-            
+<asp:ScriptManager ID="scriptmanager1" runat="server"></asp:ScriptManager>           
 
  
           <div class="row">
@@ -47,10 +69,10 @@
                    <div class="input-group custom-search-form" style="width: 50%">
                   <div style="padding: 20px; float: left; width:30%;">
                                           <p class="input-group" style="width:350px;margin-left:-20px;">
-                                        <asp:TextBox ID="txtSearch" class="form-control" runat="server" placeholder="Search..." OnTextChanged="Search" AutoPostBack="true"></asp:TextBox>
+                                        <asp:TextBox ID="txtSearch" class="form-control" runat="server" placeholder="Search..." onkeyup="Search_Gridview(this, 'GridView1')" ClientIDMode="static"></asp:TextBox>
                                         <%--<input type="submit" id="btSubmit" runat="server" />--%>
                                         <span class="input-group-btn" >
-                                            <asp:LinkButton runat="server" class="btn btn-default" ID="btnRun" style="height:34px;" Text="<i class='fa fa-search'></i>" onclick="btnRun_click"/>
+                                            <asp:LinkButton runat="server" class="btn btn-default" ID="btnRun" style="height:34px;" Text="<i class='fa fa-search'></i>" OnClick="btnRun_Click"/>
                                        </span>
                                             </p>
                                     </div>
@@ -64,8 +86,11 @@
 
 
 
+        <asp:UpdatePanel runat="server" ID="UpdatePanel1" ClientIDMode="Static">
+            <ContentTemplate>
 
-        <asp:GridView ID="GridView1" runat="server" CssClass="table table-striped table-bordered table-hover"   CellPadding ="3" ForeColor="Black" GridLines="Vertical" Height="100%" Width="100%" OnPageIndexChanging="GridView1_PageIndexChanging" OnPreRender="GridView1_PreRender" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="Company" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" >
+         
+        <asp:GridView ID="GridView1" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover"   CellPadding ="3" ForeColor="Black" GridLines="Vertical" Height="100%" Width="100%" OnPageIndexChanging="GridView1_PageIndexChanging" OnPreRender="GridView1_PreRender" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="Company" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" >
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 
@@ -79,7 +104,7 @@
                                       <asp:ImageButton ID="Image1" runat="server" ImageUrl='<%# Eval("Item") %>' OnClientClick="return LoadDiv(this.src);" Visible='<%# Eval("ItemType").ToString() =="image" %>'  />
                                       <div id="vidDiv" runat="server">
                                         <video ClientIDMode="static" id="videoDog" width="200" height="200" runat="server" controls visible='<%# Eval("ItemType").ToString()!="image" %>'>  
-                                            <source runat="server" src='<%#Eval("Item")%>' type="video/mp4" visible='<%# Eval("ItemType").ToString()!="image" %>' >  
+                                            <source runat="server" src='<%#Eval("Item")%>' type="video/mp4" visible='<%# Eval("ItemType").ToString()!="image" %>' />  
                                         </video>  
                                            </div>
                                               
@@ -89,7 +114,7 @@
                                         </asp:TemplateField>
                                     <asp:BoundField DataField="Company" visible="false" HeaderText="Company Name" SortExpression="Name"></asp:BoundField>
                                     
-                                     <asp:BoundField DataField="Name" HeaderText="Advert Name" SortExpression="Name1"></asp:BoundField>
+                                     <asp:BoundField DataField="adname" HeaderText="Advert Name" SortExpression="Name1"></asp:BoundField>
                                     <asp:BoundField DataField="ItemType" HeaderText="ItemType" SortExpression="ItemType"></asp:BoundField>
                              
                                
@@ -113,14 +138,8 @@
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" HorizontalAlign="Center" />
                                 <SortedDescendingHeaderStyle BackColor="#383838" HorizontalAlign="Center" />
         </asp:GridView>
-        <FilterParameters>
-                                            <asp:ControlParameter ControlID="txtSearch" Name="Name" PropertyName="Text" />
-                                            <asp:ControlParameter ControlID="txtSearch" Name="Item" PropertyName="Text" />                                            
-                                            <asp:ControlParameter ControlID="txtSearch" Name="Company" PropertyName="Text" />
-                                            <asp:ControlParameter ControlID="txtSearch" Name="ItemType" PropertyName="Text" />
-                                             <asp:ControlParameter ControlID="txtSearch" Name="StartDate" PropertyName="Text" />
-                                            <asp:ControlParameter ControlID="txtSearch" Name="EndDate" PropertyName="Text" />
-                                        </FilterParameters>        
+        </ContentTemplate>
+        </asp:UpdatePanel>
 
           <p>
  
