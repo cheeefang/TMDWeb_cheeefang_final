@@ -118,7 +118,13 @@ namespace targeted_marketing_display
 
         }
 
+        protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
 
+        {
+
+            GridView1.DataBind();
+
+        }
         protected void GridView1_PreRender(object sender, EventArgs e)
         {
             LabelPaging.Text = "Displaying Page " + (GridView1.PageIndex + 1).ToString() + " of " + GridView1.PageCount.ToString();

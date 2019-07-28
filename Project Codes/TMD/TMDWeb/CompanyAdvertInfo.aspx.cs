@@ -32,8 +32,13 @@ namespace targeted_marketing_display
             
         }
 
+        protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
 
+        {
 
+            GridView1.DataBind();
+
+        }
         public void BindGrid()
         {
             try
