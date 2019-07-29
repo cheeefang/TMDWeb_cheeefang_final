@@ -37,31 +37,10 @@ namespace targeted_marketing_display
                 latitude = BillboardObj.latitude;
                 longtitude = BillboardObj.Longtitude;
 
-                if (ViewState["sorting"] == null)
-                {
-                    this.BindGrid();
-                }
-            }
-            else
-            {
-                //if it is a postback, fetch SortExpression and Direction from viewstate
-                //and store it in local variables
-                if (ViewState["SortExpression"] != null)
-                    sortExpression = ViewState["SortExpression"].ToString();
-                else
-                    sortExpression = String.Empty;
-
-                if (ViewState["SortDirection"] != null)
-                {
-                    if (Convert.ToInt32(ViewState["SortDirection"]) == (int)SortDirection.Ascending)
-                    {
-                        sortDirection = SortDirection.Ascending;
-                    }
-                    else
-                    {
-                        sortDirection = SortDirection.Descending;
-                    }
-                }
+                
+                
+                this.BindGrid();
+            
             }
 
             try
@@ -136,90 +115,123 @@ namespace targeted_marketing_display
           
 
         }
-
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
         {
-            SqlConnection mycon = null;
-            mycon = new SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
-            mycon.Open();
-            SqlCommand cmdSort = new SqlCommand("select [BillboardLocation].BillboardCode, [Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join" +
+            //Response.Write("Sort Expression = " + e.SortExpression);
+            //Response.Write("<br/>");
+            //Response.Write("Sort Direction = " + e.SortDirection.ToString());
+
+            SortDirection sortDirection = SortDirection.Ascending;
+            string sortField = string.Empty;
+
+            SortGridview((GridView)sender, e, out sortDirection, out sortField);
+            string strSortDirection = sortDirection == SortDirection.Ascending ? "ASC" : "DESC";
+
+
+
+
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+
+
+
+            // instantiate and open connection
+            conn = new
+                SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+            conn.Open();
+
+
+
+            // 1. declare command object with parameter
+            SqlCommand cmd = new SqlCommand(
+                " select [BillboardLocation].BillboardCode, [Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join" +
                 " [AdvertisementLocation] on [Advertisement].AdvID=[AdvertisementLocation].AdvID join " +
                 "[BillboardLocation] on[AdvertisementLocation].BillboardID =[BillboardLocation].BillboardID " +
-                "where [Advertisement].status=1 and [BillboardLocation].BillboardID=@ID", mycon);
-            SqlParameter paramSort = new SqlParameter();
-            paramSort.ParameterName = "@ID";
-            paramSort.Value = Session["BillboardID"].ToString();
-            cmdSort.Parameters.Add(paramSort);
-            SqlDataAdapter sdaSort = new SqlDataAdapter();
-            DataSet ds = new DataSet();
-            cmdSort.Connection = mycon;
-            sdaSort.SelectCommand = cmdSort;
-            sdaSort.Fill(ds);
-            mycon.Close();
-            DataTable dtSort = ds.Tables[0];
+                "where [Advertisement].status=1 and [BillboardLocation].BillboardID=@ID", conn);
 
-            DataView dv = new DataView(dtSort);
-            if (ViewState["sorting"] == "descending" || ViewState["sorting"] == null)
-            {
-                dv.Sort = e.SortExpression + " ascending";
-                ViewState["sorting"] = "ascending";
-               
-            }
-            else if (ViewState["sorting"].ToString() == "ascending")
-            {
-                dv.Sort = e.SortExpression + " descending";
-                ViewState["sorting"] = "descending";
-              
-            }
-            GridView1.DataSource = dv;
+            // 2. define parameters used in command object
+            SqlParameter param = new SqlParameter();
+            param.ParameterName = "@ID";
+            param.Value = Session["BillboardID"].ToString();
+
+            // 3. add new parameter to command object
+            cmd.Parameters.Add(param);
+            SqlDataAdapter sda = new SqlDataAdapter();
+            DataTable dt = new DataTable();
+            cmd.Connection = conn;
+            sda.SelectCommand = cmd;
+            sda.Fill(dt);
+
+
+
+            GridView1.DataSource = dt;
             GridView1.DataBind();
-
-
-
-
         }
+
+        private void SortGridview(GridView gridView, GridViewSortEventArgs e, out SortDirection sortDirection, out string sortField)
+        {
+            sortField = e.SortExpression;
+            sortDirection = e.SortDirection;
+
+            if (gridView.Attributes["CurrentSortField"] != null && gridView.Attributes["CurrentSortDirection"] != null)
+            {
+                if (sortField == gridView.Attributes["CurrentSortField"])
+                {
+                    if (gridView.Attributes["CurrentSortDirection"] == "ASC")
+                    {
+                        sortDirection = SortDirection.Descending;
+                    }
+                    else
+                    {
+                        sortDirection = SortDirection.Ascending;
+                    }
+                }
+
+                gridView.Attributes["CurrentSortField"] = sortField;
+                gridView.Attributes["CurrentSortDirection"] = (sortDirection == SortDirection.Ascending ? "ASC" : "DESC");
+            }
+        }
+    
+
+
+
+
         protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            //check if it is a header row
-            //since allowsorting is set to true, column names are added as command arguments to
-            //the linkbuttons by DOTNET API
-            if (e.Row.RowType == DataControlRowType.Header)
+            if (GridView1.Attributes["CurrentSortField"] != null && GridView1.Attributes["CurrentSortDirection"] != null)
             {
-                LinkButton btnSort;
-                Image image;
-                //iterate through all the header cells
-                foreach (TableCell cell in e.Row.Cells)
+                if (e.Row.RowType == DataControlRowType.Header)
                 {
-                    //check if the header cell has any child controls
-                    if (cell.HasControls())
+                    foreach (TableCell tableCell in e.Row.Cells)
                     {
-                        //get reference to the button column
-                        btnSort = (LinkButton)cell.Controls[0];
-                        image = new Image();
-                        if (ViewState["SortExpression"] != null)
+                        if (tableCell.HasControls())
                         {
-                            //see if the button user clicked on and the sortexpression in the viewstate are same
-                            //this check is needed to figure out whether to add the image to this header column nor not
-                            if (btnSort.CommandArgument == ViewState["SortExpression"].ToString())
+                            LinkButton sortLinkButton = null;
+                            if (tableCell.Controls[0] is LinkButton)
                             {
-                                //following snippet figure out whether to add the up or down arrow
-                                //based on the sortdirection
-                                if (Convert.ToInt32(ViewState["SortDirection"]) == (int)SortDirection.Ascending)
+                                sortLinkButton = (LinkButton)tableCell.Controls[0];
+                            }
+
+                            if (sortLinkButton != null && GridView1.Attributes["CurrentSortField"] == sortLinkButton.CommandArgument)
+                            {
+                                Image image = new Image();
+                                if (GridView1.Attributes["CurrentSortDirection"] == "ASC")
                                 {
-                                    image.ImageUrl = "~/Images/Ascending.png";
+                                    image.ImageUrl = "~/webicons/Ascendingicon.png";
                                 }
                                 else
                                 {
-                                    image.ImageUrl = "~/Images/Descending.png";
+                                    image.ImageUrl = "~/webicons/Descendingicon.png";
                                 }
-                                cell.Controls.Add(image);
+                                tableCell.Controls.Add(new LiteralControl("&nbsp;"));
+                                tableCell.Controls.Add(image);
                             }
                         }
                     }
                 }
             }
-
         }
+       
         protected void GridView1_PreRender(object sender, EventArgs e)
         {
             LabelPaging.Text = "Displaying Page " + (GridView1.PageIndex + 1).ToString() + " of " + GridView1.PageCount.ToString();

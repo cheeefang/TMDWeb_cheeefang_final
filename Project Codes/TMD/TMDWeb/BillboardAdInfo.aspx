@@ -136,7 +136,7 @@ map.on('load', function() {
         <asp:GridView ID="GridView1" SortedAscendingHeaderStyle-CssClass="ascending" SortedDescendingHeaderStyle-CssClass="descending" runat="server" CssClass="table table-striped table-bordered table-hover"   CellPadding ="3" ForeColor="Black" GridLines="Vertical" Height="100%" Width="100%" 
             OnPreRender="GridView1_PreRender" AllowPaging="True"  OnPageIndexChanging="GridView1_PageIndexChanging" AutoGenerateColumns="False" 
             DataKeyNames="BillboardCode" BackColor="White" BorderColor="#999999" BorderStyle="Solid"
-            BorderWidth="1px" PageSize="3" AllowSorting="True" OnSorting="GridView1_Sorting" CurrentSortDirection="ASC" OnRowCreated="GridView1_RowCreated"   >
+            BorderWidth="1px" PageSize="3" AllowSorting="True" OnSorting="GridView1_Sorting" CurrentSortDirection="ASC" CurrentSortField="StartDate" OnRowCreated="GridView1_RowCreated"   >
             <AlternatingRowStyle BackColor="#CCCCCC"  />
             <Columns>
                                     
