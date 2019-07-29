@@ -181,8 +181,6 @@ function HideDiv() {
                     </button>
                 </div>
 
-
-
             <div id="all" runat="server">
                 <div class="row">
                     <div class="col-lg-12">
