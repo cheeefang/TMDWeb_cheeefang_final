@@ -58,6 +58,41 @@ namespace targeted_marketing_display
             }
 
         }
+        protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            if (GridView1.Attributes["CurrentSortField"] != null && GridView1.Attributes["CurrentSortDirection"] != null)
+            {
+                if (e.Row.RowType == DataControlRowType.Header)
+                {
+                    foreach (TableCell tableCell in e.Row.Cells)
+                    {
+                        if (tableCell.HasControls())
+                        {
+                            LinkButton sortLinkButton = null;
+                            if (tableCell.Controls[0] is LinkButton)
+                            {
+                                sortLinkButton = (LinkButton)tableCell.Controls[0];
+                            }
+
+                            if (sortLinkButton != null && GridView1.Attributes["CurrentSortField"] == sortLinkButton.CommandArgument)
+                            {
+                                Image image = new Image();
+                                if (GridView1.Attributes["CurrentSortDirection"] == "ASC")
+                                {
+                                    image.ImageUrl = "~/webicons/Ascendingicon.png";
+                                }
+                                else
+                                {
+                                    image.ImageUrl = "~/webicons/Descendingicon.png";
+                                }
+                                tableCell.Controls.Add(new LiteralControl("&nbsp;"));
+                                tableCell.Controls.Add(image);
+                            }
+                        }
+                    }
+                }
+            }
+        }
         //DataGridColumn dgcolumn = new DataGridColumn();
 
         // Label lb_msgId = (Label)gvRow1.FindControl("AdvertItem");.jpeg
@@ -72,8 +107,8 @@ namespace targeted_marketing_display
 
         //    }
         //}
-    
-       
+
+
         protected void infoBtn_Command(object sender, CommandEventArgs e)
         {
             if (e.CommandName == "AdInfo")
