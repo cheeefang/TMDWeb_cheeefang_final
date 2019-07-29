@@ -1984,6 +1984,8 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="Press_F_To_Pay_Respects.aspx" />
+    <Content Include="Testing1234.aspx" />
     <Content Include="webicons\asc.gif" />
     <Content Include="webicons\desc.gif" />
     <None Include="bin\TMDWeb.dll.config" />
@@ -2239,6 +2241,13 @@
     <Compile Include="AdListing.aspx.designer.cs">
       <DependentUpon>AdListing.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Press_F_To_Pay_Respects.aspx.cs">
+      <DependentUpon>Press_F_To_Pay_Respects.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Press_F_To_Pay_Respects.aspx.designer.cs">
+      <DependentUpon>Press_F_To_Pay_Respects.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Template.Master.cs">
       <DependentUpon>Template.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2252,6 +2261,13 @@
     </Compile>
     <Compile Include="test.aspx.designer.cs">
       <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Testing1234.aspx.cs">
+      <DependentUpon>Testing1234.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Testing1234.aspx.designer.cs">
+      <DependentUpon>Testing1234.aspx</DependentUpon>
     </Compile>
     <Compile Include="testRead.aspx.cs">
       <DependentUpon>testRead.aspx</DependentUpon>
