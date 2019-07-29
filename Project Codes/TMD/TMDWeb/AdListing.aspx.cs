@@ -37,62 +37,11 @@ namespace targeted_marketing_display
                     Session.Remove("AdvertCreate");
                 }
             }
-            else
-            {
-                if (ViewState["SortExpression"] != null)
-                    sortExpression = ViewState["SortExpression"].ToString();
-                else
-                    sortExpression = String.Empty;
-
-                if (ViewState["SortDirection"] != null)
-                {
-                    if (Convert.ToInt32(ViewState["SortDirection"]) == (int)SortDirection.Ascending)
-                    {
-                        sortDirection = SortDirection.Ascending;
-                    }
-                    else
-                    {
-                        sortDirection = SortDirection.Descending;
-                    }
-                }
-            }
+            
 
         }
-        protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
-        {
-            if (GridView1.Attributes["CurrentSortField"] != null && GridView1.Attributes["CurrentSortDirection"] != null)
-            {
-                if (e.Row.RowType == DataControlRowType.Header)
-                {
-                    foreach (TableCell tableCell in e.Row.Cells)
-                    {
-                        if (tableCell.HasControls())
-                        {
-                            LinkButton sortLinkButton = null;
-                            if (tableCell.Controls[0] is LinkButton)
-                            {
-                                sortLinkButton = (LinkButton)tableCell.Controls[0];
-                            }
-
-                            if (sortLinkButton != null && GridView1.Attributes["CurrentSortField"] == sortLinkButton.CommandArgument)
-                            {
-                                Image image = new Image();
-                                if (GridView1.Attributes["CurrentSortDirection"] == "ASC")
-                                {
-                                    image.ImageUrl = "~/webicons/Ascendingicon.png";
-                                }
-                                else
-                                {
-                                    image.ImageUrl = "~/webicons/Descendingicon.png";
-                                }
-                                tableCell.Controls.Add(new LiteralControl("&nbsp;"));
-                                tableCell.Controls.Add(image);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+       
+        
         //DataGridColumn dgcolumn = new DataGridColumn();
 
         // Label lb_msgId = (Label)gvRow1.FindControl("AdvertItem");.jpeg
