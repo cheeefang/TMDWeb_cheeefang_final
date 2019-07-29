@@ -54,6 +54,16 @@ body
 #vidDiv{
 
 }
+.ascending a{
+    background:url(webicons/asc.gif) right no-repeat;
+    display:block;
+    padding:0 25px 0 5px;
+}
+.descending a{
+     background:url(webicons/desc.gif) right no-repeat;
+    display:block;
+    padding:0 25px 0 5px;
+}
 </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -113,7 +123,7 @@ function HideDiv() {
 </script>
 
 
-        
+        <asp:ScriptManager id="script1" runat="server"></asp:ScriptManager>
      
             <!--button-->
             <div class="row">
@@ -179,11 +189,15 @@ function HideDiv() {
 
                         <div class="table-responsive">
                             <%--                        <table class="table table-striped table-bordered table-hover" style="width: 100%">--%>
-                            <asp:GridView ID="GridView1" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Width="100%" 
+                            <asp:UpdatePanel id="diulei" runat="server">
+                                <ContentTemplate>
+
+                               
+                            <asp:GridView ID="GridView1" SortedAscendingHeaderStyle-CssClass="ascending" SortedDescendingHeaderStyle-CssClass="descending" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Width="100%" 
                                 BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px"
                                 CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" HorizontalAlign="Center" DataKeyNames="AdvID" 
                                 OnPreRender="GridView1_PreRender" ForeColor="Black" GridLines="Vertical" OnRowDataBound="GridView1_RowDataBound"  cellspacing="5" PageSize="3"
-                                AllowSorting="True"   CurrentSortDirection="ASC" OnRowCreated="GridView1_RowCreated">
+                                AllowSorting="True"   CurrentSortDirection="ASC" EnableSortingAndPagingCallbacks="true" >
                                 <AlternatingRowStyle HorizontalAlign="Center" BackColor="#CCCCCC" />
                                 <Columns>
                                     <asp:TemplateField visible="false">
@@ -234,8 +248,8 @@ function HideDiv() {
                                     
                                     <asp:BoundField DataField="ItemType" HeaderText="Type" SortExpression="Name1"></asp:BoundField>
                                
-                                    <asp:BoundField DataField="StartDate" HeaderText="Start Date^" SortExpression="StartDate" DataFormatString="{0:D}"></asp:BoundField>
-                                    <asp:BoundField DataField="EndDate" HeaderText="End Date^" SortExpression="EndDate" DataFormatString="{0:D}"></asp:BoundField>
+                                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" SortExpression="StartDate" DataFormatString="{0:D}"></asp:BoundField>
+                                    <asp:BoundField DataField="EndDate" HeaderText="End Date" SortExpression="EndDate" DataFormatString="{0:D}"></asp:BoundField>
                                     
 
                                      <asp:templatefield headertext="View">
@@ -312,6 +326,8 @@ function HideDiv() {
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" HorizontalAlign="Center" />
                                 <SortedDescendingHeaderStyle BackColor="#383838" HorizontalAlign="Center" />
                             </asp:GridView>
+                                     </ContentTemplate>
+                            </asp:UpdatePanel>
                             <asp:Label ID="Label1" style="color:darkslateblue" runat="server" Text="Label"></asp:Label>
                             <br />
                             <br />

@@ -18,7 +18,14 @@
   <script src='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
   <link href='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
     <!- -->
-  
+ <!-- choose a theme file -->
+<link rel="stylesheet" href="css/theme.default.css">
+<!-- load jQuery and tablesorter scripts -->
+
+<script type="text/javascript" src="js/jquery.tablesorter.js"></script>
+
+<!-- tablesorter widgets (optional) -->
+<script type="text/javascript" src="js/jquery.tablesorter.widgets.js"></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
     <title>Targeted Marketing Display Administration</title>
     <!-- Custom Pagination CSS-->

@@ -93,7 +93,7 @@
                                         <controlstyle width="200px" height="200px"  />
                                         <ItemStyle Width="200px" height="200px" />
                                         </asp:TemplateField>
-                                    <asp:BoundField DataField="Company" visible="false" HeaderText="Company Name" SortExpression="Name"></asp:BoundField>
+                                    <asp:BoundField DataField="Company" visible="false" HeaderText="Company Name" SortExpression="Company"></asp:BoundField>
                                     
                                      <asp:BoundField DataField="adname" HeaderText="Advert Name" SortExpression="Name1"></asp:BoundField>
                                     <asp:BoundField DataField="ItemType" HeaderText="ItemType" SortExpression="ItemType"></asp:BoundField>

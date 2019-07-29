@@ -77,13 +77,11 @@ namespace targeted_marketing_display
             SqlConnection mycon = null;
             mycon = new SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
             mycon.Open();
-                SqlCommand cmdSort = new SqlCommand("select [BillboardLocation].BillboardCode, [Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join" +
-                    " [AdvertisementLocation] on [Advertisement].AdvID=[AdvertisementLocation].AdvID join " +
-                    "[BillboardLocation] on[AdvertisementLocation].BillboardID =[BillboardLocation].BillboardID " +
-                    "where [Advertisement].status=1 and [BillboardLocation].BillboardID=@ID", mycon);
+                SqlCommand cmdSort = new SqlCommand("select [Company].Name as Company,[Advertisement].Name as adname,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
+                        "where [Company].CompanyID=@ID and [Advertisement].status=1", mycon);
             SqlParameter paramSort = new SqlParameter();
             paramSort.ParameterName = "@ID";
-                paramSort.Value = Session["BillboardID"].ToString();
+                paramSort.Value = Session["CompanyID"].ToString();
             cmdSort.Parameters.Add(paramSort);
                 SqlDataAdapter sdaSort = new SqlDataAdapter();
             DataSet ds = new DataSet();

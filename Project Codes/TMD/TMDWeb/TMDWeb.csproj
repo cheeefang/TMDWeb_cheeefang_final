@@ -1771,6 +1771,7 @@
     <Content Include="css\newgridview.css" />
     <Content Include="css\TMD.css" />
     <Content Include="DiuLeiLoMo.aspx" />
+    <Content Include="f.aspx" />
     <Content Include="FAQ.aspx" />
     <Content Include="FeedbackAd.aspx" />
     <Content Include="FeedbackAnalyticsIndiv.aspx" />
@@ -1982,6 +1983,8 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="webicons\asc.gif" />
+    <Content Include="webicons\desc.gif" />
     <None Include="bin\TMDWeb.dll.config" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Debug\TMDWeb.csproj.CopyComplete" />
@@ -2145,6 +2148,13 @@
     </Compile>
     <Compile Include="DiuLeiLoMo.aspx.designer.cs">
       <DependentUpon>DiuLeiLoMo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="f.aspx.cs">
+      <DependentUpon>f.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="f.aspx.designer.cs">
+      <DependentUpon>f.aspx</DependentUpon>
     </Compile>
     <Compile Include="FAQ.aspx.cs">
       <DependentUpon>FAQ.aspx</DependentUpon>

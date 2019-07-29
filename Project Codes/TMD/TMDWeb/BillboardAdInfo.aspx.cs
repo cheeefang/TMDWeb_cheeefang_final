@@ -18,7 +18,9 @@ namespace targeted_marketing_display
     {
         SqlConnection vid= new
                 SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
-        
+        private string sortExpression;
+        private SortDirection sortDirection;
+
         protected string latitude;
         protected string longtitude;
         protected void Page_Load(object sender, EventArgs e)
@@ -40,6 +42,28 @@ namespace targeted_marketing_display
                     this.BindGrid();
                 }
             }
+            else
+            {
+                //if it is a postback, fetch SortExpression and Direction from viewstate
+                //and store it in local variables
+                if (ViewState["SortExpression"] != null)
+                    sortExpression = ViewState["SortExpression"].ToString();
+                else
+                    sortExpression = String.Empty;
+
+                if (ViewState["SortDirection"] != null)
+                {
+                    if (Convert.ToInt32(ViewState["SortDirection"]) == (int)SortDirection.Ascending)
+                    {
+                        sortDirection = SortDirection.Ascending;
+                    }
+                    else
+                    {
+                        sortDirection = SortDirection.Descending;
+                    }
+                }
+            }
+
             try
             {
 
@@ -156,42 +180,45 @@ namespace targeted_marketing_display
         }
         protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            if (GridView1.Attributes["CurrentSortField"] != null && GridView1.Attributes["CurrentSortDirection"] != null)
+            //check if it is a header row
+            //since allowsorting is set to true, column names are added as command arguments to
+            //the linkbuttons by DOTNET API
+            if (e.Row.RowType == DataControlRowType.Header)
             {
-                if (e.Row.RowType == DataControlRowType.Header)
+                LinkButton btnSort;
+                Image image;
+                //iterate through all the header cells
+                foreach (TableCell cell in e.Row.Cells)
                 {
-                    foreach (TableCell tableCell in e.Row.Cells)
+                    //check if the header cell has any child controls
+                    if (cell.HasControls())
                     {
-                        if (tableCell.HasControls())
+                        //get reference to the button column
+                        btnSort = (LinkButton)cell.Controls[0];
+                        image = new Image();
+                        if (ViewState["SortExpression"] != null)
                         {
-                            LinkButton sortLinkButton = null;
-                            if (tableCell.Controls[0] is LinkButton)
+                            //see if the button user clicked on and the sortexpression in the viewstate are same
+                            //this check is needed to figure out whether to add the image to this header column nor not
+                            if (btnSort.CommandArgument == ViewState["SortExpression"].ToString())
                             {
-                                sortLinkButton = (LinkButton)tableCell.Controls[0];
-                            }
-
-                            if (sortLinkButton != null && GridView1.Attributes["CurrentSortField"] == sortLinkButton.CommandArgument)
-                            {
-                                Image image = new Image();
-                                if (GridView1.Attributes["CurrentSortDirection"] == "ASC")
+                                //following snippet figure out whether to add the up or down arrow
+                                //based on the sortdirection
+                                if (Convert.ToInt32(ViewState["SortDirection"]) == (int)SortDirection.Ascending)
                                 {
                                     image.ImageUrl = "~/Images/Ascending.png";
-                                    image.Width=50;
-                                    image.Height = 50;
                                 }
                                 else
                                 {
                                     image.ImageUrl = "~/Images/Descending.png";
-                                    image.Width = 50;
-                                    image.Height = 50;
                                 }
-                                tableCell.Controls.Add(new LiteralControl("&nbsp;"));
-                                tableCell.Controls.Add(image);
+                                cell.Controls.Add(image);
                             }
                         }
                     }
                 }
             }
+
         }
         protected void GridView1_PreRender(object sender, EventArgs e)
         {

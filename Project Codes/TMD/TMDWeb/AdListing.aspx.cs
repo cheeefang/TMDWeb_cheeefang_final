@@ -10,8 +10,12 @@ using targeted_marketing_display.App_Code;
 using System.Configuration;
 namespace targeted_marketing_display
 {
+ 
+
     public partial class AdListing : System.Web.UI.Page
     {
+        private string sortExpression;
+        private SortDirection sortDirection;
         SqlConnection con = new SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
 
 
@@ -19,71 +23,57 @@ namespace targeted_marketing_display
 
         protected void Page_Load(object sender, EventArgs e)
         {
-           if( Convert.ToInt32(Session["AdvertUpdate"]) == 2)
+            if (!IsPostBack)
             {
-                alertSuccessUpdate.Visible = true;
-                Session.Remove("AdvertUpdate");
-            }
-
-            if (Convert.ToInt32(Session["AdvertCreate"]) == 2)
-            {
-                alertSuccessCreate.Visible = true;
-                Session.Remove("AdvertCreate");
-            }
-            //DataGridColumn dgcolumn = new DataGridColumn();
-
-            // Label lb_msgId = (Label)gvRow1.FindControl("AdvertItem");.jpeg
-            //for (int i = 0; i < GridView1.Rows.Count; i++)
-            //{
-            //    Label lb_AdvertType = (Label)GridView1.Rows[i].FindControl("AdvertItem");
-            //    if (lb_AdvertType.Text.EndsWith(".png") || lb_AdvertType.Text.EndsWith(".jpg") || lb_AdvertType.Text.EndsWith(".jpeg")||
-            //         lb_AdvertType.Text.EndsWith(".PNG") || lb_AdvertType.Text.EndsWith(".JPG") || lb_AdvertType.Text.EndsWith(".JPEG") 
-            //         || lb_AdvertType.Text.EndsWith(".GIF"))
-            //    {
-                    
-
-            //    }
-            //}
-        }
-        protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
-        {
-            if (GridView1.Attributes["CurrentSortField"] != null && GridView1.Attributes["CurrentSortDirection"] != null)
-            {
-                if (e.Row.RowType == DataControlRowType.Header)
+                if (Convert.ToInt32(Session["AdvertUpdate"]) == 2)
                 {
-                    foreach (TableCell tableCell in e.Row.Cells)
-                    {
-                        if (tableCell.HasControls())
-                        {
-                            LinkButton sortLinkButton = null;
-                            if (tableCell.Controls[0] is LinkButton)
-                            {
-                                sortLinkButton = (LinkButton)tableCell.Controls[0];
-                            }
+                    alertSuccessUpdate.Visible = true;
+                    Session.Remove("AdvertUpdate");
+                }
 
-                            if (sortLinkButton != null && GridView1.Attributes["CurrentSortField"] == sortLinkButton.CommandArgument)
-                            {
-                                Image image = new Image();
-                                if (GridView1.Attributes["CurrentSortDirection"] == "ASC")
-                                {
-                                    image.ImageUrl = "~/Images/Ascending.png";
-                                    image.Width = 50;
-                                    image.Height = 50;
-                                }
-                                else
-                                {
-                                    image.ImageUrl = "~/Images/Descending.png";
-                                    image.Width = 50;
-                                    image.Height = 50;
-                                }
-                                tableCell.Controls.Add(new LiteralControl("&nbsp;"));
-                                tableCell.Controls.Add(image);
-                            }
-                        }
+                if (Convert.ToInt32(Session["AdvertCreate"]) == 2)
+                {
+                    alertSuccessCreate.Visible = true;
+                    Session.Remove("AdvertCreate");
+                }
+            }
+            else
+            {
+                if (ViewState["SortExpression"] != null)
+                    sortExpression = ViewState["SortExpression"].ToString();
+                else
+                    sortExpression = String.Empty;
+
+                if (ViewState["SortDirection"] != null)
+                {
+                    if (Convert.ToInt32(ViewState["SortDirection"]) == (int)SortDirection.Ascending)
+                    {
+                        sortDirection = SortDirection.Ascending;
+                    }
+                    else
+                    {
+                        sortDirection = SortDirection.Descending;
                     }
                 }
             }
+
         }
+        //DataGridColumn dgcolumn = new DataGridColumn();
+
+        // Label lb_msgId = (Label)gvRow1.FindControl("AdvertItem");.jpeg
+        //for (int i = 0; i < GridView1.Rows.Count; i++)
+        //{
+        //    Label lb_AdvertType = (Label)GridView1.Rows[i].FindControl("AdvertItem");
+        //    if (lb_AdvertType.Text.EndsWith(".png") || lb_AdvertType.Text.EndsWith(".jpg") || lb_AdvertType.Text.EndsWith(".jpeg")||
+        //         lb_AdvertType.Text.EndsWith(".PNG") || lb_AdvertType.Text.EndsWith(".JPG") || lb_AdvertType.Text.EndsWith(".JPEG") 
+        //         || lb_AdvertType.Text.EndsWith(".GIF"))
+        //    {
+
+
+        //    }
+        //}
+    
+       
         protected void infoBtn_Command(object sender, CommandEventArgs e)
         {
             if (e.CommandName == "AdInfo")

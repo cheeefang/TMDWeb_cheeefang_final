@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="BBLocationRead.aspx.cs" Inherits="targeted_marketing_display.BBLocationRead" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server" >
+    <script src="scripts/jquery-1.4.3.min.js" type="text/javascript"></script>
+<script src="scripts/jquery.tablesorter.min.js" type="text/javascript"></script>
+    
     <style type="text/css">
         .auto-style2 {
             height: 42px;
@@ -27,7 +30,10 @@
             width: 5px;
             text-align: center;
         }
+         
     </style>
+
+  
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" >
     <form runat="server">
