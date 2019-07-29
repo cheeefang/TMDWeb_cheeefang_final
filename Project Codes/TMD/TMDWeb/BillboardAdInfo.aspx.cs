@@ -18,8 +18,8 @@ namespace targeted_marketing_display
     {
         SqlConnection vid= new
                 SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
-        private string sortExpression;
-        private SortDirection sortDirection;
+        public string sortExpression;
+        public SortDirection sortDirection;
 
         protected string latitude;
         protected string longtitude;
@@ -84,9 +84,13 @@ namespace targeted_marketing_display
             SqlParameter param = new SqlParameter();
             param.ParameterName = "@ID";
             param.Value = Session["BillboardID"].ToString();
+            //SqlParameter param2 = new SqlParameter();
+            //param2.ParameterName = "@BillboardFuckID";
+            //param2.Value = Session["BillboardID"].ToString();
 
             // 3. add new parameter to command object
             cmd.Parameters.Add(param);
+           
             SqlDataAdapter sda = new SqlDataAdapter();
             DataTable dt = new DataTable();
             cmd.Connection = conn;
@@ -117,9 +121,7 @@ namespace targeted_marketing_display
         }
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
         {
-            Response.Write("Sort Expression = " + e.SortExpression);
-            Response.Write("<br/>");
-            Response.Write("Sort Direction = " + e.SortDirection.ToString());
+            
 
             SortDirection sortDirection = SortDirection.Ascending;
             string sortField = string.Empty;
@@ -128,6 +130,7 @@ namespace targeted_marketing_display
             string strSortDirection = sortDirection == SortDirection.Ascending ? "ASC" : "DESC";
 
 
+         
 
 
             SqlConnection conn = null;
@@ -147,8 +150,8 @@ namespace targeted_marketing_display
                 " select [BillboardLocation].BillboardCode, [Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join" +
                 " [AdvertisementLocation] on [Advertisement].AdvID=[AdvertisementLocation].AdvID join " +
                 "[BillboardLocation] on[AdvertisementLocation].BillboardID =[BillboardLocation].BillboardID " +
-                "where [Advertisement].status=1 and [BillboardLocation].BillboardID=@ID", conn);
-
+                "where [Advertisement].status=1 and [BillboardLocation].BillboardID=@ID order by "+e.SortExpression+" "+strSortDirection, conn);
+            
             // 2. define parameters used in command object
             SqlParameter param = new SqlParameter();
             param.ParameterName = "@ID";
@@ -167,6 +170,7 @@ namespace targeted_marketing_display
             GridView1.DataSource = dt;
             GridView1.DataBind();
         }
+
 
         private void SortGridview(GridView gridView, GridViewSortEventArgs e, out SortDirection sortDirection, out string sortField)
         {

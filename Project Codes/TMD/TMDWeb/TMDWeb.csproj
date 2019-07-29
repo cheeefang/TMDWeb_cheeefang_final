@@ -91,6 +91,7 @@
     <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
@@ -2065,8 +2066,10 @@
     <Compile Include="App_Code\Advertisement.cs" />
     <Compile Include="App_Code\Advertisement_Management.cs" />
     <Compile Include="App_Code\Billboard.cs" />
+    <Content Include="App_Code\BillboardAds.cs" />
     <Compile Include="App_Code\Billboard_Management.cs" />
     <Compile Include="App_Code\Company.cs" />
+    <Content Include="App_Code\CompanyAds.cs" />
     <Compile Include="App_Code\CompanyAdverts.cs" />
     <Compile Include="App_Code\Company_Management.cs" />
     <Compile Include="App_Code\Database.cs" />
