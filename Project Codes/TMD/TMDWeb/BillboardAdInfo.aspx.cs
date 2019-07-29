@@ -117,9 +117,9 @@ namespace targeted_marketing_display
         }
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
         {
-            //Response.Write("Sort Expression = " + e.SortExpression);
-            //Response.Write("<br/>");
-            //Response.Write("Sort Direction = " + e.SortDirection.ToString());
+            Response.Write("Sort Expression = " + e.SortExpression);
+            Response.Write("<br/>");
+            Response.Write("Sort Direction = " + e.SortDirection.ToString());
 
             SortDirection sortDirection = SortDirection.Ascending;
             string sortField = string.Empty;
