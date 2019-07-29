@@ -78,10 +78,10 @@
 
     
          
-        <asp:GridView ID="GridView1" SortedAscendingHeaderStyle-CssClass="ascending" SortedDescendingHeaderStyle-CssClass="descending" ClientIDMode="Static" runat="server" CssClass="table table-striped table-bordered table-hover"   CellPadding ="3" ForeColor="Black" 
+        <asp:GridView ID="GridView1" SortedAscendingHeaderStyle-CssClass="ascending" SortedDescendingHeaderStyle-CssClass="descending" runat="server" CssClass="table table-striped table-bordered table-hover"   CellPadding ="3" ForeColor="Black" 
             GridLines="Vertical" Height="100%" Width="100%" OnPageIndexChanging="GridView1_PageIndexChanging" OnPreRender="GridView1_PreRender" AllowPaging="True"
-            AutoGenerateColumns="False" DataKeyNames="Company" BackColor="White" BorderColor="#999999" 
-            BorderStyle="Solid" BorderWidth="1px" PageSize="3" AllowSorting="True"  OnSorting="GridView1_Sorting" OnRowCreated="GridView1_RowCreated"  >
+            AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" 
+            BorderStyle="Solid" BorderWidth="1px" PageSize="3" AllowSorting="True"  OnSorting="GridView1_Sorting" CurrentSortDirection="ASC" CurrentSortField="StartDate" OnRowCreated="GridView1_RowCreated"  >
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <Columns>
                 
@@ -105,7 +105,7 @@
                                         </asp:TemplateField>
                                     <asp:BoundField DataField="Company" visible="false" HeaderText="Company Name" SortExpression="Company"></asp:BoundField>
                                     
-                                     <asp:BoundField DataField="adname" HeaderText="Advert Name" SortExpression="Name1"></asp:BoundField>
+                                     <asp:BoundField DataField="adname" HeaderText="Advert Name" SortExpression="adname"></asp:BoundField>
                                     <asp:BoundField DataField="ItemType" HeaderText="ItemType" SortExpression="ItemType"></asp:BoundField>
                              
                                

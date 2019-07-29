@@ -36,17 +36,11 @@ namespace targeted_marketing_display
                 BillboardObj = bDao.getBillboardByID(Session["BillboardID"].ToString());
                 latitude = BillboardObj.latitude;
                 longtitude = BillboardObj.Longtitude;
-
-                
-                
                 this.BindGrid();
-            
             }
 
             try
             {
-
-
                 var rowIndex = 0;
                 var hiddenvalue = (string)GridView1.DataKeys[rowIndex]["BillboardCode"];
                 BillboardCodelabel.Text = " for " + hiddenvalue.ToString();
@@ -56,7 +50,6 @@ namespace targeted_marketing_display
             {
                 
             }
-
 
         }
         protected void BindGrid()
@@ -114,10 +107,6 @@ namespace targeted_marketing_display
             Int32 numberOfRows = Convert.ToInt32(cmdCount.ExecuteScalar());
             rowcounttext.Text = numberOfRows.ToString() + " Advertisement(s)";
             
-
-            
-          
-
         }
         protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
         {
