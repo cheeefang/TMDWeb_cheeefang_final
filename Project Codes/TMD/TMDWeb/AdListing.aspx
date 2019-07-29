@@ -55,12 +55,12 @@ body
 
 }
 .ascending a{
-    background:url(webicons/asc.gif) right no-repeat;
+    background:url(webicons/Ascendingicon.png) right no-repeat;
     display:block;
     padding:0 25px 0 5px;
 }
 .descending a{
-     background:url(webicons/desc.gif) right no-repeat;
+     background:url(webicons/Descendingicon.png) right no-repeat;
     display:block;
     padding:0 25px 0 5px;
 }

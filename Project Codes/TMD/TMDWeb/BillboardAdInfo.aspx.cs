@@ -159,16 +159,16 @@ namespace targeted_marketing_display
             DataTable dtSort = ds.Tables[0];
 
             DataView dv = new DataView(dtSort);
-            if (ViewState["sorting"] == "DESC" || ViewState["sorting"] == null)
+            if (ViewState["sorting"] == "descending" || ViewState["sorting"] == null)
             {
-                dv.Sort = e.SortExpression + " ASC";
-                ViewState["sorting"] = "ASC";
+                dv.Sort = e.SortExpression + " ascending";
+                ViewState["sorting"] = "ascending";
                
             }
-            else if (ViewState["sorting"].ToString() == "ASC")
+            else if (ViewState["sorting"].ToString() == "ascending")
             {
-                dv.Sort = e.SortExpression + " DESC";
-                ViewState["sorting"] = "DESC";
+                dv.Sort = e.SortExpression + " descending";
+                ViewState["sorting"] = "descending";
               
             }
             GridView1.DataSource = dv;
