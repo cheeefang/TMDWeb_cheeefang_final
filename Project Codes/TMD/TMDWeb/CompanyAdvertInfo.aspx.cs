@@ -11,6 +11,7 @@ using CoInfoMgmt;
 using targeted_marketing_display.App_Code;
 using targeted_marketing_display;
 using System.Web.UI.WebControls;
+using System.Web.UI;
 
 namespace targeted_marketing_display
 {
@@ -20,23 +21,96 @@ namespace targeted_marketing_display
               SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
         Database dbConnection = new Database();
 
+        
         protected void Page_Load(object sender, EventArgs e)
         {
 
             if (!IsPostBack)
             {
-
+                
                 this.BindGrid();
          
             }
-            
+
         }
-
-        protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
-
+        protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
         {
+            if (GridView1.Attributes["CurrentSortField"] != null && GridView1.Attributes["CurrentSortDirection"] != null)
+            {
+                if (e.Row.RowType == DataControlRowType.Header)
+                {
+                    foreach (TableCell tableCell in e.Row.Cells)
+                    {
+                        if (tableCell.HasControls())
+                        {
+                            LinkButton sortLinkButton = null;
+                            if (tableCell.Controls[0] is LinkButton)
+                            {
+                                sortLinkButton = (LinkButton)tableCell.Controls[0];
+                            }
 
+                            if (sortLinkButton != null && GridView1.Attributes["CurrentSortField"] == sortLinkButton.CommandArgument)
+                            {
+                                Image image = new Image();
+                                if (GridView1.Attributes["CurrentSortDirection"] == "ASC")
+                                {
+                                    image.ImageUrl = "~/Images/Ascending.png";
+                                    image.Width = 50;
+                                    image.Height = 50;
+                                }
+                                else
+                                {
+                                    image.ImageUrl = "~/Images/Descending.png";
+                                    image.Width = 50;
+                                    image.Height = 50;
+                                }
+                                tableCell.Controls.Add(new LiteralControl("&nbsp;"));
+                                tableCell.Controls.Add(image);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            SqlConnection mycon = null;
+            mycon = new SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+            mycon.Open();
+                SqlCommand cmdSort = new SqlCommand("select [BillboardLocation].BillboardCode, [Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join" +
+                    " [AdvertisementLocation] on [Advertisement].AdvID=[AdvertisementLocation].AdvID join " +
+                    "[BillboardLocation] on[AdvertisementLocation].BillboardID =[BillboardLocation].BillboardID " +
+                    "where [Advertisement].status=1 and [BillboardLocation].BillboardID=@ID", mycon);
+            SqlParameter paramSort = new SqlParameter();
+            paramSort.ParameterName = "@ID";
+                paramSort.Value = Session["BillboardID"].ToString();
+            cmdSort.Parameters.Add(paramSort);
+                SqlDataAdapter sdaSort = new SqlDataAdapter();
+            DataSet ds = new DataSet();
+            cmdSort.Connection = mycon;
+                sdaSort.SelectCommand = cmdSort;
+                sdaSort.Fill(ds);
+                mycon.Close();
+                DataTable dtSort = ds.Tables[0];
+
+            DataView dv = new DataView(dtSort);
+            if (ViewState["sorting"] == "DESC" || ViewState["sorting"] == null)
+            {
+                dv.Sort = e.SortExpression + " ASC";
+                ViewState["sorting"] = "ASC";
+               
+            }
+            else if (ViewState["sorting"].ToString() == "ASC")
+            {
+                dv.Sort = e.SortExpression + " DESC";
+                ViewState["sorting"] = "DESC";
+              
+            }
+            GridView1.DataSource = dv;
             GridView1.DataBind();
+
+
+
 
         }
         public void BindGrid()

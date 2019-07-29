@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace targeted_marketing_display.App_Code
 {
@@ -22,4 +25,16 @@ namespace targeted_marketing_display.App_Code
         public string LastUpdOn { get; set; }
 
     }
+    //public class AdvertDataAccessLayer
+    //{
+    //    public static List<Advertisement> GetAllAdverts(string sortColumn)
+    //    {
+    //        List<Advertisement> listAdverts = new List<Advertisement>();
+    //        string CS = ConfigurationManager.ConnectionStrings["TMDdb"].ConnectionString;
+    //        using (SqlConnection con=new SqlConnection(CS))
+    //        {
+    //            string 
+    //        }
+    //    }
+    //}
 }

@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="BillboardAdInfo.aspx.cs" Inherits="targeted_marketing_display.BillboardAdInfo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -36,7 +37,7 @@
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
-
+       
         <asp:label id="labelMap" runat="server" font-bold="true">Billboard Location</asp:label>
          <div id='map' style="width:300px;height:300px" align="center"></div>
 
@@ -125,7 +126,7 @@ map.on('load', function() {
         <asp:GridView ID="GridView1" runat="server" CssClass="table table-striped table-bordered table-hover"   CellPadding ="3" ForeColor="Black" GridLines="Vertical" Height="100%" Width="100%" 
             OnPreRender="GridView1_PreRender" AllowPaging="True"  OnPageIndexChanging="GridView1_PageIndexChanging" AutoGenerateColumns="False" 
             DataKeyNames="BillboardCode" BackColor="White" BorderColor="#999999" BorderStyle="Solid"
-            BorderWidth="1px" PageSize="3" AllowSorting="True" OnSorting="GridView1_Sorting" >
+            BorderWidth="1px" PageSize="3" AllowSorting="True" OnSorting="GridView1_Sorting" CurrentSortDirection="ASC" OnRowCreated="GridView1_RowCreated"   >
             <AlternatingRowStyle BackColor="#CCCCCC"  />
             <Columns>
                                     

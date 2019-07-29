@@ -182,7 +182,8 @@ function HideDiv() {
                             <asp:GridView ID="GridView1" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Width="100%" 
                                 BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px"
                                 CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" HorizontalAlign="Center" DataKeyNames="AdvID" 
-                                OnPreRender="GridView1_PreRender" ForeColor="Black" GridLines="Vertical" OnRowDataBound="GridView1_RowDataBound"  cellspacing="5" PageSize="3" AllowSorting="True">
+                                OnPreRender="GridView1_PreRender" ForeColor="Black" GridLines="Vertical" OnRowDataBound="GridView1_RowDataBound"  cellspacing="5" PageSize="3"
+                                AllowSorting="True"   CurrentSortDirection="ASC" OnRowCreated="GridView1_RowCreated">
                                 <AlternatingRowStyle HorizontalAlign="Center" BackColor="#CCCCCC" />
                                 <Columns>
                                     <asp:TemplateField visible="false">
@@ -233,8 +234,8 @@ function HideDiv() {
                                     
                                     <asp:BoundField DataField="ItemType" HeaderText="Type" SortExpression="Name1"></asp:BoundField>
                                
-                                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" SortExpression="StartDate" DataFormatString="{0:D}"></asp:BoundField>
-                                    <asp:BoundField DataField="EndDate" HeaderText="End Date" SortExpression="EndDate" DataFormatString="{0:D}"></asp:BoundField>
+                                    <asp:BoundField DataField="StartDate" HeaderText="Start Date^" SortExpression="StartDate" DataFormatString="{0:D}"></asp:BoundField>
+                                    <asp:BoundField DataField="EndDate" HeaderText="End Date^" SortExpression="EndDate" DataFormatString="{0:D}"></asp:BoundField>
                                     
 
                                      <asp:templatefield headertext="View">
