@@ -24,27 +24,27 @@
 <body>
     <form id="form1" runat="server">
        <div class="card">
-  <img src="http://localhost:58659/Images/Simple-Tomato-Salad-IMAGE-7.jpg" alt="Avatar" style="width:100%">
+  <img src="http://localhost:58659/Images/Simple-Tomato-Salad-IMAGE-7.jpg" alt="Avatar" style="width:400px;height:400px">
   <div class="container">
-  <h1><b>Company: Los Angeles Lakers</b></h1>
- <h1><b>Advertisement Name: TESTING</b></h1>
-File Type: image
-Start Date: Thursday, 30 May 2019
-End Date: Thursday, 18 July 2019
+  <h1><b>Company:</b></h1> Los Angeles Lakers
+ <h1><b>Advertisement Name:</b></h1>TESTING
+<h1><b>File Type:</b></h1> image
+  <h1><b>Start Date:</b></h1> Thursday, 30 May 2019
+  <h1><b>End Date:</b></h1> Thursday, 18 July 2019
 <h1><b>Targeted Audience(s):</b></h1>
--Age 0-15, Child (Female)
--Age 0-15, Child (Male)
--Age 16-30, Young adult (Female)
--Age 16-30, Young adult (Male)
--Age 31-65, Adult (Female)
--Age 31-65, Adult (Male)
--Age 66+, Senior (Female)
--Age 66+, Senior (Male)
+Age 0-15, Child (Female),
+Age 0-15, Child (Male),
+Age 16-30, Young adult (Female),
+Age 16-30, Young adult (Male),
+Age 31-65, Adult (Female),
+Age 31-65, Adult (Male),
+Age 66+, Senior (Female),
+Age 66+, Senior (Male)
 <h1><b>Advertisement Category(s):</b></h1>
--Food
--Health
--Offices of physicians, dentists and other practitioners. Medical and diagnostic laboratories. Home health care, outpatient care and other ambulatory services. Psychiatric, substance abuse and specialty hospitals
--Restaurant
+Food,
+Health,
+Offices of physicians, dentists and other practitioners. Medical and diagnostic laboratories. Home health care, outpatient care and other ambulatory services. Psychiatric, substance abuse and specialty hospitals,
+Restaurant
 <h1><b>Connected Billboard(s):</b></h1>
 87abc1,5dewe34,3dh7,67T6,987,abc12345,bb511,bb1234,#bb5789,#bb5647
   </div>
