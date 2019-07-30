@@ -93,17 +93,19 @@ map.on('load', function() {
         console.log(e.result.context["0"].text);
         var string = e.result.place_name,
             length = string.length,
-            step = 50,
+            step = 40,
             array = [],
             i = 0,
             j;
-
+       //run when i<address total length
         while (i < length) {
+            //find index of empty space after i+50;
             j = string.indexOf(" ", i + step);
+            //if cant find empty space after a certain index,return -1
             if (j === -1) {
                 j = length;
             }
-    
+            //push value of addln1 first,then addln2
             array.push(string.slice(i, j));
             i = j;
         }
