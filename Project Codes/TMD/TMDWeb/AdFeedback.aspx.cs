@@ -769,7 +769,7 @@ namespace targeted_marketing_display
                         else if (rbAge.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select Count(NoOfPax),AgeID as AgeGroup From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' group by AgeID");
+                            SqlCommand command = new SqlCommand("Select Count(NoOfPax) as NoOfPax,AgeID as AgeGroup From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' group by AgeID");
                             command.Parameters.AddWithValue("@pId", id.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
@@ -1093,7 +1093,7 @@ namespace targeted_marketing_display
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
                     DataTable gvComp = new DataTable();
-                    gvComp.Columns.Add("ID", typeof(int));
+                    gvComp.Columns.Add("AdvID", typeof(int));
                     gvComp.Columns.Add("BillboardID", typeof(int));
                     gvComp.Columns.Add("Name", typeof(string));
                     gvComp.Columns.Add("Age", typeof(int));
@@ -1164,7 +1164,7 @@ namespace targeted_marketing_display
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
                     DataTable gvComp = new DataTable();
-                    gvComp.Columns.Add("ID", typeof(int));
+                    gvComp.Columns.Add("AdvID", typeof(int));
                     gvComp.Columns.Add("BillboardID", typeof(int));
                     gvComp.Columns.Add("Name", typeof(string));
                     gvComp.Columns.Add("Age", typeof(int));
@@ -1236,7 +1236,7 @@ namespace targeted_marketing_display
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
                     DataTable gvComp = new DataTable();
-                    gvComp.Columns.Add("ID", typeof(int));
+                    gvComp.Columns.Add("AdvID", typeof(int));
                     gvComp.Columns.Add("BillboardID", typeof(int));
                     gvComp.Columns.Add("Name", typeof(string));
                     gvComp.Columns.Add("Age", typeof(int));
@@ -1339,7 +1339,7 @@ namespace targeted_marketing_display
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
                     DataTable gvComp = new DataTable();
-                    gvComp.Columns.Add("ID", typeof(int));
+                    gvComp.Columns.Add("AdvID", typeof(int));
                     gvComp.Columns.Add("BillboardID", typeof(int));
                     gvComp.Columns.Add("Name", typeof(string));
                     gvComp.Columns.Add("Age", typeof(int));
@@ -1413,7 +1413,7 @@ namespace targeted_marketing_display
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
                     DataTable gvComp = new DataTable();
-                    gvComp.Columns.Add("ID", typeof(int));
+                    gvComp.Columns.Add("AdvID", typeof(int));
                     gvComp.Columns.Add("BillboardID", typeof(int));
                     gvComp.Columns.Add("Name", typeof(string));
                     gvComp.Columns.Add("Age", typeof(int));

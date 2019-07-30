@@ -105,12 +105,12 @@
                                         </asp:TemplateField>
                                     <asp:BoundField DataField="Company" visible="false" HeaderText="Company Name" SortExpression="Company"></asp:BoundField>
                                     
-                                     <asp:BoundField DataField="adname" HeaderText="Advert Name" SortExpression="adname"></asp:BoundField>
-                                    <asp:BoundField DataField="ItemType" HeaderText="ItemType" SortExpression="ItemType"></asp:BoundField>
+                                     <asp:BoundField DataField="adname" HeaderText="Name" SortExpression="adname"></asp:BoundField>
+                                    <asp:BoundField DataField="ItemType" HeaderText="Type" SortExpression="ItemType"></asp:BoundField>
                              
                                
-                                    <asp:BoundField DataField="StartDate" HeaderText="StartDate" SortExpression="StartDate" DataFormatString="{0:D}"></asp:BoundField>
-                                    <asp:BoundField DataField="EndDate" HeaderText="EndDate" SortExpression="EndDate" DataFormatString="{0:D}"></asp:BoundField>
+                                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" SortExpression="StartDate" DataFormatString="{0:D}"></asp:BoundField>
+                                    <asp:BoundField DataField="EndDate" HeaderText="End Date" SortExpression="EndDate" DataFormatString="{0:D}"></asp:BoundField>
                                    
                
                 
