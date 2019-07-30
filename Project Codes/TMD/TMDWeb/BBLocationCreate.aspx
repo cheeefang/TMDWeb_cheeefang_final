@@ -78,37 +78,42 @@ map.on('load', function() {
   map.addLayer({
     id: 'point',
     source: 'single-point',
-    type: 'circle',
-    paint: {
-      'circle-radius': 10,
-      'circle-color': '#448ee4'
-    }
+      type: 'circle',
+      paint: {
+          'circle-radius': 10,
+          'circle-color': '#448ee4'
+      }
   });
 
-  // Listen for the `result` event from the Geocoder
-  // `result` event is triggered when a user makes a selection
-  //  Add a marker at the result's coordinates
+    // Listen for the `result` event from the Geocoder
+    // `result` event is triggered when a user makes a selection
+    //  Add a marker at the result's coordinates
     geocoder.on('result', function (e) {
         console.log(e);
         console.log(e.result.context["0"].text);
+
         var string = e.result.place_name,
             length = string.length,
-            step = 40,
+            step = 50,
             array = [],
             i = 0,
             j;
-       //run when i<address total length
-        while (i < length) {
-            //find index of empty space after i+50;
-            j = string.indexOf(" ", i + step);
-            //if cant find empty space after a certain index,return -1
-            if (j === -1) {
-                j = length;
-            }
-            //push value of addln1 first,then addln2
-            array.push(string.slice(i, j));
-            i = j;
+        console.log(length);
+        // j = string.lastIndexOf(" ", i + step);
+        //run when i<address total length
+
+        //find index of empty space after i+50;
+        j = string.lastIndexOf(" ", i + step);
+        console.log(j);
+        //if cant find empty space after a certain index,return -1
+        if (j === -1) {
+            j = length;
         }
+        //push value of addln1 first,then addln2
+        array.push(string.slice(0, j));
+        array.push(string.slice(j, length));
+
+
         if (array[1] == undefined) {
             array[1] = ' ';
         }

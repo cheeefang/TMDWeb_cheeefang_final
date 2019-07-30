@@ -31,6 +31,7 @@ namespace targeted_marketing_display
         //cheeefang was here
         string DBConnect = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
 
+        //wtf is this
         public static void DisableLinkButton(LinkButton linkButton)
         {
             linkButton.Attributes.Remove("href");
@@ -47,6 +48,7 @@ namespace targeted_marketing_display
             }
         }
 
+        //populate Company dropdown list
         public void PopulateDdl()
         {
                 Database db = new Database();

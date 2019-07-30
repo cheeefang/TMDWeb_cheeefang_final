@@ -283,8 +283,9 @@
                             </span>
                         </div>
                                 &nbsp
-                                &nbsp
-                        <asp:GridView ID="gvBb" runat="server" Visible="true" Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover" OnRowDataBound="gvBb_RowDataBound">
+                                &nbsp gvBb
+                        <asp:GridView ID="gvBb" runat="server" Visible="true" Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover"
+                            OnRowDataBound="gvBb_RowDataBound" AllowPaging="true" PageSize="10">
                             <Columns>
                                 <asp:TemplateField>
                                     <ItemTemplate>
