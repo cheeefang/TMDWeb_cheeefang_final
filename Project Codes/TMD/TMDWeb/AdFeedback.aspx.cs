@@ -1083,11 +1083,14 @@ namespace targeted_marketing_display
                 chartComEmotion.Columns.Add("No", typeof(string));
                 chartComEmotion.Columns.Add("Emotion", typeof(string));
 
+                //Select AdvertisementFeedback.AdvId, BillboardID, count(Name) AS totalcount From AdvertisementFeedback Full Outer Join Advertisement On
+ //               AdvertisementFeedback.AdvId = Advertisement.AdvId Where Advertisement.CompanyId Like  1 and AdvertisementFeedback.AdvId is not null
+ //group by AdvertisementFeedback.BillboardID,AdvertisementFeedback.AdvID
                 if (rbNo.Checked == true)
                 {
                     con.Open();
-                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name From AdvertisementFeedback Full Outer Join Advertisement On" +
-                        " AdvertisementFeedback.AdvId=Advertisement.AdvId Where Advertisement.CompanyId Like '%' + @pComId + '%' and AdvertisementFeedback.AdvId is not null");
+                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID,count(Name) as totalcount From AdvertisementFeedback Full Outer Join Advertisement On" +
+                        " AdvertisementFeedback.AdvId=Advertisement.AdvId Where Advertisement.CompanyId Like '%' + @pComId + '%' and AdvertisementFeedback.AdvId is not null group by AdvertisementFeedback.BillboardID,AdvertisementFeedback.AdvID");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
@@ -1095,7 +1098,7 @@ namespace targeted_marketing_display
                     DataTable gvComp = new DataTable();
                     gvComp.Columns.Add("AdvID", typeof(int));
                     gvComp.Columns.Add("BillboardID", typeof(int));
-                    gvComp.Columns.Add("Name", typeof(string));
+                    gvComp.Columns.Add("totalcount", typeof(int));
                     gvComp.Columns.Add("Age", typeof(int));
                     gvComp.Columns.Add("Gender", typeof(string));
                     gvComp.Columns.Add("Emotion", typeof(int));
@@ -1104,11 +1107,11 @@ namespace targeted_marketing_display
                     {
                         int gvId = Convert.ToInt32(drGvCmd["AdvID"]);
                         int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
-                        string name = drGvCmd["Name"].ToString();
+                        int counttotal = Convert.ToInt32(drGvCmd["totalcount"]);
                         int ageGv = 0;
                         string genderGv = "";
                         int emotionGv = 0;
-                        gvComp.Rows.Add(gvId, locationGv, name, ageGv, genderGv, emotionGv);
+                        gvComp.Rows.Add(gvId, locationGv, counttotal, ageGv, genderGv, emotionGv);
                         gvCom.DataSource = gvComp;
                         gvCom.DataBind();
                     }
@@ -1159,7 +1162,7 @@ namespace targeted_marketing_display
                 else if (rbTs.Checked == true)
                 {
                     con.Open();
-                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name From AdvertisementFeedback inner join Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId" +
+                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name From AdvertisementFeedback inner Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId" +
                         " Where Advertisement.CompanyId Like '%' + @pComId + '%' ");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
                     gvCmd.Connection = con;

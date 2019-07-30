@@ -171,7 +171,7 @@
                 </div>
             </div>
             <div class="row">
-                <asp:GridView ID="gvCom" runat="server" Visible="true" Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover">
+                <asp:GridView ID="gvCom" runat="server"  Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover" visible="false">
                             <Columns>
                                 <asp:BoundField DataField="AdvID" HeaderText="Advertisement ID" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
                                         <ItemStyle HorizontalAlign="Center" Width="2%"></ItemStyle>
@@ -179,7 +179,7 @@
                                 <asp:BoundField DataField="BillboardID" HeaderText="Billboard ID" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
                                         <ItemStyle HorizontalAlign="Center" Width="2%"></ItemStyle>
                                 </asp:BoundField>
-                                <asp:BoundField DataField="Name" HeaderText="Name" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
+                                <asp:BoundField DataField="totalcount" HeaderText="Total Count" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
                                         <ItemStyle HorizontalAlign="Center" Width="2%"></ItemStyle>
                                 </asp:BoundField>
                                 <asp:BoundField DataField="Age" HeaderText="Age" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
