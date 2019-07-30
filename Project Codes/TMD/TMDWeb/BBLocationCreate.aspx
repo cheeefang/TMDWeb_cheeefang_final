@@ -91,7 +91,7 @@ map.on('load', function() {
     geocoder.on('result', function (e) {
         console.log(e);
         console.log(e.result.context["0"].text);
-        var string = "" + e.result.place_name,
+        var string = e.result.place_name,
             length = string.length,
             step = 50,
             array = [],
