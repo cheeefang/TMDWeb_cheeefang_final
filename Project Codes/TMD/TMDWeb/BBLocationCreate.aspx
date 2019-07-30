@@ -91,7 +91,28 @@ map.on('load', function() {
     geocoder.on('result', function (e) {
         console.log(e);
         console.log(e.result.context["0"].text);
-        var address = e.result.place_name;
+        var string = "" + e.result.place_name,
+            length = string.length,
+            step = 50,
+            array = [],
+            i = 0,
+            j;
+
+        while (i < length) {
+            j = string.indexOf(" ", i + step);
+            if (j === -1) {
+                j = length;
+            }
+    
+            array.push(string.slice(i, j));
+            i = j;
+        }
+        if (array[1] == undefined) {
+            array[1] = ' ';
+        }
+        console.log(array);
+        var address = array[0];
+        var address2 = array[1];
         var longtitude = e.result.geometry.coordinates[0];
         var latitude = e.result.geometry.coordinates[1];
         var pCode = e.result.context["0"].text;
@@ -104,6 +125,7 @@ map.on('load', function() {
         document.getElementById("BBPostalCode").value = pCode;
         document.getElementById("BBCity").value = City;
         document.getElementById("BBAddLn1").value = address;
+        document.getElementById("BBAddLn2").value = address2;
         document.getElementById("BBCountry").value = CapsCountry;
     map.getSource('single-point').setData(e.result.geometry);
   });
