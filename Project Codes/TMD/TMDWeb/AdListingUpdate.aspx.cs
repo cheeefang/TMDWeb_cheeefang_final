@@ -204,6 +204,7 @@ namespace targeted_marketing_display
                 for (int i = 0; i < datatableLoc.Rows.Count; i++)
                 {
                     string BillboardCodefromdb = datatableLoc.Rows[i]["BillboardCode"].ToString();
+                   
                     foreach (GridViewRow gvr in GridView1.Rows)
 
                     {
@@ -225,7 +226,7 @@ namespace targeted_marketing_display
 
 
                 }
-                GridView1.AllowPaging = true;
+               
                 billboardDisplayTB.Text = (billboardDisplayTB.Text).Substring(1);
                 SqlCommand cmdCat = new SqlCommand("select * from [AdvertisementCategory] where AdvID=@ID", conn);
                 SqlParameter paramCat = new SqlParameter();
