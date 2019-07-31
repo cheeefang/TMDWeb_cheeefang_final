@@ -452,7 +452,19 @@
                                 </ContentTemplate>
                                              </asp:UpdatePanel>
                                
-                  
+                                      
+                                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" 
+                               FilterExpression="BillboardCode LIKE '%{0}%' OR AddressLn LIKE '%{0}%' OR City LIKE '%{0}%' OR Country LIKE '%{0}%' OR postalCode LIKE '%{0}%'" 
+                                        SelectCommand="SELECT BillboardID,BillboardCode, Latitude ,Longtitude ,(( AddressLn1) + ' '+( AddressLn2 )+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address FROM BillboardLocation where status=1 ">
+                                        <FilterParameters>
+                                            <asp:ControlParameter ControlID="txtSearch" Name="City" PropertyName="Text" />
+                                            <asp:ControlParameter ControlID="txtSearch" Name="AddressLn" PropertyName="Text" />
+                                            <asp:ControlParameter ControlID="txtSearch" Name="BillboardCode" PropertyName="Text" />
+                                            <asp:ControlParameter ControlID="txtSearch" Name="Country" PropertyName="Text" />
+                                            <asp:ControlParameter ControlID="txtSearch" Name="postalCode" PropertyName="Text" />
+
+                                        </FilterParameters>
+                                    </asp:SqlDataSource>
                                          
                                    
                                     </div>
