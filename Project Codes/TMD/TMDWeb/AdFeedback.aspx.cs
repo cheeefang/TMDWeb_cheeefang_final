@@ -19,14 +19,16 @@ namespace targeted_marketing_display
         {
             //DisableLinkButton(lBtnFrom);
             //DisableLinkButton(lBtnTo);
-            CompareValidator2.ValueToCompare = DateTime.Now.ToShortDateString();
+    
             if (!IsPostBack)
             {
                 string modalId = "No Selection";
                 Session["modalId"] = modalId;
                 PopulateDdl();
                 ddlCom.Items.Insert(0, new ListItem("<--Select A Company-->"));
+           
             }
+            CompareValidator2.ValueToCompare = DateTime.Now.ToShortDateString();
         }
         //cheeefang was here
         string DBConnect = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
@@ -293,7 +295,8 @@ namespace targeted_marketing_display
                 cmdGv.Columns.Add("Age", typeof(int));
                 cmdGv.Columns.Add("Gender", typeof(string));
                 cmdGv.Columns.Add("Emotion", typeof(int));
-
+                DateTime sdate = DateTime.Parse(startDateTB.Text);
+                DateTime edate = DateTime.Parse(endDateTB.Text);
                 for (int i = 0; i < gvAdv.Rows.Count; i++)
                 {
                     GridViewRow row = gvAdv.Rows[i];
@@ -308,8 +311,10 @@ namespace targeted_marketing_display
                         if (rbNo.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select Sum(NoOfPax) As totalPax From AdvertisementFeedback Where AdvId Like '%' + @pId + '%' Group By AdvId");
+                            SqlCommand command = new SqlCommand("Select Sum(NoOfPax) As totalPax From AdvertisementFeedback Where AdvId Like '%' + @pId + '%' and Timestamp>=@sDate and Timestamp<=@eDate Group By AdvId");
                             command.Parameters.AddWithValue("@pId", advLabel.Text.ToString());
+                            command.Parameters.AddWithValue("@sDate",sdate );
+                            command.Parameters.AddWithValue("@eDate",edate);
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -342,8 +347,10 @@ namespace targeted_marketing_display
                         else if (rbTs.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("select top 1 NoOfPax,TimeStamp from AdvertisementFeedback Where AdvID Like '%' + @pId + '%' order by NoOfPax Desc");
+                            SqlCommand command = new SqlCommand("select top 1 NoOfPax,TimeStamp from AdvertisementFeedback Where AdvID Like '%' + @pId + '%' and Timestamp>=@sDate and Timestamp<=@eDate order by NoOfPax Desc");
                             command.Parameters.AddWithValue("@pId", advLabel.Text.ToString());
+                            command.Parameters.AddWithValue("@sDate", sdate);
+                            command.Parameters.AddWithValue("@eDate", edate);
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -377,8 +384,10 @@ namespace targeted_marketing_display
                         else if (rbAge.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select count(NoOfPax) as NoOfPax,AgeID From AdvertisementFeedback Where AdvID Like '%' + @pId + '%' group by AgeID");
+                            SqlCommand command = new SqlCommand("Select count(NoOfPax) as NoOfPax,AgeID From AdvertisementFeedback Where AdvID Like '%' + @pId + '%'  group by AgeID");
                             command.Parameters.AddWithValue("@pId", advLabel.Text.ToString());
+                            command.Parameters.AddWithValue("@sDate", sdate);
+                            command.Parameters.AddWithValue("@eDate", edate);
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -491,6 +500,8 @@ namespace targeted_marketing_display
                             con.Open();
                             SqlCommand command = new SqlCommand("Select  count(NoOfPax) as NoOfPax,GenderID From AdvertisementFeedback Where AdvID Like '%' + @pId + '%' group by GenderID");
                             command.Parameters.AddWithValue("@pId", advLabel.Text.ToString());
+                            command.Parameters.AddWithValue("@sDate", sdate);
+                            command.Parameters.AddWithValue("@eDate", edate);
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -526,6 +537,8 @@ namespace targeted_marketing_display
                             con.Open();
                             SqlCommand command = new SqlCommand("Select  count(NoOfPax) as NoOfPax,Emotion From AdvertisementFeedback Where AdvID Like '%' + @pId + '%' group by emotion");
                             command.Parameters.AddWithValue("@pId", advLabel.Text.ToString());
+                            command.Parameters.AddWithValue("@sDate", sdate);
+                            command.Parameters.AddWithValue("@eDate", edate);
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -688,7 +701,8 @@ namespace targeted_marketing_display
                 chartBbEmotion.Columns.Add("Bb", typeof(string));
                 chartBbEmotion.Columns.Add("No", typeof(string));
                 chartBbEmotion.Columns.Add("Emotion", typeof(string));
-
+                DateTime sdate = DateTime.Parse(startDateTB.Text);
+                DateTime edate = DateTime.Parse(endDateTB.Text);
                 for (int i = 0; i < gvBb.Rows.Count; i++)
                 {
                     GridViewRow row = gvBb.Rows[i];
@@ -701,8 +715,10 @@ namespace targeted_marketing_display
                         if (rbNo.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select Sum(NoOfPax) As NoOfPaxs From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' Group By BillboardID");
+                            SqlCommand command = new SqlCommand("Select Sum(NoOfPax) As NoOfPaxs From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' and Timestamp>=@sDate and Timestamp<=@eDate Group By BillboardID");
                             command.Parameters.AddWithValue("@pId", bblabel.Text.ToString());
+                            command.Parameters.AddWithValue("@sDate", sdate);
+                            command.Parameters.AddWithValue("@eDate", edate);
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -736,8 +752,10 @@ namespace targeted_marketing_display
                         else if (rbTs.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select top 1 Count(NoOfPax) as NoOfPax,TimeStamp From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' group by TimeStamp ");
+                            SqlCommand command = new SqlCommand("Select top 1 Count(NoOfPax) as NoOfPax,TimeStamp From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' and Timestamp>=@sDate and Timestamp<=@eDate group by TimeStamp ");
                             command.Parameters.AddWithValue("@pId", bblabel.Text.ToString());
+                            command.Parameters.AddWithValue("@sDate", sdate);
+                            command.Parameters.AddWithValue("@eDate", edate);
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -772,8 +790,10 @@ namespace targeted_marketing_display
                         else if (rbAge.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select Count(NoOfPax) as NoOfPax,AgeID as AgeGroup From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' group by AgeID");
+                            SqlCommand command = new SqlCommand("Select Count(NoOfPax) as NoOfPax,AgeID as AgeGroup From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' and Timestamp>=@sDate and Timestamp<=@eDate group by AgeID");
                             command.Parameters.AddWithValue("@pId", bblabel.Text.ToString());
+                            command.Parameters.AddWithValue("@sDate", sdate);
+                            command.Parameters.AddWithValue("@eDate", edate);
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -886,8 +906,10 @@ namespace targeted_marketing_display
                         {
                             con.Open();
                             SqlCommand command = new SqlCommand("Select Count(NoOfPax) as NoOfPax,GenderID as Gender From AdvertisementFeedback Where" +
-                                " BillboardID Like '%' + @pId + '%' group by GenderID");
+                                " BillboardID Like '%' + @pId + '%' and Timestamp>=@sDate and Timestamp<=@eDate group by GenderID");
                             command.Parameters.AddWithValue("@pId", bblabel.Text.ToString());
+                            command.Parameters.AddWithValue("@sDate", sdate);
+                            command.Parameters.AddWithValue("@eDate", edate);
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -921,8 +943,10 @@ namespace targeted_marketing_display
                         else if (rbEmotion.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select Count(NoOfPax) as NoOfPax,Emotion From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' group by Emotion");
+                            SqlCommand command = new SqlCommand("Select Count(NoOfPax) as NoOfPax,Emotion From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' and Timestamp>=@sDate and Timestamp<=@eDate group by Emotion");
                             command.Parameters.AddWithValue("@pId", bblabel.Text.ToString());
+                            command.Parameters.AddWithValue("@sDate", sdate);
+                            command.Parameters.AddWithValue("@eDate", edate);
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -1106,19 +1130,16 @@ namespace targeted_marketing_display
                 chartComEmotion.Columns.Add("Com", typeof(string));
                 chartComEmotion.Columns.Add("No", typeof(string));
                 chartComEmotion.Columns.Add("Emotion", typeof(string));
-
-
-
-
-
-
-
+                DateTime sdate = DateTime.Parse(startDateTB.Text);
+                DateTime edate = DateTime.Parse(endDateTB.Text);
                 if (rbNo.Checked == true)
                 {
                     con.Open();
                     SqlCommand gvCmd = new SqlCommand("select count(AdvertisementFeedback.AdvID) as totalcount,Company.Name as CompanyName from AdvertisementFeedback inner join Advertisement on " +
-                        "AdvertisementFeedback.AdvID = Advertisement.AdvID inner join Company on Advertisement.companyID=Company.CompanyID where Advertisement.companyID = @pComId group by Company.Name ");
+                        "AdvertisementFeedback.AdvID = Advertisement.AdvID inner join Company on Advertisement.companyID=Company.CompanyID where Advertisement.companyID = @pComId and Timestamp>=@sDate and Timestamp<=@eDate group by Company.Name ");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
+                    gvCmd.Parameters.AddWithValue("@sDate", sdate);
+                    gvCmd.Parameters.AddWithValue("@eDate", edate);
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
@@ -1166,8 +1187,10 @@ namespace targeted_marketing_display
                     con.Open();
                     SqlCommand gvCmd = new SqlCommand("select top 1 NoOfPax,TimeStamp,Company.Name from AdvertisementFeedback inner join Advertisement on AdvertisementFeedback.AdvID=Advertisement.AdvID inner join Company on " +
                         "Advertisement.companyID = Company.CompanyID " +
-                        "Where Advertisement.companyID =@pComId order by NoOfPax Desc ");
+                        "Where Advertisement.companyID =@pComId and Timestamp>=@sDate and Timestamp<=@eDate order by NoOfPax Desc ");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
+                    gvCmd.Parameters.AddWithValue("@sDate", sdate);
+                    gvCmd.Parameters.AddWithValue("@eDate", edate);
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
@@ -1212,8 +1235,10 @@ namespace targeted_marketing_display
                     con.Open();
                 
                     SqlCommand gvCmd = new SqlCommand("Select  count(NoOfPax) as NoOfPax,  AgeID as AgeGroup From AdvertisementFeedback inner Join Advertisement" +
-                        " On AdvertisementFeedback.AdvId=Advertisement.AdvId Where Advertisement.CompanyId Like '%' + @pComId + '%' group by AgeID");
+                        " On AdvertisementFeedback.AdvId=Advertisement.AdvId Where Advertisement.CompanyId Like '%' + @pComId + '%' and Timestamp>=@sDate and Timestamp<=@eDate group by AgeID");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
+                    gvCmd.Parameters.AddWithValue("@sDate", sdate);
+                    gvCmd.Parameters.AddWithValue("@eDate", edate);
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
@@ -1301,8 +1326,10 @@ namespace targeted_marketing_display
 //                    Select count(NoOfPax) as NoOfPax,GenderID From AdvertisementFeedback inner join Advertisement on AdvertisementFeedback.AdvID = Advertisement.AdvID
 //Where Advertisement.companyID Like 1 group by GenderID
                     SqlCommand gvCmd = new SqlCommand("Select count(NoOfPax) as NoOfPax,GenderID From AdvertisementFeedback inner join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId " +
-                        "Where Advertisement.CompanyId Like '%' + @pComId + '%' group by GenderId");
+                        "Where Advertisement.CompanyId Like '%' + @pComId + '%' and Timestamp>=@sDate and Timestamp<=@eDate group by GenderId");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
+                    gvCmd.Parameters.AddWithValue("@sDate", sdate);
+                    gvCmd.Parameters.AddWithValue("@eDate", edate);
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
@@ -1359,8 +1386,10 @@ namespace targeted_marketing_display
                     con.Open();
                
                     SqlCommand gvCmd = new SqlCommand("Select count(NoOfPax) as NoOfPax,Emotion From AdvertisementFeedback inner Join Advertisement On " +
-                        "AdvertisementFeedback.AdvId=Advertisement.AdvId Where Advertisement.CompanyId Like '%' + @pComId + '%' group by emotion");
+                        "AdvertisementFeedback.AdvId=Advertisement.AdvId Where Advertisement.CompanyId Like '%' + @pComId + '%' and Timestamp>=@sDate and Timestamp<=@eDate group by emotion");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
+                    gvCmd.Parameters.AddWithValue("@sDate", sdate);
+                    gvCmd.Parameters.AddWithValue("@eDate", edate);
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 

@@ -72,14 +72,7 @@
 
                 <br />
 
-            <div class="row">
-                <div class="col-lg-6">
-                    <p style="font-weight:bold">From:</p>
-                </div>
-                <div class="col-lg-6">
-                    <p style="font-weight:bold">To:</p>
-                </div>
-            </div>
+           
           <%--  <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
@@ -94,13 +87,13 @@
                 </div>
             </div>
             </div>--%>
-            <div class="row">
+             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label>From </label>
+                        <label>From: </label>
                         <label style="color: red">*</label>
                         <asp:TextBox Class="form-control" ID="startDateTB" runat="server" TextMode="Date" AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>
-                        <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="startDateTB" ErrorMessage="invalid start date (must be a day later)" Operator="GreaterThan" Type="Date" ForeColor="Red"></asp:CompareValidator>
+                      
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="startDateTB" Display="None" ErrorMessage="required start date"></asp:RequiredFieldValidator>
                     </div>
                 </div>
