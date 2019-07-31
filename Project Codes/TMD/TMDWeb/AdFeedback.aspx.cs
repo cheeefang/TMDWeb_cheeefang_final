@@ -17,9 +17,9 @@ namespace targeted_marketing_display
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            DisableLinkButton(lBtnFrom);
-            DisableLinkButton(lBtnTo);
-
+            //DisableLinkButton(lBtnFrom);
+            //DisableLinkButton(lBtnTo);
+            CompareValidator2.ValueToCompare = DateTime.Now.ToShortDateString();
             if (!IsPostBack)
             {
                 string modalId = "No Selection";
@@ -231,11 +231,11 @@ namespace targeted_marketing_display
         //Generate Chart
         protected void btnGen_Click(object sender, EventArgs e)
         {
-            if (txtFrom.Text == "" || txtTo.Text == "")
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showVadDateModal();", true);
-            }
-            else if (rbNo.Checked == false && rbTs.Checked == false && rbAge.Checked == false && rbGender.Checked == false && rbEmotion.Checked == false)
+            //if (txtFrom.Text == "" || txtTo.Text == "")
+            //{
+            //    //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showVadDateModal();", true);
+            //}
+            if (rbNo.Checked == false && rbTs.Checked == false && rbAge.Checked == false && rbGender.Checked == false && rbEmotion.Checked == false)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showVadModal();", true);
             }

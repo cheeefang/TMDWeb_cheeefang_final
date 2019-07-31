@@ -80,7 +80,7 @@
                     <p style="font-weight:bold">To:</p>
                 </div>
             </div>
-            <div class="row">
+          <%--  <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
                      <asp:TextBox ID="txtFrom" runat="server" CssClass="form-control pickdate"></asp:TextBox>
@@ -93,6 +93,29 @@
                     <asp:LinkButton ID="lBtnTo" runat="server" CssClass="btn btn-default calendar pickdate"><span aria-hidden="false" class="glyphicon glyphicon-calendar"></span></asp:LinkButton>
                 </div>
             </div>
+            </div>--%>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>From </label>
+                        <label style="color: red">*</label>
+                        <asp:TextBox Class="form-control" ID="startDateTB" runat="server" TextMode="Date" AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>
+                        <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="startDateTB" ErrorMessage="invalid start date (must be a day later)" Operator="GreaterThan" Type="Date" ForeColor="Red"></asp:CompareValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="startDateTB" Display="None" ErrorMessage="required start date"></asp:RequiredFieldValidator>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+
+                    <div class="form-group">
+                        <label>To: </label>
+                        <label style="color: red">*</label>
+                        <asp:TextBox class="form-control" ID="endDateTB" runat="server" TextMode="Date" AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>&nbsp;
+                         <asp:CompareValidator ID="CompareValidator2" runat="server" ControlToCompare="startDateTB" ControlToValidate="endDateTB" ErrorMessage="invalid end date" Operator="GreaterThan" Type="Date" ForeColor="Red"></asp:CompareValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="endDateTB" Display="None" ErrorMessage="required end date"></asp:RequiredFieldValidator>
+                    </div>
+                </div>
+             
             </div>
             <div class="row">
                 <div class="col-lg-12">
