@@ -35,7 +35,7 @@
             </div>
             <!-- /.row -->
 
-       <div id='map' style="width:300px;height:300px" align="center"></div>
+       <div id='map' style="width:1550px;height:400px" align="center"></div>
 
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlZWVmYW5nIiwiYSI6ImNqeWdyd3ozeDAzejQzZGwzMjY0MzhzYzcifQ.BN7hdcRRbZT02s4h8QR-iw';

@@ -21,7 +21,7 @@
             </div>
             <!-- /.row -->
 
-     <div id='map' style="width:300px;height:300px" align="center"></div>
+     <div id='map' style="width:1550px;height:400px" align="center"></div>
 
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlZWVmYW5nIiwiYSI6ImNqeWdyd3ozeDAzejQzZGwzMjY0MzhzYzcifQ.BN7hdcRRbZT02s4h8QR-iw';
@@ -77,7 +77,35 @@ map.on('load', function() {
     geocoder.on('result', function (e) {
         console.log(e);
         console.log(e.result.context["0"].text);
-        var address = e.result.place_name;
+
+        var string = e.result.place_name,
+            length = string.length,
+            step = 50,
+            array = [],
+            i = 0,
+            j;
+        console.log(length);
+        // j = string.lastIndexOf(" ", i + step);
+        //run when i<address total length
+
+        //find index of empty space after i+50;
+        j = string.lastIndexOf(" ", i + step);
+        console.log(j);
+        //if cant find empty space after a certain index,return -1
+        if (j === -1) {
+            j = length;
+        }
+        //push value of addln1 first,then addln2
+        array.push(string.slice(0, j));
+        array.push(string.slice(j, length));
+
+
+        if (array[1] == undefined) {
+            array[1] = ' ';
+        }
+        console.log(array);
+        var address = array[0];
+        var address2 = array[1];
         var longtitude = e.result.geometry.coordinates[0];
         var latitude = e.result.geometry.coordinates[1];
         var pCode = e.result.context["0"].text;
@@ -90,6 +118,7 @@ map.on('load', function() {
         document.getElementById("BBPostalCode").value = pCode;
         document.getElementById("BBCity").value = City;
         document.getElementById("BBAddLn1").value = address;
+        document.getElementById("BBAddLn2").value = address2;
         document.getElementById("BBCountry").value = CapsCountry;
     map.getSource('single-point').setData(e.result.geometry);
   });
