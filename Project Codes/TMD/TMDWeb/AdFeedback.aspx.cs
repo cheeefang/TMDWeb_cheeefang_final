@@ -348,14 +348,14 @@ namespace targeted_marketing_display
                             {
                                 string name = r.Cells[2].Text;
                                 int no = Convert.ToInt32(dr["NoOfPax"]);
-                                string timestamp = name + "\n\n" + dr["TimeStamp"].ToString();
+                                string timestamp = dr["TimeStamp"].ToString();
                                 chartAdvTs.Rows.Add(name, no, timestamp);
 
                                 chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                 chartFb.Series["Series1"].XValueMember = "TimeStamp";
                                 chartFb.Series["Series1"].YValueMembers = "No";
                                 chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Highest Advertisement/Timestamp";
+                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Highest No. Of Pax/Timestamp";
                                 chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                 chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                 chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
