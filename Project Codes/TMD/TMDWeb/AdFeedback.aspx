@@ -103,7 +103,7 @@
                 <div class ="col-lg-6">
                     <div class="form-group">
                         <asp:DropDownList ID="ddlCom" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlCom_SelectedIndexChanged" AutoPostBack="True" DataTextField="Name" DataValueField="Name"></asp:DropDownList>
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [Name] FROM [Company]"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [Name] FROM [Company] where status=1"></asp:SqlDataSource>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -218,9 +218,12 @@
                                 </button>
                             </span>
                         </div>
-                                &nbsp
-                                &nbsp
-                        <asp:GridView ID="gvAdv" runat="server" Visible="true" Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover" OnRowDataBound="gvAdv_RowDataBound">
+                    
+                        <asp:GridView ID="gvAdv" runat="server" Visible="true" Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover" OnRowDataBound="gvAdv_RowDataBound"
+                            AllowPaging="true" PageSize="10" ForeColor="Black" GridLines="Vertical" Height="100%" Width="100%"
+                                BackColor="White" BorderColor="#999999" BorderStyle="Solid"
+                                BorderWidth="1px" CellPadding="3" >
+                              <AlternatingRowStyle BackColor="#CCCCCC" />
                             <Columns>
                                 <asp:TemplateField>
                                     <ItemTemplate>
@@ -228,9 +231,11 @@
                                     </ItemTemplate>
                                     <ItemStyle Width="3%" />
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="AdvId" HeaderText="Advertisement ID" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
-                                        <ItemStyle HorizontalAlign="Center" Width="2%"></ItemStyle>
-                                </asp:BoundField>
+                                <asp:TemplateField visible="false">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" visible="false"  ID="lb_AdvertID" Text='<%# Bind("AdvID") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                 <asp:BoundField DataField="Name" HeaderText="Advertisement" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
                                         <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                 </asp:BoundField>
@@ -240,10 +245,16 @@
                                 <asp:BoundField DataField="EndDate" HeaderText="End Date" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
                                         <ItemStyle HorizontalAlign="Center"></ItemStyle>
                                 </asp:BoundField>
-                                <asp:BoundField DataField="Status" HeaderText="Status" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
-                                        <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                                </asp:BoundField>
+                                
                             </Columns>
+                                <FooterStyle BackColor="#CCCCCC" />
+                                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="left" />
+                                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                                <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                <SortedAscendingHeaderStyle BackColor="#808080" />
+                                <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                <SortedDescendingHeaderStyle BackColor="#383838" />
                         </asp:GridView>
                     </div>
                 </div>
@@ -284,8 +295,10 @@
                         </div>
                                 &nbsp
                                 &nbsp 
-                        <asp:GridView ID="gvBb" runat="server" Visible="true" Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover"
-                            OnRowDataBound="gvBb_RowDataBound" AllowPaging="true" PageSize="10">
+                        <asp:GridView ID="gvBb" runat="server" Visible="true" Style="margin-top: 5px;" CssClass="table table-bordered table-striped table-hover"
+                            OnRowDataBound="gvBb_RowDataBound" AllowPaging="true" PageSize="10" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3"
+                            AutoGenerateColumns="False" Height="100%" Width="100%">
+                             <AlternatingRowStyle BackColor="#CCCCCC" />
                             <Columns>
                                 <asp:TemplateField>
                                     <ItemTemplate>
@@ -293,16 +306,27 @@
                                     </ItemTemplate>
                                     <ItemStyle Width="3%" />
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="BillboardID" HeaderText="Billboard ID" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
+                                  <asp:TemplateField visible="false">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" visible="false"  ID="lb_BillboardID" Text='<%# Bind("BillboardID") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                <asp:BoundField DataField="BillboardCode" HeaderText="Billboard Code" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
                                         <ItemStyle HorizontalAlign="Left" Width="7%"></ItemStyle>
                                 </asp:BoundField>
                                 <asp:BoundField DataField="Address" HeaderText="Address" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="200px">
                                         <ItemStyle HorizontalAlign="Center" Width="200px"></ItemStyle>
                                 </asp:BoundField>
-                                <asp:BoundField DataField="Status" HeaderText="Status" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
-                                        <ItemStyle HorizontalAlign="Center" Width="100px"></ItemStyle>
-                                </asp:BoundField>
+                            
                             </Columns>
+                               <FooterStyle BackColor="#CCCCCC" />
+                                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
+                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="left" />
+                                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                                <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                <SortedAscendingHeaderStyle BackColor="#808080" />
+                                <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                <SortedDescendingHeaderStyle BackColor="#383838" />
                         </asp:GridView>
                     </div>
                 </div>

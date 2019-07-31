@@ -52,7 +52,7 @@ namespace targeted_marketing_display
         public void PopulateDdl()
         {
                 Database db = new Database();
-                SqlCommand command = new SqlCommand("Select * From Company");
+                SqlCommand command = new SqlCommand("Select * From Company where status=1");
                 DataTable dt = db.getDataTable(command);
 
                 ddlCom.DataSource = dt;
@@ -65,7 +65,7 @@ namespace targeted_marketing_display
         public void btnAdvSearch_OnClick(Object sender, EventArgs e)
         {
             Database db = new Database();
-            SqlCommand command = new SqlCommand("Select AdvId,Name,StartDate,EndDate,Status From Advertisement Where Name Like '%' + @pAdv + '%' Or companyID Like '%' + @pCom + '%'");
+            SqlCommand command = new SqlCommand("Select AdvId,Name,StartDate,EndDate,Status From Advertisement Where Name Like '%' + @pAdv + '%' Or companyID Like '%' + @pCom + '%' and status=1");
             command.Parameters.AddWithValue("@pAdv", txtAdv.Text);
             command.Parameters.AddWithValue("@pCom", ddlCom.SelectedItem.Text.Substring(1, 1));
             DataTable adv = db.getDataTable(command);
@@ -78,24 +78,24 @@ namespace targeted_marketing_display
 
         protected void gvAdv_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            foreach (GridViewRow row in gvAdv.Rows)
-            {
-                if (row.Cells[5].Text == "0")
-                {
-                    row.Cells[5].Text = "Inactive";
-                }
-                else if (row.Cells[5].Text == "1")
-                {
-                    row.Cells[5].Text = "Active";
-                }
-            }
+            //foreach (GridViewRow row in gvAdv.Rows)
+            //{
+            //    if (row.Cells[5].Text == "0")
+            //    {
+            //        row.Cells[5].Text = "Inactive";
+            //    }
+            //    else if (row.Cells[5].Text == "1")
+            //    {
+            //        row.Cells[5].Text = "Active";
+            //    }
+            //}
         }
 
         //Billboard Modal Search Button
         public void btnBbSearch_OnClick(Object sender, EventArgs e)
         {
             Database db = new Database();
-            SqlCommand command = new SqlCommand("Select BillboardID,Concat(AddressLn1, ',' ,AddressLn2) As Address,Status From BillboardLocation Where BillboardLocation.BillboardID Like '%' + @pBb + '%'");
+            SqlCommand command = new SqlCommand("Select BillboardID,BillboardCode,Concat(AddressLn1, ',' ,AddressLn2) As Address,Status From BillboardLocation Where BillboardLocation.BillboardID Like '%' + @pBb + '%' and status=1");
             command.Parameters.AddWithValue("@pBB", txtBb.Text);
             DataTable bb = db.getDataTable(command);
             gvBb.DataSource = bb;
@@ -107,17 +107,17 @@ namespace targeted_marketing_display
 
         protected void gvBb_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            foreach (GridViewRow row in gvBb.Rows)
-            {
-                if (row.Cells[3].Text == "0")
-                {
-                    row.Cells[3].Text = "Inactive";
-                }
-                else if (row.Cells[3].Text == "1")
-                {
-                    row.Cells[3].Text = "Active";
-                }
-            }
+            //foreach (GridViewRow row in gvBb.Rows)
+            //{
+            //    if (row.Cells[4].Text == "0")
+            //    {
+            //        row.Cells[4].Text = "Inactive";
+            //    }
+            //    else if (row.Cells[4].Text == "1")
+            //    {
+            //        row.Cells[4].Text = "Active";
+            //    }
+            //}
         }
 
         //Advertisement Modal Add Button
@@ -300,13 +300,16 @@ namespace targeted_marketing_display
                     CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
                     if (chkrw.Checked == true)
                     {
+
+                        //that is where you are wrong
                         GridViewRow r = this.gvAdv.Rows[i];
-                        int id = Convert.ToInt32(r.Cells[1].Text);
+                       // int id = Convert.ToInt32(r.Cells[1].Text);
+                        Label advLabel = (Label)gvAdv.Rows[i].FindControl("lb_AdvertID");
                         if (rbNo.Checked == true)
                         {
                             con.Open();
                             SqlCommand command = new SqlCommand("Select Sum(NoOfPax) As totalPax From AdvertisementFeedback Where AdvId Like '%' + @pId + '%' Group By AdvId");
-                            command.Parameters.AddWithValue("@pId", id.ToString());
+                            command.Parameters.AddWithValue("@pId", advLabel.Text.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -340,7 +343,7 @@ namespace targeted_marketing_display
                         {
                             con.Open();
                             SqlCommand command = new SqlCommand("select top 1 NoOfPax,TimeStamp from AdvertisementFeedback Where AdvID Like '%' + @pId + '%' order by NoOfPax Desc");
-                            command.Parameters.AddWithValue("@pId", id.ToString());
+                            command.Parameters.AddWithValue("@pId", advLabel.Text.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -375,7 +378,7 @@ namespace targeted_marketing_display
                         {
                             con.Open();
                             SqlCommand command = new SqlCommand("Select count(NoOfPax) as NoOfPax,AgeID From AdvertisementFeedback Where AdvID Like '%' + @pId + '%' group by AgeID");
-                            command.Parameters.AddWithValue("@pId", id.ToString());
+                            command.Parameters.AddWithValue("@pId", advLabel.Text.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -384,18 +387,17 @@ namespace targeted_marketing_display
                                 string name = r.Cells[2].Text;
                                 int no = Convert.ToInt32(dr["NoOfPax"]);
                                 int ageGroup = Convert.ToInt32(dr["AgeID"]);
-
                                 if (ageGroup == 1)
                                 {
                                     string ageRange = "Child(0-15)";
-                                    string age = name + "\n\n" + ageRange;
+                                    string age = ageRange;
                                     chartAdvAge.Rows.Add(name, no, age);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement/Age";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -412,14 +414,14 @@ namespace targeted_marketing_display
                                 else if (ageGroup == 2)
                                 {
                                     string ageRange = "Young Adult(16-30)";
-                                    string age = name + "\n\n" + ageRange;
+                                    string age = ageRange;
                                     chartAdvAge.Rows.Add(name, no, age);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement/Age";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -436,14 +438,14 @@ namespace targeted_marketing_display
                                 else if (ageGroup == 3)
                                 {
                                     string ageRange = "Adult(31-65)";
-                                    string age = name + "\n\n" + ageRange;
+                                    string age =  ageRange;
                                     chartAdvAge.Rows.Add(name, no, age);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement/Age";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -460,14 +462,14 @@ namespace targeted_marketing_display
                                 else if (ageGroup == 4)
                                 {
                                     string ageRange = "Senior(66+)";
-                                    string age = name + "\n\n" + ageRange;
+                                    string age = ageRange;
                                     chartAdvAge.Rows.Add(name, no, age);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement/Age";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for "+name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -488,7 +490,7 @@ namespace targeted_marketing_display
                         {
                             con.Open();
                             SqlCommand command = new SqlCommand("Select  count(NoOfPax) as NoOfPax,GenderID From AdvertisementFeedback Where AdvID Like '%' + @pId + '%' group by GenderID");
-                            command.Parameters.AddWithValue("@pId", id.ToString());
+                            command.Parameters.AddWithValue("@pId", advLabel.Text.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -496,14 +498,14 @@ namespace targeted_marketing_display
                             {
                                 string name = r.Cells[2].Text;
                                 int no = Convert.ToInt32(dr["NoOfPax"]);
-                                string gender = name + "\n\n" + dr["GenderID"].ToString();
+                                string gender = dr["GenderID"].ToString();
                                 chartAdvGender.Rows.Add(name, no, gender);
 
                                 chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                 chartFb.Series["Series1"].XValueMember = "Gender";
                                 chartFb.Series["Series1"].YValueMembers = "No";
                                 chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement/Gender";
+                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Gender data for "+name;
                                 chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                 chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                 chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -523,7 +525,7 @@ namespace targeted_marketing_display
                         {
                             con.Open();
                             SqlCommand command = new SqlCommand("Select  count(NoOfPax) as NoOfPax,Emotion From AdvertisementFeedback Where AdvID Like '%' + @pId + '%' group by emotion");
-                            command.Parameters.AddWithValue("@pId", id.ToString());
+                            command.Parameters.AddWithValue("@pId", advLabel.Text.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -536,14 +538,14 @@ namespace targeted_marketing_display
                                 if (emotionRange == 1)
                                 {
                                     string emotion = "Very Happy";
-                                    string emo = name + "\n\n" + emotion;
+                                    string emo = emotion;
                                     chartAdvEmotion.Rows.Add(name, no, emo);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement/Emotion";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for "+name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -560,14 +562,14 @@ namespace targeted_marketing_display
                                 else if (emotionRange == 2)
                                 {
                                     string emotion = "Happy";
-                                    string emo = name + "\n\n" + emotion;
+                                    string emo =  emotion;
                                     chartAdvEmotion.Rows.Add(name, no, emo);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement/Emotion";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -584,14 +586,14 @@ namespace targeted_marketing_display
                                 else if (emotionRange == 3)
                                 {
                                     string emotion = "Neutral";
-                                    string emo = name + "\n\n" + emotion;
+                                    string emo =  emotion;
                                     chartAdvEmotion.Rows.Add(name, no, emo);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement/Emotion";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -608,14 +610,14 @@ namespace targeted_marketing_display
                                 else if (emotionRange == 4)
                                 {
                                     string emotion = "Unhappy";
-                                    string emo = name + "\n\n" + emotion;
+                                    string emo =  emotion;
                                     chartAdvEmotion.Rows.Add(name, no, emo);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement/Emotion";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -632,14 +634,14 @@ namespace targeted_marketing_display
                                 else if (emotionRange == 5)
                                 {
                                     string emotion = "Very Unhappy";
-                                    string emo = name + "\n\n" + emotion;
+                                    string emo = emotion;
                                     chartAdvEmotion.Rows.Add(name, no, emo);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement/Emotion";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -694,12 +696,13 @@ namespace targeted_marketing_display
                     if (chkrw.Checked == true)
                     {
                         GridViewRow r = this.gvBb.Rows[i];
-                        int id = Convert.ToInt32(r.Cells[1].Text);
+                        //int id = Convert.ToInt32(r.Cells[1].Text);
+                        Label bblabel = (Label)gvBb.Rows[i].FindControl("lb_BillboardID");
                         if (rbNo.Checked == true)
                         {
                             con.Open();
                             SqlCommand command = new SqlCommand("Select Sum(NoOfPax) As NoOfPaxs From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' Group By BillboardID");
-                            command.Parameters.AddWithValue("@pId", id.ToString());
+                            command.Parameters.AddWithValue("@pId", bblabel.Text.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -734,7 +737,7 @@ namespace targeted_marketing_display
                         {
                             con.Open();
                             SqlCommand command = new SqlCommand("Select top 1 Count(NoOfPax) as NoOfPax,TimeStamp From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' group by TimeStamp ");
-                            command.Parameters.AddWithValue("@pId", id.ToString());
+                            command.Parameters.AddWithValue("@pId", bblabel.Text.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -742,15 +745,15 @@ namespace targeted_marketing_display
                             {
                                 string name = r.Cells[2].Text;
                                 int no = Convert.ToInt32(dr["NoOfPax"]);
-                                string timestamp = name + "\n\n" + dr["TimeStamp"].ToString();
+                                string timestamp =  dr["TimeStamp"].ToString();
                                 chartBbTs.Rows.Add(name, no, timestamp);
 
                                 chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                 chartFb.Series["Series1"].XValueMember = "TimeStamp";
                                 chartFb.Series["Series1"].YValueMembers = "No";
                                 chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Billboard/Timestamp";
-                                chartFb.ChartAreas["ChartArea1"].AxisY.Title = "Highest No. Of Pax Per Timestamp";
+                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Highest No. Of Pax/Timestamp";
+                                chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No.Of Pax";
                                 chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                 chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
                                 chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
@@ -770,7 +773,7 @@ namespace targeted_marketing_display
                         {
                             con.Open();
                             SqlCommand command = new SqlCommand("Select Count(NoOfPax) as NoOfPax,AgeID as AgeGroup From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' group by AgeID");
-                            command.Parameters.AddWithValue("@pId", id.ToString());
+                            command.Parameters.AddWithValue("@pId", bblabel.Text.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -783,14 +786,14 @@ namespace targeted_marketing_display
                                 if (ageGroup == 1)
                                 {
                                     string ageRange = "Child(0-15)";
-                                    string age = name + "\n\n" + ageRange;
+                                    string age = ageRange;
                                     chartBbAge.Rows.Add(name, no, age);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Billboard/Age";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for Billboard " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -807,14 +810,14 @@ namespace targeted_marketing_display
                                 else if (ageGroup == 2)
                                 {
                                     string ageRange = "Young Adult(16-30)";
-                                    string age = name + "\n\n" + ageRange;
+                                    string age = ageRange;
                                     chartBbAge.Rows.Add(name, no, age);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Billboard/Age";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for Billboard " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -831,14 +834,14 @@ namespace targeted_marketing_display
                                 else if (ageGroup == 3)
                                 {
                                     string ageRange = "Adult(31-65)";
-                                    string age = name + "\n\n" + ageRange;
+                                    string age = ageRange;
                                     chartBbAge.Rows.Add(name, no, age);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Billboard/Age";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for Billboard " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -855,14 +858,14 @@ namespace targeted_marketing_display
                                 else if (ageGroup == 4)
                                 {
                                     string ageRange = "Senior(66+)";
-                                    string age = name + "\n\n" + ageRange;
+                                    string age = ageRange;
                                     chartBbAge.Rows.Add(name, no, age);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Billboard/Age";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for Billboard " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -884,7 +887,7 @@ namespace targeted_marketing_display
                             con.Open();
                             SqlCommand command = new SqlCommand("Select Count(NoOfPax) as NoOfPax,GenderID as Gender From AdvertisementFeedback Where" +
                                 " BillboardID Like '%' + @pId + '%' group by GenderID");
-                            command.Parameters.AddWithValue("@pId", id.ToString());
+                            command.Parameters.AddWithValue("@pId", bblabel.Text.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -892,7 +895,7 @@ namespace targeted_marketing_display
                             {
                                 string name = r.Cells[2].Text;
                                 int no = Convert.ToInt32(dr["NoOfPax"]);
-                                string gender = name + "\n\n" + dr["Gender"].ToString();
+                                string gender =  dr["Gender"].ToString();
                                 chartBbGender.Rows.Add(name, no, gender);
 
                                 chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
@@ -918,8 +921,8 @@ namespace targeted_marketing_display
                         else if (rbEmotion.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select Count(NoOfPax),Emotion From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' group by Emotion");
-                            command.Parameters.AddWithValue("@pId", id.ToString());
+                            SqlCommand command = new SqlCommand("Select Count(NoOfPax) as NoOfPax,Emotion From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' group by Emotion");
+                            command.Parameters.AddWithValue("@pId", bblabel.Text.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -932,14 +935,14 @@ namespace targeted_marketing_display
                                 if (emotionRange == 1)
                                 {
                                     string emotion = "Very Happy";
-                                    string emo = name + "\n\n" + emotion;
+                                    string emo = emotion;
                                     chartBbEmotion.Rows.Add(name, no, emo);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Billboard/Emotion";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion Data for "+name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -956,14 +959,14 @@ namespace targeted_marketing_display
                                 else if (emotionRange == 2)
                                 {
                                     string emotion = "Happy";
-                                    string emo = name + "\n\n" + emotion;
+                                    string emo =  emotion;
                                     chartBbEmotion.Rows.Add(name, no, emo);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Billboard/Emotion";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion Data for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -980,14 +983,14 @@ namespace targeted_marketing_display
                                 else if (emotionRange == 3)
                                 {
                                     string emotion = "Neutral";
-                                    string emo = name + "\n\n" + emotion;
+                                    string emo =  emotion;
                                     chartBbEmotion.Rows.Add(name, no, emo);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Billboard/Emotion";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion Data for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -1004,13 +1007,13 @@ namespace targeted_marketing_display
                                 else if (emotionRange == 4)
                                 {
                                     string emotion = "Unhappy";
-                                    string emo = name + "\n\n" + emotion;
+                                    string emo = emotion;
                                     chartBbEmotion.Rows.Add(name, no, emo);
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Billboard/Emotion";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion Data for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -1027,14 +1030,14 @@ namespace targeted_marketing_display
                                 else if (emotionRange == 5)
                                 {
                                     string emotion = "Very Unhappy";
-                                    string emo = name + "\n\n" + emotion;
+                                    string emo = emotion;
                                     chartBbEmotion.Rows.Add(name, no, emo);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Billboard/Emotion";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion Data for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
