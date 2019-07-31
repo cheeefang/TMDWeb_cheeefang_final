@@ -9,7 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.DataVisualization.Charting;
 using targeted_marketing_display.App_Code;
-
+using System.Globalization;
 
 namespace targeted_marketing_display
 {
@@ -339,7 +339,7 @@ namespace targeted_marketing_display
                         else if (rbTs.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("select top 3 NoOfPax,TimeStamp from AdvertisementFeedback Where AdvID Like '%' + @pId + '%' order by NoOfPax Desc");
+                            SqlCommand command = new SqlCommand("select top 1 NoOfPax,TimeStamp from AdvertisementFeedback Where AdvID Like '%' + @pId + '%' order by NoOfPax Desc");
                             command.Parameters.AddWithValue("@pId", id.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
@@ -355,7 +355,7 @@ namespace targeted_marketing_display
                                 chartFb.Series["Series1"].XValueMember = "TimeStamp";
                                 chartFb.Series["Series1"].YValueMembers = "No";
                                 chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement/Timestamp";
+                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Highest Advertisement/Timestamp";
                                 chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                 chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                 chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -733,7 +733,7 @@ namespace targeted_marketing_display
                         else if (rbTs.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select top 3 Count(NoOfPax) as NoOfPax,TimeStamp From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' group by TimeStamp ");
+                            SqlCommand command = new SqlCommand("Select top 1 Count(NoOfPax) as NoOfPax,TimeStamp From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' group by TimeStamp ");
                             command.Parameters.AddWithValue("@pId", id.ToString());
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
@@ -750,7 +750,7 @@ namespace targeted_marketing_display
                                 chartFb.Series["Series1"].YValueMembers = "No";
                                 chartFb.Series["Series1"].IsValueShownAsLabel = true;
                                 chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Billboard/Timestamp";
-                                chartFb.ChartAreas["ChartArea1"].AxisY.Title = "Top 3 No. Of Pax Per Timestamp";
+                                chartFb.ChartAreas["ChartArea1"].AxisY.Title = "Highest No. Of Pax Per Timestamp";
                                 chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                 chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
                                 chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
@@ -1156,189 +1156,125 @@ namespace targeted_marketing_display
                     }
                     con.Close();
 
-                    for (int i = 0; i < gvCom.Rows.Count; i++)
-                    {
-                        GridViewRow row = gvCom.Rows[i];
-                        int advId = Convert.ToInt32(row.Cells[0].Text);
-
-                        con.Open();
-                        SqlCommand command = new SqlCommand("Select Sum(NoOfPax) As NoOfPaxs From AdvertisementFeedback inner join Advertisement on AdvertisementFeedback.AdvID=Advertisement.AdvID" +
-                            " Where Advertisement.CompanyId Like '%' + @pComId + '%' And AdvertisementFeedback.AdvId Like '%' + @pAdvId + '%' Group By AdvertisementFeedback.AdvId");
-                        command.Parameters.AddWithValue("@pComId", companyId.ToString());
-                        command.Parameters.AddWithValue("@pAdvId", advId.ToString());
-                        command.Connection = con;
-                        SqlDataReader dr = command.ExecuteReader();
-
-                        while (dr.Read())
-                        {
-                            
-                        }
-                        con.Close();
-                    }
+                 
                 }
                 else if (rbTs.Checked == true)
                 {
                     con.Open();
-                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name From AdvertisementFeedback inner Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId" +
-                        " Where Advertisement.CompanyId Like '%' + @pComId + '%' ");
+                    SqlCommand gvCmd = new SqlCommand("select top 1 NoOfPax,TimeStamp,Company.Name from AdvertisementFeedback inner join Advertisement on AdvertisementFeedback.AdvID=Advertisement.AdvID inner join Company on " +
+                        "Advertisement.companyID = Company.CompanyID " +
+                        "Where Advertisement.companyID =@pComId order by NoOfPax Desc ");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
-                    DataTable gvComp = new DataTable();
-                    gvComp.Columns.Add("AdvID", typeof(int));
-                    gvComp.Columns.Add("BillboardID", typeof(int));
-                    gvComp.Columns.Add("Name", typeof(string));
-                    gvComp.Columns.Add("Age", typeof(int));
-                    gvComp.Columns.Add("Gender", typeof(string));
-                    gvComp.Columns.Add("Emotion", typeof(int));
-
+                    //DateTime startDatevar = Convert.ToDateTime(AdvertObj.StartDate);
+                    //String ConvertDate = startDatevar.ToString("yyyy-MM-dd");
                     while (drGvCmd.Read())
                     {
-                        int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
-                        int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
-                        string name = drGvCmd["Name"].ToString();
-                        int ageGv = 0;
-                        string genderGv = "";
-                        int emotionGv = 0;
-                        gvComp.Rows.Add(gvId, locationGv, name, ageGv, genderGv, emotionGv);
-                        gvCom.DataSource = gvComp;
-                        gvCom.DataBind();
+                        int totalNo = Convert.ToInt32(drGvCmd["NoOfPax"]);
+
+                        DateTime timestamp = Convert.ToDateTime(drGvCmd["Timestamp"]);
+                        string date = timestamp.ToString("yyyy-MM-dd");
+                        //int location = Convert.ToInt32(row.Cells[1].Text);
+                        //string name = row.Cells[2].Text;
+                        //string ts = dr["TimeStamp"].ToString();
+                        //string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + ts;
+                        //int no = Convert.ToInt32(dr["NoOfPax"]);
+                        chartComTs.Rows.Add(date, totalNo);
+
+                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                        chartFb.Series["Series1"].XValueMember = "Com";
+                        chartFb.Series["Series1"].YValueMembers = "No";
+                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Top No. Of Pax/Timestamp";
+                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                        chartFb.DataSource = chartComTs;
+                        chartFb.DataBind();
                     }
-                    con.Close();
-
-                    for (int i = 0; i < gvCom.Rows.Count; i++)
-                    {
-                        GridViewRow row = gvCom.Rows[i];
-                        int advId = Convert.ToInt32(row.Cells[0].Text);
-
-                        con.Open();
-                        SqlCommand command = new SqlCommand("Select NoOfPax, TimeStamp From AdvertisementFeedback inner join Advertisement on AdvertisementFeedback.AdvID=Advertisement.AdvID" +
-                            " Where Advertisement.CompanyId Like '%' + @pComId + '%' And AdvertisementFeedback.AdvId Like '%' + @pAdvId + '%'");
-                        command.Parameters.AddWithValue("@pComId", companyId.ToString());
-                        command.Parameters.AddWithValue("@pAdvId", advId.ToString());
-                        command.Connection = con;
-                        SqlDataReader dr = command.ExecuteReader();
-
-                        while (dr.Read())
-                        {
-                            int location = Convert.ToInt32(row.Cells[1].Text);
-                            string name = row.Cells[2].Text;
-                            string ts = dr["TimeStamp"].ToString();
-                            string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + ts;
-                            int no = Convert.ToInt32(dr["NoOfPax"]);
-                            chartComTs.Rows.Add(com, no);
-
-                            chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                            chartFb.Series["Series1"].XValueMember = "Com";
-                            chartFb.Series["Series1"].YValueMembers = "No";
-                            chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                            chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement/Billboard/Timestamp";
-                            chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                            chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                            chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                            chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                            chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                            chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                            chartFb.DataSource = chartComTs;
-                            chartFb.DataBind();
-                        }
-                        con.Close();
-                    }
+                    con.Close();       
                 }
                 else if (rbAge.Checked == true)
                 {
+                    
                     con.Open();
-                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name, AgeID as AgeGroup From AdvertisementFeedback inner Join Advertisement" +
-                        " On AdvertisementFeedback.AdvId=Advertisement.AdvId Where Advertisement.CompanyId Like '%' + @pComId + '%'");
+                
+                    SqlCommand gvCmd = new SqlCommand("Select  count(NoOfPax) as NoOfPax,  AgeID as AgeGroup From AdvertisementFeedback inner Join Advertisement" +
+                        " On AdvertisementFeedback.AdvId=Advertisement.AdvId Where Advertisement.CompanyId Like '%' + @pComId + '%' group by AgeID");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
-                    DataTable gvComp = new DataTable();
-                    gvComp.Columns.Add("AdvID", typeof(int));
-                    gvComp.Columns.Add("BillboardID", typeof(int));
-                    gvComp.Columns.Add("Name", typeof(string));
-                    gvComp.Columns.Add("Age", typeof(int));
-                    gvComp.Columns.Add("Gender", typeof(string));
-                    gvComp.Columns.Add("Emotion", typeof(int));
+                    //DataTable gvComp = new DataTable();
+                    //gvComp.Columns.Add("AdvID", typeof(int));
+                    //gvComp.Columns.Add("BillboardID", typeof(int));
+                    //gvComp.Columns.Add("Name", typeof(string));
+                    //gvComp.Columns.Add("Age", typeof(int));
+                    //gvComp.Columns.Add("Gender", typeof(string));
+                    //gvComp.Columns.Add("Emotion", typeof(int));
 
                     while (drGvCmd.Read())
                     {
-                        int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
-                        int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
-                        string name = drGvCmd["Name"].ToString();
-                        int ageGv = Convert.ToInt32(drGvCmd["AgeGroup"]);
-                        string genderGv = "";
-                        int emotionGv = 0;
-                        gvComp.Rows.Add(gvId, locationGv, name, ageGv, genderGv, emotionGv);
-                        gvCom.DataSource = gvComp;
-                        gvCom.DataBind();
-                    }
-                    con.Close();
-
-                    for (int i = 0; i < gvCom.Rows.Count; i++)
-                    {
-                        GridViewRow row = gvCom.Rows[i];
-                        int advId = Convert.ToInt32(row.Cells[0].Text);
-                        int ageId = Convert.ToInt32(row.Cells[3].Text);
-
-                        con.Open();
-                        SqlCommand command = new SqlCommand("Select NoOfPax, AgeGroup From AdvertisementFeedback inner join Advertisement on AdvertisementFeedback.AdvID=Advertisement.AdvID" +
-                            " Where CompanyId Like '%' + @pComId + '%' And AdvId Like '%' + @pAdvId + '%' And AgeGroup Like '%' + @pAgeId + '%'");
-                        command.Parameters.AddWithValue("@pComId", companyId.ToString());
-                        command.Parameters.AddWithValue("@pAdvId", advId.ToString());
-                        command.Parameters.AddWithValue("@pAgeId", ageId.ToString());
-                        command.Connection = con;
-                        SqlDataReader dr = command.ExecuteReader();
-
-                        while (dr.Read())
-                        {
-                            if (Convert.ToInt32(dr["AgeGroup"]) == 1)
+                        //int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
+                        //int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
+                        //string name = drGvCmd["Name"].ToString();
+                        //int ageGv = Convert.ToInt32(drGvCmd["AgeGroup"]);
+                        //string genderGv = "";
+                        //int emotionGv = 0;
+                        //gvComp.Rows.Add(gvId, locationGv, name, ageGv, genderGv, emotionGv);
+                        //gvCom.DataSource = gvComp;
+                        //gvCom.DataBind();
+                    
+                            if (Convert.ToInt32(drGvCmd["AgeGroup"]) == 1)
                             {
                                 string age = "Child\n(0-15)";
-                                int location = Convert.ToInt32(row.Cells[1].Text);
-                                string name = row.Cells[2].Text;
-                                string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + age;
-                                int no = Convert.ToInt32(dr["NoOfPax"]);
+                                //int location = Convert.ToInt32(row.Cells[1].Text);
+                                //string name = row.Cells[2].Text;
+                                string com =  age;
+                                int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
                                 chartComAge.Rows.Add(com, no);
                             }
-                            else if (Convert.ToInt32(dr["AgeGroup"]) == 2)
+                            else if (Convert.ToInt32(drGvCmd["AgeGroup"]) == 2)
                             {
                                 string age = "Young\nAdult\n(16-30)";
-                                int location = Convert.ToInt32(row.Cells[1].Text);
-                                string name = row.Cells[2].Text;
-                                string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + age;
-                                int no = Convert.ToInt32(dr["NoOfPax"]);
+                                //int location = Convert.ToInt32(row.Cells[1].Text);
+                                //string name = row.Cells[2].Text;
+                                string com =   age;
+                                int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
                                 chartComAge.Rows.Add(com, no);
                             }
-                            else if (Convert.ToInt32(dr["AgeGroup"]) == 3)
+                            else if (Convert.ToInt32(drGvCmd["AgeGroup"]) == 3)
                             {
                                 string age = "Adult\n(31-65)";
-                                int location = Convert.ToInt32(row.Cells[1].Text);
-                                string name = row.Cells[2].Text;
-                                string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + age;
-                                int no = Convert.ToInt32(dr["NoOfPax"]);
+                                //int location = Convert.ToInt32(row.Cells[1].Text);
+                                //string name = row.Cells[2].Text;
+                                string com =  age;
+                                int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
                                 chartComAge.Rows.Add(com, no);
                             }
-                            else if (Convert.ToInt32(dr["AgeGroup"]) == 4)
+                            else if (Convert.ToInt32(drGvCmd["AgeGroup"]) == 4)
                             {
                                 string age = "Senior\n(66+)";
-                                int location = Convert.ToInt32(row.Cells[1].Text);
-                                string name = row.Cells[2].Text;
-                                string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + age;
-                                int no = Convert.ToInt32(dr["NoOfPax"]);
+                                //int location = Convert.ToInt32(row.Cells[1].Text);
+                                //string name = row.Cells[2].Text;
+                                string com =  age;
+                                int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
                                 chartComAge.Rows.Add(com, no);
                             }
                             chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
                             chartFb.Series["Series1"].XValueMember = "Com";
                             chartFb.Series["Series1"].YValueMembers = "No";
                             chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                            chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement/Billboard/Age";
+                            chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age Groups";
                             chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                             chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                             chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -1350,201 +1286,159 @@ namespace targeted_marketing_display
                             chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
                             chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
                             chartFb.DataSource = chartComAge;
-                            chartFb.DataBind();
-                        }
-                        con.Close();
+                            chartFb.DataBind();                       
                     }
+                    con.Close();
+
+                    
                 }
                 else if (rbGender.Checked == true)
                 {
                     con.Open();
-                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name, Gender From AdvertisementFeedback inner Join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId " +
-                        "Where Advertisement.CompanyId Like '%' + @pComId + '%'");
+//                    Select count(NoOfPax) as NoOfPax,GenderID From AdvertisementFeedback inner join Advertisement on AdvertisementFeedback.AdvID = Advertisement.AdvID
+//Where Advertisement.companyID Like 1 group by GenderID
+                    SqlCommand gvCmd = new SqlCommand("Select count(NoOfPax) as NoOfPax,GenderID From AdvertisementFeedback inner join Advertisement On AdvertisementFeedback.AdvId=Advertisement.AdvId " +
+                        "Where Advertisement.CompanyId Like '%' + @pComId + '%' group by GenderId");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
-                    DataTable gvComp = new DataTable();
-                    gvComp.Columns.Add("AdvID", typeof(int));
-                    gvComp.Columns.Add("BillboardID", typeof(int));
-                    gvComp.Columns.Add("Name", typeof(string));
-                    gvComp.Columns.Add("Age", typeof(int));
-                    gvComp.Columns.Add("Gender", typeof(string));
-                    gvComp.Columns.Add("Emotion", typeof(int));
+                    //DataTable gvComp = new DataTable();
+                    //gvComp.Columns.Add("AdvID", typeof(int));
+                    //gvComp.Columns.Add("BillboardID", typeof(int));
+                    //gvComp.Columns.Add("Name", typeof(string));
+                    //gvComp.Columns.Add("Age", typeof(int));
+                    //gvComp.Columns.Add("Gender", typeof(string));
+                    //gvComp.Columns.Add("Emotion", typeof(int));
 
                     while (drGvCmd.Read())
                     {
-                        int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
-                        int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
-                        string name = drGvCmd["Name"].ToString();
-                        int ageGv = 0;
-                        string genderGv = drGvCmd["Gender"].ToString();
-                        int emotionGv = 0;
-                        gvComp.Rows.Add(gvId, locationGv, name, ageGv, genderGv, emotionGv);
-                        gvCom.DataSource = gvComp;
-                        gvCom.DataBind();
+                        //int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
+                        //int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
+                        //string name = drGvCmd["Name"].ToString();
+                        //int ageGv = 0;
+                        //string genderGv = drGvCmd["Gender"].ToString();
+                        //int emotionGv = 0;
+                        //gvComp.Rows.Add(gvId, locationGv, name, ageGv, genderGv, emotionGv);
+                        //gvCom.DataSource = gvComp;
+                        //gvCom.DataBind();
+                        //int location = Convert.ToInt32(row.Cells[1].Text);
+                        //string name = row.Cells[2].Text;
+                        //string gender = dr["GenderID"].ToString();
+                        //string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + gender;
+                        //int no = Convert.ToInt32(dr["NoOfPax"]);
+                        int totalcount = Convert.ToInt32(drGvCmd["NoOfPax"]);
+                        string GenderID = drGvCmd["GenderID"].ToString();
+                        chartComGender.Rows.Add(GenderID, totalcount);
+
+                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                        chartFb.Series["Series1"].XValueMember = "Com";
+                        chartFb.Series["Series1"].YValueMembers = "No";
+                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Gender";
+                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                        chartFb.DataSource = chartComGender;
+                        chartFb.DataBind();
                     }
                     con.Close();
-
-                    for (int i = 0; i < gvCom.Rows.Count; i++)
-                    {
-                        GridViewRow row = gvCom.Rows[i];
-                        int advId = Convert.ToInt32(row.Cells[0].Text);
-                        string genderId = row.Cells[4].Text;
-
-                        con.Open();
-                        SqlCommand command = new SqlCommand("Select NoOfPax, Gender From AdvertisementFeedback inner join Advertisement on AdvertisementFeedback.AdvID=Advertisement.AdvID" +
-                            " Where CompanyId Like '%' + @pComId + '%' And AdvertisementFeedback.AdvId Like '%' + @pAdvId + '%' And Gender Like '%' + @pGenderId + '%'");
-                        command.Parameters.AddWithValue("@pComId", companyId.ToString());
-                        command.Parameters.AddWithValue("@pAdvId", advId.ToString());
-                        command.Parameters.AddWithValue("@pGenderId", genderId.ToString());
-                        command.Connection = con;
-                        SqlDataReader dr = command.ExecuteReader();
-
-                        while (dr.Read())
-                        {
-                            int location = Convert.ToInt32(row.Cells[1].Text);
-                            string name = row.Cells[2].Text;
-                            string gender = dr["Gender"].ToString();
-                            string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + gender;
-                            int no = Convert.ToInt32(dr["NoOfPax"]);
-                            chartComGender.Rows.Add(com, no);
-
-                            chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                            chartFb.Series["Series1"].XValueMember = "Com";
-                            chartFb.Series["Series1"].YValueMembers = "No";
-                            chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                            chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement/Billboard/Gender";
-                            chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                            chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                            chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                            chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                            chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                            chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                            chartFb.DataSource = chartComGender;
-                            chartFb.DataBind();
-                        }
-                        con.Close();
-                    }
                 }
                 else if (rbEmotion.Checked == true)
                 {
                     con.Open();
-                    SqlCommand gvCmd = new SqlCommand("Select AdvertisementFeedback.AdvId, BillboardID, Name, Emotion From AdvertisementFeedback inner Join Advertisement On " +
-                        "AdvertisementFeedback.AdvId=Advertisement.AdvId Where Advertisement.CompanyId Like '%' + @pComId + '%' and AdvertisementFeedback.AdvID is not null");
+               
+                    SqlCommand gvCmd = new SqlCommand("Select count(NoOfPax) as NoOfPax,Emotion From AdvertisementFeedback inner Join Advertisement On " +
+                        "AdvertisementFeedback.AdvId=Advertisement.AdvId Where Advertisement.CompanyId Like '%' + @pComId + '%' group by emotion");
                     gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
 
-                    DataTable gvComp = new DataTable();
-                    gvComp.Columns.Add("AdvID", typeof(int));
-                    gvComp.Columns.Add("BillboardID", typeof(int));
-                    gvComp.Columns.Add("Name", typeof(string));
-                    gvComp.Columns.Add("Age", typeof(int));
-                    gvComp.Columns.Add("Gender", typeof(string));
-                    gvComp.Columns.Add("Emotion", typeof(int));
 
                     while (drGvCmd.Read())
                     {
-                        int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
-                        int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
-                        string name = drGvCmd["Name"].ToString();
-                        int ageGv = 0;
-                        string genderGv = "";
-                        int emotionGv = Convert.ToInt32(drGvCmd["Emotion"]);
-                        gvComp.Rows.Add(gvId, locationGv, name, ageGv, genderGv, emotionGv);
-                        gvCom.DataSource = gvComp;
-                        gvCom.DataBind();
+                        //int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
+                        //int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
+                        //string name = drGvCmd["Name"].ToString();
+                        //int ageGv = 0;
+                        //string genderGv = "";
+                        //int emotionGv = Convert.ToInt32(drGvCmd["Emotion"]);
+                        //gvComp.Rows.Add(gvId, locationGv, name, ageGv, genderGv, emotionGv);
+                        //gvCom.DataSource = gvComp;
+                        //gvCom.DataBind();
+                        if (Convert.ToInt32(drGvCmd["Emotion"]) == 1)
+                        {
+                            string emo = "Very Happy";
+                            //int location = Convert.ToInt32(row.Cells[1].Text);
+                            //string name = row.Cells[2].Text;
+                            string com =  emo;
+                            int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
+                            chartComEmotion.Rows.Add(com, no);
+                        }
+                        else if (Convert.ToInt32(drGvCmd["Emotion"]) == 2)
+                        {
+                            string emo = "Happy";
+                            //int location = Convert.ToInt32(row.Cells[1].Text);
+                            //string name = row.Cells[2].Text;
+                            string com =   emo;
+                            int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
+                            chartComEmotion.Rows.Add(com, no);
+                        }
+                        else if (Convert.ToInt32(drGvCmd["Emotion"]) == 3)
+                        {
+                            string emo = "Neutral";
+                            //int location = Convert.ToInt32(row.Cells[1].Text);
+                            //string name = row.Cells[2].Text;
+                            string com = emo;
+                            int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
+                            chartComEmotion.Rows.Add(com, no);
+                        }
+                        else if (Convert.ToInt32(drGvCmd["Emotion"]) == 4)
+                        {
+                            string emo = "Unhappy";
+                            //int location = Convert.ToInt32(row.Cells[1].Text);
+                            //string name = row.Cells[2].Text;
+                            string com =  emo;
+                            int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
+                            chartComEmotion.Rows.Add(com, no);
+                        }
+                        else if (Convert.ToInt32(drGvCmd["Emotion"]) == 5)
+                        {
+                            string emo = "Very Unhappy";
+                            //int location = Convert.ToInt32(row.Cells[1].Text);
+                            //string name = row.Cells[2].Text;
+                            string com =  emo;
+                            int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
+                            chartComEmotion.Rows.Add(com, no);
+                        }
+                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                        chartFb.Series["Series1"].XValueMember = "Com";
+                        chartFb.Series["Series1"].YValueMembers = "No";
+                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotions";
+                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                        chartFb.DataSource = chartComEmotion;
+                        chartFb.DataBind();
                     }
                     con.Close();
 
-                    for (int i = 0; i < gvCom.Rows.Count; i++)
-                    {
-                        GridViewRow row = gvCom.Rows[i];
-                        int advId = Convert.ToInt32(row.Cells[0].Text);
-                        int emotionId = Convert.ToInt32(row.Cells[5].Text);
-
-                        con.Open();
-                        SqlCommand command = new SqlCommand("Select NoOfPax, Emotion From AdvertisementFeedback inner join" +
-                            " Advertisement on Advertisement.AdvID=AdvertisementFeedback.AdvID" +
-                            " Where CompanyId Like '%' + @pComId + '%' And AdvertisementFeedback.AdvId Like '%' + @pAdvId + '%' And Emotion Like '%' + @pEmotionId + '%'");
-                        command.Parameters.AddWithValue("@pComId", companyId.ToString());
-                        command.Parameters.AddWithValue("@pAdvId", advId.ToString());
-                        command.Parameters.AddWithValue("@pEmotionId", emotionId.ToString());
-                        command.Connection = con;
-                        SqlDataReader dr = command.ExecuteReader();
-
-                        while (dr.Read())
-                        {
-                            if (Convert.ToInt32(dr["Emotion"]) == 1)
-                            {
-                                string emo = "Very Happy";
-                                int location = Convert.ToInt32(row.Cells[1].Text);
-                                string name = row.Cells[2].Text;
-                                string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + emo;
-                                int no = Convert.ToInt32(dr["NoOfPax"]);
-                                chartComEmotion.Rows.Add(com, no);
-                            }
-                            else if (Convert.ToInt32(dr["Emotion"]) == 2)
-                            {
-                                string emo = "Happy";
-                                int location = Convert.ToInt32(row.Cells[1].Text);
-                                string name = row.Cells[2].Text;
-                                string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + emo;
-                                int no = Convert.ToInt32(dr["NoOfPax"]);
-                                chartComEmotion.Rows.Add(com, no);
-                            }
-                            else if (Convert.ToInt32(dr["Emotion"]) == 3)
-                            {
-                                string emo = "Neutral";
-                                int location = Convert.ToInt32(row.Cells[1].Text);
-                                string name = row.Cells[2].Text;
-                                string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + emo;
-                                int no = Convert.ToInt32(dr["NoOfPax"]);
-                                chartComEmotion.Rows.Add(com, no);
-                            }
-                            else if (Convert.ToInt32(dr["Emotion"]) == 4)
-                            {
-                                string emo = "Unhappy";
-                                int location = Convert.ToInt32(row.Cells[1].Text);
-                                string name = row.Cells[2].Text;
-                                string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + emo;
-                                int no = Convert.ToInt32(dr["NoOfPax"]);
-                                chartComEmotion.Rows.Add(com, no);
-                            }
-                            else if (Convert.ToInt32(dr["Emotion"]) == 5)
-                            {
-                                string emo = "Very Unhappy";
-                                int location = Convert.ToInt32(row.Cells[1].Text);
-                                string name = row.Cells[2].Text;
-                                string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + emo;
-                                int no = Convert.ToInt32(dr["NoOfPax"]);
-                                chartComEmotion.Rows.Add(com, no);
-                            }
-                            chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                            chartFb.Series["Series1"].XValueMember = "Com";
-                            chartFb.Series["Series1"].YValueMembers = "No";
-                            chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                            chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement/Billboard/Emotion";
-                            chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                            chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                            chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                            chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                            chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                            chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                            chartFb.DataSource = chartComEmotion;
-                            chartFb.DataBind();
-                        }
-                        con.Close();
-                    }
+                   
                 }
             }
         }
