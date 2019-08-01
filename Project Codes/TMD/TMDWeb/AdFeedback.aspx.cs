@@ -67,9 +67,9 @@ namespace targeted_marketing_display
         public void btnAdvSearch_OnClick(Object sender, EventArgs e)
         {
             Database db = new Database();
-            SqlCommand command = new SqlCommand("Select AdvId,Name,Item,ItemType,StartDate,EndDate,Status From Advertisement Where Name Like '%' + @pAdv + '%' Or companyID Like '%' + @pCom + '%' and Advertisement.Status=1");
+            SqlCommand command = new SqlCommand("Select AdvId,Name,Item,ItemType,StartDate,EndDate,Status From Advertisement Where Advertisement.Status=1");
             command.Parameters.AddWithValue("@pAdv", txtAdv.Text);
-            command.Parameters.AddWithValue("@pCom", ddlCom.SelectedItem.Text.Substring(1, 1));
+           
             DataTable adv = db.getDataTable(command);
             gvAdv.DataSource = adv;
             gvAdv.DataBind();
@@ -77,7 +77,43 @@ namespace targeted_marketing_display
             gvAdv.Visible = true;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showAdvModal();", true);
         }
+        private string ConvertSortDirectionToSql(SortDirection sortDirection)
+        {
+            string newSortDirection = String.Empty;
 
+            switch (sortDirection)
+            {
+                case SortDirection.Ascending:
+                    newSortDirection = "ASC";
+                    break;
+
+                case SortDirection.Descending:
+                    newSortDirection = "DESC";
+                    break;
+            }
+
+            return newSortDirection;
+        }
+
+        protected void gvAdv_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvAdv.PageIndex = e.NewPageIndex;
+            gvAdv.DataBind();
+        }
+
+        protected void gvAdv_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            DataTable dataTable = gvAdv.DataSource as DataTable;
+
+            if (dataTable != null)
+            {
+                DataView dataView = new DataView(dataTable);
+                dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
+                gvAdv.DataSource = dataView;
+                gvAdv.DataBind();
+            }
+        }
         protected void gvAdv_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             //foreach (GridViewRow row in gvAdv.Rows)

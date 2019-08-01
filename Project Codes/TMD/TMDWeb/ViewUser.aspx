@@ -149,7 +149,7 @@
                                     </asp:BoundField>
 
                                     <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name"></asp:BoundField>
-                                    <asp:BoundField DataField="Type" HeaderText="UserType" SortExpression="Type"></asp:BoundField>
+                                    <asp:BoundField DataField="Type" HeaderText="User Type" SortExpression="Type"></asp:BoundField>
                                     <asp:BoundField DataField="Expr1" HeaderText="Company Name" SortExpression="Expr1"></asp:BoundField>
                                     <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email"></asp:BoundField>
 

@@ -24,6 +24,12 @@
             left:710px;
             top:-20px
         }
+        #videoDog{
+     object-fit: cover;
+}
+#vidDiv{
+
+}
     </style>  
     <script>  
         $(function ()
@@ -234,11 +240,13 @@
                                 </button>
                             </span>
                         </div>
-                    
+                     <asp:UpdatePanel ID="updatepanel20" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+
+                            <ContentTemplate>
                         <asp:GridView ID="gvAdv" runat="server" Visible="true" Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover" OnRowDataBound="gvAdv_RowDataBound"
                             AllowPaging="true" PageSize="10" ForeColor="Black" GridLines="Vertical" Height="100%" Width="100%"
                                 BackColor="White" BorderColor="#999999" BorderStyle="Solid"
-                                BorderWidth="1px" CellPadding="3" >
+                                BorderWidth="1px" CellPadding="3" OnPageIndexChanging="gvAdv_PageIndexChanging" OnSorting="gvAdv_Sorting" >
                               <AlternatingRowStyle BackColor="#CCCCCC" />
                             <Columns>
                                 <asp:TemplateField>
@@ -269,7 +277,7 @@
                                         <controlstyle width="100px" height="100px"  />
                                         <ItemStyle Width="200px" height="200px" />
                                         </asp:TemplateField>
-                                <asp:BoundField DataField="Name" HeaderText="Advertisement" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
+                                <asp:BoundField DataField="Name" HeaderText="Name" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
                                         <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                 </asp:BoundField>
                                    <asp:BoundField DataField="ItemType" HeaderText="Type" SortExpression="ItemType"></asp:BoundField>
@@ -283,13 +291,15 @@
                             </Columns>
                                 <FooterStyle BackColor="#CCCCCC" />
                                 <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" HorizontalAlign="Center" Wrap="False" />
-                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="left" />
+                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Left" />
                                 <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-                                <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                                <SortedAscendingHeaderStyle BackColor="#808080" />
-                                <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                                <SortedDescendingHeaderStyle BackColor="#383838" />
+                                <SortedAscendingCellStyle BackColor="#F1F1F1" HorizontalAlign="Center" />
+                                <SortedAscendingHeaderStyle BackColor="#808080" HorizontalAlign="Center" />
+                                <SortedDescendingCellStyle BackColor="#CAC9C9" HorizontalAlign="Center"/>
+                                <SortedDescendingHeaderStyle BackColor="#383838" HorizontalAlign="Center"/>
                         </asp:GridView>
+                                </ContentTemplate>
+                         </asp:UpdatePanel>
                     </div>
                 </div>
                     <asp:UpdatePanel ID="updatepanel1" runat="server">

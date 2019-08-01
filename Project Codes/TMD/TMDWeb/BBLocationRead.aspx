@@ -143,7 +143,7 @@
                                     </asp:BoundField>
 
 
-                                    <asp:BoundField DataField="BillboardCode" HeaderText="BillboardCode" SortExpression="BillboardCode">
+                                    <asp:BoundField DataField="BillboardCode" HeaderText="Billboard Code" SortExpression="BillboardCode">
                                     </asp:BoundField>
 
                                     <asp:BoundField DataField="Latitude" HeaderText="Latitude" SortExpression="Latitude">
