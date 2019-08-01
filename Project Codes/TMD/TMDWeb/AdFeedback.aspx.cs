@@ -404,10 +404,10 @@ namespace targeted_marketing_display
                                 chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
                                 chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
                                 chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 90;
+                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
                                 chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
                                 chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 50;
                                 chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
                                 chartFb.DataSource = chartAdv;
                                 chartFb.DataBind();
@@ -444,7 +444,7 @@ namespace targeted_marketing_display
                                 chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
                                 chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
                                 chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 50;
                                 chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
                                 chartFb.DataSource = chartAdvTs;
                                 chartFb.DataBind();
