@@ -252,13 +252,31 @@
                                             <asp:Label runat="server" visible="false"  ID="lb_AdvertID" Text='<%# Bind("AdvID") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
+                                 <asp:TemplateField HeaderText="Advertisement">
+                                       
+                                        <ItemTemplate>
+                                          
+                                        
+                                      <asp:ImageButton ID="Image1" runat="server" ImageUrl='<%# Eval("Item") %>' OnClientClick="return LoadDiv(this.src);" 
+                                          Visible='<%# Eval("ItemType").ToString() =="image" %>' ClientIDMode="static" style="display:block;"   />
+                                      <div id="vidDiv" runat="server">
+                                        <video ClientIDMode="static" id="videoDog" width="200" height="200" runat="server" controls visible='<%# Eval("ItemType").ToString()!="image" %>'>  
+                                            <source runat="server" src='<%#Eval("Item")%>' type="video/mp4" visible='<%# Eval("ItemType").ToString()!="image" %>' />  
+                                        </video>  
+                                           </div>
+                                              
+                                            </ItemTemplate>
+                                        <controlstyle width="100px" height="100px"  />
+                                        <ItemStyle Width="200px" height="200px" />
+                                        </asp:TemplateField>
                                 <asp:BoundField DataField="Name" HeaderText="Advertisement" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
                                         <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                 </asp:BoundField>
-                                <asp:BoundField DataField="StartDate" HeaderText="Start Date" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
+                                   <asp:BoundField DataField="ItemType" HeaderText="Type" SortExpression="ItemType"></asp:BoundField>
+                                <asp:BoundField DataField="StartDate" HeaderText="Start Date" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px" DataFormatString="{0:D}">
                                         <ItemStyle HorizontalAlign="Center"></ItemStyle>
                                 </asp:BoundField>
-                                <asp:BoundField DataField="EndDate" HeaderText="End Date" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
+                                <asp:BoundField DataField="EndDate" HeaderText="End Date" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px" DataFormatString="{0:D}">
                                         <ItemStyle HorizontalAlign="Center"></ItemStyle>
                                 </asp:BoundField>
                                 

@@ -87,7 +87,24 @@ namespace targeted_marketing_display
             }
             if (!Page.IsPostBack)
             {
-            
+                //SqlCommand cmdBB = new SqlCommand("SELECT BillboardID,BillboardCode, Latitude ,Longtitude ,(( AddressLn1)" +
+                //    " + ' '+( AddressLn2 )+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address FROM BillboardLocation where status=1", conn);
+                //SqlDataAdapter sdaBB = new SqlDataAdapter();
+                //DataTable dtBB = new DataTable();
+                //cmdBB.Connection = conn;
+                //sdaBB.SelectCommand = cmdBB;
+                //sdaBB.Fill(dtBB);
+                //GridView1.DataSource = dtBB;
+                //GridView1.DataBind();
+
+
+
+
+
+
+
+
+
                 Database db = new Database();
                 string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
                 SqlConnection sqlconn = new SqlConnection(dbConnStr);
@@ -200,7 +217,7 @@ namespace targeted_marketing_display
                 sdaLoc.SelectCommand = cmdLoc;
                 sdaLoc.Fill(datatableLoc);
                 cmdLoc.Parameters.Clear();
-                GridView1.AllowPaging = false;
+   
                 for (int i = 0; i < datatableLoc.Rows.Count; i++)
                 {
                     string BillboardCodefromdb = datatableLoc.Rows[i]["BillboardCode"].ToString();

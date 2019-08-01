@@ -408,7 +408,9 @@
                                          <asp:UpdatePanel ID="updatepanel20" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
 
                             <ContentTemplate>
-                                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered table-hover" DataKeyNames="BillboardID" DataSourceID="SqlDataSource2" AllowPaging="True" Width="100%" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3">
+                                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered table-hover"
+                                        DataKeyNames="BillboardID"  AllowPaging="False" Width="100%"  BackColor="White" 
+                                        BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3"  DataSourceID="SqlDataSource2">
                                          <AlternatingRowStyle BackColor="#CCCCCC" />
                                         <Columns>                                         
                                            <asp:TemplateField>

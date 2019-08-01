@@ -67,7 +67,7 @@ namespace targeted_marketing_display
         public void btnAdvSearch_OnClick(Object sender, EventArgs e)
         {
             Database db = new Database();
-            SqlCommand command = new SqlCommand("Select AdvId,Name,StartDate,EndDate,Status From Advertisement Where Name Like '%' + @pAdv + '%' Or companyID Like '%' + @pCom + '%' and status=1");
+            SqlCommand command = new SqlCommand("Select AdvId,Name,Item,ItemType,StartDate,EndDate,Status From Advertisement Where Name Like '%' + @pAdv + '%' Or companyID Like '%' + @pCom + '%' and Advertisement.Status=1");
             command.Parameters.AddWithValue("@pAdv", txtAdv.Text);
             command.Parameters.AddWithValue("@pCom", ddlCom.SelectedItem.Text.Substring(1, 1));
             DataTable adv = db.getDataTable(command);
@@ -93,11 +93,12 @@ namespace targeted_marketing_display
             //}
         }
 
-        //Billboard Modal Search Button
+        //Billboard Modal Search ButtonSELECT BillboardID,BillboardCode, Latitude ,Longtitude ,(( AddressLn1) + ' '+( AddressLn2 )+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address FROM BillboardLocation where status=1
         public void btnBbSearch_OnClick(Object sender, EventArgs e)
         {
             Database db = new Database();
-            SqlCommand command = new SqlCommand("Select BillboardID,BillboardCode,Concat(AddressLn1, ',' ,AddressLn2) As Address,Status From BillboardLocation Where BillboardLocation.BillboardID Like '%' + @pBb + '%' and status=1");
+            SqlCommand command = new SqlCommand("Select BillboardID,BillboardCode,Concat((AddressLn1)+ ' '+(AddressLn2)+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address" +
+                ",Status From BillboardLocation Where BillboardLocation.BillboardID Like '%' + @pBb + '%' and status=1");
             command.Parameters.AddWithValue("@pBB", txtBb.Text);
             DataTable bb = db.getDataTable(command);
             gvBb.DataSource = bb;
