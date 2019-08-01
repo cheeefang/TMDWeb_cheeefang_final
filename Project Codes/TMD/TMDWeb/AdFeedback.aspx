@@ -60,7 +60,22 @@
         function showVadModal2() {
             $('#VadModal2').modal('show');
         }
+        
     </script>
+   <script type="text/javascript">
+    function checkRadioBtn(id) {
+        var gv = document.getElementById('<%=gvAdv.ClientID %>');
+
+        for (var i = 1; i < gv.rows.length; i++) {
+            var radioBtn = gv.rows[i].cells[0].getElementsByTagName("input");
+
+            // Check if the id not same
+            if (radioBtn[0].id != id.id) {
+                radioBtn[0].checked = false;
+            }
+        }
+    }
+</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
@@ -233,14 +248,14 @@
                     <div class="col-lg-12">
 
                         <div class="input-group custom-search-form" style="width: 50%">
-                            <asp:TextBox ID="txtAdv" class="form-control" runat="server" placeholder="Search..."></asp:TextBox>
+                            <asp:textbox id="txtAdv" class="form-control" runat="server" placeholder="Search..."></asp:textbox>
                             <span class="input-group-btn">
                                 <button class="btn btn-default" runat="server" type="button" onserverclick="btnAdvSearch_OnClick">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
                         </div>
-                     <asp:UpdatePanel ID="updatepanel20" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                        <asp:updatepanel id="updatepanel20" runat="server" updatemode="Conditional" childrenastriggers="true">
 
                             <ContentTemplate>
                         <asp:GridView ID="gvAdv" runat="server" Visible="true" Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover" OnRowDataBound="gvAdv_RowDataBound"
@@ -249,12 +264,15 @@
                                 BorderWidth="1px" CellPadding="3" OnPageIndexChanging="gvAdv_PageIndexChanging" OnSorting="gvAdv_Sorting" >
                               <AlternatingRowStyle BackColor="#CCCCCC" />
                             <Columns>
-                                <asp:TemplateField>
+                            <%--    <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:CheckBox ID="CheckBox1" runat="server" />
                                     </ItemTemplate>
                                     <ItemStyle Width="3%" />
-                                </asp:TemplateField>
+                                </asp:TemplateField>--%>
+                                <asp:TemplateField HeaderText="Select">
+                <ItemTemplate><asp:RadioButton ID="RowSelector" runat="server" onclick="checkRadioBtn(this);" /></ItemTemplate>
+            </asp:TemplateField>
                                 <asp:TemplateField visible="false">
                                         <ItemTemplate>
                                             <asp:Label runat="server" visible="false"  ID="lb_AdvertID" Text='<%# Bind("AdvID") %>'></asp:Label>
@@ -299,10 +317,10 @@
                                 <SortedDescendingHeaderStyle BackColor="#383838" HorizontalAlign="Center"/>
                         </asp:GridView>
                                 </ContentTemplate>
-                         </asp:UpdatePanel>
+                         </asp:updatepanel>
                     </div>
-                </div>
-                    <asp:UpdatePanel ID="updatepanel1" runat="server">
+                    </div>
+                    <asp:updatepanel id="updatepanel1" runat="server">
 
                             <ContentTemplate>
                     <div class="modal-footer">
@@ -341,7 +359,7 @@
                                 &nbsp 
                         <asp:GridView ID="gvBb" runat="server" Visible="true" Style="margin-top: 5px;" CssClass="table table-bordered table-striped table-hover"
                             OnRowDataBound="gvBb_RowDataBound" AllowPaging="true" PageSize="10" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3"
-                            AutoGenerateColumns="False" Height="100%" Width="100%">
+                            AutoGenerateColumns="False" Height="100%" Width="100%" OnPageIndexChanging="gvBb_PageIndexChanging" OnSorting="gvBb_Sorting">
                              <AlternatingRowStyle BackColor="#CCCCCC" />
                             <Columns>
                                 <asp:TemplateField>

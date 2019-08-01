@@ -67,9 +67,9 @@ namespace targeted_marketing_display
         public void btnAdvSearch_OnClick(Object sender, EventArgs e)
         {
             Database db = new Database();
-            SqlCommand command = new SqlCommand("Select AdvId,Name,Item,ItemType,StartDate,EndDate,Status From Advertisement Where Advertisement.Status=1");
+            SqlCommand command = new SqlCommand("Select AdvId,Name,Item,ItemType,StartDate,EndDate,Status From Advertisement Where Advertisement.Status=1 and Advertisement.CompanyID=@pComID");
             command.Parameters.AddWithValue("@pAdv", txtAdv.Text);
-           
+            command.Parameters.AddWithValue("@pComID",Convert.ToInt32(ddlCom.SelectedItem.Value));
             DataTable adv = db.getDataTable(command);
             gvAdv.DataSource = adv;
             gvAdv.DataBind();
@@ -129,13 +129,33 @@ namespace targeted_marketing_display
             //}
         }
 
+        protected void gvBb_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvBb.PageIndex = e.NewPageIndex;
+            gvBb.DataBind();
+        }
+
+        protected void gvBb_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            DataTable dataTable = gvAdv.DataSource as DataTable;
+
+            if (dataTable != null)
+            {
+                DataView dataView = new DataView(dataTable);
+                dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
+                gvBb.DataSource = dataView;
+                gvBb.DataBind();
+            }
+        }
+
         //Billboard Modal Search ButtonSELECT BillboardID,BillboardCode, Latitude ,Longtitude ,(( AddressLn1) + ' '+( AddressLn2 )+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address FROM BillboardLocation where status=1
         public void btnBbSearch_OnClick(Object sender, EventArgs e)
         {
             Database db = new Database();
-            SqlCommand command = new SqlCommand("Select BillboardID,BillboardCode,Concat((AddressLn1)+ ' '+(AddressLn2)+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address" +
-                ",Status From BillboardLocation Where BillboardLocation.BillboardID Like '%' + @pBb + '%' and status=1");
-            command.Parameters.AddWithValue("@pBB", txtBb.Text);
+            SqlCommand command = new SqlCommand("Select BillboardID,BillboardCode,((AddressLn1)+ ' '+(AddressLn2)+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address" +
+                " From BillboardLocation Where  status=1");
+           // command.Parameters.AddWithValue("@pBB", txtBb.Text);
             DataTable bb = db.getDataTable(command);
             gvBb.DataSource = bb;
             gvBb.DataBind();
@@ -159,16 +179,28 @@ namespace targeted_marketing_display
             //}
         }
 
+        //RadioButton rdBtn = (RadioButton)row.FindControl("RowSelector");
+        //            if (rdBtn.Checked==true)
+        //            {
+
+        //                //that is where you are wrong
+        //                GridViewRow r = this.gvAdv.Rows[i];
+        //// int id = Convert.ToInt32(r.Cells[1].Text);
+        //Label advLabel = (Label)gvAdv.Rows[i].FindControl("lb_AdvertID");
+
+
+
         //Advertisement Modal Add Button
         protected void addAdv_Click(object sender, EventArgs e)
         {
             ddlCom.SelectedIndex = 0;
             foreach (GridViewRow row in gvBb.Rows)
             {
-                CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
-                if (chkrw.Checked == true)
+                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelector");
+                
+                if (rdBtn.Checked == true)
                 {
-                    chkrw.Checked = false;
+                    rdBtn.Checked = false;
                 }
             }
             string modalId = "Adv";
@@ -181,10 +213,10 @@ namespace targeted_marketing_display
             ddlCom.SelectedIndex = 0;
             foreach (GridViewRow row in gvAdv.Rows)
             {
-                CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
-                if (chkrw.Checked == true)
+                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelector");
+                if (rdBtn.Checked == true)
                 {
-                    chkrw.Checked = false;
+                    rdBtn.Checked = false;
                 }
             }
             string modalId = "Bb";
@@ -196,18 +228,18 @@ namespace targeted_marketing_display
         {
             foreach (GridViewRow row in gvAdv.Rows)
             {
-                CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
-                if (chkrw.Checked == true)
+                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelector");
+                if (rdBtn.Checked == true)
                 {
-                    chkrw.Checked = false;
+                    rdBtn.Checked = false;
                 }
             }
             foreach (GridViewRow row in gvBb.Rows)
             {
-                CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
-                if (chkrw.Checked == true)
+                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelector");
+                if (rdBtn.Checked == true)
                 {
-                    chkrw.Checked = false;
+                    rdBtn.Checked = false;
                 }
             }
             string code = ddlCom.SelectedItem.Text.Substring(1, 1);
@@ -337,8 +369,9 @@ namespace targeted_marketing_display
                 for (int i = 0; i < gvAdv.Rows.Count; i++)
                 {
                     GridViewRow row = gvAdv.Rows[i];
-                    CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
-                    if (chkrw.Checked == true)
+                    // CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
+                    RadioButton rdBtn = (RadioButton)row.FindControl("RowSelector");
+                    if (rdBtn.Checked==true)
                     {
 
                         //that is where you are wrong
