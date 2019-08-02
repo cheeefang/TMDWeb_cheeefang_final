@@ -158,9 +158,7 @@
                         <asp:RadioButton ID="rbNo" runat="server" OnCheckedChanged="rbNo_CheckedChanged" AutoPostBack="true"/> 
                         <asp:Label ID="lblNo" runat="server" Text="No. Of Pax"></asp:Label>
                         &nbsp
-                        <asp:RadioButton ID="rbTs" runat="server" OnCheckedChanged="rbTs_CheckedChanged" AutoPostBack="true"/>
-                        <asp:Label ID="lblTs" runat="server" Text="Time Stamp"></asp:Label>
-                        &nbsp
+                       
                         <asp:RadioButton ID="rbAge" runat="server" OnCheckedChanged="rbAge_CheckedChanged" AutoPostBack="true"/> 
                         <asp:Label ID="lblAge" runat="server" Text="Age"></asp:Label>
                         &nbsp
@@ -281,25 +279,27 @@
                                           
                                         
                                       <asp:ImageButton ID="Image1" runat="server" ImageUrl='<%# Eval("Item") %>' OnClientClick="return LoadDiv(this.src);" 
-                                          Visible='<%# Eval("ItemType").ToString() =="image" %>' ClientIDMode="static" style="display:block;"   />
+                                          Visible='<%# Eval("ItemType").ToString() =="image" %>' ClientIDMode="static" style="display:block;" ItemStyle-HorizontalAlign="Center"   />
                                       <div id="vidDiv" runat="server">
-                                        <video ClientIDMode="static" id="videoDog" width="200" height="200" runat="server" controls visible='<%# Eval("ItemType").ToString()!="image" %>'>  
-                                            <source runat="server" src='<%#Eval("Item")%>' type="video/mp4" visible='<%# Eval("ItemType").ToString()!="image" %>' />  
+                                        <video ClientIDMode="static" id="videoDog" width="100" height="100" runat="server" controls visible='<%# Eval("ItemType").ToString()!="image" %>'>  
+                                            <source runat="server" src='<%#Eval("Item")%>' type="video/mp4" visible='<%# Eval("ItemType").ToString()!="image" %>' ItemStyle-HorizontalAlign="Center" />  
                                         </video>  
                                            </div>
                                               
                                             </ItemTemplate>
                                         <controlstyle width="100px" height="100px"  />
-                                        <ItemStyle Width="200px" height="200px" />
+                                        <ItemStyle Width="100px" height="100px" />
                                         </asp:TemplateField>
-                                <asp:BoundField DataField="Name" HeaderText="Name" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
+                                <asp:BoundField DataField="Name" HeaderText="Name" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100px">
                                         <ItemStyle HorizontalAlign="Left"></ItemStyle>
                                 </asp:BoundField>
-                                   <asp:BoundField DataField="ItemType" HeaderText="Type" SortExpression="ItemType"></asp:BoundField>
-                                <asp:BoundField DataField="StartDate" HeaderText="Start Date" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px" DataFormatString="{0:D}">
+                                   <asp:BoundField DataField="ItemType" HeaderText="Type" SortExpression="ItemType" ItemStyle-HorizontalAlign="Center">
+
+                                   </asp:BoundField>
+                                <asp:BoundField DataField="StartDate" HeaderText="Start Date" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100px" DataFormatString="{0:D}">
                                         <ItemStyle HorizontalAlign="Center"></ItemStyle>
                                 </asp:BoundField>
-                                <asp:BoundField DataField="EndDate" HeaderText="End Date" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px" DataFormatString="{0:D}">
+                                <asp:BoundField DataField="EndDate" HeaderText="End Date" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100px" DataFormatString="{0:D}">
                                         <ItemStyle HorizontalAlign="Center"></ItemStyle>
                                 </asp:BoundField>
                                 
@@ -361,7 +361,7 @@
                             <Columns>
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:CheckBox ID="CheckBox1" runat="server" />
+                                        <asp:CheckBox ID="CheckBoxBB" runat="server" />
                                     </ItemTemplate>
                                     <ItemStyle Width="3%" />
                                 </asp:TemplateField>

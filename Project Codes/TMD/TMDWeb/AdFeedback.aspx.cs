@@ -19,14 +19,14 @@ namespace targeted_marketing_display
         {
             //DisableLinkButton(lBtnFrom);
             //DisableLinkButton(lBtnTo);
-           
+
             if (!IsPostBack)
             {
                 string modalId = "No Selection";
                 Session["modalId"] = modalId;
                 PopulateDdl();
                 ddlCom.Items.Insert(0, new ListItem("<--Select A Company-->"));
-           
+
             }
             CompareValidator2.ValueToCompare = DateTime.Now.ToShortDateString();
         }
@@ -53,14 +53,14 @@ namespace targeted_marketing_display
         //populate Company dropdown list
         public void PopulateDdl()
         {
-                Database db = new Database();
-                SqlCommand command = new SqlCommand("Select * From Company where status=1");
-                DataTable dt = db.getDataTable(command);
+            Database db = new Database();
+            SqlCommand command = new SqlCommand("Select * From Company where status=1");
+            DataTable dt = db.getDataTable(command);
 
-                ddlCom.DataSource = dt;
-                ddlCom.DataValueField = "CompanyID";
-                ddlCom.DataTextField = "Name";
-                ddlCom.DataBind();
+            ddlCom.DataSource = dt;
+            ddlCom.DataValueField = "CompanyID";
+            ddlCom.DataTextField = "Name";
+            ddlCom.DataBind();
         }
 
         //Advertisement Modal Search Button
@@ -69,7 +69,7 @@ namespace targeted_marketing_display
             Database db = new Database();
             SqlCommand command = new SqlCommand("Select AdvId,Name,Item,ItemType,StartDate,EndDate,Status From Advertisement Where Advertisement.Status=1 and Advertisement.CompanyID=@pComID");
             command.Parameters.AddWithValue("@pAdv", txtAdv.Text);
-            command.Parameters.AddWithValue("@pComID",Convert.ToInt32(ddlCom.SelectedItem.Value));
+            command.Parameters.AddWithValue("@pComID", Convert.ToInt32(ddlCom.SelectedItem.Value));
             DataTable adv = db.getDataTable(command);
             gvAdv.DataSource = adv;
             gvAdv.DataBind();
@@ -116,17 +116,8 @@ namespace targeted_marketing_display
         }
         protected void gvAdv_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            //foreach (GridViewRow row in gvAdv.Rows)
-            //{
-            //    if (row.Cells[5].Text == "0")
-            //    {
-            //        row.Cells[5].Text = "Inactive";
-            //    }
-            //    else if (row.Cells[5].Text == "1")
-            //    {
-            //        row.Cells[5].Text = "Active";
-            //    }
-            //}
+          
+           
         }
 
         protected void gvBb_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -158,8 +149,8 @@ namespace targeted_marketing_display
             SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
             conn.Open();
             Database db = new Database();
-           
-            for(int i = 0; i < gvAdv.Rows.Count; i++)
+
+            for (int i = 0; i < gvAdv.Rows.Count; i++)
             {
                 SqlCommand command = new SqlCommand("Select Distinct AdvertisementFeedback.BillboardID,BillboardCode,((AddressLn1)+ ' '+(AddressLn2)+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address" +
                " From BillboardLocation inner join AdvertisementFeedback on BillboardLocation.BillboardID=AdvertisementFeedback.BillboardID" +
@@ -170,7 +161,7 @@ namespace targeted_marketing_display
                 if (chkrw.Checked == true)
                 {
 
-              
+
                     Label advLabel = (Label)gvAdv.Rows[i].FindControl("lb_AdvertID");
                     SqlParameter param = new SqlParameter();
                     param.ParameterName = "@pAdvID";
@@ -183,11 +174,11 @@ namespace targeted_marketing_display
                     gvBb.DataSource = dt;
                     gvBb.DataBind();
                 }
-             }
-                    
-            
-          
-                          
+            }
+
+
+
+
             gvBb.Visible = true;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showBbModal();", true);
         }
@@ -279,7 +270,6 @@ namespace targeted_marketing_display
         //Chart Type Radio Buttons
         protected void rbNo_CheckedChanged(object sender, EventArgs e)
         {
-            rbTs.Checked = false;
             rbAge.Checked = false;
             rbGender.Checked = false;
             rbEmotion.Checked = false;
@@ -287,20 +277,11 @@ namespace targeted_marketing_display
             chartFb.Visible = false;
         }
 
-        protected void rbTs_CheckedChanged(object sender, EventArgs e)
-        {
-            rbNo.Checked = false;
-            rbAge.Checked = false;
-            rbGender.Checked = false;
-            rbEmotion.Checked = false;
-            lblFbc.Visible = false;
-            chartFb.Visible = false;
-        }
+
 
         protected void rbAge_CheckedChanged(object sender, EventArgs e)
         {
             rbNo.Checked = false;
-            rbTs.Checked = false;
             rbGender.Checked = false;
             rbEmotion.Checked = false;
             lblFbc.Visible = false;
@@ -310,7 +291,6 @@ namespace targeted_marketing_display
         protected void rbGender_CheckedChanged(object sender, EventArgs e)
         {
             rbNo.Checked = false;
-            rbTs.Checked = false;
             rbAge.Checked = false;
             rbEmotion.Checked = false;
             lblFbc.Visible = false;
@@ -320,7 +300,6 @@ namespace targeted_marketing_display
         protected void rbEmotion_CheckedChanged(object sender, EventArgs e)
         {
             rbNo.Checked = false;
-            rbTs.Checked = false;
             rbAge.Checked = false;
             rbGender.Checked = false;
             lblFbc.Visible = false;
@@ -334,7 +313,14 @@ namespace targeted_marketing_display
             //{
             //    //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showVadDateModal();", true);
             //}
-            if (rbNo.Checked == false && rbTs.Checked == false && rbAge.Checked == false && rbGender.Checked == false && rbEmotion.Checked == false)
+
+            //if (ddlCom.SelectedIndex==0 ||gvAdv)
+
+
+
+
+
+            if (rbNo.Checked == false && rbAge.Checked == false && rbGender.Checked == false && rbEmotion.Checked == false)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showVadModal();", true);
             }
@@ -399,7 +385,7 @@ namespace targeted_marketing_display
                     GridViewRow row = gvAdv.Rows[i];
                     CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
                     //RadioButton rdBtn = (RadioButton)row.FindControl("RowSelector");
-                    if (chkrw.Checked==true)
+                    if (chkrw.Checked == true)
                     {
 
                         //that is where you are wrong
@@ -411,8 +397,8 @@ namespace targeted_marketing_display
                             con.Open();
                             SqlCommand command = new SqlCommand("Select Sum(NoOfPax) As totalPax From AdvertisementFeedback Where AdvId Like '%' + @pId + '%' and Timestamp>=@sDate and Timestamp<=@eDate Group By AdvId");
                             command.Parameters.AddWithValue("@pId", advLabel.Text.ToString());
-                            command.Parameters.AddWithValue("@sDate",sdate );
-                            command.Parameters.AddWithValue("@eDate",edate);
+                            command.Parameters.AddWithValue("@sDate", sdate);
+                            command.Parameters.AddWithValue("@eDate", edate);
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
 
@@ -442,43 +428,7 @@ namespace targeted_marketing_display
                             }
                             con.Close();
                         }
-                        else if (rbTs.Checked == true)
-                        {
-                            con.Open();
-                            SqlCommand command = new SqlCommand("select top 1 NoOfPax,TimeStamp from AdvertisementFeedback Where AdvID Like '%' + @pId + '%' and Timestamp>=@sDate and Timestamp<=@eDate order by NoOfPax Desc");
-                            command.Parameters.AddWithValue("@pId", advLabel.Text.ToString());
-                            command.Parameters.AddWithValue("@sDate", sdate);
-                            command.Parameters.AddWithValue("@eDate", edate);
-                            command.Connection = con;
-                            SqlDataReader dr = command.ExecuteReader();
 
-                            while (dr.Read())
-                            {
-                                string name = r.Cells[2].Text;
-                                int no = Convert.ToInt32(dr["NoOfPax"]);
-                                string timestamp = dr["TimeStamp"].ToString();
-                                chartAdvTs.Rows.Add(name, no, timestamp);
-
-                                chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                chartFb.Series["Series1"].XValueMember = "TimeStamp";
-                                chartFb.Series["Series1"].YValueMembers = "No";
-                                chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Highest No. Of Pax/Timestamp";
-                                chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 50;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                chartFb.DataSource = chartAdvTs;
-                                chartFb.DataBind();
-                            }
-                            con.Close();
-                        }
                         else if (rbAge.Checked == true)
                         {
                             con.Open();
@@ -545,7 +495,7 @@ namespace targeted_marketing_display
                                 else if (ageGroup == 3)
                                 {
                                     string ageRange = "Adult(31-65)";
-                                    string age =  ageRange;
+                                    string age = ageRange;
                                     chartAdvAge.Rows.Add(name, no, age);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
@@ -576,7 +526,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for "+name;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -596,7 +546,7 @@ namespace targeted_marketing_display
                         else if (rbGender.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select  count(NoOfPax) as NoOfPax,GenderID From AdvertisementFeedback Where AdvID Like '%' + @pId + '%' group by GenderID");
+                            SqlCommand command = new SqlCommand("Select count(NoOfPax) as NoOfPax,GenderID From AdvertisementFeedback Where AdvID Like '%' + @pId + '%' group by GenderID");
                             command.Parameters.AddWithValue("@pId", advLabel.Text.ToString());
                             command.Parameters.AddWithValue("@sDate", sdate);
                             command.Parameters.AddWithValue("@eDate", edate);
@@ -614,7 +564,7 @@ namespace targeted_marketing_display
                                 chartFb.Series["Series1"].XValueMember = "Gender";
                                 chartFb.Series["Series1"].YValueMembers = "No";
                                 chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Gender data for "+name;
+                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Gender data for " + name;
                                 chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                 chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                 chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -633,7 +583,7 @@ namespace targeted_marketing_display
                         else if (rbEmotion.Checked == true)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select  count(NoOfPax) as NoOfPax,Emotion From AdvertisementFeedback Where AdvID Like '%' + @pId + '%' group by emotion");
+                            SqlCommand command = new SqlCommand("Select count(NoOfPax) as NoOfPax,Emotion From AdvertisementFeedback Where AdvID Like '%' + @pId + '%' group by emotion");
                             command.Parameters.AddWithValue("@pId", advLabel.Text.ToString());
                             command.Parameters.AddWithValue("@sDate", sdate);
                             command.Parameters.AddWithValue("@eDate", edate);
@@ -656,7 +606,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for "+name;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -673,7 +623,7 @@ namespace targeted_marketing_display
                                 else if (emotionRange == 2)
                                 {
                                     string emotion = "Happy";
-                                    string emo =  emotion;
+                                    string emo = emotion;
                                     chartAdvEmotion.Rows.Add(name, no, emo);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
@@ -697,7 +647,7 @@ namespace targeted_marketing_display
                                 else if (emotionRange == 3)
                                 {
                                     string emotion = "Neutral";
-                                    string emo =  emotion;
+                                    string emo = emotion;
                                     chartAdvEmotion.Rows.Add(name, no, emo);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
@@ -721,7 +671,7 @@ namespace targeted_marketing_display
                                 else if (emotionRange == 4)
                                 {
                                     string emotion = "Unhappy";
-                                    string emo =  emotion;
+                                    string emo = emotion;
                                     chartAdvEmotion.Rows.Add(name, no, emo);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
@@ -772,11 +722,11 @@ namespace targeted_marketing_display
                     }
                 }
             }
-        }
 
+        }
         //Generate Chart Based On Billboard Modal
-        protected void modalBb()
-        {
+       protected void modalBb()
+       {
             SqlConnection con = new SqlConnection(DBConnect);
             using (con)
             {
@@ -801,10 +751,11 @@ namespace targeted_marketing_display
                 chartBbEmotion.Columns.Add("Emotion", typeof(string));
                 DateTime sdate = DateTime.Parse(startDateTB.Text);
                 DateTime edate = DateTime.Parse(endDateTB.Text);
+
                 for (int i = 0; i < gvBb.Rows.Count; i++)
                 {
                     GridViewRow row = gvBb.Rows[i];
-                    CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
+                    CheckBox chkrw = (CheckBox)row.FindControl("CheckBoxBB");
                     if (chkrw.Checked == true)
                     {
                         GridViewRow r = this.gvBb.Rows[i];
@@ -848,44 +799,7 @@ namespace targeted_marketing_display
                             }
                             con.Close();
                         }
-                        else if (rbTs.Checked == true)
-                        {
-                            con.Open();
-                            SqlCommand command = new SqlCommand("Select top 1 Count(NoOfPax) as NoOfPax,TimeStamp From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' and Timestamp>=@sDate and Timestamp<=@eDate group by TimeStamp ");
-                            command.Parameters.AddWithValue("@pId", bblabel.Text.ToString());
-                            command.Parameters.AddWithValue("@sDate", sdate);
-                            command.Parameters.AddWithValue("@eDate", edate);
-                            command.Connection = con;
-                            SqlDataReader dr = command.ExecuteReader();
 
-                            while (dr.Read())
-                            {
-                                string name = r.Cells[2].Text;
-                                int no = Convert.ToInt32(dr["NoOfPax"]);
-                                string timestamp =  dr["TimeStamp"].ToString();
-                                chartBbTs.Rows.Add(name, no, timestamp);
-
-                                chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                chartFb.Series["Series1"].XValueMember = "TimeStamp";
-                                chartFb.Series["Series1"].YValueMembers = "No";
-                                chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Highest No. Of Pax/Timestamp";
-                                chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No.Of Pax";
-                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                chartFb.ChartAreas["ChartArea1"].RecalculateAxesScale();
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                chartFb.DataSource = chartBbTs;
-                                chartFb.DataBind();
-                            }
-                            con.Close();
-                        }
                         else if (rbAge.Checked == true)
                         {
                             con.Open();
@@ -1016,7 +930,7 @@ namespace targeted_marketing_display
                             {
                                 string name = r.Cells[2].Text;
                                 int no = Convert.ToInt32(dr["NoOfPax"]);
-                                string gender =  dr["Gender"].ToString();
+                                string gender = dr["Gender"].ToString();
                                 chartBbGender.Rows.Add(name, no, gender);
 
                                 chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
@@ -1065,7 +979,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion Data for "+name;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion Data for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -1082,7 +996,7 @@ namespace targeted_marketing_display
                                 else if (emotionRange == 2)
                                 {
                                     string emotion = "Happy";
-                                    string emo =  emotion;
+                                    string emo = emotion;
                                     chartBbEmotion.Rows.Add(name, no, emo);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
@@ -1106,7 +1020,7 @@ namespace targeted_marketing_display
                                 else if (emotionRange == 3)
                                 {
                                     string emotion = "Neutral";
-                                    string emo =  emotion;
+                                    string emo = emotion;
                                     chartBbEmotion.Rows.Add(name, no, emo);
 
                                     chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
@@ -1179,30 +1093,9 @@ namespace targeted_marketing_display
                         }
                     }
                 }
+
             }
-        }
-
-//        Company(NoOfPax)-select count(AdvertisementFeedback.AdvID) as totalcount from AdvertisementFeedback inner join Advertisement on
-//AdvertisementFeedback.AdvID=Advertisement.AdvID where Advertisement.companyID= 1
-
-
-//Company(Timestamp)-select top 3 NoOfPax, TimeStamp from AdvertisementFeedback inner join Advertisement on AdvertisementFeedback.AdvID= Advertisement.AdvID
-//Where Advertisement.companyID= 1 order by NoOfPax Desc
-
-//Company(Age)-Select count(NoOfPax) as NoOfPax, AgeID From AdvertisementFeedback inner join Advertisement on AdvertisementFeedback.AdvID= Advertisement.AdvID
-//Where Advertisement.companyID Like 1 group by AgeID
-
-//Company(Gender)-Select count(NoOfPax) as NoOfPax, GenderID From AdvertisementFeedback inner join Advertisement on AdvertisementFeedback.AdvID= Advertisement.AdvID
-//Where Advertisement.companyID Like 1 group by GenderID
-
-//Company(Emotion)-Select count(NoOfPax) as NoOfPax, Emotion From AdvertisementFeedback inner join Advertisement on AdvertisementFeedback.AdvID= Advertisement.AdvID
-//Where Advertisement.companyID Like 1 group by emotion
-
-
-
-
-
-
+       }
         //Generate Chart Based On Company Dropdownlist
         protected void modalCom()
         {
@@ -1281,53 +1174,7 @@ namespace targeted_marketing_display
 
                  
                 }
-                else if (rbTs.Checked == true)
-                {
-                    con.Open();
-                    SqlCommand gvCmd = new SqlCommand("select top 1 NoOfPax,TimeStamp,Company.Name from AdvertisementFeedback inner join Advertisement on AdvertisementFeedback.AdvID=Advertisement.AdvID inner join Company on " +
-                        "Advertisement.companyID = Company.CompanyID " +
-                        "Where Advertisement.companyID =@pComId and Timestamp>=@sDate and Timestamp<=@eDate order by NoOfPax Desc ");
-                    gvCmd.Parameters.AddWithValue("@pComId", companyId.ToString());
-                    gvCmd.Parameters.AddWithValue("@sDate", sdate);
-                    gvCmd.Parameters.AddWithValue("@eDate", edate);
-                    gvCmd.Connection = con;
-                    SqlDataReader drGvCmd = gvCmd.ExecuteReader();
-
-                    //DateTime startDatevar = Convert.ToDateTime(AdvertObj.StartDate);
-                    //String ConvertDate = startDatevar.ToString("yyyy-MM-dd");
-                    while (drGvCmd.Read())
-                    {
-                        int totalNo = Convert.ToInt32(drGvCmd["NoOfPax"]);
-
-                        DateTime timestamp = Convert.ToDateTime(drGvCmd["Timestamp"]);
-                        string date = timestamp.ToString("yyyy-MM-dd");
-                        //int location = Convert.ToInt32(row.Cells[1].Text);
-                        //string name = row.Cells[2].Text;
-                        //string ts = dr["TimeStamp"].ToString();
-                        //string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + ts;
-                        //int no = Convert.ToInt32(dr["NoOfPax"]);
-                        chartComTs.Rows.Add(date, totalNo);
-
-                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                        chartFb.Series["Series1"].XValueMember = "Com";
-                        chartFb.Series["Series1"].YValueMembers = "No";
-                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Top No. Of Pax/Timestamp";
-                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                        chartFb.DataSource = chartComTs;
-                        chartFb.DataBind();
-                    }
-                    con.Close();       
-                }
+              
                 else if (rbAge.Checked == true)
                 {
                     
