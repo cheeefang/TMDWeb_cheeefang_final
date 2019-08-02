@@ -264,15 +264,12 @@
                                 BorderWidth="1px" CellPadding="3" OnPageIndexChanging="gvAdv_PageIndexChanging" OnSorting="gvAdv_Sorting" >
                               <AlternatingRowStyle BackColor="#CCCCCC" />
                             <Columns>
-                            <%--    <asp:TemplateField>
+                              <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:CheckBox ID="CheckBox1" runat="server" />
                                     </ItemTemplate>
                                     <ItemStyle Width="3%" />
-                                </asp:TemplateField>--%>
-                                <asp:TemplateField HeaderText="Select">
-                <ItemTemplate><asp:RadioButton ID="RowSelector" runat="server" onclick="checkRadioBtn(this);" /></ItemTemplate>
-            </asp:TemplateField>
+                                </asp:TemplateField>
                                 <asp:TemplateField visible="false">
                                         <ItemTemplate>
                                             <asp:Label runat="server" visible="false"  ID="lb_AdvertID" Text='<%# Bind("AdvID") %>'></asp:Label>
