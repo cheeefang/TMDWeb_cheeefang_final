@@ -725,8 +725,8 @@ namespace targeted_marketing_display
 
         }
         //Generate Chart Based On Billboard Modal
-       protected void modalBb()
-       {
+        protected void modalBb()
+        {
             SqlConnection con = new SqlConnection(DBConnect);
             using (con)
             {
@@ -752,29 +752,77 @@ namespace targeted_marketing_display
                 DateTime sdate = DateTime.Parse(startDateTB.Text);
                 DateTime edate = DateTime.Parse(endDateTB.Text);
 
+                //Initialize 2 list to store billboard and advert data
+                List<int> AdvList = new List<int>();
+                List<int> BBList = new List<int>();
+
+                //loop to insert advid to advlist
+                for (int i = 0; i < gvAdv.Rows.Count; i++)
+                {
+                    GridViewRow row = gvAdv.Rows[i];
+                    CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
+                    if (chkrw.Checked == true)
+                    {
+
+                        //that is where you are wrong
+                        GridViewRow r = this.gvAdv.Rows[i];
+                        int id = Convert.ToInt32(r.Cells[1].Text);
+                        Label advLabel = (Label)gvAdv.Rows[i].FindControl("lb_AdvertID");
+                        AdvList.Add(Convert.ToInt32(advLabel.Text));
+                    }
+                }
+
+                //loop to insert billboardID to Billboard List
                 for (int i = 0; i < gvBb.Rows.Count; i++)
                 {
                     GridViewRow row = gvBb.Rows[i];
-                    CheckBox chkrw = (CheckBox)row.FindControl("CheckBoxBB");
+                    CheckBox chkrw = (CheckBox)row.FindControl("CheckboxBB");
                     if (chkrw.Checked == true)
                     {
                         GridViewRow r = this.gvBb.Rows[i];
-                        //int id = Convert.ToInt32(r.Cells[1].Text);
-                        Label bblabel = (Label)gvBb.Rows[i].FindControl("lb_BillboardID");
-                        if (rbNo.Checked == true)
-                        {
-                            con.Open();
-                            SqlCommand command = new SqlCommand("Select Sum(NoOfPax) As NoOfPaxs From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' and Timestamp>=@sDate" +
-                                " and Timestamp<=@eDate Group By BillboardID");
-                            command.Parameters.AddWithValue("@pId", bblabel.Text.ToString());
-                            command.Parameters.AddWithValue("@sDate", sdate);
-                            command.Parameters.AddWithValue("@eDate", edate);
-                            command.Connection = con;
-                            SqlDataReader dr = command.ExecuteReader();
+                        Label bbLabel = (Label)gvBb.Rows[i].FindControl("lb_BillboardID");
+                        BBList.Add(Convert.ToInt32(bbLabel.Text));
+                    }
+                }
 
+
+                SqlConnection conn = null;
+                SqlDataReader reader = null;
+
+
+
+                // instantiate and open connection
+                conn = new
+                    SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                conn.Open();
+
+                int totalPeople;
+                if (rbNo.Checked == true)
+                {
+                    for (int i = 0; i < AdvList.Count; i++)
+                    {
+
+                        for (int x = 0; x < BBList.Count; x++)
+                        {
+                            SqlCommand cmdTotal = new SqlCommand("Select Sum(NoOfPax) As NoOfPaxs From AdvertisementFeedback " +
+                                "Where BillboardID=@BBID and AdvertisementFeedback.AdvID =@ADVID and Timestamp>=@sDate" +
+                                " and Timestamp<=@eDate  Group By BillboardID", conn);
+                            //SqlParameter paramTotal = new SqlParameter();
+                            //paramTotal.ParameterName = "@BBID";
+                            //paramTotal.Value = BBList[x];
+                            //SqlParameter paramAdv = new SqlParameter();
+                            //paramAdv.ParameterName = "@ADVID";
+                            //paramAdv.Value = AdvList[i];
+                            //cmdTotal.Parameters.Add(paramTotal);
+                            //cmdTotal.Parameters.Add(paramAdv);
+                            cmdTotal.Parameters.AddWithValue("@BBID", BBList[x]);
+                            cmdTotal.Parameters.AddWithValue("@ADVID", AdvList[i]);
+                            cmdTotal.Parameters.AddWithValue("@sDate", sdate);
+                            cmdTotal.Parameters.AddWithValue("@eDate", edate);
+                            SqlDataReader dr = cmdTotal.ExecuteReader();
                             while (dr.Read())
                             {
-                                string name = r.Cells[2].Text;
+                                string name = "fuck";
                                 int no = Convert.ToInt32(dr["NoOfPaxs"]);
                                 chartBb.Rows.Add(name, no);
 
@@ -782,7 +830,7 @@ namespace targeted_marketing_display
                                 chartFb.Series["Series1"].XValueMember = "Bb";
                                 chartFb.Series["Series1"].YValueMembers = "No";
                                 chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Billboard";
+                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement";
                                 chartFb.ChartAreas["ChartArea1"].AxisY.Title = "Total No. Of People";
                                 chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                 chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -797,14 +845,21 @@ namespace targeted_marketing_display
                                 chartFb.DataSource = chartBb;
                                 chartFb.DataBind();
                             }
-                            con.Close();
-                        }
 
-                        else if (rbAge.Checked == true)
+                        }
+                    }
+                }
+
+                else if (rbAge.Checked == true)
+                {
+                    for (int i = 0; i < AdvList.Count; i++)
+                    {
+
+                        for (int x = 0; x < BBList.Count; x++)
                         {
-                            con.Open();
-                            SqlCommand command = new SqlCommand("Select Count(NoOfPax) as NoOfPax,AgeID as AgeGroup From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' and Timestamp>=@sDate and Timestamp<=@eDate group by AgeID");
-                            command.Parameters.AddWithValue("@pId", bblabel.Text.ToString());
+                            SqlCommand command = new SqlCommand("Select Count(NoOfPax) as NoOfPax,AgeID as AgeGroup From AdvertisementFeedback Where BillboardID=@BBID and AdvId=@ADVID and Timestamp>=@sDate and Timestamp<=@eDate group by AgeID", conn);
+                            command.Parameters.AddWithValue("@BBID", BBList[x]);
+                            command.Parameters.AddWithValue("@ADVID", AdvList[i]);
                             command.Parameters.AddWithValue("@sDate", sdate);
                             command.Parameters.AddWithValue("@eDate", edate);
                             command.Connection = con;
@@ -812,7 +867,7 @@ namespace targeted_marketing_display
 
                             while (dr.Read())
                             {
-                                string name = r.Cells[2].Text;
+                                string name = "fuck";
                                 int no = Convert.ToInt32(dr["NoOfPax"]);
                                 int ageGroup = Convert.ToInt32(dr["AgeGroup"]);
 
@@ -912,15 +967,23 @@ namespace targeted_marketing_display
                                     chartFb.DataSource = chartBbAge;
                                     chartFb.DataBind();
                                 }
+
                             }
-                            con.Close();
                         }
-                        else if (rbGender.Checked == true)
+                    }
+                }
+                else if (rbGender.Checked == true)
+                {
+                    for (int i = 0; i < AdvList.Count; i++)
+                    {
+
+                        for (int x = 0; x < BBList.Count; x++)
                         {
-                            con.Open();
+
                             SqlCommand command = new SqlCommand("Select Count(NoOfPax) as NoOfPax,GenderID as Gender From AdvertisementFeedback Where" +
-                                " BillboardID Like '%' + @pId + '%' and Timestamp>=@sDate and Timestamp<=@eDate group by GenderID");
-                            command.Parameters.AddWithValue("@pId", bblabel.Text.ToString());
+                          " BillboardID=@BBID and AdvID=@ADVID  and Timestamp>=@sDate and Timestamp<=@eDate group by GenderID");
+                            command.Parameters.AddWithValue("@BBID", BBList[x]);
+                            command.Parameters.AddWithValue("@ADVID", AdvList[i]);
                             command.Parameters.AddWithValue("@sDate", sdate);
                             command.Parameters.AddWithValue("@eDate", edate);
                             command.Connection = con;
@@ -928,7 +991,7 @@ namespace targeted_marketing_display
 
                             while (dr.Read())
                             {
-                                string name = r.Cells[2].Text;
+                                string name = "fuck";
                                 int no = Convert.ToInt32(dr["NoOfPax"]);
                                 string gender = dr["Gender"].ToString();
                                 chartBbGender.Rows.Add(name, no, gender);
@@ -951,13 +1014,20 @@ namespace targeted_marketing_display
                                 chartFb.DataSource = chartBbGender;
                                 chartFb.DataBind();
                             }
-                            con.Close();
                         }
-                        else if (rbEmotion.Checked == true)
+                    }
+                }
+                else if (rbEmotion.Checked == true)
+                {
+                    for (int i = 0; i < AdvList.Count; i++)
+                    {
+
+                        for (int x = 0; x < BBList.Count; x++)
                         {
                             con.Open();
-                            SqlCommand command = new SqlCommand("Select Count(NoOfPax) as NoOfPax,Emotion From AdvertisementFeedback Where BillboardID Like '%' + @pId + '%' and Timestamp>=@sDate and Timestamp<=@eDate group by Emotion");
-                            command.Parameters.AddWithValue("@pId", bblabel.Text.ToString());
+                            SqlCommand command = new SqlCommand("Select Count(NoOfPax) as NoOfPax,Emotion From AdvertisementFeedback Where BillboardID=@BBId and AdvID=@ADVID and Timestamp>=@sDate and Timestamp<=@eDate group by Emotion");
+                            command.Parameters.AddWithValue("@BBID", BBList[x]);
+                            command.Parameters.AddWithValue("@ADVID", AdvList[i]);
                             command.Parameters.AddWithValue("@sDate", sdate);
                             command.Parameters.AddWithValue("@eDate", edate);
                             command.Connection = con;
@@ -965,7 +1035,7 @@ namespace targeted_marketing_display
 
                             while (dr.Read())
                             {
-                                string name = r.Cells[2].Text;
+                                string name = "fuck";
                                 int no = Convert.ToInt32(dr["NoOfPax"]);
                                 int emotionRange = Convert.ToInt32(dr["Emotion"]);
 
@@ -1089,13 +1159,13 @@ namespace targeted_marketing_display
                                     chartFb.DataBind();
                                 }
                             }
-                            con.Close();
                         }
                     }
                 }
 
+
             }
-       }
+        }
         //Generate Chart Based On Company Dropdownlist
         protected void modalCom()
         {
