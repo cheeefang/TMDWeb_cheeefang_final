@@ -154,7 +154,8 @@ namespace targeted_marketing_display
         {
             Database db = new Database();
             SqlCommand command = new SqlCommand("Select BillboardID,BillboardCode,((AddressLn1)+ ' '+(AddressLn2)+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address" +
-                " From BillboardLocation Where  status=1");
+                " From BillboardLocation inner join AdvertisementLocation on BillboardLocation.BillboardID=AdvertisementFeedback.BillboardID" +
+                " Where  BillboardLocation.status=1 and AdvertisementFeedback.AdvID= ");
            // command.Parameters.AddWithValue("@pBB", txtBb.Text);
             DataTable bb = db.getDataTable(command);
             gvBb.DataSource = bb;
