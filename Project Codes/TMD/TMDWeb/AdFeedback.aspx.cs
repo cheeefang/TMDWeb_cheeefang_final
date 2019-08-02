@@ -235,7 +235,7 @@ namespace targeted_marketing_display
                 CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
                 if (chkrw.Checked == true)
                 {
-                    chkrw.Checked = false;
+                    chkrw.Checked = true;
                 }
             }
             string modalId = "Bb";
@@ -717,7 +717,7 @@ namespace targeted_marketing_display
                                     chartFb.DataBind();
                                 }
                             }
-                            con.Close();
+                     
                         }
                     }
                 }
