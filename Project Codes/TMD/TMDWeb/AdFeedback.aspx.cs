@@ -822,7 +822,7 @@ namespace targeted_marketing_display
                             SqlDataReader dr = cmdTotal.ExecuteReader();
                             while (dr.Read())
                             {
-                                string name = "fuck";
+                                string name = "";
                                 int no = Convert.ToInt32(dr["NoOfPaxs"]);
                                 chartBb.Rows.Add(name, no);
 
@@ -862,12 +862,12 @@ namespace targeted_marketing_display
                             command.Parameters.AddWithValue("@ADVID", AdvList[i]);
                             command.Parameters.AddWithValue("@sDate", sdate);
                             command.Parameters.AddWithValue("@eDate", edate);
-                            command.Connection = con;
+                     
                             SqlDataReader dr = command.ExecuteReader();
 
                             while (dr.Read())
                             {
-                                string name = "fuck";
+                                string name = "";
                                 int no = Convert.ToInt32(dr["NoOfPax"]);
                                 int ageGroup = Convert.ToInt32(dr["AgeGroup"]);
 
@@ -981,17 +981,17 @@ namespace targeted_marketing_display
                         {
 
                             SqlCommand command = new SqlCommand("Select Count(NoOfPax) as NoOfPax,GenderID as Gender From AdvertisementFeedback Where" +
-                          " BillboardID=@BBID and AdvID=@ADVID  and Timestamp>=@sDate and Timestamp<=@eDate group by GenderID");
+                          " BillboardID=@BBID and AdvID=@ADVID  and Timestamp>=@sDate and Timestamp<=@eDate group by GenderID",conn);
                             command.Parameters.AddWithValue("@BBID", BBList[x]);
                             command.Parameters.AddWithValue("@ADVID", AdvList[i]);
                             command.Parameters.AddWithValue("@sDate", sdate);
                             command.Parameters.AddWithValue("@eDate", edate);
-                            command.Connection = con;
+                            
                             SqlDataReader dr = command.ExecuteReader();
 
                             while (dr.Read())
                             {
-                                string name = "fuck";
+                                string name = "";
                                 int no = Convert.ToInt32(dr["NoOfPax"]);
                                 string gender = dr["Gender"].ToString();
                                 chartBbGender.Rows.Add(name, no, gender);
@@ -1024,18 +1024,18 @@ namespace targeted_marketing_display
 
                         for (int x = 0; x < BBList.Count; x++)
                         {
-                            con.Open();
-                            SqlCommand command = new SqlCommand("Select Count(NoOfPax) as NoOfPax,Emotion From AdvertisementFeedback Where BillboardID=@BBId and AdvID=@ADVID and Timestamp>=@sDate and Timestamp<=@eDate group by Emotion");
+                      
+                            SqlCommand command = new SqlCommand("Select Count(NoOfPax) as NoOfPax,Emotion From AdvertisementFeedback Where BillboardID=@BBId and AdvID=@ADVID and Timestamp>=@sDate and Timestamp<=@eDate group by Emotion",conn);
                             command.Parameters.AddWithValue("@BBID", BBList[x]);
                             command.Parameters.AddWithValue("@ADVID", AdvList[i]);
                             command.Parameters.AddWithValue("@sDate", sdate);
                             command.Parameters.AddWithValue("@eDate", edate);
-                            command.Connection = con;
+
                             SqlDataReader dr = command.ExecuteReader();
 
                             while (dr.Read())
                             {
-                                string name = "fuck";
+                                string name = "";
                                 int no = Convert.ToInt32(dr["NoOfPax"]);
                                 int emotionRange = Convert.ToInt32(dr["Emotion"]);
 

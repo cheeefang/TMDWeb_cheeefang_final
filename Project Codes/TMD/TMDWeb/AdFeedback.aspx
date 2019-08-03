@@ -137,12 +137,18 @@
                 </div>
             </div>
             <div class="row">
+                <asp:UpdatePanel ID="updatePanelCompany" runat="server">
+                    <ContentTemplate>
+
+                  
                 <div class ="col-lg-6">
                     <div class="form-group">
                         <asp:DropDownList ID="ddlCom" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlCom_SelectedIndexChanged" AutoPostBack="True" DataTextField="Name" DataValueField="Name"></asp:DropDownList>
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [Name] FROM [Company] where status=1"></asp:SqlDataSource>
                     </div>
                 </div>
+                          </ContentTemplate>
+                </asp:UpdatePanel>
                 <div class="col-lg-6">
                     <div class="form-group">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AdvModal" style="width:30.7%"> <b>Select Advertisements: </b></button>
