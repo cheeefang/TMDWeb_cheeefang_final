@@ -426,7 +426,7 @@ namespace targeted_marketing_display
                                 chartFb.DataSource = chartAdv;
                                 chartFb.DataBind();
                             }
-                            con.Close();
+                         
                         }
 
                         else if (rbAge.Checked == true)
@@ -541,7 +541,7 @@ namespace targeted_marketing_display
                                     chartFb.DataBind();
                                 }
                             }
-                            con.Close();
+                           
                         }
                         else if (rbGender.Checked == true)
                         {
@@ -578,7 +578,7 @@ namespace targeted_marketing_display
                                 chartFb.DataSource = chartAdvGender;
                                 chartFb.DataBind();
                             }
-                            con.Close();
+                           
                         }
                         else if (rbEmotion.Checked == true)
                         {
@@ -766,7 +766,7 @@ namespace targeted_marketing_display
 
                         //that is where you are wrong
                         GridViewRow r = this.gvAdv.Rows[i];
-                        int id = Convert.ToInt32(r.Cells[1].Text);
+                        //int id = Convert.ToInt32(r.Cells[1].Text);
                         Label advLabel = (Label)gvAdv.Rows[i].FindControl("lb_AdvertID");
                         AdvList.Add(Convert.ToInt32(advLabel.Text));
                     }
@@ -1240,7 +1240,7 @@ namespace targeted_marketing_display
                         chartFb.DataSource = chartCom;
                         chartFb.DataBind();
                     }
-                    con.Close();
+              
 
                  
                 }
@@ -1332,7 +1332,7 @@ namespace targeted_marketing_display
                             chartFb.DataSource = chartComAge;
                             chartFb.DataBind();                       
                     }
-                    con.Close();
+               
 
                     
                 }
@@ -1395,7 +1395,7 @@ namespace targeted_marketing_display
                         chartFb.DataSource = chartComGender;
                         chartFb.DataBind();
                     }
-                    con.Close();
+                    
                 }
                 else if (rbEmotion.Checked == true)
                 {
@@ -1484,7 +1484,7 @@ namespace targeted_marketing_display
                         chartFb.DataSource = chartComEmotion;
                         chartFb.DataBind();
                     }
-                    con.Close();
+                  
 
                    
                 }
