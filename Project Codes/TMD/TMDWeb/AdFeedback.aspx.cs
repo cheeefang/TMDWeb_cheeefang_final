@@ -763,6 +763,10 @@ namespace targeted_marketing_display
                 List<int> AdvList = new List<int>();
                 List<int> BBList = new List<int>();
 
+                //Initialize 2 Strings to store Billboard Code and Advertisement Name
+                string AdvertName="";
+                string BillboardCode="";
+
                 //loop to insert advid to advlist
                 for (int i = 0; i < gvAdv.Rows.Count; i++)
                 {
@@ -774,6 +778,7 @@ namespace targeted_marketing_display
 
                         //that is where you are wrong
                         GridViewRow r = this.gvAdv.Rows[i];
+                        AdvertName = r.Cells[2].Text;
                         //int id = Convert.ToInt32(r.Cells[1].Text);
                         Label advLabel = (Label)gvAdv.Rows[i].FindControl("lb_AdvertID");
                         AdvList.Add(Convert.ToInt32(advLabel.Text));
@@ -789,6 +794,7 @@ namespace targeted_marketing_display
                     if (rdBtn.Checked == true)
                     {
                         GridViewRow r = this.gvBb.Rows[i];
+                        BillboardCode = r.Cells[1].Text;
                         Label bbLabel = (Label)gvBb.Rows[i].FindControl("lb_BillboardID");
                         BBList.Add(Convert.ToInt32(bbLabel.Text));
                     }
@@ -831,7 +837,8 @@ namespace targeted_marketing_display
                             SqlDataReader dr = cmdTotal.ExecuteReader();
                             while (dr.Read())
                             {
-                               
+                                //string settedadname = AdvertName;
+                                //string settedbillboardcode = BillboardCode;
                                 string name = "";
                                 int no = Convert.ToInt32(dr["NoOfPaxs"]);
                                 chartBb.Rows.Add(name, no);
@@ -840,7 +847,7 @@ namespace targeted_marketing_display
                                 chartFb.Series["Series1"].XValueMember = "Bb";
                                 chartFb.Series["Series1"].YValueMembers = "No";
                                 chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement";
+                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = BillboardCode+"("+AdvertName+")";
                                 chartFb.ChartAreas["ChartArea1"].AxisY.Title = "Total No. Of People";
                                 chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                 chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -891,7 +898,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for Billboard " + name;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -915,7 +922,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for Billboard " + name;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -939,7 +946,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for Billboard " + name;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -963,7 +970,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for Billboard " + name;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -1010,7 +1017,7 @@ namespace targeted_marketing_display
                                 chartFb.Series["Series1"].XValueMember = "Gender";
                                 chartFb.Series["Series1"].YValueMembers = "No";
                                 chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Billboard/Gender";
+                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = BillboardCode + "(" + AdvertName + ")";
                                 chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                 chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                 chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -1059,7 +1066,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion Data for " + name;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -1083,7 +1090,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion Data for " + name;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -1107,7 +1114,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion Data for " + name;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -1130,7 +1137,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion Data for " + name;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -1154,7 +1161,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion Data for " + name;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
