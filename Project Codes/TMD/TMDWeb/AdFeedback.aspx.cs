@@ -149,16 +149,16 @@ namespace targeted_marketing_display
             SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
             conn.Open();
             Database db = new Database();
-
+            DataTable dtBillboards = new DataTable();
             for (int i = 0; i < gvAdv.Rows.Count; i++)
             {
                 SqlCommand command = new SqlCommand("Select Distinct AdvertisementFeedback.BillboardID,BillboardCode,((AddressLn1)+ ' '+(AddressLn2)+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address" +
                " From BillboardLocation inner join AdvertisementFeedback on BillboardLocation.BillboardID=AdvertisementFeedback.BillboardID" +
                " Where  BillboardLocation.status=1 and AdvertisementFeedback.AdvID=@pAdvID", conn);
                 GridViewRow row = gvAdv.Rows[i];
-                CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
-                //RadioButton rdBtn = (RadioButton)row.FindControl("RowSelector");
-                if (chkrw.Checked == true)
+                //CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
+                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorADV");
+                if (rdBtn.Checked == true)
                 {
 
 
@@ -168,13 +168,14 @@ namespace targeted_marketing_display
                     param.Value = advLabel.Text.ToString();
                     command.Parameters.Add(param);
                     SqlDataAdapter sda = new SqlDataAdapter();
-                    DataTable dt = new DataTable();
+                  
                     sda.SelectCommand = command;
-                    sda.Fill(dt);
-                    gvBb.DataSource = dt;
-                    gvBb.DataBind();
+                    sda.Fill(dtBillboards);
+                   
                 }
             }
+            gvBb.DataSource = dtBillboards;
+            gvBb.DataBind();
 
 
 
@@ -215,11 +216,12 @@ namespace targeted_marketing_display
             ddlCom.SelectedIndex = 0;
             foreach (GridViewRow row in gvBb.Rows)
             {
-                CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
+                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorBB");
+               // CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
 
-                if (chkrw.Checked == true)
+                if (rdBtn.Checked == true)
                 {
-                    chkrw.Checked = false;
+                    rdBtn.Checked = false;
                 }
             }
             string modalId = "Adv";
@@ -232,10 +234,11 @@ namespace targeted_marketing_display
             ddlCom.SelectedIndex = 0;
             foreach (GridViewRow row in gvAdv.Rows)
             {
-                CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
-                if (chkrw.Checked == true)
+                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorADV");
+                //CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
+                if (rdBtn.Checked == true)
                 {
-                    chkrw.Checked = true;
+                    rdBtn.Checked = true;
                 }
             }
             string modalId = "Bb";
@@ -247,18 +250,20 @@ namespace targeted_marketing_display
         {
             foreach (GridViewRow row in gvAdv.Rows)
             {
-                CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
-                if (chkrw.Checked == true)
+                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorADV");
+                //CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
+                if (rdBtn.Checked == true)
                 {
-                    chkrw.Checked = false;
+                    rdBtn.Checked = false;
                 }
             }
             foreach (GridViewRow row in gvBb.Rows)
             {
-                CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
-                if (chkrw.Checked == true)
+                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorBB");
+               // CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
+                if (rdBtn.Checked == true)
                 {
-                    chkrw.Checked = false;
+                    rdBtn.Checked = false;
                 }
             }
             string code = ddlCom.SelectedItem.Text.Substring(1, 1);
@@ -383,9 +388,10 @@ namespace targeted_marketing_display
                 for (int i = 0; i < gvAdv.Rows.Count; i++)
                 {
                     GridViewRow row = gvAdv.Rows[i];
-                    CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
-                    //RadioButton rdBtn = (RadioButton)row.FindControl("RowSelector");
-                    if (chkrw.Checked == true)
+
+                    //CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
+                    RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorADV");
+                    if (rdBtn.Checked == true)
                     {
 
                         //that is where you are wrong
@@ -716,6 +722,7 @@ namespace targeted_marketing_display
                                     chartFb.DataSource = chartAdvEmotion;
                                     chartFb.DataBind();
                                 }
+                          
                             }
                      
                         }
@@ -760,8 +767,9 @@ namespace targeted_marketing_display
                 for (int i = 0; i < gvAdv.Rows.Count; i++)
                 {
                     GridViewRow row = gvAdv.Rows[i];
-                    CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
-                    if (chkrw.Checked == true)
+                    RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorADV");
+                    //CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
+                    if (rdBtn.Checked == true)
                     {
 
                         //that is where you are wrong
@@ -776,8 +784,9 @@ namespace targeted_marketing_display
                 for (int i = 0; i < gvBb.Rows.Count; i++)
                 {
                     GridViewRow row = gvBb.Rows[i];
-                    CheckBox chkrw = (CheckBox)row.FindControl("CheckboxBB");
-                    if (chkrw.Checked == true)
+                    RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorBB");
+                   // CheckBox chkrw = (CheckBox)row.FindControl("CheckboxBB");
+                    if (rdBtn.Checked == true)
                     {
                         GridViewRow r = this.gvBb.Rows[i];
                         Label bbLabel = (Label)gvBb.Rows[i].FindControl("lb_BillboardID");
@@ -793,7 +802,7 @@ namespace targeted_marketing_display
 
                 // instantiate and open connection
                 conn = new
-                    SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                    SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;MultipleActiveResultSets=true;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
                 conn.Open();
 
                 int totalPeople;
@@ -822,6 +831,7 @@ namespace targeted_marketing_display
                             SqlDataReader dr = cmdTotal.ExecuteReader();
                             while (dr.Read())
                             {
+                               
                                 string name = "";
                                 int no = Convert.ToInt32(dr["NoOfPaxs"]);
                                 chartBb.Rows.Add(name, no);

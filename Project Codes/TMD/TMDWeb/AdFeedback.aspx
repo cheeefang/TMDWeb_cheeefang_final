@@ -62,19 +62,32 @@
         }
         
     </script>
-   <script type="text/javascript">
-    function checkRadioBtn(id) {
-        var gv = document.getElementById('<%=gvAdv.ClientID %>');
+  <script type="text/javascript">
+      function checkRadioBtnADV(id) {
+          var gv = document.getElementById('<%=gvAdv.ClientID %>');
 
-        for (var i = 1; i < gv.rows.length; i++) {
-            var radioBtn = gv.rows[i].cells[0].getElementsByTagName("input");
+          for (var i = 1; i < gv.rows.length; i++) {
+              var radioBtn = gv.rows[i].cells[0].getElementsByTagName("input");
 
-            // Check if the id not same
-            if (radioBtn[0].id != id.id) {
-                radioBtn[0].checked = false;
-            }
-        }
-    }
+              // Check if the id not same
+              if (radioBtn[0].id != id.id) {
+                  radioBtn[0].checked = false;
+              }
+          }
+      }
+
+      function checkRadioBtnBB(id) {
+          var gv = document.getElementById('<%=gvBb.ClientID %>');
+
+          for (var i = 1; i < gv.rows.length; i++) {
+              var radioBtn = gv.rows[i].cells[0].getElementsByTagName("input");
+
+              // Check if the id not same
+              if (radioBtn[0].id != id.id) {
+                  radioBtn[0].checked = false;
+              }
+          }
+      }
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -263,17 +276,17 @@
 
                             <ContentTemplate>
                         <asp:GridView ID="gvAdv" runat="server" Visible="true" Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover" OnRowDataBound="gvAdv_RowDataBound"
-                            AllowPaging="true" PageSize="10" ForeColor="Black" GridLines="Vertical" Height="100%" Width="100%"
+                            AllowPaging="true" PageSize="3" ForeColor="Black" GridLines="Vertical" Height="100%" Width="100%"
                                 BackColor="White" BorderColor="#999999" BorderStyle="Solid"
                                 BorderWidth="1px" CellPadding="3" OnPageIndexChanging="gvAdv_PageIndexChanging" OnSorting="gvAdv_Sorting" >
                               <AlternatingRowStyle BackColor="#CCCCCC" />
                             <Columns>
-                              <asp:TemplateField>
-                                    <ItemTemplate>
-                                        <asp:CheckBox ID="CheckBox1" runat="server" />
-                                    </ItemTemplate>
-                                    <ItemStyle Width="3%" />
-                                </asp:TemplateField>
+                              <asp:TemplateField HeaderText="Select">
+                <ItemTemplate><asp:RadioButton ID="RowSelectorADV" runat="server" onclick="checkRadioBtnADV(this);" />
+
+                </ItemTemplate>
+                                 <ItemStyle Width="3%" HorizontalAlign="Center" />
+            </asp:TemplateField>
                                 <asp:TemplateField visible="false">
                                         <ItemTemplate>
                                             <asp:Label runat="server" visible="false"  ID="lb_AdvertID" Text='<%# Bind("AdvID") %>'></asp:Label>
@@ -365,12 +378,12 @@
                             AutoGenerateColumns="False" Height="100%" Width="100%" OnPageIndexChanging="gvBb_PageIndexChanging" OnSorting="gvBb_Sorting">
                              <AlternatingRowStyle BackColor="#CCCCCC" />
                             <Columns>
-                                <asp:TemplateField>
-                                    <ItemTemplate>
-                                        <asp:CheckBox ID="CheckBoxBB" runat="server" />
-                                    </ItemTemplate>
-                                    <ItemStyle Width="3%" />
-                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Select">
+                <ItemTemplate><asp:RadioButton ID="RowSelectorBB" runat="server" onclick="checkRadioBtnBB(this);" />
+
+                </ItemTemplate>
+                                    <ItemStyle Width="3%" HorizontalAlign="Center" />
+            </asp:TemplateField>
                                   <asp:TemplateField visible="false">
                                         <ItemTemplate>
                                             <asp:Label runat="server" visible="false"  ID="lb_BillboardID" Text='<%# Bind("BillboardID") %>'></asp:Label>
