@@ -336,15 +336,12 @@
                          </asp:updatepanel>
                     </div>
                     </div>
-                    <asp:updatepanel id="updatepanel1" runat="server">
-
-                            <ContentTemplate>
+                   
                     <div class="modal-footer">
                     <asp:Button ID="addAdv" runat="server" CssClass="btn btn-primary" Text="Add" OnClick="addAdv_Click"/>
                         
                     </div>
-                                </ContentTemplate>
-                        </asp:UpdatePanel>
+                     
                     </div>
                 </div>
             </div>

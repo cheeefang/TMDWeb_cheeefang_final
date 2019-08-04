@@ -420,7 +420,7 @@ namespace targeted_marketing_display
                                 chartFb.Series["Series1"].XValueMember = "Adv";
                                 chartFb.Series["Series1"].YValueMembers = "No";
                                 chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Advertisement:"+name;
+                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "";
                                 chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                 chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                 chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -442,7 +442,7 @@ namespace targeted_marketing_display
                             con.Open();
                             SqlCommand command = new SqlCommand("Select count(NoOfPax) as NoOfPax,AgeID,Name From AdvertisementFeedback inner join Advertisement on" +
                                 " AdvertisementFeedback.AdvID=Advertisement.AdvID" +
-                                " Where AdvertisementFeedback.AdvID Like '%' + @pId + '%'  group by AdvertisementFeedback.AgeID");
+                                " Where AdvertisementFeedback.AdvID Like '%' + @pId + '%'  group by AdvertisementFeedback.AgeID,Name");
                             command.Parameters.AddWithValue("@pId", advLabel.Text.ToString());
                             command.Parameters.AddWithValue("@sDate", sdate);
                             command.Parameters.AddWithValue("@eDate", edate);
@@ -1195,6 +1195,7 @@ namespace targeted_marketing_display
         {
             SqlConnection con = new SqlConnection(DBConnect);
             int companyId = Convert.ToInt32(ddlCom.SelectedValue);
+            String companyName = ddlCom.SelectedItem.ToString();
             using (con)
             {
                 DataTable chartCom = new DataTable();
@@ -1239,7 +1240,7 @@ namespace targeted_marketing_display
                     while (drGvCmd.Read())
                     {
                         int totalNo = Convert.ToInt32(drGvCmd["totalcount"]);
-                        string companyName = (drGvCmd["CompanyName"].ToString());
+                    
                         // int location = Convert.ToInt32(row.Cells[1].Text);
                         //string name = row.Cells[2].Text;
                         //string com = name + "\nBillboard:\n" + location.ToString();
@@ -1301,7 +1302,7 @@ namespace targeted_marketing_display
                         //gvComp.Rows.Add(gvId, locationGv, name, ageGv, genderGv, emotionGv);
                         //gvCom.DataSource = gvComp;
                         //gvCom.DataBind();
-                        string companyName = (drGvCmd["CompanyName"].ToString());
+                   
                         if (Convert.ToInt32(drGvCmd["AgeGroup"]) == 1)
                             {
                                 string age = "Child\n(0-15)";
@@ -1342,7 +1343,7 @@ namespace targeted_marketing_display
                             chartFb.Series["Series1"].XValueMember = "Com";
                             chartFb.Series["Series1"].YValueMembers = "No";
                             chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                            chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age Groups for "+companyName;
+                            chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age Groups for "+ companyName;
                             chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                             chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                             chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -1383,7 +1384,7 @@ namespace targeted_marketing_display
                     
                     while (drGvCmd.Read())
                     {
-                        string companyName = (drGvCmd["CompanyName"].ToString());
+              
                         //int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
                         //int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
                         //string name = drGvCmd["Name"].ToString();
@@ -1406,7 +1407,7 @@ namespace targeted_marketing_display
                         chartFb.Series["Series1"].XValueMember = "Com";
                         chartFb.Series["Series1"].YValueMembers = "No";
                         chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Gender Data for "+ companyName ;
+                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Gender Data for "+ companyName;
                         chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                         chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                         chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -1437,7 +1438,7 @@ namespace targeted_marketing_display
 
                     while (drGvCmd.Read())
                     {
-                        string companyName = (drGvCmd["CompanyName"].ToString());
+                    
                         //int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
                         //int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
                         //string name = drGvCmd["Name"].ToString();
