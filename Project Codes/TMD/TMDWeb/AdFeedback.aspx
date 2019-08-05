@@ -91,7 +91,7 @@
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form runat="server">
+    <form id="form1" runat="server">
           <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
         <div id="adminDiv" runat="server">
      
@@ -107,20 +107,7 @@
                 <br />
 
            
-          <%--  <div class="row">
-            <div class="col-lg-6">
-                <div class="form-group">
-                     <asp:TextBox ID="txtFrom" runat="server" CssClass="form-control pickdate"></asp:TextBox>
-                     <asp:LinkButton ID="lBtnFrom" runat="server" CssClass="btn btn-default calendar pickdate"><span aria-hidden="false" class="glyphicon glyphicon-calendar"></span></asp:LinkButton>
-                </div>   
-            </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <asp:TextBox ID="txtTo" runat="server" CssClass="form-control pickdate"></asp:TextBox>
-                    <asp:LinkButton ID="lBtnTo" runat="server" CssClass="btn btn-default calendar pickdate"><span aria-hidden="false" class="glyphicon glyphicon-calendar"></span></asp:LinkButton>
-                </div>
-            </div>
-            </div>--%>
+        
              <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
@@ -207,19 +194,27 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <asp:Panel runat="server" CssClass="panel">
-                    <asp:Chart ID="chartFb" class="chartFb" runat="server" Visible="true">
+                     
+                    <asp:Chart ID="chartFb" class="chartFb" runat="server" Visible="true" >
                         <Series>
                             <asp:Series Name="Series1"></asp:Series>
                         </Series>
                                 <Chartareas>
-                                    <asp:ChartArea>
+                                    <asp:ChartArea Name="ChartArea1">
                                     </asp:ChartArea>
                                 </Chartareas>
                             </asp:Chart>
-                        </asp:Panel>
+            
                     </div>
                 </div>
+                <br />
+            
+
+       <asp:Button ID="btnExport" runat="server" Text="Export To PDF" OnClick="btnExport_Click"  />
+
+    
+
+
                 <div class="col-lg-3">
 
                 </div>

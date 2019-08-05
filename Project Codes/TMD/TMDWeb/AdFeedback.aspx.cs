@@ -11,6 +11,20 @@ using System.Web.UI.DataVisualization.Charting;
 using targeted_marketing_display;
 using targeted_marketing_display.App_Code;
 using System.Globalization;
+using System.Xml.Linq;
+using iTextSharp;
+
+using iTextSharp.text;
+
+using iTextSharp.text.pdf;
+
+using iTextSharp.text.html;
+
+using iTextSharp.text.html.simpleparser;
+
+
+using System.IO;
+
 
 namespace targeted_marketing_display
 {
@@ -27,7 +41,7 @@ namespace targeted_marketing_display
                 string modalId = "No Selection";
                 Session["modalId"] = modalId;
                 PopulateDdl();
-                ddlCom.Items.Insert(0, new ListItem("<--Select A Company-->"));
+                ddlCom.Items.Insert(0, new System.Web.UI.WebControls.ListItem("<--Select A Company-->"));
 
             }
             CompareValidator2.ValueToCompare = DateTime.Now.ToShortDateString();
@@ -52,6 +66,7 @@ namespace targeted_marketing_display
             }
         }
 
+       
         //populate Company dropdown list
         public void PopulateDdl()
         {
@@ -86,6 +101,9 @@ namespace targeted_marketing_display
             }
         
         }
+
+       
+
 
         //Advertisement Modal Search Button
         public void btnAdvSearch_OnClick(Object sender, EventArgs e)
@@ -334,7 +352,26 @@ namespace targeted_marketing_display
             lblFbc.Visible = false;
             chartFb.Visible = false;
         }
+        protected void btnExport_Click(object sender, EventArgs e)
+        {
+            Document Doc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+            PdfWriter.GetInstance(Doc, Response.OutputStream);
+            Doc.Open();
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                chartFb.SaveImage(memoryStream, ChartImageFormat.Png);
+                iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(memoryStream.GetBuffer());
+                img.ScalePercent(75f);
+                Doc.Add(img);
+                Doc.Close();
 
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("content-disposition", "attachment;filename=Chart.pdf");
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.Write(Doc);
+                Response.End();
+            }
+        }
         //Generate Chart
         protected void btnGen_Click(object sender, EventArgs e)
         {
