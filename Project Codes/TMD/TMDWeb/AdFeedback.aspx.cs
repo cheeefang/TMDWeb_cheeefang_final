@@ -66,7 +66,26 @@ namespace targeted_marketing_display
             }
         }
 
-       
+        protected void btnExport_Click(object sender, EventArgs e)
+        {
+            Document Doc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+            PdfWriter.GetInstance(Doc, Response.OutputStream);
+            Doc.Open();
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                chartFb.SaveImage(memoryStream, ChartImageFormat.Png);
+                iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(memoryStream.GetBuffer());
+                img.ScalePercent(75f);
+                Doc.Add(img);
+                Doc.Close();
+
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("content-disposition", "attachment;filename=Chart.pdf");
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.Write(Doc);
+                Response.End();
+            }
+        }
         //populate Company dropdown list
         public void PopulateDdl()
         {
@@ -352,26 +371,7 @@ namespace targeted_marketing_display
             lblFbc.Visible = false;
             chartFb.Visible = false;
         }
-        protected void btnExport_Click(object sender, EventArgs e)
-        {
-            Document Doc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
-            PdfWriter.GetInstance(Doc, Response.OutputStream);
-            Doc.Open();
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                chartFb.SaveImage(memoryStream, ChartImageFormat.Png);
-                iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(memoryStream.GetBuffer());
-                img.ScalePercent(75f);
-                Doc.Add(img);
-                Doc.Close();
-
-                Response.ContentType = "application/pdf";
-                Response.AddHeader("content-disposition", "attachment;filename=Chart.pdf");
-                Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                Response.Write(Doc);
-                Response.End();
-            }
-        }
+       
         //Generate Chart
         protected void btnGen_Click(object sender, EventArgs e)
         {

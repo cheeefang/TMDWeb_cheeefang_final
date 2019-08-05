@@ -1772,6 +1772,7 @@
     <Content Include="css\newgridview.css" />
     <Content Include="css\TMD.css" />
     <Content Include="DiuLeiLoMo.aspx" />
+    <Content Include="ExportChartToPDF.aspx" />
     <Content Include="f.aspx" />
     <Content Include="FAQ.aspx" />
     <Content Include="FeedbackAd.aspx" />
@@ -2154,6 +2155,10 @@
     </Compile>
     <Compile Include="DiuLeiLoMo.aspx.designer.cs">
       <DependentUpon>DiuLeiLoMo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExportChartToPDF.aspx.cs">
+      <DependentUpon>ExportChartToPDF.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="f.aspx.cs">
       <DependentUpon>f.aspx</DependentUpon>

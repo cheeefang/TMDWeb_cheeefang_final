@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="AdFeedback.aspx.cs" Inherits="targeted_marketing_display.AdFeedback" %>
-<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
+<%@ Register assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.DataVisualization.Charting" tagprefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .panel{
@@ -90,10 +90,10 @@
       }
 </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form id="form1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" ClientIDMode="Static">
+    <form runat="server">
           <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
-        <div id="adminDiv" runat="server">
+
      
                 <!--button-->
                 <div class="row">
@@ -195,24 +195,29 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                      
-                    <asp:Chart ID="chartFb" class="chartFb" runat="server" Visible="true" >
-                        <Series>
-                            <asp:Series Name="Series1"></asp:Series>
-                        </Series>
-                                <Chartareas>
+                    <asp:Chart ID="chartFb" class="chartFb" runat="server" ClientIDMode="Static">
+                        <series>
+                          
+                            <asp:Series Name="Series1" Legend="Legend1">
+                <Points>
+                    <asp:DataPoint AxisLabel="Article" YValues="90" />
+                    <asp:DataPoint AxisLabel="Blogs" YValues="120" />
+                    <asp:DataPoint AxisLabel="Questions" YValues="300" />
+                    <asp:DataPoint AxisLabel="Videos" YValues="240" />
+                    <asp:DataPoint AxisLabel="Training" YValues="100" />
+                </Points>
+                </asp:Series>
+                        </series>
+                                <chartareas>
                                     <asp:ChartArea Name="ChartArea1">
                                     </asp:ChartArea>
-                                </Chartareas>
+                                </chartareas>
                             </asp:Chart>
             
                     </div>
                 </div>
                 <br />
             
-
-       <asp:Button ID="btnExport" runat="server" Text="Export To PDF" OnClick="btnExport_Click"  />
-
-    
 
 
                 <div class="col-lg-3">
