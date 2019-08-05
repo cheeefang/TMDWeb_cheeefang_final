@@ -17,11 +17,15 @@ namespace TMDWeb
                 User userObj = new User();
                 UserManagement uDao = new UserManagement();
 
-                //noted,CheEe(001):add this to pass the create user page!!!
-                if (Session["userType"] == null)
+                ////noted,CheEe(001):add this to pass the create user page!!!
+                //if (Session["userType"] == null)
+                //{
+                //    Session["userType"] = "Admin";
+                //    Session["userID"] = 18;// "zshiyun98@gmail.com";
+                //}
+                if (Session["userID"].ToString() == "")
                 {
-                    Session["userType"] = "Admin";
-                    Session["userID"] = 18;// "zshiyun98@gmail.com";
+                    Response.Redirect("login.aspx");
                 }
 
                 if (Session["userType"].ToString() == "Admin")
