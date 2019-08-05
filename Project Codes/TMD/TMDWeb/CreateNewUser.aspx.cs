@@ -173,6 +173,7 @@ namespace targeted_marketing_display
                             tbConNo.Text = String.Empty;
 
                             alertSuccess.Visible = true;
+                            alertWarning.Visible = false;
                             msgSuccess.Text = Name + " Has Been Created Successfully!";
                         }
                         //VIC: do not need to check if contact already exist
@@ -181,6 +182,7 @@ namespace targeted_marketing_display
                             tbEmail.Text = String.Empty;
 
                             alertWarning.Visible = true;
+                            alertSuccess.Visible = true;
                             msgWarning.Text = "Email Already In-Use. Please Try Again!";
                         }
                     

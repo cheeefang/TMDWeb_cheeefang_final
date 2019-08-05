@@ -133,7 +133,9 @@ function HideDiv() {
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-        
+        <asp:Label id="labeltesting" runat="server" >
+           
+        </asp:Label>
                 <br />
               
              <div class="row">
@@ -144,7 +146,7 @@ function HideDiv() {
                                         <asp:TextBox ID="txtSearch" class="form-control" runat="server" placeholder="Search..."></asp:TextBox>
                                         <%--<input type="submit" id="btSubmit" runat="server" />--%>
                                         <span class="input-group-btn" >
-                                            <asp:LinkButton runat="server" class="btn btn-default" ID="btnRun" style="height:34px;" Text="<i class='fa fa-search'></i>"/>
+                                            <asp:LinkButton runat="server" class="btn btn-default" ID="btnRun" style="height:34px;" Text="<i class='fa fa-search'></i>" OnClick="btnRun_Click"/>
                                        </span>
                                             </p>
                                     </div>
@@ -191,11 +193,13 @@ function HideDiv() {
                                 <ContentTemplate>
 
                                
-                            <asp:GridView ID="GridView1" ClientIdMode="Static" SortedAscendingHeaderStyle-CssClass="ascending" SortedDescendingHeaderStyle-CssClass="descending" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Width="100%" 
+                            <asp:GridView ID="GridView1" ClientIdMode="Static" SortedAscendingHeaderStyle-CssClass="ascending" SortedDescendingHeaderStyle-CssClass="descending" CssClass="table table-striped table-bordered table-hover" 
+                                runat="server" AutoGenerateColumns="False" Width="100%" 
                                 BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px"
-                                CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" HorizontalAlign="Center" DataKeyNames="AdvID" 
+                                CellPadding="3" AllowPaging="True" HorizontalAlign="Center" DataKeyNames="AdvID" 
                                 OnPreRender="GridView1_PreRender" ForeColor="Black" GridLines="Vertical" OnRowDataBound="GridView1_RowDataBound"  cellspacing="5" PageSize="3"
-                                AllowSorting="True" EnableSortingAndPagingCallbacks="true"   CurrentSortField="StartDate" CurrentSortDirection="ASC" >
+                                AllowSorting="True" EnableSortingAndPagingCallbacks="true" CurrentSortField="StartDate" CurrentSortDirection="ASC"  OnSorting="GridView1_Sorting" OnRowCreated="GridView1_RowCreated" 
+                                OnPageIndexChanging="GridView1_PageIndexChanging">
                                 <AlternatingRowStyle HorizontalAlign="Center" BackColor="#CCCCCC" />
                                 <Columns>
                                     <asp:TemplateField visible="false">
@@ -240,9 +244,9 @@ function HideDiv() {
 
                                              
 
-                                    <asp:BoundField DataField="Name" HeaderText="Company" SortExpression="Name"></asp:BoundField>
+                                    <asp:BoundField DataField="CompanyName" HeaderText="Company" SortExpression="CompanyName"></asp:BoundField>
                                     
-                                     <asp:BoundField DataField="Name1" HeaderText="Name" SortExpression="Name1"></asp:BoundField>
+                                     <asp:BoundField DataField="AdvertName" HeaderText="Name" SortExpression="AdvertName"></asp:BoundField>
                                     
                                     <asp:BoundField DataField="ItemType" HeaderText="Type" SortExpression="ItemType"></asp:BoundField>
                                
@@ -354,7 +358,7 @@ function HideDiv() {
           
 
 
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [Advertisement].AdvID,[Company].Name, [Advertisement].Name, [Advertisement].Item, [Advertisement].ItemType,[StartDate], [EndDate]FROM [Advertisement] inner join [Company] on Company.CompanyID=[Advertisement].CompanyID where [Advertisement].status=1 and [Company].status=1" FilterExpression="Name LIKE '%{0}%' OR Item LIKE '%{0}%' OR Name1  LIKE '%{0}%' OR ItemType LIKE '%{0}%' OR convert(StartDate,'System.String') LIKE '%{0}%' OR convert(EndDate,'System.String') LIKE '%{0}%' ">
+<%--        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [Advertisement].AdvID,[Company].Name, [Advertisement].Name, [Advertisement].Item, [Advertisement].ItemType,[StartDate], [EndDate]FROM [Advertisement] inner join [Company] on Company.CompanyID=[Advertisement].CompanyID where [Advertisement].status=1 and [Company].status=1" FilterExpression="Name LIKE '%{0}%' OR Item LIKE '%{0}%' OR Name1  LIKE '%{0}%' OR ItemType LIKE '%{0}%' OR convert(StartDate,'System.String') LIKE '%{0}%' OR convert(EndDate,'System.String') LIKE '%{0}%' ">
             <FilterParameters>
                                             <asp:ControlParameter ControlID="txtSearch" Name="Name" PropertyName="Text" />
                                             <asp:ControlParameter ControlID="txtSearch" Name="Item" PropertyName="Text" />                                            
@@ -364,7 +368,7 @@ function HideDiv() {
                                             <asp:ControlParameter ControlID="txtSearch" Name="EndDate" PropertyName="Text" />
                                         </FilterParameters>        
             
-       </asp:SqlDataSource>
+       </asp:SqlDataSource>--%>
       
 
     </form>

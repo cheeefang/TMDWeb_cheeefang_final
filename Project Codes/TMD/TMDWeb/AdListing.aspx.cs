@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using targeted_marketing_display;
 using targeted_marketing_display.App_Code;
 using System.Configuration;
 namespace targeted_marketing_display
@@ -14,6 +15,8 @@ namespace targeted_marketing_display
 
     public partial class AdListing : System.Web.UI.Page
     {
+        SqlConnection vid = new
+             SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
         private string sortExpression;
         private SortDirection sortDirection;
         SqlConnection con = new SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
@@ -36,26 +39,287 @@ namespace targeted_marketing_display
                     alertSuccessCreate.Visible = true;
                     Session.Remove("AdvertCreate");
                 }
+
+                this.BindGrid();
+
+
             }
             
 
         }
-       
-        
-        //DataGridColumn dgcolumn = new DataGridColumn();
+        public void BindGrid()
+        {
+                SqlConnection conn = null;
+                SqlDataReader reader = null;
 
-        // Label lb_msgId = (Label)gvRow1.FindControl("AdvertItem");.jpeg
-        //for (int i = 0; i < GridView1.Rows.Count; i++)
-        //{
-        //    Label lb_AdvertType = (Label)GridView1.Rows[i].FindControl("AdvertItem");
-        //    if (lb_AdvertType.Text.EndsWith(".png") || lb_AdvertType.Text.EndsWith(".jpg") || lb_AdvertType.Text.EndsWith(".jpeg")||
-        //         lb_AdvertType.Text.EndsWith(".PNG") || lb_AdvertType.Text.EndsWith(".JPG") || lb_AdvertType.Text.EndsWith(".JPEG") 
-        //         || lb_AdvertType.Text.EndsWith(".GIF"))
-        //    {
+                // instantiate and open connection
+                conn = new
+                    SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                conn.Open();
+            if (Session["userType"].ToString()=="Admin")
+            {
+                // 1. declare command object with parameter
+                SqlCommand cmd = new SqlCommand(
+                  " SELECT [Advertisement].AdvID,[Company].Name as CompanyName, [Advertisement].Name as AdvertName, [Advertisement].Item, [Advertisement].ItemType,[StartDate], [EndDate]FROM " +
+                  "[Advertisement] inner join [Company] on Company.CompanyID =[Advertisement].CompanyID where [Advertisement].status = 1 and[Company].status = 1", conn);
+                SqlDataAdapter sda = new SqlDataAdapter();
+                DataTable dt = new DataTable();
 
 
-        //    }
-        //}
+                cmd.Connection = conn;
+                sda.SelectCommand = cmd;
+                sda.Fill(dt);
+
+
+                // get data stream
+
+
+
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+            }
+            else
+            {
+                User uObj = new User();
+                UserManagement uDao = new UserManagement();
+                uObj = uDao.getUserByID(Session["userID"].ToString());
+                // 1. declare command object with parameter
+                SqlCommand cmd = new SqlCommand(
+                  " SELECT [Advertisement].AdvID,[Company].Name as CompanyName, [Advertisement].Name as AdvertName, [Advertisement].Item, [Advertisement].ItemType,[StartDate], [EndDate] FROM " +
+                  "[Advertisement] inner join [Company] on Company.CompanyID =[Advertisement].CompanyID where [Advertisement].status = 1 and [Company].status = 1 and [Company].CompanyID=@comID", conn);
+
+                // 2. define parameters used in command object
+                SqlParameter param = new SqlParameter();
+                param.ParameterName = "@comID";
+                param.Value = uObj.CompanyID.ToString();
+                // 3. add new parameter to command object
+                cmd.Parameters.Add(param);
+
+
+                SqlDataAdapter sda = new SqlDataAdapter();
+                DataTable dt = new DataTable();
+
+
+                cmd.Connection = conn;
+                sda.SelectCommand = cmd;
+                sda.Fill(dt);
+
+
+                // get data stream
+
+
+
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+            }
+               
+
+                if (GridView1.Rows.Count == 0)
+                {
+                    
+                }                          
+        }
+
+        protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            if (GridView1.Attributes["CurrentSortField"] != null && GridView1.Attributes["CurrentSortDirection"] != null)
+            {
+                if (e.Row.RowType == DataControlRowType.Header)
+                {
+                    foreach (TableCell tableCell in e.Row.Cells)
+                    {
+                        if (tableCell.HasControls())
+                        {
+                            LinkButton sortLinkButton = null;
+                            if (tableCell.Controls[0] is LinkButton)
+                            {
+                                sortLinkButton = (LinkButton)tableCell.Controls[0];
+                            }
+
+                            if (sortLinkButton != null && GridView1.Attributes["CurrentSortField"] == sortLinkButton.CommandArgument)
+                            {
+                                Image image = new Image();
+                                if (GridView1.Attributes["CurrentSortDirection"] == "ASC")
+                                {
+                                    image.ImageUrl = "~/webicons/Ascendingicon.png";
+
+                                }
+                                else
+                                {
+                                    image.ImageUrl = "~/webicons/Descendingicon.png";
+
+                                }
+                                tableCell.Controls.Add(new LiteralControl("&nbsp;"));
+                                tableCell.Controls.Add(image);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
+        {
+
+
+            SortDirection sortDirection = SortDirection.Ascending;
+            string sortField = string.Empty;
+
+            SortGridview((GridView)sender, e, out sortDirection, out sortField);
+            string strSortDirection = sortDirection == SortDirection.Ascending ? "ASC" : "DESC";
+
+
+
+
+
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+
+
+
+            // instantiate and open connection
+            conn = new
+                SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+            conn.Open();
+
+
+            //  " SELECT [Advertisement].AdvID,[Company].Name, [Advertisement].Name, [Advertisement].Item, [Advertisement].ItemType,[StartDate], [EndDate]FROM " +
+            //"[Advertisement] inner join[Company] on Company.CompanyID =[Advertisement].CompanyID where[Advertisement].status = 1 and[Company].status = 1"
+            if (Session["UserType"].ToString()=="Admin")
+            {
+                SqlCommand cmd = new SqlCommand(
+               " select [Company].Name as CompanyName ,[Advertisement].Name as AdvertName,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate" +
+               " from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
+                       "where [Advertisement].status=1 order by " + e.SortExpression + "  " + strSortDirection, conn);
+              
+                SqlDataAdapter sda = new SqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd.Connection = conn;
+                sda.SelectCommand = cmd;
+                sda.Fill(dt);
+
+
+
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+            }
+            else
+            {
+                User uObj = new User();
+                UserManagement uDao = new UserManagement();
+                uObj = uDao.getUserByID(Session["userID"].ToString());
+                SqlCommand cmd = new SqlCommand(
+            " select [Company].Name as CompanyName ,[Advertisement].Name as AdvertName,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate" +
+            " from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
+                    "where [Company].CompanyID=@ID and [Advertisement].status=1 order by " + e.SortExpression + "  " + strSortDirection, conn);
+
+                // 2. define parameters used in command object
+                SqlParameter param = new SqlParameter();
+                param.ParameterName = "@ID";
+                param.Value = uObj.CompanyID.ToString();
+
+                // 3. add new parameter to command object
+                cmd.Parameters.Add(param);
+                SqlDataAdapter sda = new SqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd.Connection = conn;
+                sda.SelectCommand = cmd;
+                sda.Fill(dt);
+
+
+
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+            }
+             
+        }
+        //nth to change
+        private void SortGridview(GridView gridView, GridViewSortEventArgs e, out SortDirection sortDirection, out string sortField)
+        {
+            sortField = e.SortExpression;
+            sortDirection = e.SortDirection;
+
+            if (gridView.Attributes["CurrentSortField"] != null && gridView.Attributes["CurrentSortDirection"] != null)
+            {
+                if (sortField == gridView.Attributes["CurrentSortField"])
+                {
+                    if (gridView.Attributes["CurrentSortDirection"] == "ASC")
+                    {
+                        sortDirection = SortDirection.Descending;
+                    }
+                    else
+                    {
+                        sortDirection = SortDirection.Ascending;
+                    }
+                }
+
+                gridView.Attributes["CurrentSortField"] = sortField;
+                gridView.Attributes["CurrentSortDirection"] = (sortDirection == SortDirection.Ascending ? "ASC" : "DESC");
+            }
+        }
+
+        protected void btnRun_Click(object sender, EventArgs e)
+        {
+         //   " select [Company].Name as CompanyName ,[Advertisement].Name as AdvertName,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate" +
+         //" from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
+         //        "where [Advertisement].status=1 order by " + e.SortExpression + "  " + strSortDirection, conn);
+            if (Session["userType"].ToString() == "Admin")
+            {
+                string str = " select [Company].Name as CompanyName,[Advertisement].Name as AdvertName" +
+               ",[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
+                       "where  [Advertisement].status=1 and ([Advertisement].Name like '%' + @search + '%' OR [Company].Name like '%' + @search + '%' OR ItemType like '%'" +
+                       " + @search + '%' OR StartDate like '%' + @search + '%' OR  EndDate like '%' + @search + '%') ";
+                SqlCommand xp = new SqlCommand(str, vid);            
+                xp.Parameters.Add("@search", SqlDbType.NVarChar).Value = txtSearch.Text;
+                //xp.Parameters.Add("@search2", SqlDbType.NVarChar).Value = txtSearch.Text;
+                vid.Open();
+                xp.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = xp;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "Name");
+                GridView1.DataSource = ds;
+                GridView1.DataBind();
+            }
+            else
+            {
+                User uObj = new User();
+                UserManagement uDao = new UserManagement();
+                uObj = uDao.getUserByID(Session["userID"].ToString());
+                string str = " select [Company].Name as CompanyName,[Advertisement].Name as AdvertName" +
+             ",[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
+                     "where [Company].CompanyID=@ID and [Advertisement].status=1 and ([Advertisement].Name like '%' + @search + '%' OR [Company].Name like '%' + @search + '%' OR ItemType like '%'" +
+                     " + @search + '%' OR StartDate like '%' + @search + '%' OR  EndDate like '%' + @search + '%') ";
+                SqlCommand xp = new SqlCommand(str, vid);
+                xp.Parameters.Add("@ID", SqlDbType.NVarChar).Value = uObj.CompanyID.ToString();
+                xp.Parameters.Add("@search", SqlDbType.NVarChar).Value = txtSearch.Text;
+                //xp.Parameters.Add("@search2", SqlDbType.NVarChar).Value = txtSearch.Text;
+                vid.Open();
+                xp.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = xp;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "Name");
+                GridView1.DataSource = ds;
+                GridView1.DataBind();
+            }
+            //string str = " select [Company].Name as CompanyName,[Advertisement].Name as AdvertName" +
+            //    ",[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
+            //            "where [Company].CompanyID=@ID and [Advertisement].status=1 and ([Advertisement].Name like '%' + @search + '%' OR ItemType like '%'" +
+            //            " + @search + '%' OR StartDate like '%' + @search + '%' OR  EndDate like '%' + @search + '%') ";
+            //SqlCommand xp = new SqlCommand(str, vid);
+            //xp.Parameters.Add("@ID", SqlDbType.NVarChar).Value = Session["CompanyID"].ToString();
+            //xp.Parameters.Add("@search", SqlDbType.NVarChar).Value = txtSearch.Text;
+            ////xp.Parameters.Add("@search2", SqlDbType.NVarChar).Value = txtSearch.Text;
+            //vid.Open();
+            //xp.ExecuteNonQuery();
+            //SqlDataAdapter da = new SqlDataAdapter();
+            //da.SelectCommand = xp;
+            //DataSet ds = new DataSet();
+            //da.Fill(ds, "Name");
+            //GridView1.DataSource = ds;
+            //GridView1.DataBind();
+        }
+
 
 
         protected void infoBtn_Command(object sender, CommandEventArgs e)
@@ -168,6 +432,14 @@ namespace targeted_marketing_display
 
             //    }
             //}
+        }
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+
+            GridView1.PageIndex = e.NewPageIndex;
+            GridView1.DataBind();
+            BindGrid();
+
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)

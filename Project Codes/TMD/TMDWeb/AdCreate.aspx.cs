@@ -161,10 +161,14 @@ namespace targeted_marketing_display
                     int AdvertisementID = GetMaxIDAdvertisement();
                     string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
                     SqlConnection sqlconn = new SqlConnection(dbConnStr);
-                    String adv = "Insert into [Advertisement](Name,Item,ItemType,Duration,CompanyID,StartDate,EndDate,Status,CreatedBy,CreatedOn) Values(@Name,@Item,@ItemType,@Duration,@CompanyID,@StartDate,@EndDate,@Status,@CreatedBy,@CreatedOn)";
+                    String adv = "Insert into [Advertisement](Name,Item,ItemType,Duration,CompanyID,StartDate,EndDate,Status,CreatedBy,CreatedOn)" +
+                    " Values(@Name,@Item,@ItemType,@Duration,@CompanyID,@StartDate,@EndDate,@Status,@CreatedBy,@CreatedOn)";
                     SqlCommand sqlcomm = new SqlCommand(adv);
                     sqlcomm.Connection = sqlconn;
                     sqlconn.Open();
+                if ((string)Session["userType"] == "Admin")
+                {
+
 
                     sqlcomm.Parameters.AddWithValue("@CreatedOn", DateTime.Now);
                     sqlcomm.Parameters.AddWithValue("@Name", adNameTB.Text);
@@ -178,7 +182,25 @@ namespace targeted_marketing_display
                     sqlcomm.Parameters.AddWithValue("@Duration", videoDurationTB.Text);
                     sqlcomm.ExecuteNonQuery();
                     sqlconn.Close();
-
+                }
+                else
+                {
+                    User userObj = new User();
+                    UserManagement uDao = new UserManagement();
+                    userObj = uDao.getUserByID(Session["userID"].ToString());
+                    sqlcomm.Parameters.AddWithValue("@CreatedOn", DateTime.Now);
+                    sqlcomm.Parameters.AddWithValue("@Name", adNameTB.Text);
+                    sqlcomm.Parameters.AddWithValue("@Item", imagelink);
+                    sqlcomm.Parameters.AddWithValue("@ItemType", Literal2.Text);
+                    sqlcomm.Parameters.AddWithValue("@StartDate", sdate);
+                    sqlcomm.Parameters.AddWithValue("@EndDate", edate);
+                    sqlcomm.Parameters.AddWithValue("@CompanyID", userObj.CompanyID);
+                    sqlcomm.Parameters.AddWithValue("@Status", "1");
+                    sqlcomm.Parameters.AddWithValue("@CreatedBy", "2");
+                    sqlcomm.Parameters.AddWithValue("@Duration", videoDurationTB.Text);
+                    sqlcomm.ExecuteNonQuery();
+                    sqlconn.Close();
+                }
 
                     SqlConnection sqlcon = new SqlConnection(dbConnStr);
                     string sqlquery = "Insert into [AdvertisementCategory](AdvID,CategoryID) values(@AdvID,@CategoryID)";
