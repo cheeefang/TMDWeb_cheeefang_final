@@ -187,7 +187,7 @@ namespace targeted_marketing_display
             if (Session["UserType"].ToString()=="Admin")
             {
                 SqlCommand cmd = new SqlCommand(
-               " select [Company].Name as CompanyName ,[Advertisement].Name as AdvertName,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate" +
+               " select AdvID, [Company].Name as CompanyName ,[Advertisement].Name as AdvertName,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate" +
                " from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
                        "where [Advertisement].status=1 order by " + e.SortExpression + "  " + strSortDirection, conn);
               
@@ -208,7 +208,7 @@ namespace targeted_marketing_display
                 UserManagement uDao = new UserManagement();
                 uObj = uDao.getUserByID(Session["userID"].ToString());
                 SqlCommand cmd = new SqlCommand(
-            " select [Company].Name as CompanyName ,[Advertisement].Name as AdvertName,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate" +
+            " select AdvID, [Company].Name as CompanyName ,[Advertisement].Name as AdvertName,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate" +
             " from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
                     "where [Company].CompanyID=@ID and [Advertisement].status=1 order by " + e.SortExpression + "  " + strSortDirection, conn);
 
@@ -264,7 +264,7 @@ namespace targeted_marketing_display
          //        "where [Advertisement].status=1 order by " + e.SortExpression + "  " + strSortDirection, conn);
             if (Session["userType"].ToString() == "Admin")
             {
-                string str = " select [Company].Name as CompanyName,[Advertisement].Name as AdvertName" +
+                string str = " select AdvID, [Company].Name as CompanyName,[Advertisement].Name as AdvertName" +
                ",[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
                        "where  [Advertisement].status=1 and ([Advertisement].Name like '%' + @search + '%' OR [Company].Name like '%' + @search + '%' OR ItemType like '%'" +
                        " + @search + '%' OR StartDate like '%' + @search + '%' OR  EndDate like '%' + @search + '%') ";
@@ -285,7 +285,7 @@ namespace targeted_marketing_display
                 User uObj = new User();
                 UserManagement uDao = new UserManagement();
                 uObj = uDao.getUserByID(Session["userID"].ToString());
-                string str = " select [Company].Name as CompanyName,[Advertisement].Name as AdvertName" +
+                string str = " select AdvID, [Company].Name as CompanyName,[Advertisement].Name as AdvertName" +
              ",[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
                      "where [Company].CompanyID=@ID and [Advertisement].status=1 and ([Advertisement].Name like '%' + @search + '%' OR [Company].Name like '%' + @search + '%' OR ItemType like '%'" +
                      " + @search + '%' OR StartDate like '%' + @search + '%' OR  EndDate like '%' + @search + '%') ";

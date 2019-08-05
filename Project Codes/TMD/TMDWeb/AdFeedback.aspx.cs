@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.DataVisualization.Charting;
+using targeted_marketing_display;
 using targeted_marketing_display.App_Code;
 using System.Globalization;
 
@@ -22,6 +23,7 @@ namespace targeted_marketing_display
 
             if (!IsPostBack)
             {
+               
                 string modalId = "No Selection";
                 Session["modalId"] = modalId;
                 PopulateDdl();
@@ -53,14 +55,36 @@ namespace targeted_marketing_display
         //populate Company dropdown list
         public void PopulateDdl()
         {
-            Database db = new Database();
-            SqlCommand command = new SqlCommand("Select * From Company where status=1");
-            DataTable dt = db.getDataTable(command);
+            User uObj = new User();
+            UserManagement uDao = new UserManagement();
+            uObj = uDao.getUserByID(Session["userID"].ToString());
+            if (Session["userType"].ToString() == "Admin")
+            {
+                Database db = new Database();
+                SqlCommand command = new SqlCommand("Select * From Company where status=1");
+                DataTable dt = db.getDataTable(command);
 
-            ddlCom.DataSource = dt;
-            ddlCom.DataValueField = "CompanyID";
-            ddlCom.DataTextField = "Name";
-            ddlCom.DataBind();
+                ddlCom.DataSource = dt;
+                ddlCom.DataValueField = "CompanyID";
+                ddlCom.DataTextField = "Name";
+                ddlCom.DataBind();
+            }
+            else
+            {
+                Database db = new Database();
+                SqlCommand command = new SqlCommand("Select * From Company where status=1 and CompanyID=@comID");
+                SqlParameter param = new SqlParameter();
+                param.ParameterName = "@comID";
+                param.Value = uObj.CompanyID.ToString();
+                command.Parameters.Add(param);
+                DataTable dt = db.getDataTable(command);
+
+                ddlCom.DataSource = dt;
+                ddlCom.DataValueField = "CompanyID";
+                ddlCom.DataTextField = "Name";
+                ddlCom.DataBind();
+            }
+        
         }
 
         //Advertisement Modal Search Button

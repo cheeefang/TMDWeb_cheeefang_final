@@ -218,11 +218,7 @@ function HideDiv() {
                                     </asp:TemplateField>
 
 
-                                    <asp:BoundField DataField="AdvID" HeaderText="AdvID" SortExpression="AdvID" ItemStyle-CssClass="hiddencol" HeaderStyle-CssClass="hiddencol" InsertVisible="False" ReadOnly="True">
-<HeaderStyle CssClass="hiddencol"></HeaderStyle>
-
-<ItemStyle CssClass="hiddencol"></ItemStyle>
-                                    </asp:BoundField>
+                               
                                     <asp:TemplateField HeaderText="Advertisement">
                                        
                                         <ItemTemplate>
