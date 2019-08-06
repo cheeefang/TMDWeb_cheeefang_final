@@ -16,6 +16,13 @@
   }
     </style>
 <style type="text/css">
+    #Image1 {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#Image1:hover {opacity: 0.7;}
 body
 {
     margin: 0;
@@ -45,7 +52,7 @@ body
     background-color: White;
     height: 550px;
     width: 600px;
-    padding: 3px;
+    padding: 0px;
     border: solid 1px black;
 }
 #videoDog{
@@ -63,6 +70,15 @@ body
      background:url(webicons/Descendingicon.png) right no-repeat;
     display:block;
     padding:0 25px 0 5px;
+}
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: darkslateblue;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
 }
 </style>
 </asp:Content>
@@ -331,17 +347,12 @@ function HideDiv() {
                             <br />
                            <div id="divBackground" class="modal">
 </div>
-<div id="divImage">
-    <button type="button" class="close" onclick="HideDiv()">×</button>
-<table style="height: 100%; width: 100%">
-    <tr>
-        <td valign="middle" align="center">
+<div id="divImage" style="padding:0px">
+    <button type="button" class="close" onclick="HideDiv()">X</button>
+
             <img id="imgLoader" alt="" src="images/loader.gif" />
-            <img id="imgFull" alt="" src="" style="display: none; height: 500px; width: 500px" />
-        </td>
-    </tr>
-    
-</table>
+            <img id="imgFull" alt="" src="" style="display: none; height:100%; width:100%;object-fit: cover;" />
+     
 </div>
                         </div>
                         <!-- /.table-responsive -->

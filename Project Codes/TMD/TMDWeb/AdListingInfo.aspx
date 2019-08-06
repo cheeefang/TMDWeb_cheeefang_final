@@ -67,7 +67,7 @@
 
           <br />
           <div class="a">
-         <div class="w3-container w3-teal">
+         <div class="w3-container w3-dark-grey">
   <h1 id="headerName" runat="server" style="font-size:25px;padding-left:10px"></h1>
 </div>
        <div class="w3-container">
@@ -125,7 +125,7 @@
                       
          
               </div>
-           <div class="w3-container w3-teal">
+           <div class="w3-container w3-dark-grey">
                <h1 id="footer" style="font-size:25px;padding-left:10px">Targeted Marketing Display &#169;</h1>
                </div>
        </div>
