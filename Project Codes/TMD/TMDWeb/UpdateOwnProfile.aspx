@@ -19,7 +19,12 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-
+         <div runat="server" class="alert alert-danger" id="alertDanger" visible="False">
+                    <strong>Error!</strong> Your Current Password is Incorrect
+                    <button type="button" class="close" onclick="window.location.href='OwnProfile.aspx';">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div runat="server" class="alert alert-success" id="alertSuccess" visible="False">
                     <strong>Success!</strong> Your profile has been updated.
                     <button type="button" class="close" onclick="window.location.href='OwnProfile.aspx';">
@@ -51,12 +56,27 @@
 
             </div>
 
+        <div class="row">
+
+                <div class="col-lg-6" runat="server" id="divCurrentPassword" visible="false">
+
+                    <div class="form-group">
+                        <label>Current Password </label>
+                        <asp:TextBox class="form-control" ID="CurrentPassword" placeholder="Enter Password" runat="server" TextMode="Password"></asp:TextBox>&nbsp;
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="CurrentPassword" Display="Dynamic" ErrorMessage="Please Enter Password." ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="CurrentPassword" Display="Dynamic" ErrorMessage="Please Enter A Password With Length Between 8-12 Characters." ValidationExpression="^.{8,12}$" ForeColor="Red"></asp:RegularExpressionValidator>
+                    </div>
+
+                </div>
+            </div>
+
+
             <div class="row">
 
                 <div class="col-lg-6" runat="server" id="divPswd" visible="false">
 
                     <div class="form-group">
-                        <label>Password </label>
+                        <label>New Password </label>
                         <asp:TextBox class="form-control" ID="tbPswd" placeholder="Enter Password" runat="server" TextMode="Password"></asp:TextBox>&nbsp;
                         <asp:RequiredFieldValidator ID="rfvPswd" runat="server" ControlToValidate="tbPswd" Display="Dynamic" ErrorMessage="Please Enter Password." ForeColor="Red"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="revPswd" runat="server" ControlToValidate="tbPswd" Display="Dynamic" ErrorMessage="Please Enter A Password With Length Between 8-12 Characters." ValidationExpression="^.{8,12}$" ForeColor="Red"></asp:RegularExpressionValidator>
