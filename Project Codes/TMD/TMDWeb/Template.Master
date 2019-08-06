@@ -9,7 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Targeted Marketing Display Administration">
     <meta name="author" content="NYP SIT">
-
+    <!--w3 Schools css-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!--mapbox api-->
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
       <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />

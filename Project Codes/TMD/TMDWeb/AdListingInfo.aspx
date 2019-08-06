@@ -63,8 +63,10 @@
 
           <br />
 
-         
-       
+         <div class="w3-container w3-teal">
+  <h1>Header</h1>
+</div>
+       <div class="w3-container">
                   <p>  <asp:image id="imgLogo" runat="server" imageurl="" style="width:700px;height:700px;margin-right:15px;" ClientIDMode="Static" ></asp:image>
                       <div id="vidDiv" runat="server">
                           <video clientidmode="static" id="videoThumbnail" width="250" height="250" runat="server" visible="true" controls class="img-fluid" alt="">
@@ -113,12 +115,15 @@
                       <asp:label id="LocationLabel" runat="server" text="Connected Billboard(s):" font-bold="true" class="card-title" />
                       <ul runat="server" id="BBCodeList"></ul>
                       </div>
+                    
                        
                       
           </p>  
               </div>
-
-
+           <div class="w3-container w3-teal">
+               <h1>Targeted Marketing Display</h1>
+               </div>
+       
 
 
 
