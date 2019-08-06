@@ -5,6 +5,9 @@
         #imgLogo{
   float: left;
 }
+        #videoThumbnail{
+            float:left;
+        }
       .GridViewEditRow input[type=text] {
             width: 90px;
         }
@@ -27,6 +30,10 @@
        #divText{
            overflow:auto;
        }
+       div.a {
+  border: 1px solid black;
+  
+}
             
     </style>
 </asp:Content>
@@ -62,18 +69,18 @@
           <!-- /.row -->
 
           <br />
-
+          <div class="a">
          <div class="w3-container w3-teal">
   <h1>Header</h1>
 </div>
        <div class="w3-container">
-                  <p>  <asp:image id="imgLogo" runat="server" imageurl="" style="width:700px;height:700px;margin-right:15px;" ClientIDMode="Static" ></asp:image>
+              <p>    <asp:image id="imgLogo" runat="server" imageurl="" style="width:700px;height:700px;margin-right:15px;" ClientIDMode="Static"  ></asp:image>
                       <div id="vidDiv" runat="server">
-                          <video clientidmode="static" id="videoThumbnail" width="250" height="250" runat="server" visible="true" controls class="img-fluid" alt="">
+                          <video clientidmode="static" id="videoThumbnail" style="width:700px;height:700px;margin-right:15px;" runat="server" visible="true" controls class="img-fluid" alt="">
                               <source id="vidSource" runat="server" src="" type="video/mp4">
                           </video>
                       </div>
-
+           
                       <div id="divText">
                  
                       <asp:label id="CompanyNameLabel" runat="server" font-bold="true" class="card-title" text="Company:" />
@@ -118,12 +125,12 @@
                     
                        
                       
-          </p>  
+         </p>
               </div>
            <div class="w3-container w3-teal">
                <h1>Targeted Marketing Display</h1>
                </div>
-       
+       </div>
 
 
 
