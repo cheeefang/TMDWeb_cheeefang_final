@@ -87,7 +87,7 @@
                 <div class="col-lg-6" runat="server" id="divCPswd" Visible="false">
 
                     <div class="form-group">
-                        <label>Confirm Password </label>
+                        <label>Confirm New Password </label>
                         <asp:TextBox class="form-control" ID="tbCPswd" placeholder="Confirm Password" runat="server" TextMode="Password"></asp:TextBox>&nbsp;
                         <asp:RequiredFieldValidator ID="rfvCpswd" runat="server" ControlToValidate="tbCPswd" Display="Dynamic" ErrorMessage="Please Confirm Password." ForeColor="Red"></asp:RequiredFieldValidator>
                     </div>

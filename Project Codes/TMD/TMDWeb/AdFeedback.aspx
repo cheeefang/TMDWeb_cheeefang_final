@@ -199,13 +199,7 @@
                         <series>
                           
                             <asp:Series Name="Series1" Legend="Legend1">
-                <Points>
-                    <asp:DataPoint AxisLabel="Article" YValues="90" />
-                    <asp:DataPoint AxisLabel="Blogs" YValues="120" />
-                    <asp:DataPoint AxisLabel="Questions" YValues="300" />
-                    <asp:DataPoint AxisLabel="Videos" YValues="240" />
-                    <asp:DataPoint AxisLabel="Training" YValues="100" />
-                </Points>
+                
                 </asp:Series>
                         </series>
                                 <chartareas>

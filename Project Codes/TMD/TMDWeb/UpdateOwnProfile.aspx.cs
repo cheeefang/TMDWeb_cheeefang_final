@@ -132,6 +132,7 @@ namespace targeted_marketing_display
                         tbContact.Text = String.Empty;
 
                         alertSuccess.Visible = true;
+                        alertDanger.Visible = false;
                     }
                 }
                 else

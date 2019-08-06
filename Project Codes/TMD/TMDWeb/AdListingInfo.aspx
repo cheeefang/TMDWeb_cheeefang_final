@@ -2,6 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
+        #imgLogo{
+  float: left;
+}
       .GridViewEditRow input[type=text] {
             width: 90px;
         }
@@ -21,6 +24,9 @@
             #vidDiv{
        
       }
+       #divText{
+           overflow:auto;
+       }
             
     </style>
 </asp:Content>
@@ -57,97 +63,60 @@
 
           <br />
 
-          <div class="row">
-              <div class="col-lg-6">
-                  <div class="form-group">
-
-                      <asp:image id="imgLogo" runat="server" imageurl="" width="250" height="250" visible="false" clientidmode="static" class="img-fluid" alt=""></asp:image>
+         
+       
+                  <p>  <asp:image id="imgLogo" runat="server" imageurl="" style="width:700px;height:700px;margin-right:15px;" ClientIDMode="Static" ></asp:image>
                       <div id="vidDiv" runat="server">
                           <video clientidmode="static" id="videoThumbnail" width="250" height="250" runat="server" visible="true" controls class="img-fluid" alt="">
                               <source id="vidSource" runat="server" src="" type="video/mp4">
                           </video>
                       </div>
 
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-lg-6">
-                  <div class="form-group">
+                      <div id="divText">
+                 
                       <asp:label id="CompanyNameLabel" runat="server" font-bold="true" class="card-title" text="Company:" />
                       <asp:literal runat="server" id="CompanyNameLiteral"></asp:literal>
                 
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-lg-6">
-                  <div class="form-group">
+                       <br />
 
                       <asp:label id="AdName2" runat="server" font-bold="true" text="Advertisement Name:" class="card-title" />
                       <asp:literal runat="server" id="AdNameLiteral"></asp:literal>
                    
-                  </div>
-              </div>
-          </div>
+                       <br />
 
-          <div class="row">
-              <div class="col-lg-6">
-                  <div class="form-group">
                       <asp:label id="ItemTypeLabel" runat="server" font-bold="true" text="File Type:" class="card-title" />
                       <asp:literal runat="server" id="ItemTypeLiteral"></asp:literal>
-               
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-lg-6">
-                  <div class="form-group">
+                    
+                      <br />
+
                       <asp:label id="StartDateLabel" runat="server" text="Start Date:" font-bold="true" class="card-title" />
                       <asp:literal runat="server" id="StartDateLiteral"></asp:literal>
                   
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-lg-6">
-                  <div class="form-group">
+                       <br />
+        
                       <asp:label id="EndDateLabel" runat="server" text="End Date:" font-bold="true" class="card-title" />
                       <asp:literal runat="server" id="EndDateLiteral"></asp:literal>
-                  
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-lg-6">
-                  <div class="form-group">
+                       
+                      <br />
+
                       <asp:label id="AudienceLabel" runat="server" text="Targeted Audience(s):" font-bold="true"  />
                       <ul runat="server" id="AudienceList" ></ul>
                       
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-lg-6">
-                  <div class="form-group">
+                      <br /> 
+
+
                       <asp:label id="CategoryLabel" runat="server" text="Advertisement Category(s):" font-bold="true" class="card-title" />
                       <ul runat="server" id="CategoryList"></ul>
                  
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-lg-6">
-                  <div class="form-group">
+                       <br />
+         
                       <asp:label id="LocationLabel" runat="server" text="Connected Billboard(s):" font-bold="true" class="card-title" />
                       <ul runat="server" id="BBCodeList"></ul>
-
-                  </div>
+                      </div>
+                       
+                      
+          </p>  
               </div>
-          </div>
-
-
-
 
 
 

@@ -33,6 +33,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <IncludeIisSettings>true</IncludeIisSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1838,6 +1839,7 @@
     <Content Include="Images\upload.png" />
     <Content Include="Images\Wheat.jpg" />
     <Content Include="Images\Yole.jpg" />
+    <Content Include="ImproveDesign.aspx" />
     <Content Include="jquery-ui.css" />
     <Content Include="login.aspx" />
     <Content Include="Logout.aspx" />
@@ -1998,6 +2000,9 @@
     <Content Include="obj\Debug\TMDWeb.csprojAssemblyReference.cache" />
     <Content Include="obj\Debug\TMDWeb.csprojResolveAssemblyReference.cache" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile2.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
@@ -2209,6 +2214,13 @@
     </Compile>
     <Compile Include="HorseShit.aspx.designer.cs">
       <DependentUpon>HorseShit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ImproveDesign.aspx.cs">
+      <DependentUpon>ImproveDesign.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ImproveDesign.aspx.designer.cs">
+      <DependentUpon>ImproveDesign.aspx</DependentUpon>
     </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
