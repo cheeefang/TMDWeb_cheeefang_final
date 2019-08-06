@@ -38,6 +38,9 @@
   padding: 0px;
 
 }
+       #imgLogo{
+             border: 1px solid black;
+       }
      
     </style>
 </asp:Content>
@@ -68,15 +71,15 @@
   <h1 id="headerName" runat="server" style="font-size:25px;padding-left:10px"></h1>
 </div>
        <div class="w3-container">
-              <p>    <asp:image id="imgLogo" runat="server" imageurl="" style="width:700px;height:700px;margin-right:15px;" ClientIDMode="Static"  ></asp:image>
+                 <asp:image id="imgLogo" runat="server" imageurl="" style="width:800px;height:700px;margin-right:15px;" ClientIDMode="Static"  ></asp:image>
                       <div id="vidDiv" runat="server">
-                          <video clientidmode="static" id="videoThumbnail" style="width:700px;height:700px;margin-right:15px;" runat="server" visible="true" controls class="img-fluid" alt="">
+                          <video clientidmode="static" id="videoThumbnail" style="width:800px;height:700px;margin-right:15px;" runat="server" visible="true" controls class="img-fluid" alt="">
                               <source id="vidSource" runat="server" src="" type="video/mp4">
                           </video>
                       </div>
            
-                      <div id="divText">
-                 
+                      <div id="divText" style="padding-top:20px">
+                 <p> 
                       <asp:label id="CompanyNameLabel" runat="server" font-bold="true" class="card-title" text="Company:" />
                       <asp:literal runat="server" id="CompanyNameLiteral"></asp:literal>
                 
@@ -115,11 +118,12 @@
          
                       <asp:label id="LocationLabel" runat="server" text="Connected Billboard(s):" font-bold="true" class="card-title" />
                       <ul runat="server" id="BBCodeList"></ul>
-                      </div>
+                     </p>
+                     </div>
                     
                        
                       
-         </p>
+         
               </div>
            <div class="w3-container w3-teal">
                <h1 id="footer" style="font-size:25px;padding-left:10px">Targeted Marketing Display &#169;</h1>
