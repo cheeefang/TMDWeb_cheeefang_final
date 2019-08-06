@@ -197,7 +197,7 @@ map.on('load', function() {
 
           </p>
  
-        <asp:Label ID="LabelPaging" style="color:darkslateblue" runat="server" Text="Label"></asp:Label>
+        <asp:Label ID="LabelPaging" style="color:darkslateblue" runat="server" Text="Label" Font-Bold="true"></asp:Label>
        
             
 

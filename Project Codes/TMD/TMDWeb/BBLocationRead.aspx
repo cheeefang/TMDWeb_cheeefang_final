@@ -232,7 +232,7 @@
                                 <SortedDescendingHeaderStyle BackColor="#383838" />
                             </asp:GridView>
 
-                            <asp:Label ID="Label1" style="color:darkslateblue" runat="server" Text="Label"></asp:Label>
+                            <asp:Label ID="Label1" style="color:darkslateblue" Font-Bold="true" runat="server" Text="Label"></asp:Label>
 
                             <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT BillboardID,BillboardCode, Latitude ,Longtitude ,(( AddressLn1) + ' '+( AddressLn2 )+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address FROM BillboardLocation where status=1 " FilterExpression="BillboardCode LIKE '%{0}%' OR Address LIKE '%{0}%' OR convert(Latitude,'System.String') LIKE '%{0}%' OR convert(Longtitude,'System.String') LIKE '%{0}%'">
                                  <FilterParameters>

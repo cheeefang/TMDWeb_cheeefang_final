@@ -326,7 +326,7 @@ function HideDiv() {
                             </asp:GridView>
                                      </ContentTemplate>
                             </asp:UpdatePanel>
-                            <asp:Label ID="Label1" style="color:darkslateblue" runat="server" Text="Label"></asp:Label>
+                            <asp:Label ID="Label1" style="color:darkslateblue" Font-Bold="true" runat="server" Text="Label"></asp:Label>
                             <br />
                             <br />
                            <div id="divBackground" class="modal">

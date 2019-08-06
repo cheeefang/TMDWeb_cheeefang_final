@@ -65,8 +65,8 @@ namespace targeted_marketing_display
                     videoThumbnail.Visible = true;
                     imgLogo.Visible = false;
                 }
-              
-               
+
+                headerName.InnerText = AdvertObj.Name.ToString();
                 AdNameLabel.Text = "for " + AdvertObj.Name.ToString();
                 AdNameLiteral.Text = AdvertObj.Name.ToString();
                 ItemTypeLiteral.Text = AdvertObj.ItemType.ToString();
@@ -78,7 +78,9 @@ namespace targeted_marketing_display
                 EndDateLiteral.Text= niceEndDate;
 
 
-                SqlCommand cmd1 = new SqlCommand("select a.AdvID,a.AgeID,a.GenderID,coderefage.CodeDesc as agedesc,coderefgender.CodeDesc as genderdesc from AdvertisementAudience  a full outer join CodeReferece as coderefage on coderefage.CodeValue = a.AgeID  full outer join CodeReferece as coderefgender on coderefgender.CodeValue = a.GenderID where a.advid =@ID and coderefage.CodeType = 'AgeID' and coderefgender.CodeType = 'GenderID' ", conn);
+                SqlCommand cmd1 = new SqlCommand("select a.AdvID,a.AgeID,a.GenderID,coderefage.CodeDesc as agedesc,coderefgender.CodeDesc as genderdesc from AdvertisementAudience " +
+                    " a full outer join CodeReferece as coderefage on coderefage.CodeValue = a.AgeID  full outer join CodeReferece as coderefgender on coderefgender.CodeValue = a.GenderID where" +
+                    " a.advid =@ID and coderefage.CodeType = 'AgeID' and coderefgender.CodeType = 'GenderID' ", conn);
                 SqlParameter param1 = new SqlParameter();
                 param1.ParameterName = "@ID";
                 param1.Value = Session["AdvertID"].ToString();
@@ -107,7 +109,8 @@ namespace targeted_marketing_display
                 }
             
 
-                SqlCommand cmdCat = new SqlCommand("SELECT a.[AdvID], a.[Name], a.[Item], b.CategoryID, c.CodeDesc FROM [Advertisement] a INNER JOIN [AdvertisementCategory] b ON a.AdvID = b.AdvID FULL OUTER JOIN [CodeReferece] c ON b.CategoryID = c.CodeValue WHERE a.AdvID = @ID", conn);
+                SqlCommand cmdCat = new SqlCommand("SELECT a.[AdvID], a.[Name], a.[Item], b.CategoryID, c.CodeDesc FROM [Advertisement] a INNER JOIN [AdvertisementCategory]" +
+                    " b ON a.AdvID = b.AdvID FULL OUTER JOIN [CodeReferece] c ON b.CategoryID = c.CodeValue WHERE a.AdvID = @ID and c.CodeType='Category' ", conn);
                 SqlParameter paramCat = new SqlParameter();
                 paramCat.ParameterName = "@ID";
                 paramCat.Value = Session["AdvertID"].ToString();

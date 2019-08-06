@@ -34,23 +34,17 @@
   border: 1px solid black;
   
 }
-            
+       .w3-container{
+  padding: 0px;
+
+}
+     
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
       <form runat="server">
 <script>
-        function deleteFunction() {
-
-            if (!confirm('Confirm Deletion of Advertisement')) {
-
-                return false;
-            }
-
-            else {
-                return true;
-            }
-        }
+     
 </script>
 
 
@@ -71,7 +65,7 @@
           <br />
           <div class="a">
          <div class="w3-container w3-teal">
-  <h1>Header</h1>
+  <h1 id="headerName" runat="server" style="font-size:25px;padding-left:10px"></h1>
 </div>
        <div class="w3-container">
               <p>    <asp:image id="imgLogo" runat="server" imageurl="" style="width:700px;height:700px;margin-right:15px;" ClientIDMode="Static"  ></asp:image>
@@ -128,11 +122,12 @@
          </p>
               </div>
            <div class="w3-container w3-teal">
-               <h1>Targeted Marketing Display</h1>
+               <h1 id="footer" style="font-size:25px;padding-left:10px">Targeted Marketing Display &#169;</h1>
                </div>
        </div>
 
-
+          <br />
+          <br />
 
 
 
