@@ -63,85 +63,87 @@ namespace targeted_marketing_display
             //initalise salted password
             string uPswdSalt = "";
             int testing = 1;
+            //pswdmatch=1
+            int pswdMatch = 1;
             //if empty make password hash and salt same
-            if (tbPswd.Text == "" || tbCPswd.Text == "" || (tbPswd.Text == "" && tbCPswd.Text == ""))
+            if (CurrentPassword.Text == "" && CurrentPassword.Visible == false || tbPswd.Text == "" || tbCPswd.Text == "" || (tbPswd.Text == "" && tbCPswd.Text == ""))
             {
                 uPswdHash = (string)uObj.PasswordHash;
                 uPswdSalt = (string)uObj.PasswordSalt;
+                Boolean insCnt = uDao.updateCurrentUser(Session["userID"].ToString(), uName, uContact, uPswdHash, uPswdSalt, lastUpdBy, lastUpdOn);
+
+                tbName.Text = String.Empty;
+                tbContact.Text = String.Empty;
+                alertSuccess.Visible = true;
             }
-
-
-         
-            int pswdMatch = 1;
-
-            if (testing == 1)
+            else
             {
-                string passwordhashlol = uObj.PasswordHash;
-                // convert into bytes
-                byte[] hashbyteslol = Convert.FromBase64String(passwordhashlol);
+                    string passwordhashlol = uObj.PasswordHash;
+                    // convert into bytes
+                    byte[] hashbyteslol = Convert.FromBase64String(passwordhashlol);
 
-                // take the salt out of the string
-                byte[] saltlol = new byte[16];
-                Array.Copy(hashbyteslol, 0, saltlol, 0, 16);
+                    // take the salt out of the string
+                    byte[] saltlol = new byte[16];
+                    Array.Copy(hashbyteslol, 0, saltlol, 0, 16);
 
-                // hash the entered Current password
-                var pbkdf2lol = new Rfc2898DeriveBytes(CurrentPassword.Text, saltlol, 10000);
+                    // hash the entered Current password
+                    var pbkdf2lol = new Rfc2898DeriveBytes(CurrentPassword.Text, saltlol, 10000);
 
 
-                byte[] hashlol = pbkdf2lol.GetBytes(20);
+                    byte[] hashlol = pbkdf2lol.GetBytes(20);
 
-                for(int i = 0; i < 20; i++)
-                {
-                    if (hashbyteslol[i + 16] != hashlol[i])
+                    for (int i = 0; i < 20; i++)
                     {
-                        pswdMatch = 0;
+                        if (hashbyteslol[i + 16] != hashlol[i])
+                        {
+                            pswdMatch = 0;
+                        }
                     }
-                }
 
+
+                    if (pswdMatch == 1)
+                    {
+                        if (tbPswd.Text == tbCPswd.Text)
+                        {
+                            byte[] salt;
+
+                            // generate salt
+                            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+
+                            // hash and salt using PBKDF2
+                            var pbkdf2 = new Rfc2898DeriveBytes(tbCPswd.Text, salt, 10000);
+
+                            // place string in byte array
+                            byte[] hash = pbkdf2.GetBytes(20);
+
+                            // make new byte array to store hashed password + salt
+                            // 36 --> 16(salt) + 20(hash)
+
+                            byte[] hashbytes = new byte[36];
+                            Array.Copy(salt, 0, hashbytes, 0, 16);
+                            Array.Copy(hash, 0, hashbytes, 16, 20);
+
+                            string PasswordHash = Convert.ToBase64String(hashbytes);
+                            string PasswordSalt = Convert.ToBase64String(salt);
+
+                            uPswdHash = PasswordHash;
+                            uPswdSalt = PasswordSalt;
+                            Boolean insCnt = uDao.updateCurrentUser(Session["userID"].ToString(), uName, uContact, uPswdHash, uPswdSalt, lastUpdBy, lastUpdOn);
+
+                            tbName.Text = String.Empty;
+                            tbContact.Text = String.Empty;
+
+                            alertSuccess.Visible = true;
+                            alertDanger.Visible = false;
+                        }
+                    }
+                    else
+                    {
+                        alertDanger.Visible = true;
+                        alertSuccess.Visible = false;
+                    }
                 
-                if(pswdMatch==1)
-                {
-                    if (tbPswd.Text == tbCPswd.Text)
-                    {
-                        byte[] salt;
-
-                        // generate salt
-                        new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
-
-                        // hash and salt using PBKDF2
-                        var pbkdf2 = new Rfc2898DeriveBytes(tbCPswd.Text, salt, 10000);
-
-                        // place string in byte array
-                        byte[] hash = pbkdf2.GetBytes(20);
-
-                        // make new byte array to store hashed password + salt
-                        // 36 --> 16(salt) + 20(hash)
-
-                        byte[] hashbytes = new byte[36];
-                        Array.Copy(salt, 0, hashbytes, 0, 16);
-                        Array.Copy(hash, 0, hashbytes, 16, 20);
-
-                        string PasswordHash = Convert.ToBase64String(hashbytes);
-                        string PasswordSalt = Convert.ToBase64String(salt);
-
-                        uPswdHash = PasswordHash;
-                        uPswdSalt = PasswordSalt;
-                        Boolean insCnt = uDao.updateCurrentUser(Session["userID"].ToString(), uName, uContact, uPswdHash, uPswdSalt, lastUpdBy, lastUpdOn);
-
-                        tbName.Text = String.Empty;
-                        tbContact.Text = String.Empty;
-
-                        alertSuccess.Visible = true;
-                        alertDanger.Visible = false;
-                    }
-                }
-                else
-                {
-                    alertDanger.Visible = true;
-                    alertSuccess.Visible = false;
-                }
             }
-
 
 
          

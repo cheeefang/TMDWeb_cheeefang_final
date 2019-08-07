@@ -289,7 +289,7 @@
                     <div class="form-group">
                         <label>Name </label>
                         <label style="color: red">*</label>
-                        <asp:TextBox Class="form-control" ID="adNameTB" runat="server" AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>
+                        <asp:TextBox Class="form-control" ID="adNameTB" runat="server" AutoCompleteType="Disabled" autocomplete="off" MaxLength="255"></asp:TextBox>
                     </div>
                 </div>
             </div>

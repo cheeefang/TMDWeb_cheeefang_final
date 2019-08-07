@@ -273,7 +273,7 @@
                     <div class="form-group">
                         <label>Name </label>
                         <label style="color: red">*</label>
-                        <asp:TextBox Class="form-control" ID="adNameTB" runat="server" AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>
+                        <asp:TextBox Class="form-control" ID="adNameTB" runat="server" AutoCompleteType="Disabled" autocomplete="off" MaxLength="255"></asp:TextBox>
                                      <asp:RequiredFieldValidator runat="server" id="RequiredFieldValidator3" controltovalidate="adNameTB" errormessage="Please Enter Advertisement Name" ForeColor="Red"/>
     <br /><br />
                     </div>
@@ -343,7 +343,7 @@
                 </div>
             
 
-                            <contentTemplate>
+                          
                 <div class="col-lg-6">
 
                     <div class="form-group">

@@ -86,6 +86,25 @@ namespace targeted_marketing_display
                 Response.End();
             }
         }
+
+        private string ConvertSortDirectionToSql(SortDirection sortDirection)
+        {
+            string newSortDirection = String.Empty;
+
+            switch (sortDirection)
+            {
+                case SortDirection.Ascending:
+                    newSortDirection = "ASC";
+                    break;
+
+                case SortDirection.Descending:
+                    newSortDirection = "DESC";
+                    break;
+            }
+
+            return newSortDirection;
+        }
+
         //populate Company dropdown list
         public void PopulateDdl()
         {
@@ -121,12 +140,32 @@ namespace targeted_marketing_display
         
         }
 
-       
 
-
-        //Advertisement Modal Search Button
-        public void btnAdvSearch_OnClick(Object sender, EventArgs e)
+        //Company Dropdownlist
+        protected void ddlCom_SelectedIndexChanged(object sender, EventArgs e)
         {
+            foreach (GridViewRow row in gvAdv.Rows)
+            {
+                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorADV");
+                //CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
+                if (rdBtn.Checked == true)
+                {
+                    rdBtn.Checked = false;
+                }
+            }
+            foreach (GridViewRow row in gvBb.Rows)
+            {
+                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorBB");
+                // CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
+                if (rdBtn.Checked == true)
+                {
+                    rdBtn.Checked = false;
+                }
+            }
+            string code = ddlCom.SelectedItem.Text.Substring(1, 1);
+            Session["code"] = code;
+            lblFbc.Visible = false;
+            chartFb.Visible = false;
             Database db = new Database();
             SqlCommand command = new SqlCommand("Select AdvId,Name,Item,ItemType,StartDate,EndDate,Status From Advertisement Where Advertisement.Status=1 and Advertisement.CompanyID=@pComID");
             command.Parameters.AddWithValue("@pAdv", txtAdv.Text);
@@ -136,25 +175,70 @@ namespace targeted_marketing_display
             gvAdv.DataBind();
 
             gvAdv.Visible = true;
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showAdvModal();", true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showAdvModal();", true);
         }
-        private string ConvertSortDirectionToSql(SortDirection sortDirection)
+
+
+        //Advertisement Modal Search Button
+        public void btnAdvSearch_OnClick(Object sender, EventArgs e)
         {
-            string newSortDirection = String.Empty;
+            //Database db = new Database();
+            //SqlCommand command = new SqlCommand("Select AdvId,Name,Item,ItemType,StartDate,EndDate,Status From Advertisement Where Advertisement.Status=1 and Advertisement.CompanyID=@pComID");
+            //command.Parameters.AddWithValue("@pAdv", txtAdv.Text);
+            //command.Parameters.AddWithValue("@pComID", Convert.ToInt32(ddlCom.SelectedItem.Value));
+            //DataTable adv = db.getDataTable(command);
+            //gvAdv.DataSource = adv;
+            //gvAdv.DataBind();
 
-            switch (sortDirection)
-            {
-                case SortDirection.Ascending:
-                    newSortDirection = "ASC";
-                    break;
-
-                case SortDirection.Descending:
-                    newSortDirection = "DESC";
-                    break;
-            }
-
-            return newSortDirection;
+            //gvAdv.Visible = true;
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showAdvModal();", true);
         }
+
+        //Billboard Modal Search ButtonSELECT BillboardID,BillboardCode, Latitude ,Longtitude ,(( AddressLn1) + ' '+( AddressLn2 )+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address FROM BillboardLocation where status=1
+        public void btnBbSearch_OnClick(Object sender, EventArgs e)
+        {
+            //SqlConnection conn = null;
+            //SqlDataReader reader = null;
+            //conn = new
+            //SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+            //conn.Open();
+            //Database db = new Database();
+            //DataTable dtBillboards = new DataTable();
+            //for (int i = 0; i < gvAdv.Rows.Count; i++)
+            //{
+            //    SqlCommand command = new SqlCommand("Select Distinct AdvertisementFeedback.BillboardID,BillboardCode,((AddressLn1)+ ' '+(AddressLn2)+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address" +
+            //   " From BillboardLocation inner join AdvertisementFeedback on BillboardLocation.BillboardID=AdvertisementFeedback.BillboardID" +
+            //   " Where  BillboardLocation.status=1 and AdvertisementFeedback.AdvID=@pAdvID", conn);
+            //    GridViewRow row = gvAdv.Rows[i];
+            //    //CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
+            //    RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorADV");
+            //    if (rdBtn.Checked == true)
+            //    {
+
+
+            //        Label advLabel = (Label)gvAdv.Rows[i].FindControl("lb_AdvertID");
+            //        SqlParameter param = new SqlParameter();
+            //        param.ParameterName = "@pAdvID";
+            //        param.Value = advLabel.Text.ToString();
+            //        command.Parameters.Add(param);
+            //        SqlDataAdapter sda = new SqlDataAdapter();
+
+            //        sda.SelectCommand = command;
+            //        sda.Fill(dtBillboards);
+
+            //    }
+            //}
+            //gvBb.DataSource = dtBillboards;
+            //gvBb.DataBind();
+
+
+
+
+            //gvBb.Visible = true;
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showBbModal();", true);
+        }
+
+
 
         protected void gvAdv_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -201,49 +285,9 @@ namespace targeted_marketing_display
             }
         }
 
-        //Billboard Modal Search ButtonSELECT BillboardID,BillboardCode, Latitude ,Longtitude ,(( AddressLn1) + ' '+( AddressLn2 )+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address FROM BillboardLocation where status=1
-        public void btnBbSearch_OnClick(Object sender, EventArgs e)
-        {
-            SqlConnection conn = null;
-            SqlDataReader reader = null;
-            conn = new
-            SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
-            conn.Open();
-            Database db = new Database();
-            DataTable dtBillboards = new DataTable();
-            for (int i = 0; i < gvAdv.Rows.Count; i++)
-            {
-                SqlCommand command = new SqlCommand("Select Distinct AdvertisementFeedback.BillboardID,BillboardCode,((AddressLn1)+ ' '+(AddressLn2)+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address" +
-               " From BillboardLocation inner join AdvertisementFeedback on BillboardLocation.BillboardID=AdvertisementFeedback.BillboardID" +
-               " Where  BillboardLocation.status=1 and AdvertisementFeedback.AdvID=@pAdvID", conn);
-                GridViewRow row = gvAdv.Rows[i];
-                //CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
-                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorADV");
-                if (rdBtn.Checked == true)
-                {
 
 
-                    Label advLabel = (Label)gvAdv.Rows[i].FindControl("lb_AdvertID");
-                    SqlParameter param = new SqlParameter();
-                    param.ParameterName = "@pAdvID";
-                    param.Value = advLabel.Text.ToString();
-                    command.Parameters.Add(param);
-                    SqlDataAdapter sda = new SqlDataAdapter();
-                  
-                    sda.SelectCommand = command;
-                    sda.Fill(dtBillboards);
-                   
-                }
-            }
-            gvBb.DataSource = dtBillboards;
-            gvBb.DataBind();
-
-
-
-
-            gvBb.Visible = true;
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showBbModal();", true);
-        }
+       
 
         protected void gvBb_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -269,11 +313,11 @@ namespace targeted_marketing_display
         //// int id = Convert.ToInt32(r.Cells[1].Text);
         //Label advLabel = (Label)gvAdv.Rows[i].FindControl("lb_AdvertID");
 
+        //Billboard Modal Search ButtonSELECT BillboardID,BillboardCode, Latitude ,Longtitude ,(( AddressLn1) + ' '+( AddressLn2 )+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address FROM BillboardLocation where status=1
 
-
-        //Advertisement Modal Add Button
-        protected void addAdv_Click(object sender, EventArgs e)
-        {
+            //Advertisement Modal Add Button
+            protected void addAdv_Click(object sender, EventArgs e)
+            {
             ddlCom.SelectedIndex = 0;
             foreach (GridViewRow row in gvBb.Rows)
             {
@@ -287,6 +331,45 @@ namespace targeted_marketing_display
             }
             string modalId = "Adv";
             Session["modalId"] = modalId;
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+            conn = new
+            SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+            conn.Open();
+            Database db = new Database();
+            DataTable dtBillboards = new DataTable();
+            for (int i = 0; i < gvAdv.Rows.Count; i++)
+            {
+                SqlCommand command = new SqlCommand("Select Distinct AdvertisementFeedback.BillboardID,BillboardCode,((AddressLn1)+ ' '+(AddressLn2)+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address" +
+               " From BillboardLocation inner join AdvertisementFeedback on BillboardLocation.BillboardID=AdvertisementFeedback.BillboardID" +
+               " Where  BillboardLocation.status=1 and AdvertisementFeedback.AdvID=@pAdvID", conn);
+                GridViewRow row = gvAdv.Rows[i];
+                //CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
+                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorADV");
+                if (rdBtn.Checked == true)
+                {
+
+
+                    Label advLabel = (Label)gvAdv.Rows[i].FindControl("lb_AdvertID");
+                    SqlParameter param = new SqlParameter();
+                    param.ParameterName = "@pAdvID";
+                    param.Value = advLabel.Text.ToString();
+                    command.Parameters.Add(param);
+                    SqlDataAdapter sda = new SqlDataAdapter();
+
+                    sda.SelectCommand = command;
+                    sda.Fill(dtBillboards);
+
+                }
+            }
+            gvBb.DataSource = dtBillboards;
+            gvBb.DataBind();
+
+
+
+
+            gvBb.Visible = true;
+           // ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showBbModal();", true);
         }
 
         //Billboard Modal Add Button
@@ -304,33 +387,6 @@ namespace targeted_marketing_display
             }
             string modalId = "Bb";
             Session["modalId"] = modalId;
-        }
-
-        //Company Dropdownlist
-        protected void ddlCom_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            foreach (GridViewRow row in gvAdv.Rows)
-            {
-                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorADV");
-                //CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
-                if (rdBtn.Checked == true)
-                {
-                    rdBtn.Checked = false;
-                }
-            }
-            foreach (GridViewRow row in gvBb.Rows)
-            {
-                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorBB");
-               // CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
-                if (rdBtn.Checked == true)
-                {
-                    rdBtn.Checked = false;
-                }
-            }
-            string code = ddlCom.SelectedItem.Text.Substring(1, 1);
-            Session["code"] = code;
-            lblFbc.Visible = false;
-            chartFb.Visible = false;
         }
 
         //Chart Type Radio Buttons

@@ -333,8 +333,12 @@
                     </div>
                    
                     <div class="modal-footer">
+                        <asp:UpdatePanel ID="updatepanel1" runat="server">
+
+                            <ContentTemplate>
                     <asp:Button ID="addAdv" runat="server" CssClass="btn btn-primary" Text="Add" OnClick="addAdv_Click"/>
-                        
+                        </ContentTemplate>
+                            </asp:UpdatePanel>
                     </div>
                      
                     </div>
@@ -401,7 +405,12 @@
                     </div>
                 </div>
                     <div class="modal-footer">
+                        <asp:UpdatePanel ID="updatepanel2" runat="server">
+
+                            <ContentTemplate>
                     <asp:Button ID="addBb" runat="server" CssClass="btn btn-primary" Text="Add" OnClick="addBb_Click"/>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                     </div>
                     </div>
                 </div>

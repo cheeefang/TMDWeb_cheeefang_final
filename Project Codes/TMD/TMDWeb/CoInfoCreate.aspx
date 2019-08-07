@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <label>Company Name</label><label style="color:red">*</label>
                        
-                         <asp:TextBox  class="form-control" ID="CoName" placeholder="Enter Company Name" runat="server"></asp:TextBox> &nbsp;
+                         <asp:TextBox  class="form-control" ID="CoName" placeholder="Enter Company Name" runat="server" MaxLength="255"></asp:TextBox> &nbsp;
 
                     </div>
                 </div>
