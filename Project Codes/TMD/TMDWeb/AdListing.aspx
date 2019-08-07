@@ -145,9 +145,17 @@ function HideDiv() {
 }
 </script>
 
+                        <div id="divBackground" class="modal fade">
+</div>
+<div id="divImage" style="padding:0px">
+    <button type="button" class="close" onclick="HideDiv()">X</button>
 
-        <asp:ScriptManager id="script1" runat="server"></asp:ScriptManager>
+            <img id="imgLoader" alt="" src="images/loader.gif" />
+            <img id="imgFull" alt="" src="" style="display: none; height:100%; width:100%;object-fit: cover;" />
      
+</div>
+        <asp:ScriptManager id="script1" runat="server"></asp:ScriptManager>
+          
             <!--button-->
             <div class="row">
                 <div class="col-lg-12">
@@ -248,7 +256,7 @@ function HideDiv() {
                                           
                                         
                                       <asp:ImageButton ID="Image1" runat="server" ImageUrl='<%# Eval("Item") %>' OnClientClick="return LoadDiv(this.src);" 
-                                          Visible='<%# Eval("ItemType").ToString() =="image" %>' ClientIDMode="static" style="display:block;"   />
+                                          Visible='<%# Eval("ItemType").ToString() =="image" %>' ClientIDMode="static" style="display:block; object-fit: cover;"   />
                                       <div id="vidDiv" runat="server">
                                         <video ClientIDMode="static" id="videoDog" width="200" height="200" runat="server" controls visible='<%# Eval("ItemType").ToString()!="image" %>'>  
                                             <source runat="server" src='<%#Eval("Item")%>' type="video/mp4" visible='<%# Eval("ItemType").ToString()!="image" %>' />  
@@ -352,38 +360,12 @@ function HideDiv() {
                             <asp:Label ID="Label1" style="color:darkslateblue" Font-Bold="true" runat="server" Text="Label"></asp:Label>
                             <br />
                             <br />
-                           <div id="divBackground" class="modal">
-</div>
-<div id="divImage" style="padding:0px">
-    <button type="button" class="close" onclick="HideDiv()">X</button>
-
-            <img id="imgLoader" alt="" src="images/loader.gif" />
-            <img id="imgFull" alt="" src="" style="display: none; height:100%; width:100%;object-fit: cover;" />
-     
-</div>
+        
                         </div>
                         <!-- /.table-responsive -->
                     </div>
                 </div>
-            </div>
-     
-
-
-          
-
-
-<%--        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [Advertisement].AdvID,[Company].Name, [Advertisement].Name, [Advertisement].Item, [Advertisement].ItemType,[StartDate], [EndDate]FROM [Advertisement] inner join [Company] on Company.CompanyID=[Advertisement].CompanyID where [Advertisement].status=1 and [Company].status=1" FilterExpression="Name LIKE '%{0}%' OR Item LIKE '%{0}%' OR Name1  LIKE '%{0}%' OR ItemType LIKE '%{0}%' OR convert(StartDate,'System.String') LIKE '%{0}%' OR convert(EndDate,'System.String') LIKE '%{0}%' ">
-            <FilterParameters>
-                                            <asp:ControlParameter ControlID="txtSearch" Name="Name" PropertyName="Text" />
-                                            <asp:ControlParameter ControlID="txtSearch" Name="Item" PropertyName="Text" />                                            
-                                            <asp:ControlParameter ControlID="txtSearch" Name="Name1" PropertyName="Text" />
-                                            <asp:ControlParameter ControlID="txtSearch" Name="ItemType" PropertyName="Text" />
-                                             <asp:ControlParameter ControlID="txtSearch" Name="StartDate" PropertyName="Text" />
-                                            <asp:ControlParameter ControlID="txtSearch" Name="EndDate" PropertyName="Text" />
-                                        </FilterParameters>        
-            
-       </asp:SqlDataSource>--%>
-      
+            </div>          
 
     </form>
 </asp:Content>
