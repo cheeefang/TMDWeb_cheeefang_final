@@ -218,6 +218,7 @@
 
                 </div>
             </div>
+        <!--Useless Gridview -->
             <div class="row">
                 <asp:GridView ID="gvCom" runat="server"  Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover" visible="false">
                             <Columns>
