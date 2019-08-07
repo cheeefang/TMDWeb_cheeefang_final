@@ -91,7 +91,7 @@
             <div runat="server" id="adminDiv" >
                 <!-- Admin Navigation -->
 
-                <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;">
+                <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;" id="cancerNav" runat="server">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
@@ -113,7 +113,7 @@
                     <!-- /.navbar-top-links -->
 
                     <div class="navbar-default sidebar" role="navigation">
-                        <div class="sidebar-nav navbar-collapse">
+                        <div class="sidebar-nav navbar-collapse" runat="server" id="cancerDiv">
                             <ul class="nav" id="side-menu">
                                 <li>
                                     <div class="auto-style1">

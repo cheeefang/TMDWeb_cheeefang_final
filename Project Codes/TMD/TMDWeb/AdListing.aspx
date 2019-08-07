@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="AdListing.aspx.cs" Inherits="targeted_marketing_display.AdListing" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
       .GridViewEditRow input[type=text] {
@@ -130,18 +131,28 @@ body
     bcgDiv.style.width = "100%";
  
     bcgDiv.style.display = "block";
-    imgDiv.style.display = "block";
+        imgDiv.style.display = "block";
+        document.getElementById('<%=Master.FindControl("cancerDiv").ClientID %>').style.opacity = "0.3";
+      
+        document.getElementById('<%=Master.FindControl("cancerDiv").ClientID %>').style.pointerEvents="None";
+        document.getElementById('<%=Master.FindControl("cancerNav").ClientID %>').style.pointerEvents="None";
     return false;
 }
 function HideDiv() {
     var bcgDiv = document.getElementById("divBackground");
     var imgDiv = document.getElementById("divImage");
     var imgFull = document.getElementById("imgFull");
+    
     if (bcgDiv != null) {
         bcgDiv.style.display = "none";
         imgDiv.style.display = "none";
         imgFull.style.display = "none";
+    
     }
+        document.getElementById('<%=Master.FindControl("cancerDiv").ClientID %>').style.opacity = "1";
+    document.getElementById('<%=Master.FindControl("cancerDiv").ClientID %>').style.pointerEvents = "auto";
+     document.getElementById('<%=Master.FindControl("cancerNav").ClientID %>').style.pointerEvents="auto";
+    
 }
 </script>
 

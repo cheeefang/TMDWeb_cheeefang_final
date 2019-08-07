@@ -44,8 +44,9 @@ namespace targeted_marketing_display
 
 
             }
-            
 
+            Control c = this.Master.FindControl("cancerDiv");
+            
         }
         public void BindGrid()
         {
