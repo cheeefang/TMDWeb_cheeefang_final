@@ -145,17 +145,9 @@ function HideDiv() {
 }
 </script>
 
-                        <div id="divBackground" class="modal fade">
-</div>
-<div id="divImage" style="padding:0px">
-    <button type="button" class="close" onclick="HideDiv()">X</button>
 
-            <img id="imgLoader" alt="" src="images/loader.gif" />
-            <img id="imgFull" alt="" src="" style="display: none; height:100%; width:100%;object-fit: cover;" />
-     
-</div>
         <asp:ScriptManager id="script1" runat="server"></asp:ScriptManager>
-          
+     
             <!--button-->
             <div class="row">
                 <div class="col-lg-12">
@@ -190,6 +182,17 @@ function HideDiv() {
                   
                 </div>
                  </div>
+
+                             <div id="divBackground" class="modal">
+</div>
+<div id="divImage" style="padding:0px">
+    <button type="button" class="close" onclick="HideDiv()">X</button>
+
+            <img id="imgLoader" alt="" src="images/loader.gif" />
+            <img id="imgFull" alt="" src="" style="display: none; height:100%; width:100%;object-fit: cover;" />
+     
+</div>
+
          <div runat="server" class="alert alert-success" id="alertSuccessCreate" visible="False">
                     <strong>Successfully Created Advertisement</strong> 
                     <asp:Label runat="server" ID="Label2"></asp:Label>

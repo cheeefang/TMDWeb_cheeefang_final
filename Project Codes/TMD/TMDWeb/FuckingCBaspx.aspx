@@ -7,13 +7,13 @@
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
 
-#myImg {
+#Image1 {
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
 }
 
-#myImg:hover {opacity: 0.7;}
+#Image1:hover {opacity: 0.7;}
 
 /* The Modal (background) */
 .modal {
@@ -102,7 +102,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <p>We use JavaScript to trigger the modal and to display the current image inside the modal when it is clicked on. Also note that we use the value from the image's "alt" attribute as an image caption text inside the modal.</p>
 
 
-    <asp:Image ID="myImg" runat="server" ImageUrl="https://www.w3schools.com/howto/img_snow.jpg" style="width:100%;max-width:300px"  AlternateText="fuckoff" />
+    <asp:Image ID="Image1" runat="server" ImageUrl="https://www.w3schools.com/howto/img_snow.jpg" style="width:100%;max-width:300px"  AlternateText="fuckoff" />
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -116,7 +116,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 var modal = document.getElementById("myModal");
 
 // Get the image and insert it inside the modal - use its "alt" text as a caption
-var img = document.getElementById("myImg");
+var img = document.getElementById("Image1");
 var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");
 img.onclick = function(){
