@@ -51,7 +51,7 @@ body
     top: 0;
     left: 0;
     background-color: White;
-    height: 550px;
+    height: 600px;
     width: 600px;
     padding: 0px;
     border: solid 1px black;
@@ -74,12 +74,13 @@ body
 }
 .close {
   position: absolute;
-  top: 15px;
-  right: 35px;
+  top: 0px;
+  right: 0px;
   color: darkslateblue;
   font-size: 40px;
   font-weight: bold;
   transition: 0.3s;
+  opacity:1;
 }
 .close:hover,
 .close:focus {
@@ -197,11 +198,13 @@ function HideDiv() {
                              <div id="divBackground" class="modal">
 </div>
 <div id="divImage" style="padding:0px">
-    <button type="button" class="close" onclick="HideDiv()">X</button>
+    <span class="close"  onclick="HideDiv()">&times;</span>
+
 
             <img id="imgLoader" alt="" src="images/loader.gif" />
             <img id="imgFull" alt="" src="" style="display: none; height:100%; width:100%;object-fit: cover;" />
-     
+
+
 </div>
 
          <div runat="server" class="alert alert-success" id="alertSuccessCreate" visible="False">
