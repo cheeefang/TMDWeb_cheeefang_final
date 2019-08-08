@@ -398,7 +398,7 @@
                                             <asp:TextBox ID="txtSearch" class="form-control" runat="server" placeholder="Search..." AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>
                                       
                                             <span class="input-group-btn">
-                                                <asp:LinkButton runat="server" class="btn btn-default" ID="btnRun" Style="height: 34px;" Text="<i class='fa fa-search'></i>" OnClick="btnRun_Click"  />
+                                                <asp:LinkButton runat="server" class="btn btn-default" ID="btnRun" Style="height: 34px;" Text="<i class='fa fa-search'></i>"/>
                                             </span>
 
 
@@ -454,18 +454,20 @@
                            </asp:GridView>
                                     </div>
                                 </ContentTemplate>
+                                                <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="btnRun" EventName="Click" />
+            </Triggers>
                                              </asp:UpdatePanel>
                                
                                       
                                     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" 
-                               FilterExpression="BillboardCode LIKE '%{0}%' OR AddressLn LIKE '%{0}%' OR City LIKE '%{0}%' OR Country LIKE '%{0}%' OR postalCode LIKE '%{0}%'" 
+                               FilterExpression="BillboardCode LIKE '%{0}%' OR Address LIKE '%{0}%' OR convert(Latitude,'System.String') LIKE '%{0}%' OR convert(Longtitude,'System.String') LIKE '%{0}%'"
                                         SelectCommand="SELECT BillboardID,BillboardCode, Latitude ,Longtitude ,(( AddressLn1) + ' '+( AddressLn2 )+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address FROM BillboardLocation where status=1 ">
                                         <FilterParameters>
-                                            <asp:ControlParameter ControlID="txtSearch" Name="City" PropertyName="Text" />
-                                            <asp:ControlParameter ControlID="txtSearch" Name="AddressLn" PropertyName="Text" />
+                                                       <asp:ControlParameter ControlID="txtSearch" Name="Address" PropertyName="Text" />
                                             <asp:ControlParameter ControlID="txtSearch" Name="BillboardCode" PropertyName="Text" />
-                                            <asp:ControlParameter ControlID="txtSearch" Name="Country" PropertyName="Text" />
-                                            <asp:ControlParameter ControlID="txtSearch" Name="postalCode" PropertyName="Text" />
+                                            <asp:ControlParameter ControlID="txtSearch" Name="Latitude" PropertyName="Text" />
+                                            <asp:ControlParameter ControlID="txtSearch" Name="Longtitude" PropertyName="Text" />
 
                                         </FilterParameters>
                                     </asp:SqlDataSource>
