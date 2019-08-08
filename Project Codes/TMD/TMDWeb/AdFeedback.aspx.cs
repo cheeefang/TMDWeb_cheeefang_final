@@ -480,10 +480,10 @@ namespace targeted_marketing_display
                 DataTable chartAdv = new DataTable();
                 chartAdv.Columns.Add("Adv", typeof(string));
                 chartAdv.Columns.Add("No", typeof(string));
-                DataTable chartAdvTs = new DataTable();
-                chartAdvTs.Columns.Add("Adv", typeof(string));
-                chartAdvTs.Columns.Add("No", typeof(string));
-                chartAdvTs.Columns.Add("Timestamp", typeof(string));
+                //DataTable chartAdvTs = new DataTable();
+                //chartAdvTs.Columns.Add("Adv", typeof(string));
+                //chartAdvTs.Columns.Add("No", typeof(string));
+                //chartAdvTs.Columns.Add("Timestamp", typeof(string));
                 DataTable chartAdvAge = new DataTable();
                 chartAdvAge.Columns.Add("Adv", typeof(string));
                 chartAdvAge.Columns.Add("No", typeof(string));
@@ -682,7 +682,7 @@ namespace targeted_marketing_display
 
                             while (dr.Read())
                             {
-                                string name = r.Cells[2].Text;
+                                string name = r.Cells[3].Text;
                                 int no = Convert.ToInt32(dr["NoOfPax"]);
                                 string gender = dr["GenderID"].ToString();
                                 chartAdvGender.Rows.Add(name, no, gender);
@@ -785,13 +785,15 @@ namespace targeted_marketing_display
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                    //chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font=
                                     chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
                                     chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
                                     chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
                                     chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
                                     chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.None;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 20F, System.Drawing.FontStyle.Bold);
                                     chartFb.DataSource = chartAdvEmotion;
                                     chartFb.DataBind();
                                 }

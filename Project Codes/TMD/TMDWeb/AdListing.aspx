@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="AdListing.aspx.cs" Inherits="targeted_marketing_display.AdListing" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="AdListing.aspx.cs" Inherits="targeted_marketing_display.AdListing" EnableEventValidation="false" %>
+<%--NOTE:I put event validation=false because i manipulate the side menu with javascript and if i dont include it,it will show error.It compromises security though--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
       .GridViewEditRow input[type=text] {
@@ -73,7 +73,7 @@ body
     display:block;
     padding:0 25px 0 5px;
 }
-.close {
+#imageCloser {
   position: absolute;
   top: 0px;
   right: 0px;
@@ -83,8 +83,8 @@ body
   transition: 0.3s;
   opacity:1;
 }
-.close:hover,
-.close:focus {
+#imageCloser:hover,
+#imageCloser:focus {
   color: #bbb;
   text-decoration: none;
   cursor: pointer;
@@ -134,26 +134,53 @@ body
  
     bcgDiv.style.display = "block";
         imgDiv.style.display = "block";
-        document.getElementById('<%=Master.FindControl("cancerDiv").ClientID %>').style.opacity = "0.4";
+        //if not admin
+        if ('<%=fuckoff %>'==0) {
+            document.getElementById('<%=Master.FindControl("stupidDiv").ClientID %>').style.opacity = "0.3";
+
+            document.getElementById('<%=Master.FindControl("stupidDiv").ClientID %>').style.pointerEvents = "None";
+            document.getElementById('<%=Master.FindControl("stupidNav").ClientID %>').style.pointerEvents = "None";
+        }
+        //if admin
+        else {
+             document.getElementById('<%=Master.FindControl("cancerDiv").ClientID %>').style.opacity = "0.3";
       
         document.getElementById('<%=Master.FindControl("cancerDiv").ClientID %>').style.pointerEvents="None";
-        document.getElementById('<%=Master.FindControl("cancerNav").ClientID %>').style.pointerEvents="None";
+        document.getElementById('<%=Master.FindControl("cancerNav").ClientID %>').style.pointerEvents = "None";
+        }
+       
+        
     return false;
 }
 function HideDiv() {
     var bcgDiv = document.getElementById("divBackground");
     var imgDiv = document.getElementById("divImage");
     var imgFull = document.getElementById("imgFull");
-    
+
     if (bcgDiv != null) {
         bcgDiv.style.display = "none";
         imgDiv.style.display = "none";
         imgFull.style.display = "none";
-    
+
     }
-        document.getElementById('<%=Master.FindControl("cancerDiv").ClientID %>').style.opacity = "1";
-    document.getElementById('<%=Master.FindControl("cancerDiv").ClientID %>').style.pointerEvents = "auto";
-     document.getElementById('<%=Master.FindControl("cancerNav").ClientID %>').style.pointerEvents="auto";
+    //if not admin
+    if ('<%=fuckoff %>' == 0) {
+        document.getElementById('<%=Master.FindControl("stupidDiv").ClientID %>').style.opacity = "1";
+
+          document.getElementById('<%=Master.FindControl("stupidDiv").ClientID %>').style.pointerEvents = "auto";
+          document.getElementById('<%=Master.FindControl("stupidNav").ClientID %>').style.pointerEvents = "auto";
+
+
+    }
+    //if admin
+      else {
+          document.getElementById('<%=Master.FindControl("cancerDiv").ClientID %>').style.opacity = "1";
+          document.getElementById('<%=Master.FindControl("cancerDiv").ClientID %>').style.pointerEvents = "auto";
+          document.getElementById('<%=Master.FindControl("cancerNav").ClientID %>').style.pointerEvents = "auto";
+    }
+
+
+   
     
 }
 </script>
@@ -199,7 +226,7 @@ function HideDiv() {
                              <div id="divBackground" class="modal">
 </div>
 <div id="divImage" style="padding:0px">
-    <span class="close"  onclick="HideDiv()">&times;</span>
+    <span class="close" id="imageCloser" onclick="HideDiv()">&times;</span>
 
 
             <img id="imgLoader" alt="" src="images/loader.gif" />
@@ -225,7 +252,7 @@ function HideDiv() {
                 </div>
 
            <div runat="server" class="alert alert-success" id="alertSuccessDelete" visible="False">
-                    <strong></strong> 
+                    <strong>Success</strong> 
                     <asp:Label runat="server" ID="Label3"></asp:Label>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>

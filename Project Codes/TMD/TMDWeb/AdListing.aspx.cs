@@ -23,7 +23,7 @@ namespace targeted_marketing_display
 
 
 
-
+        protected int fuckoff;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -44,9 +44,16 @@ namespace targeted_marketing_display
 
 
             }
-
-            Control c = this.Master.FindControl("cancerDiv");
-            
+          
+        
+            if (Session["userType"].ToString() == "Admin")
+            {
+                 fuckoff = 1;
+            }
+            else
+            {
+                 fuckoff = 0;
+            }
         }
         public void BindGrid()
         {
@@ -369,6 +376,17 @@ namespace targeted_marketing_display
 
         protected void btnDelete_Command(object sender, CommandEventArgs e)
         {
+
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+
+
+
+            // instantiate and open connection
+            conn = new
+                SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+            conn.Open();
+
             if (e.CommandName == "DeleteAdMessage")
             {
                 int index = Convert.ToInt32(e.CommandArgument);
@@ -401,15 +419,43 @@ namespace targeted_marketing_display
                 alertSuccessDelete.Visible = true;
                 alertSuccessCreate.Visible = false;
                 alertSuccessUpdate.Visible = false;
-                Label3.Text = " Advert# " + aObj.AdvID + " Has Been Deleted Successfully!";
-
+                Label3.Text = " Advert '" + aObj.Name + "' Has Been Deleted Successfully!";
+                //" SELECT [Advertisement].AdvID,[Company].Name as CompanyName, [Advertisement].Name as AdvertName, [Advertisement].Item, [Advertisement].ItemType,[StartDate], [EndDate]FROM " +
+                // "[Advertisement] inner join [Company] on Company.CompanyID =[Advertisement].CompanyID where [Advertisement].status = 1 and[Company].status = 1", conn);
                 Database db = new Database();
+                if (Session["userType"].ToString() == "Admin")
+                {
+                    SqlCommand cmd = new SqlCommand("SELECT [Advertisement].AdvID,[Company].Name as CompanyName, [Advertisement].Name as AdvertName, [Advertisement].Item, [Advertisement].ItemType,[StartDate], [EndDate]FROM " +
+                        "[Advertisement] inner join [Company] on Company.CompanyID =[Advertisement].CompanyID where [Advertisement].status = 1 and[Company].status = 1",conn);
+                    SqlDataAdapter sda = new SqlDataAdapter();
+                    DataTable dt = new DataTable();
+                    sda.SelectCommand = cmd;
+                    sda.Fill(dt);
+                    GridView1.DataSource = dt;
+                    GridView1.DataBind();
+                }
+                else
+                {
+                    User uObj = new User();
+                    UserManagement uDao = new UserManagement();
+                    uObj = uDao.getUserByID(Session["userID"].ToString());
+                    SqlCommand cmd = new SqlCommand("SELECT [Advertisement].AdvID,[Company].Name as CompanyName, [Advertisement].Name as AdvertName, [Advertisement].Item, [Advertisement].ItemType,[StartDate], [EndDate]FROM " +
+                        "[Advertisement] inner join [Company] on Company.CompanyID =[Advertisement].CompanyID where [Advertisement].status = 1 and[Company].status = 1 and [Advertisement].CompanyID=@comID",conn);
+                    SqlParameter param = new SqlParameter();
+                    param.ParameterName = "@comID";
+                    param.Value = uObj.CompanyID.ToString();
+                    cmd.Parameters.Add(param);
+                    SqlDataAdapter sda = new SqlDataAdapter();
+                    DataTable dt = new DataTable();
+                    sda.SelectCommand = cmd;
+                    sda.Fill(dt);
+                    GridView1.DataSource = dt;
+                    GridView1.DataBind();
 
-                SqlCommand cmd = new SqlCommand("Select * from [Advertisement] WHERE Status = 1");
-                DataSet ds = db.getDataSet(cmd);
+                }
+                
 
-                //gvUser.DataSource = ds;
-                GridView1.DataBind();
+               
 
             }
         }

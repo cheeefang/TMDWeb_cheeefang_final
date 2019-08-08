@@ -63,31 +63,97 @@
         
     </script>
   <script type="text/javascript">
-      function checkRadioBtnADV(id) {
-          var gv = document.getElementById('<%=gvAdv.ClientID %>');
-
-          for (var i = 1; i < gv.rows.length; i++) {
-              var radioBtn = gv.rows[i].cells[0].getElementsByTagName("input");
+      <%-- function checkRadioBtnADV(id) {
+          var gv = document.getElementById('<%=gvAdv %>');
+          var rbs = gv.getElementsByTagName("input");
+          var row = rb.parentNode.parentNode;
+          for (var i = 0; i < rbs.length; i++) {
+              
 
               // Check if the id not same
-              if (radioBtn[0].id != id.id) {
-                  radioBtn[0].checked = false;
+              if (rbs[i].type == "radio") {
+                  if (rbs[i].checked && rbs[i] != rb) {
+                      rbs[i].checked = false;
+                      break;
+                  }
+                  
               }
           }
       }
 
       function checkRadioBtnBB(id) {
-          var gv = document.getElementById('<%=gvBb.ClientID %>');
-
-          for (var i = 1; i < gv.rows.length; i++) {
-              var radioBtn = gv.rows[i].cells[0].getElementsByTagName("input");
+           var gv = document.getElementById('<%=gvBb %>');
+          var rbs = gv.getElementsByTagName("input");
+          var row = rb.parentNode.parentNode;
+          for (var i = 0; i < rbs.length; i++) {
+              
 
               // Check if the id not same
-              if (radioBtn[0].id != id.id) {
-                  radioBtn[0].checked = false;
+              if (rbs[i].type == "radio") {
+                  if (rbs[i].checked && rbs[i] != rb) {
+                      rbs[i].checked = false;
+                      break;
+                  }
+                  
               }
           }
-      }
+      }--%>
+      function RadioCheckAdvert(rb) {
+
+        var gv = document.getElementById("<%=gvAdv.ClientID%>");
+
+        var rbs = gv.getElementsByTagName("input");
+
+ 
+
+        var row = rb.parentNode.parentNode;
+
+        for (var i = 0; i < rbs.length; i++) {
+
+            if (rbs[i].type == "radio") {
+
+                if (rbs[i].checked && rbs[i] != rb) {
+
+                    rbs[i].checked = false;
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+      }    
+      function RadioCheckBillboard(rb) {
+
+        var gv = document.getElementById("<%=gvBb.ClientID%>");
+
+        var rbs = gv.getElementsByTagName("input");
+
+ 
+
+        var row = rb.parentNode.parentNode;
+
+        for (var i = 0; i < rbs.length; i++) {
+
+            if (rbs[i].type == "radio") {
+
+                if (rbs[i].checked && rbs[i] != rb) {
+
+                    rbs[i].checked = false;
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+    }    
+
+
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" ClientIDMode="Static">
@@ -273,11 +339,12 @@
                         <asp:GridView ID="gvAdv" runat="server" Visible="true" Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover" OnRowDataBound="gvAdv_RowDataBound"
                             AllowPaging="true" PageSize="3" ForeColor="Black" GridLines="Vertical" Height="100%" Width="100%"
                                 BackColor="White" BorderColor="#999999" BorderStyle="Solid"
-                                BorderWidth="1px" CellPadding="3" OnPageIndexChanging="gvAdv_PageIndexChanging" OnSorting="gvAdv_Sorting" >
+                                BorderWidth="1px" CellPadding="3" OnPageIndexChanging="gvAdv_PageIndexChanging" OnSorting="gvAdv_Sorting"  >
                               <AlternatingRowStyle BackColor="#CCCCCC" />
                             <Columns>
                               <asp:TemplateField HeaderText="Select">
-                <ItemTemplate><asp:RadioButton ID="RowSelectorADV" runat="server" onclick="checkRadioBtnADV(this);" />
+                <ItemTemplate>
+                    <asp:RadioButton ID="RowSelectorADV" runat="server" onclick="RadioCheckAdvert(this);" />
 
                 </ItemTemplate>
                                  <ItemStyle Width="3%" HorizontalAlign="Center" />
@@ -375,7 +442,7 @@
                              <AlternatingRowStyle BackColor="#CCCCCC" />
                             <Columns>
                                 <asp:TemplateField HeaderText="Select">
-                <ItemTemplate><asp:RadioButton ID="RowSelectorBB" runat="server" onclick="checkRadioBtnBB(this);" />
+                <ItemTemplate><asp:RadioButton ID="RowSelectorBB" runat="server" onclick="RadioCheckBillboard(this);" />
 
                 </ItemTemplate>
                                     <ItemStyle Width="3%" HorizontalAlign="Center" />
