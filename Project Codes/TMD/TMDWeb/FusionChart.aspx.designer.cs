@@ -11,7 +11,7 @@ namespace targeted_marketing_display
 {
 
 
-    public partial class FuckingCBaspx
+    public partial class FusionChart
     {
 
         /// <summary>

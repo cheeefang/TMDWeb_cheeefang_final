@@ -1772,6 +1772,7 @@
     <Content Include="css\gridview.css" />
     <Content Include="css\newgridview.css" />
     <Content Include="css\TMD.css" />
+    <Content Include="DataProvider.aspx" />
     <Content Include="DiuLeiLoMo.aspx" />
     <Content Include="ExportChartToPDF.aspx" />
     <Content Include="f.aspx" />
@@ -1817,7 +1818,7 @@
     <Content Include="font-awesome\scss\_spinning.scss" />
     <Content Include="font-awesome\scss\_stacked.scss" />
     <Content Include="font-awesome\scss\_variables.scss" />
-    <Content Include="FuckingCBaspx.aspx" />
+    <Content Include="FusionChart.aspx" />
     <Content Include="HorseShit.aspx" />
     <Content Include="Images\1.jpg" />
     <Content Include="Images\2.jpg" />
@@ -1991,6 +1992,7 @@
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="Press_F_To_Pay_Respects.aspx" />
     <Content Include="Testing1234.aspx" />
+    <Content Include="Using_MS_SQL_Server.aspx" />
     <Content Include="webicons\asc.gif" />
     <Content Include="webicons\desc.gif" />
     <None Include="bin\TMDWeb.dll.config" />
@@ -2155,6 +2157,10 @@
     <Compile Include="CreateNewUser.aspx.designer.cs">
       <DependentUpon>CreateNewUser.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DataProvider.aspx.cs">
+      <DependentUpon>DataProvider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="DiuLeiLoMo.aspx.cs">
       <DependentUpon>DiuLeiLoMo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2201,12 +2207,12 @@
     <Compile Include="FeedBackBillboard.aspx.designer.cs">
       <DependentUpon>FeedBackBillboard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FuckingCBaspx.aspx.cs">
-      <DependentUpon>FuckingCBaspx.aspx</DependentUpon>
+    <Compile Include="FusionChart.aspx.cs">
+      <DependentUpon>FusionChart.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FuckingCBaspx.aspx.designer.cs">
-      <DependentUpon>FuckingCBaspx.aspx</DependentUpon>
+    <Compile Include="FusionChart.aspx.designer.cs">
+      <DependentUpon>FusionChart.aspx</DependentUpon>
     </Compile>
     <Compile Include="HorseShit.aspx.cs">
       <DependentUpon>HorseShit.aspx</DependentUpon>
@@ -2322,6 +2328,10 @@
     </Compile>
     <Compile Include="UpdateOwnProfile.aspx.designer.cs">
       <DependentUpon>UpdateOwnProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Using_MS_SQL_Server.aspx.cs">
+      <DependentUpon>Using_MS_SQL_Server.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewUser.aspx.cs">
       <DependentUpon>ViewUser.aspx</DependentUpon>

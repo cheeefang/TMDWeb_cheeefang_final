@@ -11,6 +11,16 @@
     <meta name="author" content="NYP SIT">
     <!--w3 Schools css-->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!--Fusion Chart-->
+    <script type="text/javascript" src="js/fusioncharts.js"></script>
+    <!--Fusion Chart CSS-->
+      <link href="css/SampleStyleSheet.css" rel="stylesheet" />
+    <!--some stuff-->
+      <!-- Step 1 - Include the fusioncharts core library -->
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <!-- Step 2 - Include the fusion theme -->
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+
 <!--mapbox api-->
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
       <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />

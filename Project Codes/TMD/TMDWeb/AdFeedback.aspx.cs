@@ -439,35 +439,43 @@ namespace targeted_marketing_display
             //if (ddlCom.SelectedIndex==0 ||gvAdv)
 
 
-
-
-
-            if (rbNo.Checked == false && rbAge.Checked == false && rbGender.Checked == false && rbEmotion.Checked == false)
+            if (startDateTB.Text == "" || endDateTB.Text == "")
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showVadModal();", true);
+                dateNull.Visible = true;
+                RadioButtonNull.Visible = false;
             }
-            else if (ddlCom.SelectedItem.Text.Substring(1, 1) == "-")
+            else
             {
-                lblFbc.Visible = true;
-                chartFb.Visible = true;
-                if (Session["modalId"].ToString() == "Adv")
+
+                dateNull.Visible = false;
+                if (rbNo.Checked == false && rbAge.Checked == false && rbGender.Checked == false && rbEmotion.Checked == false)
                 {
-                    modalAdv();
+                    RadioButtonNull.Visible = true;
+                    dateNull.Visible = false;
                 }
-                else if (Session["modalId"].ToString() == "Bb")
+                else if (ddlCom.SelectedItem.Text.Substring(1, 1) == "-")
                 {
-                    modalBb();
+                    lblFbc.Visible = true;
+                    chartFb.Visible = true;
+                    if (Session["modalId"].ToString() == "Adv")
+                    {
+                        modalAdv();
+                    }
+                    else if (Session["modalId"].ToString() == "Bb")
+                    {
+                        modalBb();
+                    }
+                    else if (Session["modalId"].ToString() == "No Selection")
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showVadModal2();", true);
+                    }
                 }
-                else if (Session["modalId"].ToString() == "No Selection")
+                else if (ddlCom.SelectedItem.Text.Substring(1, 1) != "-")
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showVadModal2();", true);
+                    lblFbc.Visible = true;
+                    chartFb.Visible = true;
+                    modalCom();
                 }
-            }
-            else if (ddlCom.SelectedItem.Text.Substring(1, 1) != "-")
-            {
-                lblFbc.Visible = true;
-                chartFb.Visible = true;
-                modalCom();
             }
         }
 
