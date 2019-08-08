@@ -8,7 +8,7 @@ using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Text;
-using InfoSoftGlobal;
+
 
 
 public partial class Using_MS_SQL_Server : System.Web.UI.Page
@@ -69,4 +69,4 @@ public partial class Using_MS_SQL_Server : System.Web.UI.Page
     //            true);              // Register with JavaScript object
         
     //}
-//}
+}

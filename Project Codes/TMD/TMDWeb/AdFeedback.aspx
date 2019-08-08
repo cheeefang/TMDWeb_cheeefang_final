@@ -260,6 +260,7 @@
                         <asp:Button ID="btnGen" runat="server"  Font-Bold="true" Text="Generate Chart" CssClass="btn btn-primary" OnClick="btnGen_Click" />
                     </div>
                 </div>
+        
             <div class="row" style="margin-top:30px">
                 <div class="col-lg-12">
                     <div class="form-group">
@@ -274,7 +275,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                      
-                    <asp:Chart ID="chartFb" class="chartFb" runat="server" ClientIDMode="Static">
+                    <asp:Chart ID="chartFb" class="chartFb" runat="server" ClientIDMode="Static" Palette="Bright">
                         <series>
                           
                             <asp:Series Name="Series1" Legend="Legend1">
@@ -292,37 +293,6 @@
                 <br />
             
 
-
-                <div class="col-lg-3">
-
-                </div>
-            </div>
-        <!--Useless Gridview -->
-            <div class="row">
-                <asp:GridView ID="gvCom" runat="server"  Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover" visible="false">
-                            <Columns>
-                                <asp:BoundField DataField="AdvID" HeaderText="Advertisement ID" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
-                                        <ItemStyle HorizontalAlign="Center" Width="2%"></ItemStyle>
-                                </asp:BoundField>
-                                <asp:BoundField DataField="BillboardID" HeaderText="Billboard ID" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
-                                        <ItemStyle HorizontalAlign="Center" Width="2%"></ItemStyle>
-                                </asp:BoundField>
-                                <asp:BoundField DataField="totalcount" HeaderText="Total Count" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
-                                        <ItemStyle HorizontalAlign="Center" Width="2%"></ItemStyle>
-                                </asp:BoundField>
-                                <asp:BoundField DataField="Age" HeaderText="Age" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
-                                        <ItemStyle HorizontalAlign="Center" Width="2%"></ItemStyle>
-                                </asp:BoundField>
-                                <asp:BoundField DataField="Gender" HeaderText="Gender" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
-                                        <ItemStyle HorizontalAlign="Center" Width="2%"></ItemStyle>
-                                </asp:BoundField>
-                                <asp:BoundField DataField="Emotion" HeaderText="Emotion" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="100px">
-                                        <ItemStyle HorizontalAlign="Center" Width="2%"></ItemStyle>
-                                </asp:BoundField>
-                            </Columns>
-                        </asp:GridView>
-            </div>
-        </div>
 
         <div id="AdvModal" class="modal fade" role="dialog">
             <div class="modal-dialog modal-lg">
