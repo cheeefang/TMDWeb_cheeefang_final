@@ -128,7 +128,9 @@
                         <div class="table-responsive">
                             <%--                        <table class="table table-striped table-bordered table-hover" style="width: 100%">--%>
 
-                            <asp:GridView ID="GridView1" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Height="100%" Width="100%" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource4" AllowPaging="True" OnPreRender="GridView1_PreRender" ForeColor="Black" GridLines="Vertical">
+                            <asp:GridView ID="GridView1" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" 
+                                Height="100%" Width="100%" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource4"
+                                AllowPaging="True" OnPreRender="GridView1_PreRender" ForeColor="Black" GridLines="Vertical">
                                 <AlternatingRowStyle BackColor="#CCCCCC" />
                                 <Columns>
 
@@ -203,7 +205,8 @@
                                         <itemtemplate>
 
                                             
-                                        <asp:LinkButton ID="DeleteBtn"  OnClientClick="return deleteFunction();"  OnCommand="btnDelete_Command" runat="server" CommandName="DeleteBBMessage" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
+                                        <asp:LinkButton ID="DeleteBtn"  OnClientClick="return deleteFunction();"  OnCommand="btnDelete_Command" runat="server" CommandName="DeleteBBMessage"
+                                            CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
 
                                              <i class="fa fa-trash"></i>
                                              
@@ -234,7 +237,9 @@
 
                             <asp:Label ID="Label1" style="color:darkslateblue" Font-Bold="true" runat="server" Text="Label"></asp:Label>
 
-                            <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT BillboardID,BillboardCode, Latitude ,Longtitude ,(( AddressLn1) + ' '+( AddressLn2 )+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address FROM BillboardLocation where status=1 " FilterExpression="BillboardCode LIKE '%{0}%' OR Address LIKE '%{0}%' OR convert(Latitude,'System.String') LIKE '%{0}%' OR convert(Longtitude,'System.String') LIKE '%{0}%'">
+                            <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" 
+                                SelectCommand="SELECT BillboardID,BillboardCode, Latitude ,Longtitude ,(( AddressLn1) + ' '+( AddressLn2 )+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address FROM BillboardLocation where status=1 "
+                                FilterExpression="BillboardCode LIKE '%{0}%' OR Address LIKE '%{0}%' OR convert(Latitude,'System.String') LIKE '%{0}%' OR convert(Longtitude,'System.String') LIKE '%{0}%'">
                                  <FilterParameters>
                                             <asp:ControlParameter ControlID="tbSearch" Name="BillboardCode" PropertyName="Text" />
                                             <asp:ControlParameter ControlID="tbSearch" Name="Latitude" PropertyName="Text" />                                            

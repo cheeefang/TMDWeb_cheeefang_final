@@ -134,7 +134,7 @@ body
  
     bcgDiv.style.display = "block";
         imgDiv.style.display = "block";
-        document.getElementById('<%=Master.FindControl("cancerDiv").ClientID %>').style.opacity = "0.3";
+        document.getElementById('<%=Master.FindControl("cancerDiv").ClientID %>').style.opacity = "0.4";
       
         document.getElementById('<%=Master.FindControl("cancerDiv").ClientID %>').style.pointerEvents="None";
         document.getElementById('<%=Master.FindControl("cancerNav").ClientID %>').style.pointerEvents="None";
