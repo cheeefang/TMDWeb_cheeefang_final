@@ -1631,8 +1631,10 @@ namespace targeted_marketing_display
                         chartFb.Series["Series1"].XValueMember = "Com";
                         chartFb.Series["Series1"].YValueMembers = "No";
                         chartFb.Series["Series1"].IsValueShownAsLabel = true;
+
                         //chartFb.Series["Series1"].AxisLabel = "fuck off";
                         //chartFb.ChartAreas["ChartArea1"].Area3DStyle.Enable3D=true;
+                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font=new System.Drawing.Font("sans-serif", 6F, System.Drawing.FontStyle.Bold);
                         chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion Data for "+companyName;
                         chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                         chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
