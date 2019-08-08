@@ -55,6 +55,7 @@ body
     width: 600px;
     padding: 0px;
     border: solid 1px black;
+    margin-top:150px;
 }
 #videoDog{
      object-fit: cover;
