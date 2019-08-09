@@ -536,7 +536,7 @@ namespace targeted_marketing_display
 
                             while (dr.Read())
                             {
-                                string name = r.Cells[3].Text;
+                                string name = "Advert:"+r.Cells[3].Text;
                                 int no = Convert.ToInt32(dr["totalPax"]);
                                 
                                 chartAdv.Rows.Add(name, no);
@@ -546,13 +546,14 @@ namespace targeted_marketing_display
                                 chartFb.Series["Series1"].YValueMembers = "No";
                                 chartFb.Series["Series1"].IsValueShownAsLabel = true;
                                 chartFb.Series["Series1"]["PixelPointWidth"] = "60";
+                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                 chartFb.ChartAreas["ChartArea1"].AxisX.Title = "";
                                 chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                 chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                 chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
                                 chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
                                 chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 60;
                                 chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
                                 chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
                                 chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 50;
@@ -590,6 +591,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -614,6 +616,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -638,6 +641,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -662,6 +666,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -701,6 +706,7 @@ namespace targeted_marketing_display
                                 chartFb.Series["Series1"].YValueMembers = "No";
                                 chartFb.Series["Series1"].IsValueShownAsLabel = true;
                                 chartFb.Series["Series1"]["PixelPointWidth"] = "50";
+                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                 chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Gender data for " + name;
                                 chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                 chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -743,6 +749,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -767,6 +774,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -791,6 +799,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -817,6 +826,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -841,6 +851,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -1036,6 +1047,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -1060,6 +1072,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -1084,6 +1097,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -1108,6 +1122,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Age";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -1156,6 +1171,7 @@ namespace targeted_marketing_display
                                 chartFb.Series["Series1"].YValueMembers = "No";
                                 chartFb.Series["Series1"].IsValueShownAsLabel = true;
                                 chartFb.Series["Series1"]["PixelPointWidth"] = "60";
+                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                 chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
                                 chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                 chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -1205,6 +1221,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -1229,6 +1246,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -1253,6 +1271,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -1276,6 +1295,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                                     chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -1299,6 +1319,7 @@ namespace targeted_marketing_display
                                     chartFb.Series["Series1"].XValueMember = "Emotion";
                                     chartFb.Series["Series1"].YValueMembers = "No";
                                     chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                                     chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
                                     chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                                     chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -1383,6 +1404,7 @@ namespace targeted_marketing_display
                         chartFb.Series["Series1"].YValueMembers = "no";
                         chartFb.Series["Series1"].IsValueShownAsLabel = true;
                         chartFb.Series["Series1"]["PixelPointWidth"] = "60";
+                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                         chartFb.ChartAreas["ChartArea1"].AxisX.Title = "";
                         chartFb.ChartAreas["ChartArea1"].AxisY.Title = "Total No. Of Pax";
                         chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -1475,7 +1497,8 @@ namespace targeted_marketing_display
                             chartFb.Series["Series1"].XValueMember = "Com";
                             chartFb.Series["Series1"].YValueMembers = "No";
                             chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                            chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age Groups for "+ companyName;
+                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age Groups for "+ companyName;
                             chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                             chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                             chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -1541,6 +1564,7 @@ namespace targeted_marketing_display
                         chartFb.Series["Series1"].IsValueShownAsLabel = true;
                         chartFb.Series["Series1"]["PixelPointWidth"] = "60";
                         // chartFb.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = true;
+                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                         chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Gender Data for "+ companyName;
                         chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                         chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
@@ -1634,7 +1658,7 @@ namespace targeted_marketing_display
 
                         //chartFb.Series["Series1"].AxisLabel = "fuck off";
                         //chartFb.ChartAreas["ChartArea1"].Area3DStyle.Enable3D=true;
-                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font=new System.Drawing.Font("sans-serif", 6F, System.Drawing.FontStyle.Bold);
+                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font=new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
                         chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion Data for "+companyName;
                         chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                         chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
