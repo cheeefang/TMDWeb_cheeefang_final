@@ -181,5 +181,16 @@ namespace targeted_marketing_display
         {
             LabelPaging.Text = "Displaying Page " + (gvUser.PageIndex + 1).ToString() + " of " + gvUser.PageCount.ToString();
         }
+
+        protected void gvUser_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvUser.PageIndex = e.NewPageIndex;
+            gvUser.DataBind();
+          
+            createSuccess.Visible = false;
+            updateSuccess.Visible = false;
+            deleteFailure.Visible = false;
+            alertSuccess.Visible = false;
+        }
     }
 }

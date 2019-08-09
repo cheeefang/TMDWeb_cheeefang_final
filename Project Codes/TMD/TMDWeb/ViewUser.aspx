@@ -132,7 +132,7 @@
 
 
                             <asp:GridView ID="gvUser" runat="server" CssClass="table table-striped table-bordered table-hover" AutoGenerateColumns="False" Height="100%" Width="100%" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1"
-                                AllowPaging="True" OnPreRender="gvUser_PreRender" ForeColor="Black" GridLines="Vertical">
+                                AllowPaging="True" OnPreRender="gvUser_PreRender" ForeColor="Black" GridLines="Vertical" OnPageIndexChanging="gvUser_PageIndexChanging">
                                
                                 <AlternatingRowStyle BackColor="#CCCCCC" />
                                

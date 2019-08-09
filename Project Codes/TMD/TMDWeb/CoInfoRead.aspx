@@ -95,7 +95,7 @@
                             <asp:GridView ID="GridView3" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" Height="100%" Width="100%"
                                 BackColor="White" BorderColor="#999999" BorderStyle="Solid"
                                 BorderWidth="1px" CellPadding="3" DataSourceID="SqlDataSource1" AllowPaging="True" OnPreRender="GridView3_PreRender" 
-                                OnSelectedIndexChanged="GridView3_SelectedIndexChanged" ForeColor="Black" GridLines="Vertical">
+                                OnSelectedIndexChanged="GridView3_SelectedIndexChanged" ForeColor="Black" GridLines="Vertical" OnPageIndexChanging="GridView3_PageIndexChanging">
 
                            
 

@@ -86,7 +86,16 @@ namespace targeted_marketing_display
 
         }
 
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
 
+            GridView1.PageIndex = e.NewPageIndex;
+            GridView1.DataBind();
+            alertSuccess.Visible = false;
+            updateSuccess.Visible = false;
+            createSuccess.Visible = false;
+            DeleteFailure.Visible = false;
+        }
         protected void infoBtn_Command(object sender, CommandEventArgs e)
         {
             if (e.CommandName == "BillboardAdInfo")

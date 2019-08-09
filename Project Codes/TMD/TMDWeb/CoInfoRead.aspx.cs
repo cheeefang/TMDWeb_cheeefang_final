@@ -181,7 +181,16 @@ namespace targeted_marketing_display
         }
 
 
+        protected void GridView3_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
 
+            GridView3.PageIndex = e.NewPageIndex;
+            GridView3.DataBind();
+            alertSuccess.Visible = false;
+            updateSuccess.Visible = false;
+            createSuccess.Visible = false;
+            DeleteError.Visible = false;
+        }
 
         protected void GridView3_PreRender(object sender, EventArgs e)
         {

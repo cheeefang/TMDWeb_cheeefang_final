@@ -486,7 +486,9 @@ namespace targeted_marketing_display
             GridView1.PageIndex = e.NewPageIndex;
             GridView1.DataBind();
             BindGrid();
-
+            alertSuccessCreate.Visible = false;
+            alertSuccessDelete.Visible = false;
+            alertSuccessUpdate.Visible = false;
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
