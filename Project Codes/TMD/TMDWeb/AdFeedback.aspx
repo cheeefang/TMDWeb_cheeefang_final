@@ -290,10 +290,12 @@
             
                     </div>
                 </div>
+                </div>
                 <br />
-            
-
-
+            <div id="NoDataDiv" runat="server" visible="false">
+                <asp:Label id="NoDataText" Font-Bold="true" runat="server" text="No Data Available yet"></asp:Label>
+                <img src="~/webicons/NoChartData.png" runat="server" id="NoDataYet" />
+        </div>
         <div id="AdvModal" class="modal fade" role="dialog">
             <div class="modal-dialog modal-lg">
 

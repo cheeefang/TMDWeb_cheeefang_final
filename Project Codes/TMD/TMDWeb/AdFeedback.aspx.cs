@@ -12,17 +12,6 @@ using targeted_marketing_display;
 using targeted_marketing_display.App_Code;
 using System.Globalization;
 using System.Xml.Linq;
-using iTextSharp;
-
-using iTextSharp.text;
-
-using iTextSharp.text.pdf;
-
-using iTextSharp.text.html;
-
-using iTextSharp.text.html.simpleparser;
-
-
 using System.IO;
 
 
@@ -34,7 +23,7 @@ namespace targeted_marketing_display
         {
             //DisableLinkButton(lBtnFrom);
             //DisableLinkButton(lBtnTo);
-
+            
             if (!IsPostBack)
             {
                
@@ -66,26 +55,6 @@ namespace targeted_marketing_display
             }
         }
 
-        protected void btnExport_Click(object sender, EventArgs e)
-        {
-            Document Doc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
-            PdfWriter.GetInstance(Doc, Response.OutputStream);
-            Doc.Open();
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                chartFb.SaveImage(memoryStream, ChartImageFormat.Png);
-                iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(memoryStream.GetBuffer());
-                img.ScalePercent(75f);
-                Doc.Add(img);
-                Doc.Close();
-
-                Response.ContentType = "application/pdf";
-                Response.AddHeader("content-disposition", "attachment;filename=Chart.pdf");
-                Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                Response.Write(Doc);
-                Response.End();
-            }
-        }
 
         private string ConvertSortDirectionToSql(SortDirection sortDirection)
         {
@@ -1592,87 +1561,95 @@ namespace targeted_marketing_display
                     gvCmd.Parameters.AddWithValue("@eDate", edate);
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
-                   
 
-                    while (drGvCmd.Read())
+                    if (drGvCmd.HasRows == true)
                     {
-                    
-                        //int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
-                        //int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
-                        //string name = drGvCmd["Name"].ToString();
-                        //int ageGv = 0;
-                        //string genderGv = "";
-                        //int emotionGv = Convert.ToInt32(drGvCmd["Emotion"]);
-                        //gvComp.Rows.Add(gvId, locationGv, name, ageGv, genderGv, emotionGv);
-                        //gvCom.DataSource = gvComp;
-                        //gvCom.DataBind();
-                        if (Convert.ToInt32(drGvCmd["Emotion"]) == 1)
+                        while (drGvCmd.Read())
                         {
-                            string emo = "Very Happy";
-                            //int location = Convert.ToInt32(row.Cells[1].Text);
-                            //string name = row.Cells[2].Text;
-                            string com =  emo;
-                            int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
-                            chartComEmotion.Rows.Add(com, no);
-                        }
-                        else if (Convert.ToInt32(drGvCmd["Emotion"]) == 2)
-                        {
-                            string emo = "Happy";
-                            //int location = Convert.ToInt32(row.Cells[1].Text);
-                            //string name = row.Cells[2].Text;
-                            string com =   emo;
-                            int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
-                            chartComEmotion.Rows.Add(com, no);
-                        }
-                        else if (Convert.ToInt32(drGvCmd["Emotion"]) == 3)
-                        {
-                            string emo = "Neutral";
-                            //int location = Convert.ToInt32(row.Cells[1].Text);
-                            //string name = row.Cells[2].Text;
-                            string com = emo;
-                            int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
-                            chartComEmotion.Rows.Add(com, no);
-                        }
-                        else if (Convert.ToInt32(drGvCmd["Emotion"]) == 4)
-                        {
-                            string emo = "Unhappy";
-                            //int location = Convert.ToInt32(row.Cells[1].Text);
-                            //string name = row.Cells[2].Text;
-                            string com =  emo;
-                            int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
-                            chartComEmotion.Rows.Add(com, no);
-                        }
-                        else if (Convert.ToInt32(drGvCmd["Emotion"]) == 5)
-                        {
-                            string emo = "Very Unhappy";
-                            //int location = Convert.ToInt32(row.Cells[1].Text);
-                            //string name = row.Cells[2].Text;
-                            string com =  emo;
-                            int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
-                            chartComEmotion.Rows.Add(com, no);
-                        }
-                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                        chartFb.Series["Series1"].XValueMember = "Com";
-                        chartFb.Series["Series1"].YValueMembers = "No";
-                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
 
-                        //chartFb.Series["Series1"].AxisLabel = "fuck off";
-                        //chartFb.ChartAreas["ChartArea1"].Area3DStyle.Enable3D=true;
-                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font=new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion Data for "+companyName;
-                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                        chartFb.DataSource = chartComEmotion;
-                        chartFb.DataBind();
+                            //int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
+                            //int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
+                            //string name = drGvCmd["Name"].ToString();
+                            //int ageGv = 0;
+                            //string genderGv = "";
+                            //int emotionGv = Convert.ToInt32(drGvCmd["Emotion"]);
+                            //gvComp.Rows.Add(gvId, locationGv, name, ageGv, genderGv, emotionGv);
+                            //gvCom.DataSource = gvComp;
+                            //gvCom.DataBind();
+                            if (Convert.ToInt32(drGvCmd["Emotion"]) == 1)
+                            {
+                                string emo = "Very Happy";
+                                //int location = Convert.ToInt32(row.Cells[1].Text);
+                                //string name = row.Cells[2].Text;
+                                string com = emo;
+                                int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
+                                chartComEmotion.Rows.Add(com, no);
+                            }
+                            else if (Convert.ToInt32(drGvCmd["Emotion"]) == 2)
+                            {
+                                string emo = "Happy";
+                                //int location = Convert.ToInt32(row.Cells[1].Text);
+                                //string name = row.Cells[2].Text;
+                                string com = emo;
+                                int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
+                                chartComEmotion.Rows.Add(com, no);
+                            }
+                            else if (Convert.ToInt32(drGvCmd["Emotion"]) == 3)
+                            {
+                                string emo = "Neutral";
+                                //int location = Convert.ToInt32(row.Cells[1].Text);
+                                //string name = row.Cells[2].Text;
+                                string com = emo;
+                                int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
+                                chartComEmotion.Rows.Add(com, no);
+                            }
+                            else if (Convert.ToInt32(drGvCmd["Emotion"]) == 4)
+                            {
+                                string emo = "Unhappy";
+                                //int location = Convert.ToInt32(row.Cells[1].Text);
+                                //string name = row.Cells[2].Text;
+                                string com = emo;
+                                int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
+                                chartComEmotion.Rows.Add(com, no);
+                            }
+                            else if (Convert.ToInt32(drGvCmd["Emotion"]) == 5)
+                            {
+                                string emo = "Very Unhappy";
+                                //int location = Convert.ToInt32(row.Cells[1].Text);
+                                //string name = row.Cells[2].Text;
+                                string com = emo;
+                                int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
+                                chartComEmotion.Rows.Add(com, no);
+                            }
+                            chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                            chartFb.Series["Series1"].XValueMember = "Com";
+                            chartFb.Series["Series1"].YValueMembers = "No";
+                            chartFb.Series["Series1"].IsValueShownAsLabel = true;
+
+                            //chartFb.Series["Series1"].AxisLabel = "fuck off";
+                            //chartFb.ChartAreas["ChartArea1"].Area3DStyle.Enable3D=true;
+                            chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                            chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion Data for " + companyName;
+                            chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                            chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                            chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                            chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                            chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                            chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                            chartFb.DataSource = chartComEmotion;
+                            chartFb.DataBind();
+                        }
                     }
+                    else
+                    {
+                        chartFb.Visible = false;
+                        NoDataDiv.Visible = true;
+                    }
+                   
                   
 
                    
