@@ -292,8 +292,9 @@
                 </div>
                 </div>
                 <br />
-            <div id="NoDataDiv" runat="server" visible="false">
-                <asp:Label id="NoDataText" Font-Bold="true" runat="server" text="No Data Available yet"></asp:Label>
+            <div id="NoDataDiv" runat="server" visible="false" align="center">
+                <asp:Label id="NoDataText" Font-Bold="true" runat="server"></asp:Label>
+                <br />
                 <img src="~/webicons/NoChartData.png" runat="server" id="NoDataYet" />
         </div>
         <div id="AdvModal" class="modal fade" role="dialog">

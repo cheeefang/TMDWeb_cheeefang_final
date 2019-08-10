@@ -502,37 +502,47 @@ namespace targeted_marketing_display
                             command.Parameters.AddWithValue("@eDate", edate);
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
-
-                            while (dr.Read())
+                            if (dr.HasRows == true)
                             {
-                                string name = "Advert:"+r.Cells[3].Text;
-                                int no = Convert.ToInt32(dr["totalPax"]);
-                                
-                                chartAdv.Rows.Add(name, no);
+                                while (dr.Read())
+                                {
+                                    string name = "Advert:" + r.Cells[3].Text;
+                                    int no = Convert.ToInt32(dr["totalPax"]);
 
-                                chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                chartFb.Series["Series1"].XValueMember = "Adv";
-                                chartFb.Series["Series1"].YValueMembers = "No";
-                                chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                chartFb.Series["Series1"]["PixelPointWidth"] = "60";
-                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "";
-                                chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 60;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 50;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                chartFb.DataSource = chartAdv;
-                                chartFb.DataBind();
+                                    chartAdv.Rows.Add(name, no);
+
+                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                    chartFb.Series["Series1"].XValueMember = "Adv";
+                                    chartFb.Series["Series1"].YValueMembers = "No";
+                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.Series["Series1"]["PixelPointWidth"] = "60";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "";
+                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 60;
+                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 50;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                    chartFb.DataSource = chartAdv;
+                                    chartFb.DataBind();
+                                }
                             }
+                            else
+                            {
+                                lblFbc.Visible = false;
+                                chartFb.Visible = false;
+                                NoDataDiv.Visible = true;
+                                NoDataText.Text = "Sorry,No data available yet for " + r.Cells[3].Text;
+                            }
+                       
+
                          
                         }
-
                         else if (rbAge.Checked == true)
                         {
                             con.Open();
@@ -544,113 +554,123 @@ namespace targeted_marketing_display
                             command.Parameters.AddWithValue("@eDate", edate);
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
-
-                            while (dr.Read())
+                            if (dr.HasRows == true)
                             {
-                                string name = r.Cells[3].Text;
-                                int no = Convert.ToInt32(dr["NoOfPax"]);
-                                int ageGroup = Convert.ToInt32(dr["AgeID"]);
-                                if (ageGroup == 1)
+                                while (dr.Read())
                                 {
-                                    string ageRange = "Child(0-15)";
-                                    string age = ageRange;
-                                    chartAdvAge.Rows.Add(name, no, age);
+                                    string name = r.Cells[3].Text;
+                                    int no = Convert.ToInt32(dr["NoOfPax"]);
+                                    int ageGroup = Convert.ToInt32(dr["AgeID"]);
+                                    if (ageGroup == 1)
+                                    {
+                                        string ageRange = "Child(0-15)";
+                                        string age = ageRange;
+                                        chartAdvAge.Rows.Add(name, no, age);
 
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Age";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for " + name;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                    chartFb.DataSource = chartAdvAge;
-                                    chartFb.DataBind();
-                                }
-                                else if (ageGroup == 2)
-                                {
-                                    string ageRange = "Young Adult(16-30)";
-                                    string age = ageRange;
-                                    chartAdvAge.Rows.Add(name, no, age);
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Age";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for " + name;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                        chartFb.DataSource = chartAdvAge;
+                                        chartFb.DataBind();
+                                    }
+                                    else if (ageGroup == 2)
+                                    {
+                                        string ageRange = "Young Adult(16-30)";
+                                        string age = ageRange;
+                                        chartAdvAge.Rows.Add(name, no, age);
 
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Age";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for " + name;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                    chartFb.DataSource = chartAdvAge;
-                                    chartFb.DataBind();
-                                }
-                                else if (ageGroup == 3)
-                                {
-                                    string ageRange = "Adult(31-65)";
-                                    string age = ageRange;
-                                    chartAdvAge.Rows.Add(name, no, age);
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Age";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for " + name;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                        chartFb.DataSource = chartAdvAge;
+                                        chartFb.DataBind();
+                                    }
+                                    else if (ageGroup == 3)
+                                    {
+                                        string ageRange = "Adult(31-65)";
+                                        string age = ageRange;
+                                        chartAdvAge.Rows.Add(name, no, age);
 
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Age";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for " + name;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                    chartFb.DataSource = chartAdvAge;
-                                    chartFb.DataBind();
-                                }
-                                else if (ageGroup == 4)
-                                {
-                                    string ageRange = "Senior(66+)";
-                                    string age = ageRange;
-                                    chartAdvAge.Rows.Add(name, no, age);
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Age";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for " + name;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                        chartFb.DataSource = chartAdvAge;
+                                        chartFb.DataBind();
+                                    }
+                                    else if (ageGroup == 4)
+                                    {
+                                        string ageRange = "Senior(66+)";
+                                        string age = ageRange;
+                                        chartAdvAge.Rows.Add(name, no, age);
 
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Age";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for " + name;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                    chartFb.DataSource = chartAdvAge;
-                                    chartFb.DataBind();
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Age";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age data for " + name;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                        chartFb.DataSource = chartAdvAge;
+                                        chartFb.DataBind();
+                                    }
                                 }
                             }
+                            else
+                            {
+                                lblFbc.Visible = false;
+                                chartFb.Visible = false;
+                                NoDataDiv.Visible = true;
+                                NoDataText.Text = "Sorry,No data available yet for " + r.Cells[3].Text;
+                            }
+                          
                            
                         }
                         else if (rbGender.Checked == true)
@@ -662,34 +682,44 @@ namespace targeted_marketing_display
                             command.Parameters.AddWithValue("@eDate", edate);
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
-
-                            while (dr.Read())
+                            if (dr.HasRows == true)
                             {
-                                string name = r.Cells[3].Text;
-                                int no = Convert.ToInt32(dr["NoOfPax"]);
-                                string gender = dr["GenderID"].ToString();
-                                chartAdvGender.Rows.Add(name, no, gender);
+                                while (dr.Read())
+                                {
+                                    string name = r.Cells[3].Text;
+                                    int no = Convert.ToInt32(dr["NoOfPax"]);
+                                    string gender = dr["GenderID"].ToString();
+                                    chartAdvGender.Rows.Add(name, no, gender);
 
-                                chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                chartFb.Series["Series1"].XValueMember = "Gender";
-                                chartFb.Series["Series1"].YValueMembers = "No";
-                                chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                chartFb.Series["Series1"]["PixelPointWidth"] = "50";
-                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Gender data for " + name;
-                                chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                chartFb.DataSource = chartAdvGender;
-                                chartFb.DataBind();
+                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                    chartFb.Series["Series1"].XValueMember = "Gender";
+                                    chartFb.Series["Series1"].YValueMembers = "No";
+                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.Series["Series1"]["PixelPointWidth"] = "50";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Gender data for " + name;
+                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                    chartFb.DataSource = chartAdvGender;
+                                    chartFb.DataBind();
+                                }
                             }
+                            else
+                            {
+                                lblFbc.Visible = false;
+                                chartFb.Visible = false;
+                                NoDataDiv.Visible = true;
+                                NoDataText.Text = "Sorry,No data available yet for " + r.Cells[3].Text;
+                            }
+                          
                            
                         }
                         else if (rbEmotion.Checked == true)
@@ -701,143 +731,153 @@ namespace targeted_marketing_display
                             command.Parameters.AddWithValue("@eDate", edate);
                             command.Connection = con;
                             SqlDataReader dr = command.ExecuteReader();
-
-                            while (dr.Read())
+                            if (dr.HasRows == true)
                             {
-                                string name = r.Cells[3].Text;
-                                int no = Convert.ToInt32(dr["NoOfPax"]);
-                                int emotionRange = Convert.ToInt32(dr["Emotion"]);
-
-                                if (emotionRange == 1)
+                                while (dr.Read())
                                 {
-                                    string emotion = "Very Happy";
-                                    string emo = emotion;
-                                    chartAdvEmotion.Rows.Add(name, no, emo);
+                                    string name = r.Cells[3].Text;
+                                    int no = Convert.ToInt32(dr["NoOfPax"]);
+                                    int emotionRange = Convert.ToInt32(dr["Emotion"]);
 
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Emotion";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                    chartFb.DataSource = chartAdvEmotion;
-                                    chartFb.DataBind();
-                                }
-                                else if (emotionRange == 2)
-                                {
-                                    string emotion = "Happy";
-                                    string emo = emotion;
-                                    chartAdvEmotion.Rows.Add(name, no, emo);
+                                    if (emotionRange == 1)
+                                    {
+                                        string emotion = "Very Happy";
+                                        string emo = emotion;
+                                        chartAdvEmotion.Rows.Add(name, no, emo);
 
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Emotion";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                    chartFb.DataSource = chartAdvEmotion;
-                                    chartFb.DataBind();
-                                }
-                                else if (emotionRange == 3)
-                                {
-                                    string emotion = "Neutral";
-                                    string emo = emotion;
-                                    chartAdvEmotion.Rows.Add(name, no, emo);
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Emotion";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                        chartFb.DataSource = chartAdvEmotion;
+                                        chartFb.DataBind();
+                                    }
+                                    else if (emotionRange == 2)
+                                    {
+                                        string emotion = "Happy";
+                                        string emo = emotion;
+                                        chartAdvEmotion.Rows.Add(name, no, emo);
 
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Emotion";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    //chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font=
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.None;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 20F, System.Drawing.FontStyle.Bold);
-                                    chartFb.DataSource = chartAdvEmotion;
-                                    chartFb.DataBind();
-                                }
-                                else if (emotionRange == 4)
-                                {
-                                    string emotion = "Unhappy";
-                                    string emo = emotion;
-                                    chartAdvEmotion.Rows.Add(name, no, emo);
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Emotion";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                        chartFb.DataSource = chartAdvEmotion;
+                                        chartFb.DataBind();
+                                    }
+                                    else if (emotionRange == 3)
+                                    {
+                                        string emotion = "Neutral";
+                                        string emo = emotion;
+                                        chartAdvEmotion.Rows.Add(name, no, emo);
 
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Emotion";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                    chartFb.DataSource = chartAdvEmotion;
-                                    chartFb.DataBind();
-                                }
-                                else if (emotionRange == 5)
-                                {
-                                    string emotion = "Very Unhappy";
-                                    string emo = emotion;
-                                    chartAdvEmotion.Rows.Add(name, no, emo);
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Emotion";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        //chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font=
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.None;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 20F, System.Drawing.FontStyle.Bold);
+                                        chartFb.DataSource = chartAdvEmotion;
+                                        chartFb.DataBind();
+                                    }
+                                    else if (emotionRange == 4)
+                                    {
+                                        string emotion = "Unhappy";
+                                        string emo = emotion;
+                                        chartAdvEmotion.Rows.Add(name, no, emo);
 
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Emotion";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                    chartFb.DataSource = chartAdvEmotion;
-                                    chartFb.DataBind();
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Emotion";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                        chartFb.DataSource = chartAdvEmotion;
+                                        chartFb.DataBind();
+                                    }
+                                    else if (emotionRange == 5)
+                                    {
+                                        string emotion = "Very Unhappy";
+                                        string emo = emotion;
+                                        chartAdvEmotion.Rows.Add(name, no, emo);
+
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Emotion";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Emotion for " + name;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                        chartFb.DataSource = chartAdvEmotion;
+                                        chartFb.DataBind();
+                                    }
+
                                 }
-                          
+
                             }
-                     
+                            else
+                            {
+                                lblFbc.Visible = false;
+                                chartFb.Visible = false;
+                                NoDataDiv.Visible = true;
+                                NoDataText.Text = "Sorry,No data available yet for " + r.Cells[3].Text;
+                            }
+                            
                         }
                     }
                 }
@@ -949,36 +989,47 @@ namespace targeted_marketing_display
                             cmdTotal.Parameters.AddWithValue("@sDate", sdate);
                             cmdTotal.Parameters.AddWithValue("@eDate", edate);
                             SqlDataReader dr = cmdTotal.ExecuteReader();
-                            while (dr.Read())
+                            if (dr.HasRows == true)
                             {
-                                //string settedadname = AdvertName;
-                                //string settedbillboardcode = BillboardCode;
-                                string name = "";
-                               // string advertname = (dr["Name"].ToString());
-                                //string bbCode=
-                                int no = Convert.ToInt32(dr["NoOfPaxs"]);
-                                chartBb.Rows.Add(name, no);
+                                while (dr.Read())
+                                {
+                                    //string settedadname = AdvertName;
+                                    //string settedbillboardcode = BillboardCode;
+                                    string name = "";
+                                    // string advertname = (dr["Name"].ToString());
+                                    //string bbCode=
+                                    int no = Convert.ToInt32(dr["NoOfPaxs"]);
+                                    chartBb.Rows.Add(name, no);
 
-                                chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                chartFb.Series["Series1"].XValueMember = "Bb";
-                                chartFb.Series["Series1"].YValueMembers = "No";
-                                chartFb.Series["Series1"]["PixelPointWidth"] = "60";
-                                chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.Title ="Data for Billboard "+ BillboardCode + "("+AdvertName+")";
-                                chartFb.ChartAreas["ChartArea1"].AxisY.Title = "Total No. Of People";
-                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                chartFb.ChartAreas["ChartArea1"].RecalculateAxesScale();
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                chartFb.DataSource = chartBb;
-                                chartFb.DataBind();
+                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                    chartFb.Series["Series1"].XValueMember = "Bb";
+                                    chartFb.Series["Series1"].YValueMembers = "No";
+                                    chartFb.Series["Series1"]["PixelPointWidth"] = "60";
+                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
+                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "Total No. Of People";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                    chartFb.ChartAreas["ChartArea1"].RecalculateAxesScale();
+                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                    chartFb.DataSource = chartBb;
+                                    chartFb.DataBind();
+                                }
                             }
+                            else
+                            {
+                                lblFbc.Visible = false;
+                                chartFb.Visible = false;
+                                NoDataDiv.Visible = true;
+                                NoDataText.Text = "Sorry,No data available yet for " + "Billboard #" + BillboardCode;
+                            }
+                           
 
                         }
                     }
@@ -999,115 +1050,125 @@ namespace targeted_marketing_display
                             command.Parameters.AddWithValue("@eDate", edate);
                      
                             SqlDataReader dr = command.ExecuteReader();
-
-                            while (dr.Read())
+                            if (dr.HasRows == true)
                             {
-                                string name = "";
-                                int no = Convert.ToInt32(dr["NoOfPax"]);
-                                int ageGroup = Convert.ToInt32(dr["AgeGroup"]);
-
-                                if (ageGroup == 1)
+                                while (dr.Read())
                                 {
-                                    string ageRange = "Child(0-15)";
-                                    string age = ageRange;
-                                    chartBbAge.Rows.Add(name, no, age);
+                                    string name = "";
+                                    int no = Convert.ToInt32(dr["NoOfPax"]);
+                                    int ageGroup = Convert.ToInt32(dr["AgeGroup"]);
 
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Age";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                    chartFb.DataSource = chartBbAge;
-                                    chartFb.DataBind();
+                                    if (ageGroup == 1)
+                                    {
+                                        string ageRange = "Child(0-15)";
+                                        string age = ageRange;
+                                        chartBbAge.Rows.Add(name, no, age);
+
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Age";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                        chartFb.DataSource = chartBbAge;
+                                        chartFb.DataBind();
+                                    }
+                                    else if (ageGroup == 2)
+                                    {
+                                        string ageRange = "Young Adult(16-30)";
+                                        string age = ageRange;
+                                        chartBbAge.Rows.Add(name, no, age);
+
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Age";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                        chartFb.DataSource = chartBbAge;
+                                        chartFb.DataBind();
+                                    }
+                                    else if (ageGroup == 3)
+                                    {
+                                        string ageRange = "Adult(31-65)";
+                                        string age = ageRange;
+                                        chartBbAge.Rows.Add(name, no, age);
+
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Age";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                        chartFb.DataSource = chartBbAge;
+                                        chartFb.DataBind();
+                                    }
+                                    else if (ageGroup == 4)
+                                    {
+                                        string ageRange = "Senior(66+)";
+                                        string age = ageRange;
+                                        chartBbAge.Rows.Add(name, no, age);
+
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Age";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                        chartFb.DataSource = chartBbAge;
+                                        chartFb.DataBind();
+                                    }
+
                                 }
-                                else if (ageGroup == 2)
-                                {
-                                    string ageRange = "Young Adult(16-30)";
-                                    string age = ageRange;
-                                    chartBbAge.Rows.Add(name, no, age);
-
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Age";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                    chartFb.DataSource = chartBbAge;
-                                    chartFb.DataBind();
-                                }
-                                else if (ageGroup == 3)
-                                {
-                                    string ageRange = "Adult(31-65)";
-                                    string age = ageRange;
-                                    chartBbAge.Rows.Add(name, no, age);
-
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Age";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                    chartFb.DataSource = chartBbAge;
-                                    chartFb.DataBind();
-                                }
-                                else if (ageGroup == 4)
-                                {
-                                    string ageRange = "Senior(66+)";
-                                    string age = ageRange;
-                                    chartBbAge.Rows.Add(name, no, age);
-
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Age";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                    chartFb.DataSource = chartBbAge;
-                                    chartFb.DataBind();
-                                }
-
                             }
+                            else
+                            {
+                                lblFbc.Visible = false;
+                                chartFb.Visible = false;
+                                NoDataDiv.Visible = true;
+                                NoDataText.Text = "Sorry,No data available yet for " + "Billboard #" + BillboardCode;
+                            }
+                           
                         }
                     }
                 }
@@ -1173,137 +1234,148 @@ namespace targeted_marketing_display
                             command.Parameters.AddWithValue("@eDate", edate);
 
                             SqlDataReader dr = command.ExecuteReader();
-
-                            while (dr.Read())
+                            if (dr.HasRows == true)
                             {
-                                string name = "";
-                                int no = Convert.ToInt32(dr["NoOfPax"]);
-                                int emotionRange = Convert.ToInt32(dr["Emotion"]);
-
-                                if (emotionRange == 1)
+                                while (dr.Read())
                                 {
-                                    string emotion = "Very Happy";
-                                    string emo = emotion;
-                                    chartBbEmotion.Rows.Add(name, no, emo);
+                                    string name = "";
+                                    int no = Convert.ToInt32(dr["NoOfPax"]);
+                                    int emotionRange = Convert.ToInt32(dr["Emotion"]);
 
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Emotion";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                    chartFb.DataSource = chartBbEmotion;
-                                    chartFb.DataBind();
-                                }
-                                else if (emotionRange == 2)
-                                {
-                                    string emotion = "Happy";
-                                    string emo = emotion;
-                                    chartBbEmotion.Rows.Add(name, no, emo);
+                                    if (emotionRange == 1)
+                                    {
+                                        string emotion = "Very Happy";
+                                        string emo = emotion;
+                                        chartBbEmotion.Rows.Add(name, no, emo);
 
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Emotion";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                    chartFb.DataSource = chartBbEmotion;
-                                    chartFb.DataBind();
-                                }
-                                else if (emotionRange == 3)
-                                {
-                                    string emotion = "Neutral";
-                                    string emo = emotion;
-                                    chartBbEmotion.Rows.Add(name, no, emo);
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Emotion";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                        chartFb.DataSource = chartBbEmotion;
+                                        chartFb.DataBind();
+                                    }
+                                    else if (emotionRange == 2)
+                                    {
+                                        string emotion = "Happy";
+                                        string emo = emotion;
+                                        chartBbEmotion.Rows.Add(name, no, emo);
 
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Emotion";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                    chartFb.DataSource = chartBbEmotion;
-                                    chartFb.DataBind();
-                                }
-                                else if (emotionRange == 4)
-                                {
-                                    string emotion = "Unhappy";
-                                    string emo = emotion;
-                                    chartBbEmotion.Rows.Add(name, no, emo);
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Emotion";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                    chartFb.DataSource = chartBbEmotion;
-                                    chartFb.DataBind();
-                                }
-                                else if (emotionRange == 5)
-                                {
-                                    string emotion = "Very Unhappy";
-                                    string emo = emotion;
-                                    chartBbEmotion.Rows.Add(name, no, emo);
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Emotion";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                        chartFb.DataSource = chartBbEmotion;
+                                        chartFb.DataBind();
+                                    }
+                                    else if (emotionRange == 3)
+                                    {
+                                        string emotion = "Neutral";
+                                        string emo = emotion;
+                                        chartBbEmotion.Rows.Add(name, no, emo);
 
-                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                    chartFb.Series["Series1"].XValueMember = "Emotion";
-                                    chartFb.Series["Series1"].YValueMembers = "No";
-                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                    chartFb.DataSource = chartBbEmotion;
-                                    chartFb.DataBind();
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Emotion";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                        chartFb.DataSource = chartBbEmotion;
+                                        chartFb.DataBind();
+                                    }
+                                    else if (emotionRange == 4)
+                                    {
+                                        string emotion = "Unhappy";
+                                        string emo = emotion;
+                                        chartBbEmotion.Rows.Add(name, no, emo);
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Emotion";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                        chartFb.DataSource = chartBbEmotion;
+                                        chartFb.DataBind();
+                                    }
+                                    else if (emotionRange == 5)
+                                    {
+                                        string emotion = "Very Unhappy";
+                                        string emo = emotion;
+                                        chartBbEmotion.Rows.Add(name, no, emo);
+
+                                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                        chartFb.Series["Series1"].XValueMember = "Emotion";
+                                        chartFb.Series["Series1"].YValueMembers = "No";
+                                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                        chartFb.DataSource = chartBbEmotion;
+                                        chartFb.DataBind();
+                                    }
                                 }
                             }
+                            else
+                            {
+                                lblFbc.Visible = false;
+                                chartFb.Visible = false;
+                                NoDataDiv.Visible = true;
+                                NoDataText.Text = "Sorry,No data available yet for " + "Billboard #"+BillboardCode;
+                            }
+                            
+                            
                         }
                     }
                 }
@@ -1350,7 +1422,7 @@ namespace targeted_marketing_display
                     gvCmd.Parameters.AddWithValue("@eDate", edate);
                     gvCmd.Connection = con;
                     SqlDataReader drGvCmd = gvCmd.ExecuteReader();
-                   
+
                     //DataTable gvComp = new DataTable();
                     //gvComp.Columns.Add("AdvID", typeof(int));
                     //gvComp.Columns.Add("BillboardID", typeof(int));
@@ -1358,36 +1430,47 @@ namespace targeted_marketing_display
                     //gvComp.Columns.Add("Age", typeof(int));
                     //gvComp.Columns.Add("Gender", typeof(string));
                     //gvComp.Columns.Add("Emotion", typeof(int));
-                    while (drGvCmd.Read())
+                    if (drGvCmd.HasRows == true)
                     {
-                        int totalNo = Convert.ToInt32(drGvCmd["totalcount"]);
-                    
-                        // int location = Convert.ToInt32(row.Cells[1].Text);
-                        //string name = row.Cells[2].Text;
-                        //string com = name + "\nBillboard:\n" + location.ToString();
-                        //int no = Convert.ToInt32(dr["NoOfPaxs"]);
-                        chartCom.Rows.Add(companyName,totalNo);
+                        while (drGvCmd.Read())
+                        {
+                            int totalNo = Convert.ToInt32(drGvCmd["totalcount"]);
 
-                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                        chartFb.Series["Series1"].XValueMember = "com";
-                        chartFb.Series["Series1"].YValueMembers = "no";
-                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                        chartFb.Series["Series1"]["PixelPointWidth"] = "60";
-                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "";
-                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "Total No. Of Pax";
-                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                        chartFb.DataSource = chartCom;
-                        chartFb.DataBind();
+                            // int location = Convert.ToInt32(row.Cells[1].Text);
+                            //string name = row.Cells[2].Text;
+                            //string com = name + "\nBillboard:\n" + location.ToString();
+                            //int no = Convert.ToInt32(dr["NoOfPaxs"]);
+                            chartCom.Rows.Add(companyName, totalNo);
+
+                            chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                            chartFb.Series["Series1"].XValueMember = "com";
+                            chartFb.Series["Series1"].YValueMembers = "no";
+                            chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                            chartFb.Series["Series1"]["PixelPointWidth"] = "60";
+                            chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                            chartFb.ChartAreas["ChartArea1"].AxisX.Title = "";
+                            chartFb.ChartAreas["ChartArea1"].AxisY.Title = "Total No. Of Pax";
+                            chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                            chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                            chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                            chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                            chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                            chartFb.DataSource = chartCom;
+                            chartFb.DataBind();
+                        }
                     }
+                    else
+                    {
+                        lblFbc.Visible = false;
+                        chartFb.Visible = false;
+                        NoDataDiv.Visible = true;
+                        NoDataText.Text = "Sorry,No data available yet for " + companyName;
+                    }
+                   
               
 
                  
@@ -1413,25 +1496,26 @@ namespace targeted_marketing_display
                     //gvComp.Columns.Add("Age", typeof(int));
                     //gvComp.Columns.Add("Gender", typeof(string));
                     //gvComp.Columns.Add("Emotion", typeof(int));
-
-                    while (drGvCmd.Read())
+                    if (drGvCmd.HasRows == true)
                     {
-                        //int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
-                        //int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
-                        //string name = drGvCmd["Name"].ToString();
-                        //int ageGv = Convert.ToInt32(drGvCmd["AgeGroup"]);
-                        //string genderGv = "";
-                        //int emotionGv = 0;
-                        //gvComp.Rows.Add(gvId, locationGv, name, ageGv, genderGv, emotionGv);
-                        //gvCom.DataSource = gvComp;
-                        //gvCom.DataBind();
-                   
-                        if (Convert.ToInt32(drGvCmd["AgeGroup"]) == 1)
+                        while (drGvCmd.Read())
+                        {
+                            //int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
+                            //int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
+                            //string name = drGvCmd["Name"].ToString();
+                            //int ageGv = Convert.ToInt32(drGvCmd["AgeGroup"]);
+                            //string genderGv = "";
+                            //int emotionGv = 0;
+                            //gvComp.Rows.Add(gvId, locationGv, name, ageGv, genderGv, emotionGv);
+                            //gvCom.DataSource = gvComp;
+                            //gvCom.DataBind();
+
+                            if (Convert.ToInt32(drGvCmd["AgeGroup"]) == 1)
                             {
                                 string age = "Child\n(0-15)";
                                 //int location = Convert.ToInt32(row.Cells[1].Text);
                                 //string name = row.Cells[2].Text;
-                                string com =  age;
+                                string com = age;
                                 int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
                                 chartComAge.Rows.Add(com, no);
                             }
@@ -1440,7 +1524,7 @@ namespace targeted_marketing_display
                                 string age = "Young\nAdult\n(16-30)";
                                 //int location = Convert.ToInt32(row.Cells[1].Text);
                                 //string name = row.Cells[2].Text;
-                                string com =   age;
+                                string com = age;
                                 int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
                                 chartComAge.Rows.Add(com, no);
                             }
@@ -1449,7 +1533,7 @@ namespace targeted_marketing_display
                                 string age = "Adult\n(31-65)";
                                 //int location = Convert.ToInt32(row.Cells[1].Text);
                                 //string name = row.Cells[2].Text;
-                                string com =  age;
+                                string com = age;
                                 int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
                                 chartComAge.Rows.Add(com, no);
                             }
@@ -1458,7 +1542,7 @@ namespace targeted_marketing_display
                                 string age = "Senior\n(66+)";
                                 //int location = Convert.ToInt32(row.Cells[1].Text);
                                 //string name = row.Cells[2].Text;
-                                string com =  age;
+                                string com = age;
                                 int no = Convert.ToInt32(drGvCmd["NoOfPax"]);
                                 chartComAge.Rows.Add(com, no);
                             }
@@ -1466,8 +1550,8 @@ namespace targeted_marketing_display
                             chartFb.Series["Series1"].XValueMember = "Com";
                             chartFb.Series["Series1"].YValueMembers = "No";
                             chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age Groups for "+ companyName;
+                            chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                            chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Age Groups for " + companyName;
                             chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
                             chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
                             chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
@@ -1479,8 +1563,17 @@ namespace targeted_marketing_display
                             chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
                             chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
                             chartFb.DataSource = chartComAge;
-                            chartFb.DataBind();                       
+                            chartFb.DataBind();
+                        }
                     }
+                    else
+                    {
+                        lblFbc.Visible = false;
+                        chartFb.Visible = false;
+                        NoDataDiv.Visible = true;
+                        NoDataText.Text = "Sorry,No data available yet for " + companyName;
+                    }
+                   
                
 
                     
@@ -1505,49 +1598,59 @@ namespace targeted_marketing_display
                     //gvComp.Columns.Add("Age", typeof(int));
                     //gvComp.Columns.Add("Gender", typeof(string));
                     //gvComp.Columns.Add("Emotion", typeof(int));
-                    
-                    while (drGvCmd.Read())
+                    if (drGvCmd.HasRows == true)
                     {
-              
-                        //int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
-                        //int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
-                        //string name = drGvCmd["Name"].ToString();
-                        //int ageGv = 0;
-                        //string genderGv = drGvCmd["Gender"].ToString();
-                        //int emotionGv = 0;
-                        //gvComp.Rows.Add(gvId, locationGv, name, ageGv, genderGv, emotionGv);
-                        //gvCom.DataSource = gvComp;
-                        //gvCom.DataBind();
-                        //int location = Convert.ToInt32(row.Cells[1].Text);
-                        //string name = row.Cells[2].Text;
-                        //string gender = dr["GenderID"].ToString();
-                        //string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + gender;
-                        //int no = Convert.ToInt32(dr["NoOfPax"]);
-                        int totalcount = Convert.ToInt32(drGvCmd["NoOfPax"]);
-                        string GenderID = drGvCmd["GenderID"].ToString();
-                        chartComGender.Rows.Add(GenderID, totalcount);
+                        while (drGvCmd.Read())
+                        {
 
-                        chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                        chartFb.Series["Series1"].XValueMember = "Com";
-                        chartFb.Series["Series1"].YValueMembers = "No";
-                        chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                        chartFb.Series["Series1"]["PixelPointWidth"] = "60";
-                        // chartFb.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = true;
-                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                        chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Gender Data for "+ companyName;
-                        chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                        chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                        chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                        chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                        chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                        chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                        chartFb.DataSource = chartComGender;
-                        chartFb.DataBind();
+                            //int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
+                            //int locationGv = Convert.ToInt32(drGvCmd["BillboardID"]);
+                            //string name = drGvCmd["Name"].ToString();
+                            //int ageGv = 0;
+                            //string genderGv = drGvCmd["Gender"].ToString();
+                            //int emotionGv = 0;
+                            //gvComp.Rows.Add(gvId, locationGv, name, ageGv, genderGv, emotionGv);
+                            //gvCom.DataSource = gvComp;
+                            //gvCom.DataBind();
+                            //int location = Convert.ToInt32(row.Cells[1].Text);
+                            //string name = row.Cells[2].Text;
+                            //string gender = dr["GenderID"].ToString();
+                            //string com = name + "\nBillboard:\n" + location.ToString() + "\n\n" + gender;
+                            //int no = Convert.ToInt32(dr["NoOfPax"]);
+                            int totalcount = Convert.ToInt32(drGvCmd["NoOfPax"]);
+                            string GenderID = drGvCmd["GenderID"].ToString();
+                            chartComGender.Rows.Add(GenderID, totalcount);
+
+                            chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                            chartFb.Series["Series1"].XValueMember = "Com";
+                            chartFb.Series["Series1"].YValueMembers = "No";
+                            chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                            chartFb.Series["Series1"]["PixelPointWidth"] = "60";
+                            // chartFb.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = true;
+                            chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                            chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Gender Data for " + companyName;
+                            chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                            chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                            chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                            chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                            chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                            chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                            chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                            chartFb.DataSource = chartComGender;
+                            chartFb.DataBind();
+                        }
                     }
+                    else
+                    {
+                        lblFbc.Visible = false;
+                        chartFb.Visible = false;
+                        NoDataDiv.Visible = true;
+                        NoDataText.Text = "Sorry,No data available yet for " + companyName;
+                    }
+                   
                     
                 }
                 else if (rbEmotion.Checked == true)
@@ -1625,7 +1728,7 @@ namespace targeted_marketing_display
                             chartFb.Series["Series1"].XValueMember = "Com";
                             chartFb.Series["Series1"].YValueMembers = "No";
                             chartFb.Series["Series1"].IsValueShownAsLabel = true;
-
+                            
                             //chartFb.Series["Series1"].AxisLabel = "fuck off";
                             //chartFb.ChartAreas["ChartArea1"].Area3DStyle.Enable3D=true;
                             chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
@@ -1646,8 +1749,10 @@ namespace targeted_marketing_display
                     }
                     else
                     {
+                        lblFbc.Visible = false;
                         chartFb.Visible = false;
                         NoDataDiv.Visible = true;
+                        NoDataText.Text ="Sorry,No data available yet for " + companyName;
                     }
                    
                   
