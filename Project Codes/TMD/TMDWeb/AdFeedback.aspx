@@ -216,8 +216,8 @@
                 </div>
             </div>
             <div class="row">
-                <asp:UpdatePanel ID="updatePanelCompany" runat="server">
-                    <ContentTemplate>
+                <%--<asp:UpdatePanel ID="updatePanelCompany" runat="server">
+                    <ContentTemplate>--%>
 
                   
                 <div class ="col-lg-6">
@@ -226,8 +226,11 @@
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [Name] FROM [Company] where status=1"></asp:SqlDataSource>
                     </div>
                 </div>
-                          </ContentTemplate>
-                </asp:UpdatePanel>
+                         <%-- </ContentTemplate>
+                                  <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="addAdv" EventName="Click" />
+            </Triggers>
+                </asp:UpdatePanel>--%>
                 <div class="col-lg-6">
                     <div class="form-group">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AdvModal" style="width:30.7%"> <b>Select Advertisements: </b></button>
@@ -381,17 +384,17 @@
                                 <SortedDescendingHeaderStyle BackColor="#383838" HorizontalAlign="Center"/>
                         </asp:GridView>
                                 </ContentTemplate>
+                     <%--       <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="addAdv" EventName="Click" />
+            </Triggers>--%>
                          </asp:updatepanel>
                     </div>
                     </div>
                    
                     <div class="modal-footer">
-                        <asp:UpdatePanel ID="updatepanel1" runat="server">
-
-                            <ContentTemplate>
+                       
                     <asp:Button ID="addAdv" runat="server" CssClass="btn btn-primary" Text="Add" OnClick="addAdv_Click"/>
-                        </ContentTemplate>
-                            </asp:UpdatePanel>
+                       
                     </div>
                      
                     </div>
@@ -458,12 +461,12 @@
                     </div>
                 </div>
                     <div class="modal-footer">
-                        <asp:UpdatePanel ID="updatepanel2" runat="server">
+                       <%-- <asp:UpdatePanel ID="updatepanel2" runat="server">
 
-                            <ContentTemplate>
+                            <ContentTemplate>--%>
                     <asp:Button ID="addBb" runat="server" CssClass="btn btn-primary" Text="Add" OnClick="addBb_Click"/>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
+                    <%--            </ContentTemplate>
+                            </asp:UpdatePanel>--%>
                     </div>
                     </div>
                 </div>

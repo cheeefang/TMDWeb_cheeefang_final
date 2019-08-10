@@ -140,18 +140,25 @@ map.on('load', function() {
     </script>
 
               <center> 
-               <asp:label ID="testing123" runat="server"></asp:label>
+            
                   <div runat="server" class="alert alert-success" id="alertSuccess" visible="False">
                     <strong>Success!</strong> New Location has been created.
                 </div> 
 
+                  <br />
                 <div runat="server" class="alert alert-danger" id="alertWarning" visible="False">
-                    <strong>Warning!</strong>
+                    <strong>Error!</strong>
                     <asp:Label ID="warningLocation" runat="server"></asp:Label>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                   <div runat="server" class="alert alert-danger" id="alertDanger" visible="False">
-                    <strong>Danger!</strong>
+                    <strong>Error!</strong>
                     <asp:Label ID="dangerLocation" runat="server"></asp:Label>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                   
               </center>

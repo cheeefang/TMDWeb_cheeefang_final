@@ -484,11 +484,7 @@ map.on('load', function() {
 
                 </div>
 
-                <div class="col-lg-6">
-
-                            &nbsp;                       
-
-                </div>
+               
             </div>
 
             <div class="row">

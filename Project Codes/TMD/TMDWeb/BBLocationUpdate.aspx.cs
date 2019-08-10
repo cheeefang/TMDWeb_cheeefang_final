@@ -68,15 +68,16 @@ namespace targeted_marketing_display
                 // string companyName = CoName.Text;
                 // string Industry = CoIndustry.SelectedValue;
                 
-                string Addr1 = BBAddLn1.Text;
-                string Addr2 = BBAddLn2.Text;
-                string City = BBCity.Text;
+                string Addr1 = BBAddLn1.Text.ToString();
+                string Addr2 = BBAddLn2.Text.ToString();
+                string City = BBCity.Text.ToString();
                 string Country = BBCountry.SelectedValue;
-                string latitude = BBLatitude.Text;
-                string Longtitude = BBLongtitude.Text;
-                string postalCode = BBPostalCode.Text;
+                string latitude = BBLatitude.Text.ToString();
+                string Longtitude = BBLongtitude.Text.ToString();
+                string postalCode = BBPostalCode.Text.ToString();
                 string lastUpdBy = Session["userID"].ToString();
                 string lastUpdOn = DateTime.Now.ToString("MM/dd/yyyy h:mm tt");
+                //(string BillboardID, string AddressLn1, string AddressLn2, string City, string Country, string latitude, string Longtitude, string postalCode, string lastUpdBy, string lastUpdOn)
                 Boolean insCnt = bDAO.BBInfoUpdate(Session["BillboardID"].ToString(), Addr1, Addr2, City, Country,latitude,Longtitude,postalCode,lastUpdBy, lastUpdOn);
                 alertWarning.Visible = false;
                 alertSuccess.Visible = true;

@@ -366,6 +366,7 @@ namespace targeted_marketing_display
             rbEmotion.Checked = false;
             lblFbc.Visible = false;
             chartFb.Visible = false;
+            NoDataDiv.Visible = false;
         }
 
 
@@ -377,6 +378,7 @@ namespace targeted_marketing_display
             rbEmotion.Checked = false;
             lblFbc.Visible = false;
             chartFb.Visible = false;
+            NoDataDiv.Visible = false;
         }
 
         protected void rbGender_CheckedChanged(object sender, EventArgs e)
@@ -386,6 +388,7 @@ namespace targeted_marketing_display
             rbEmotion.Checked = false;
             lblFbc.Visible = false;
             chartFb.Visible = false;
+            NoDataDiv.Visible = false;
         }
 
         protected void rbEmotion_CheckedChanged(object sender, EventArgs e)
@@ -395,6 +398,7 @@ namespace targeted_marketing_display
             rbGender.Checked = false;
             lblFbc.Visible = false;
             chartFb.Visible = false;
+            NoDataDiv.Visible = false;
         }
        
         //Generate Chart

@@ -68,13 +68,21 @@ namespace targeted_marketing_display
 
 
 
-            if (BBLocationCode.Text != "" || BBAddLn1.Text != "" || BBCity.Text != "" || BBCountry.SelectedValue != "" ||
-                BBPostalCode.Text != "" || BBLatitude.Text != "" || BBLongtitude.Text != "")
+            if (BBLocationCode.Text == "" || BBAddLn1.Text == "" || BBCity.Text == "" || BBCountry.SelectedValue == "" ||
+                BBPostalCode.Text == "" || BBLatitude.Text == "" || BBLongtitude.Text == "")
             {
+                alertWarning.Visible = true;
+                alertSuccess.Visible = false;
+                alertDanger.Visible = false;
+                warningLocation.Text = "Please enter All Required Fields";
 
-                if (totalcount==0)
+            }
+
+            else
+            {
+                if (totalcount == 0)
                 {
-                    
+
                     Boolean result = bbMgmt.BBinsert(BillboardCode, AddressLn1, AddressLn2, City, Country, PostalCode, CreatedOn, Status, latitude, Longtitude, CreatedBy);
                     if (result == true)
                     {
@@ -88,27 +96,22 @@ namespace targeted_marketing_display
                         //BBCity.Text = String.Empty;
                         //BBPostalCode.Text = String.Empty;
 
-                       Session["BBCreate"] = 2;
-                       Response.Redirect("BBLocationRead.aspx");
+                        Session["BBCreate"] = 2;
+                        Response.Redirect("BBLocationRead.aspx");
                     }
                 }
 
                 else
                 {
-                    testing123.Text = " not Unique!";
+                   
                     alertWarning.Visible = false;
                     alertSuccess.Visible = false;
                     alertDanger.Visible = true;
                     dangerLocation.Text = "Billboard Code already exist";
                 }
-            }
 
-            else
-            {
-                alertWarning.Visible = true;
-                alertSuccess.Visible = false;
-                alertDanger.Visible = false;
-                warningLocation.Text = "Please enter All Required Fields";
+
+
             }
         }
     }

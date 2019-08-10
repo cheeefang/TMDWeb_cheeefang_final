@@ -99,7 +99,8 @@ namespace BBMgmt
         {
             Boolean result;
 
-            SqlCommand cmd = new SqlCommand("UPDATE [BillboardLocation] SET AddressLn1 = @paraAddressLn1 , AddressLn2 = @paraAddressLn2 ,City=@paraCity , Country=@paraCountry ,latitude=@paralatitude,Longtitude=@paraLongtitude,@parapostalCode=@parapostalCode, LastUpdBy = @paraLastUpdBy, LastUpdOn = @paraLastUpdOn WHERE BillboardID=@paraBillboardID");
+            SqlCommand cmd = new SqlCommand("UPDATE [BillboardLocation] SET AddressLn1 = @paraAddressLn1 , AddressLn2 = @paraAddressLn2 ,City=@paraCity , Country=@paraCountry ,latitude=@paralatitude,Longtitude=@paraLongtitude," +
+                "postalcode=@parapostalCode, LastUpdBy = @paraLastUpdBy, LastUpdOn = @paraLastUpdOn WHERE BillboardID=@paraBillboardID");
             cmd.Parameters.AddWithValue("@paraBillboardID", BillboardID);
           
             cmd.Parameters.AddWithValue("@paraAddressLn1", AddressLn1);
