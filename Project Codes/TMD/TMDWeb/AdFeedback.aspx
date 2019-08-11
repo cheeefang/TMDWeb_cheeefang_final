@@ -234,7 +234,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AdvModal" style="width:30.7%"> <b>Select Advertisements: </b></button>
-                        <asp:Label runat="server" Text="OR" Font-Bold="true"></asp:Label>
+                        <asp:Label runat="server" Text="OR/AND" Font-Bold="true"></asp:Label>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#BbModal" style="width:30.7%"><b>Select Billboards:</b></button>
                     </div>
                 </div>
@@ -384,9 +384,9 @@
                                 <SortedDescendingHeaderStyle BackColor="#383838" HorizontalAlign="Center"/>
                         </asp:GridView>
                                 </ContentTemplate>
-                     <%--       <Triggers>
+                            <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="addAdv" EventName="Click" />
-            </Triggers>--%>
+            </Triggers>
                          </asp:updatepanel>
                     </div>
                     </div>

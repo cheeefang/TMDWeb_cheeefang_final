@@ -174,6 +174,21 @@ namespace targeted_marketing_display
 
         protected void gvAdv_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+
+           // NoDataDiv.Visible = false;
+            //string code = ddlCom.SelectedItem.Text.Substring(1, 1);
+            //Session["code"] = code;
+            //lblFbc.Visible = false;
+            //chartFb.Visible = false;
+            Database db = new Database();
+            SqlCommand command = new SqlCommand("Select AdvId,Name,Item,ItemType,StartDate,EndDate,Status From Advertisement Where Advertisement.Status=1 and Advertisement.CompanyID=@pComID");
+            command.Parameters.AddWithValue("@pAdv", txtAdv.Text);
+            command.Parameters.AddWithValue("@pComID", Convert.ToInt32(ddlCom.SelectedItem.Value));
+            DataTable adv = db.getDataTable(command);
+            gvAdv.DataSource = adv;
+            gvAdv.DataBind();
+
+            gvAdv.Visible = true;
             gvAdv.PageIndex = e.NewPageIndex;
             gvAdv.DataBind();
         }
@@ -199,6 +214,39 @@ namespace targeted_marketing_display
 
         protected void gvBb_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+         
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+            conn = new
+            SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+            conn.Open();
+            Database db = new Database();
+            DataTable dtBillboards = new DataTable();
+            for (int i = 0; i < gvAdv.Rows.Count; i++)
+            {
+                SqlCommand command = new SqlCommand("Select Distinct AdvertisementFeedback.BillboardID,BillboardCode,((AddressLn1)+ ' '+(AddressLn2)+  ' '+(City)+  ', '+(Country)+ ' '+(postalCode)) AS Address" +
+               " From BillboardLocation inner join AdvertisementFeedback on BillboardLocation.BillboardID=AdvertisementFeedback.BillboardID" +
+               " Where  BillboardLocation.status=1 and AdvertisementFeedback.AdvID=@pAdvID", conn);
+                GridViewRow row = gvAdv.Rows[i];
+                //CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
+                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorADV");
+                if (rdBtn.Checked == true)
+                {
+
+
+                    Label advLabel = (Label)gvAdv.Rows[i].FindControl("lb_AdvertID");
+                    SqlParameter param = new SqlParameter();
+                    param.ParameterName = "@pAdvID";
+                    param.Value = advLabel.Text.ToString();
+                    command.Parameters.Add(param);
+                    SqlDataAdapter sda = new SqlDataAdapter();
+
+                    sda.SelectCommand = command;
+                    sda.Fill(dtBillboards);
+
+                }
+            }
+            gvBb.DataSource = dtBillboards;
             gvBb.PageIndex = e.NewPageIndex;
             gvBb.DataBind();
         }
