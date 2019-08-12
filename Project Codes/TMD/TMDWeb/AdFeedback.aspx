@@ -196,13 +196,17 @@
                 <asp:AsyncPostBackTrigger ControlID="addAdv" EventName="Click" />
             </Triggers>
                 </asp:UpdatePanel>--%>
+                
                 <div class="col-lg-6">
                     <div class="form-group">
+                       
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AdvModal" style="width:30.7%"> <b>Select Advertisements: </b></button>
+
                         <asp:Label runat="server" Text="OR/AND" Font-Bold="true"></asp:Label>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#BbModal" style="width:30.7%"><b>Select Billboards:</b></button>
                     </div>
                 </div>
+                          
             </div>
             <div class="row">
                 <div class="col-lg-6">
@@ -258,6 +262,7 @@
             
                     </div>
                 </div>
+                
                   <div class="col-lg-6">
                     <div class="form-group">
                         <asp:Label id="TitleDetailsLabel" text="Chart Data Details" runat="server" visible="false" Font-Bold="true"></asp:Label>
@@ -358,14 +363,14 @@
                                 <SortedDescendingHeaderStyle BackColor="#383838" HorizontalAlign="Center"/>
                         </asp:GridView>
                                 </ContentTemplate>
-                         
+                      
                          </asp:updatepanel>
                     </div>
                     </div>
                    
                     <div class="modal-footer">
                        
-                    <asp:Button ID="addAdv" runat="server" CssClass="btn btn-primary" Text="Add" OnClick="addAdv_Click"/>
+                    <asp:Button ID="addAdv" runat="server" CssClass="btn btn-primary" Text="Add" OnClick="addAdv_Click" />
                        
                     </div>
                      

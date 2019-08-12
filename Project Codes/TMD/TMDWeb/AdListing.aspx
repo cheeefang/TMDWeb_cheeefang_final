@@ -196,11 +196,33 @@ function HideDiv() {
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-        <asp:Label id="labeltesting" runat="server" >
-           
-        </asp:Label>
+       
                 <br />
-              
+                         <div id="demo" class="collapse">
+       <div class="row">
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label>Start Date:</label>
+                      
+                        <asp:TextBox Class="form-control" ID="startDateTB" runat="server" TextMode="Date" AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>
+                
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+
+                    <div class="form-group">
+                        <label>End Date: </label>
+                        
+                        <asp:TextBox class="form-control" ID="endDateTB" runat="server" TextMode="Date" AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>&nbsp;
+                         <asp:CompareValidator ID="CompareValidator2" runat="server" ControlToCompare="startDateTB" ControlToValidate="endDateTB" ErrorMessage="invalid end date" Operator="GreaterThan" Type="Date" ForeColor="Red"></asp:CompareValidator>
+                  
+                    </div>
+                </div>
+             
+            </div>
+  </div>
+                         
              <div class="row">
             <div class="col-lg-6">
             <div class="input-group custom-search-form" style="width: 50%">
@@ -210,20 +232,24 @@ function HideDiv() {
                                         <%--<input type="submit" id="btSubmit" runat="server" />--%>
                                         <span class="input-group-btn" >
                                             <asp:LinkButton runat="server" class="btn btn-default" ID="btnRun" style="height:34px;" Text="<i class='fa fa-search'></i>" OnClick="btnRun_Click"/>
+                                             
                                        </span>
+                                            
                                             </p>
+                        
                                     </div>
             </div>
                 </div>
-          
+        
                 <div class="col-lg-6">
                     </br>
                     <a href="AdCreate.aspx" class="btn btn-primary nextBtn pull-right" type="button"> <b> New Advertisement </b> </a>
                   
                 </div>
                  </div>
-
-                             <div id="divBackground" class="modal">
+         
+           <asp:Label id="ExtraDetailsLabel" Font-Bold="true" data-toggle="collapse" data-target="#demo"><u>Advanced Search^</u></asp:Label>
+     <div id="divBackground" class="modal">
 </div>
 <div id="divImage" style="padding:0px">
     <span class="close" id="imageCloser" onclick="HideDiv()">&times;</span>

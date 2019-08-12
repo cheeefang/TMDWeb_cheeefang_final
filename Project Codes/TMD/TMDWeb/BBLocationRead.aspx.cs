@@ -20,57 +20,64 @@ namespace targeted_marketing_display
         protected void Page_Load(object sender, EventArgs e)
         {
             //ADM Or admin
-            if (Session["userType"].ToString() == "Admin")
+            if(Session["userID"]==null||Session["userType"]==null)
             {
-                adminDiv.Visible = true;
-                userDiv.Visible = false;
+                Response.Redirect("login.aspx");
             }
             else
             {
-                adminDiv.Visible = false;
-                userDiv.Visible = true;
-            }
-            if (Convert.ToInt32(Session["BBUpdate"]) == 2)
-            {
-                updateSuccess.Visible = true;
-                Session.Remove("BBUpdate");
+                if (Session["userType"].ToString() == "Admin")
+                {
+                    adminDiv.Visible = true;
+                    userDiv.Visible = false;
+                }
+                else
+                {
+                    adminDiv.Visible = false;
+                    userDiv.Visible = true;
+                }
+                if (Convert.ToInt32(Session["BBUpdate"]) == 2)
+                {
+                    updateSuccess.Visible = true;
+                    Session.Remove("BBUpdate");
 
-            }
-            if (Convert.ToInt32(Session["BBCreate"]) == 2)
-            {
-                createSuccess.Visible = true;
-                Session.Remove("BBCreate");
-            }
-            //SqlConnection conn = null;
-            //SqlDataReader reader = null;
+                }
+                if (Convert.ToInt32(Session["BBCreate"]) == 2)
+                {
+                    createSuccess.Visible = true;
+                    Session.Remove("BBCreate");
+                }
+                //SqlConnection conn = null;
+                //SqlDataReader reader = null;
 
-            //// instantiate and open connection
-            //conn = new
-            //    SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
-            //conn.Open();
-            
-            
-            //GridView1.DataSource = dt;
-            GridView1.DataBind();
-            
+                //// instantiate and open connection
+                //conn = new
+                //    SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                //conn.Open();
+
+
+                //GridView1.DataSource = dt;
+                GridView1.DataBind();
+
                 //GridView2.DataSource = dt;
                 GridView2.DataBind();
                 //foreach (GridViewRow row in GridView1.Rows)
                 //{
                 //    for (int i = 1; i <= GridView1.Rows.Count; i++)
                 //    {
-                        
+
                 //        string BillboardID = GridView1.Rows[i].Cells[0].Text.ToString();
                 //        SqlCommand cmd = new SqlCommand(
                 //        "select count(*) from AdvertisementLocation where BillboardID=@ID ", conn);
                 //        SqlParameter param = new SqlParameter();
                 //        param.ParameterName = "@ID";
                 //        param.Value = BillboardID;
-                        
+
 
                 //}
 
                 //}
+            }
 
         }
 

@@ -23,7 +23,7 @@ namespace TMDWeb
                 //    Session["userType"] = "Admin";
                 //    Session["userID"] = 18;// "zshiyun98@gmail.com";
                 //}
-                if (Session["userID"].ToString() == "")
+                if (Session["userID"]==null||Session["userType"] ==null)
                 {
                     Response.Redirect("login.aspx");
                 }
