@@ -63,41 +63,6 @@
         
     </script>
   <script type="text/javascript">
-      <%-- function checkRadioBtnADV(id) {
-          var gv = document.getElementById('<%=gvAdv %>');
-          var rbs = gv.getElementsByTagName("input");
-          var row = rb.parentNode.parentNode;
-          for (var i = 0; i < rbs.length; i++) {
-              
-
-              // Check if the id not same
-              if (rbs[i].type == "radio") {
-                  if (rbs[i].checked && rbs[i] != rb) {
-                      rbs[i].checked = false;
-                      break;
-                  }
-                  
-              }
-          }
-      }
-
-      function checkRadioBtnBB(id) {
-           var gv = document.getElementById('<%=gvBb %>');
-          var rbs = gv.getElementsByTagName("input");
-          var row = rb.parentNode.parentNode;
-          for (var i = 0; i < rbs.length; i++) {
-              
-
-              // Check if the id not same
-              if (rbs[i].type == "radio") {
-                  if (rbs[i].checked && rbs[i] != rb) {
-                      rbs[i].checked = false;
-                      break;
-                  }
-                  
-              }
-          }
-      }--%>
       function RadioCheckAdvert(rb) {
 
         var gv = document.getElementById("<%=gvAdv.ClientID%>");
@@ -293,6 +258,15 @@
             
                     </div>
                 </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                        <asp:Label id="TitleDetailsLabel" text="Chart Data Details" runat="server" visible="false" Font-Bold="true"></asp:Label>
+                        <br />
+                        <asp:Label id="AdvertNameLabel" runat="server" visible="false"></asp:Label>
+                        <asp:Label id="CompanyNameLabel" runat="server" visible="false"></asp:Label>
+                        <asp:Label id="BillboardCodeLabel" runat="server" visible="false"></asp:Label>
+                        </div>
+                      </div>
                 </div>
                 <br />
             <div id="NoDataDiv" runat="server" visible="false" align="center">
@@ -348,17 +322,17 @@
                                         <ItemTemplate>
                                           
                                         
-                                      <asp:ImageButton ID="Image1" runat="server" ImageUrl='<%# Eval("Item") %>' OnClientClick="return LoadDiv(this.src);" 
-                                          Visible='<%# Eval("ItemType").ToString() =="image" %>' ClientIDMode="static" style="display:block;" ItemStyle-HorizontalAlign="Center"   />
+                                      <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("Item") %>'
+                                          Visible='<%# Eval("ItemType").ToString() =="image" %>' ClientIDMode="static" style="display:block;object-fit: cover;" ItemStyle-HorizontalAlign="Center"   />
                                       <div id="vidDiv" runat="server">
-                                        <video ClientIDMode="static" id="videoDog" width="100" height="100" runat="server" controls visible='<%# Eval("ItemType").ToString()!="image" %>'>  
+                                        <video ClientIDMode="static" id="videoDog" width="200" height="200" runat="server" controls visible='<%# Eval("ItemType").ToString()!="image" %>'>  
                                             <source runat="server" src='<%#Eval("Item")%>' type="video/mp4" visible='<%# Eval("ItemType").ToString()!="image" %>' ItemStyle-HorizontalAlign="Center" />  
                                         </video>  
                                            </div>
                                               
                                             </ItemTemplate>
-                                        <controlstyle width="100px" height="100px"  />
-                                        <ItemStyle Width="100px" height="100px" />
+                                        <controlstyle width="200px" height="200px"  />
+                                        <ItemStyle Width="200px" height="200px" />
                                         </asp:TemplateField>
                                 <asp:BoundField DataField="Name" HeaderText="Name" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100px">
                                         <ItemStyle HorizontalAlign="Left"></ItemStyle>
@@ -384,9 +358,7 @@
                                 <SortedDescendingHeaderStyle BackColor="#383838" HorizontalAlign="Center"/>
                         </asp:GridView>
                                 </ContentTemplate>
-                            <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="addAdv" EventName="Click" />
-            </Triggers>
+                         
                          </asp:updatepanel>
                     </div>
                     </div>

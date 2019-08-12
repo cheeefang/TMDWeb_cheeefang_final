@@ -519,6 +519,9 @@ namespace targeted_marketing_display
                             SqlDataReader dr = command.ExecuteReader();
                             if (dr.HasRows == true)
                             {
+                                lblFbc.Visible = true;
+                                chartFb.Visible = true;
+                                NoDataDiv.Visible = false;
                                 while (dr.Read())
                                 {
                                     string name = "Advert:" + r.Cells[3].Text;
@@ -571,6 +574,9 @@ namespace targeted_marketing_display
                             SqlDataReader dr = command.ExecuteReader();
                             if (dr.HasRows == true)
                             {
+                                lblFbc.Visible = true;
+                                chartFb.Visible = true;
+                                NoDataDiv.Visible = false;
                                 while (dr.Read())
                                 {
                                     string name = r.Cells[3].Text;
@@ -699,6 +705,9 @@ namespace targeted_marketing_display
                             SqlDataReader dr = command.ExecuteReader();
                             if (dr.HasRows == true)
                             {
+                                lblFbc.Visible = true;
+                                chartFb.Visible = true;
+                                NoDataDiv.Visible = false;
                                 while (dr.Read())
                                 {
                                     string name = r.Cells[3].Text;
@@ -748,6 +757,9 @@ namespace targeted_marketing_display
                             SqlDataReader dr = command.ExecuteReader();
                             if (dr.HasRows == true)
                             {
+                                lblFbc.Visible = true;
+                                chartFb.Visible = true;
+                                NoDataDiv.Visible = false;
                                 while (dr.Read())
                                 {
                                     string name = r.Cells[3].Text;
@@ -1006,6 +1018,9 @@ namespace targeted_marketing_display
                             SqlDataReader dr = cmdTotal.ExecuteReader();
                             if (dr.HasRows == true)
                             {
+                                lblFbc.Visible = true;
+                                chartFb.Visible = true;
+                                NoDataDiv.Visible = false;
                                 while (dr.Read())
                                 {
                                     //string settedadname = AdvertName;
@@ -1067,6 +1082,9 @@ namespace targeted_marketing_display
                             SqlDataReader dr = command.ExecuteReader();
                             if (dr.HasRows == true)
                             {
+                                lblFbc.Visible = true;
+                                chartFb.Visible = true;
+                                NoDataDiv.Visible = false;
                                 while (dr.Read())
                                 {
                                     string name = "";
@@ -1203,34 +1221,47 @@ namespace targeted_marketing_display
                             command.Parameters.AddWithValue("@eDate", edate);
                             
                             SqlDataReader dr = command.ExecuteReader();
-
-                            while (dr.Read())
+                            if (dr.HasRows == true)
                             {
-                                string name = "";
-                                int no = Convert.ToInt32(dr["NoOfPax"]);
-                                string gender = dr["Gender"].ToString();
-                                chartBbGender.Rows.Add(name, no, gender);
+                                lblFbc.Visible = true;
+                                chartFb.Visible = true;
+                                NoDataDiv.Visible = false;
+                                while (dr.Read())
+                                {
+                                    string name = "";
+                                    int no = Convert.ToInt32(dr["NoOfPax"]);
+                                    string gender = dr["Gender"].ToString();
+                                    chartBbGender.Rows.Add(name, no, gender);
 
-                                chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
-                                chartFb.Series["Series1"].XValueMember = "Gender";
-                                chartFb.Series["Series1"].YValueMembers = "No";
-                                chartFb.Series["Series1"].IsValueShownAsLabel = true;
-                                chartFb.Series["Series1"]["PixelPointWidth"] = "60";
-                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
-                                chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
-                                chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
-                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
-                                chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-                                chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
-                                chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
-                                chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
-                                chartFb.DataSource = chartBbGender;
-                                chartFb.DataBind();
+                                    chartFb.Series["Series1"].ChartType = SeriesChartType.Column;
+                                    chartFb.Series["Series1"].XValueMember = "Gender";
+                                    chartFb.Series["Series1"].YValueMembers = "No";
+                                    chartFb.Series["Series1"].IsValueShownAsLabel = true;
+                                    chartFb.Series["Series1"]["PixelPointWidth"] = "60";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Font = new System.Drawing.Font("Helvetica", 7F, System.Drawing.FontStyle.Bold);
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.Title = "Data for Billboard " + BillboardCode + "(" + AdvertName + ")";
+                                    chartFb.ChartAreas["ChartArea1"].AxisY.Title = "No. Of Pax";
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelStyle.Angle = 0;
+                                    chartFb.ChartAreas["ChartArea1"].AxisY.LabelStyle.Angle = 0;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+                                    chartFb.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Height = 50;
+                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.X = 15;
+                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Y = 5;
+                                    chartFb.ChartAreas["ChartArea1"].InnerPlotPosition.Width = 80;
+                                    chartFb.ChartAreas["ChartArea1"].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                                    chartFb.DataSource = chartBbGender;
+                                    chartFb.DataBind();
+                                }
                             }
+                            else
+                            {
+                                lblFbc.Visible = false;
+                                chartFb.Visible = false;
+                                NoDataDiv.Visible = true;
+                                NoDataText.Text = "Sorry,No data available yet for " + "Billboard #" + BillboardCode;
+                            }
+                           
                         }
                     }
                 }
@@ -1251,6 +1282,9 @@ namespace targeted_marketing_display
                             SqlDataReader dr = command.ExecuteReader();
                             if (dr.HasRows == true)
                             {
+                                lblFbc.Visible = true;
+                                chartFb.Visible = true;
+                                NoDataDiv.Visible = false;
                                 while (dr.Read())
                                 {
                                     string name = "";
@@ -1447,6 +1481,9 @@ namespace targeted_marketing_display
                     //gvComp.Columns.Add("Emotion", typeof(int));
                     if (drGvCmd.HasRows == true)
                     {
+                        lblFbc.Visible = true;
+                        chartFb.Visible = true;
+                        NoDataDiv.Visible = false;
                         while (drGvCmd.Read())
                         {
                             int totalNo = Convert.ToInt32(drGvCmd["totalcount"]);
@@ -1513,6 +1550,9 @@ namespace targeted_marketing_display
                     //gvComp.Columns.Add("Emotion", typeof(int));
                     if (drGvCmd.HasRows == true)
                     {
+                        lblFbc.Visible = true;
+                        chartFb.Visible = true;
+                        NoDataDiv.Visible = false;
                         while (drGvCmd.Read())
                         {
                             //int gvId = Convert.ToInt32(drGvCmd["AdvId"]);
@@ -1615,6 +1655,9 @@ namespace targeted_marketing_display
                     //gvComp.Columns.Add("Emotion", typeof(int));
                     if (drGvCmd.HasRows == true)
                     {
+                        lblFbc.Visible = true;
+                        chartFb.Visible = true;
+                        NoDataDiv.Visible = false;
                         while (drGvCmd.Read())
                         {
 
@@ -1682,6 +1725,12 @@ namespace targeted_marketing_display
 
                     if (drGvCmd.HasRows == true)
                     {
+                        lblFbc.Visible = true;
+                        chartFb.Visible = true;
+                        NoDataDiv.Visible = false;
+                        TitleDetailsLabel.Visible = true;
+                        CompanyNameLabel.Visible = true;
+                        CompanyNameLabel.Text = "Company:"+companyName.ToString();
                         while (drGvCmd.Read())
                         {
 

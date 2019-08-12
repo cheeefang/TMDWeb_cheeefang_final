@@ -73,7 +73,7 @@
             
                  <div runat="server" class="alert alert-success" id="updateSuccess" visible="False">
                     <strong>Success!</strong> 
-                    <asp:Label runat="server" ID="updateLabel"></asp:Label>
+                    <asp:Label runat="server" ID="updateLabel">Successfully Updated Company</asp:Label>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
