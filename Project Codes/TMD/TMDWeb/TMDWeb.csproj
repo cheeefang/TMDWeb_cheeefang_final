@@ -43,16 +43,21 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <IncludeIisSettings>true</IncludeIisSettings>
+    <CodeAnalysisRuleSet>GlobalizationRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Korzh.EasyQuery, Version=5.0.0.15, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Korzh.EasyQuery.5.0.0\lib\netstandard2.0\Korzh.EasyQuery.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Korzh.EasyQuery.Db, Version=5.0.0.15, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Korzh.EasyQuery.Db.5.0.0\lib\netstandard2.0\Korzh.EasyQuery.Db.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Korzh.EasyQuery.Linq, Version=5.0.0.15, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Korzh.EasyQuery.Linq.5.0.0\lib\netstandard2.0\Korzh.EasyQuery.Linq.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -61,18 +66,23 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Extensions.Options, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Options.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Extensions.Primitives, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -84,26 +94,28 @@
     </Reference>
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
       <Private>True</Private>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Threading.Thread, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Thread.4.3.0\lib\net46\System.Threading.Thread.dll</HintPath>
-      <Private>True</Private>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
@@ -1812,6 +1824,61 @@
     <Content Include="OtherUserProfile.aspx" />
     <Content Include="OwnProfile.aspx" />
     <Content Include="AdListing.aspx" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\brands.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\fontawesome.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\regular.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\solid.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\v4-shims.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\_animated.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\_bordered-pulled.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\_core.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\_fixed-width.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\_icons.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\_larger.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\_list.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\_mixins.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\_rotated-flipped.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\_screen-reader.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\_shims.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\_stacked.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\less\_variables.less" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\metadata\categories.yml" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\metadata\icons.json" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\metadata\icons.yml" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\metadata\shims.json" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\metadata\shims.yml" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\metadata\sponsors.yml" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\brands.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\fontawesome.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\regular.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\solid.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\v4-shims.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_animated.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_bordered-pulled.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_core.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_fixed-width.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_icons.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_larger.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_list.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_mixins.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_rotated-flipped.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_screen-reader.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_shims.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_stacked.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_variables.scss" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-solid-900.woff2" />
+    <Content Include="Press_F_To_Pay_Respects.aspx" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
@@ -1889,63 +1956,24 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\_bootstrap-datetimepicker.less" />
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\brands.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\fontawesome.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\regular.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\solid.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\v4-shims.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\_animated.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\_bordered-pulled.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\_core.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\_fixed-width.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\_icons.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\_larger.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\_list.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\_mixins.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\_rotated-flipped.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\_screen-reader.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\_shims.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\_stacked.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\less\_variables.less" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\metadata\categories.yml" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\metadata\icons.json" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\metadata\icons.yml" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\metadata\shims.json" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\metadata\shims.yml" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\metadata\sponsors.yml" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\brands.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\fontawesome.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\regular.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\solid.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\v4-shims.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_animated.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_bordered-pulled.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_core.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_fixed-width.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_icons.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_larger.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_list.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_mixins.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_rotated-flipped.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_screen-reader.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_shims.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_stacked.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\scss\_variables.scss" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-brands-400.eot" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-brands-400.ttf" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-brands-400.woff" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-brands-400.woff2" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-regular-400.eot" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-regular-400.ttf" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-regular-400.woff" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-regular-400.woff2" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-solid-900.eot" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-solid-900.ttf" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-solid-900.woff" />
-    <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-solid-900.woff2" />
-    <Content Include="Press_F_To_Pay_Respects.aspx" />
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />
+    <None Include="Properties\PublishProfiles\FuckOff.pubxml" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Testing1234.aspx" />
-    <Content Include="Using_MS_SQL_Server.aspx" />
     <Content Include="webicons\255-2557792_up-arrow-top-image-png-white.png" />
     <Content Include="webicons\8-87169_white-down-arrow-png-down-arrow-white-png.png" />
     <Content Include="webicons\asc.gif" />
@@ -1961,22 +1989,10 @@
     <Content Include="obj\Debug\TMDWeb.csproj.CoreCompileInputs.cache" />
     <Content Include="obj\Debug\TMDWeb.csprojAssemblyReference.cache" />
     <Content Include="obj\Debug\TMDWeb.csprojResolveAssemblyReference.cache" />
-    <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile2.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="Scripts\bootstrap-datetimepicker.js" />
-    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\moment-with-locales.js" />
-    <Content Include="Scripts\moment-with-locales.min.js" />
-    <Content Include="Scripts\moment.js" />
-    <Content Include="Scripts\moment.min.js" />
     <Content Include="Template.Master" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Web.Debug.config">
@@ -2005,7 +2021,9 @@
     <Content Include="UpdateOtherUserProfile.aspx" />
     <Content Include="UpdateOwnProfile.aspx" />
     <Content Include="ViewUser.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdFeedback.aspx.cs">
@@ -2290,10 +2308,6 @@
     <Compile Include="UpdateOwnProfile.aspx.designer.cs">
       <DependentUpon>UpdateOwnProfile.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Using_MS_SQL_Server.aspx.cs">
-      <DependentUpon>Using_MS_SQL_Server.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="ViewUser.aspx.cs">
       <DependentUpon>ViewUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2337,13 +2351,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
