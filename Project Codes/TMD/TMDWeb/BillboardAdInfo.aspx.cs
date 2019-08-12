@@ -244,26 +244,53 @@ namespace targeted_marketing_display
 
         protected void btnRun_Click(object sender, EventArgs e)
         {
-            
-            string str = " select [BillboardLocation].BillboardCode, [Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join" +
-                " [AdvertisementLocation] on [Advertisement].AdvID=[AdvertisementLocation].AdvID join " +
-                "[BillboardLocation] on[AdvertisementLocation].BillboardID =[BillboardLocation].BillboardID " +
-                "where [Advertisement].status=1 and [BillboardLocation].BillboardID=@ID and (Name like '%' + @search + '%' OR ItemType like '%' + @search + '%' ) ";
-            SqlCommand xp = new SqlCommand(str, vid);
-            xp.Parameters.Add("@ID", SqlDbType.NVarChar).Value = Session["BillboardID"].ToString();
-            xp.Parameters.Add("@search", SqlDbType.NVarChar).Value = txtSearch.Text;
-      
-            vid.Open();
-            xp.ExecuteNonQuery();
-            SqlDataAdapter da = new SqlDataAdapter();
-            da.SelectCommand = xp;
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            GridView1.DataSource = ds;
-            GridView1.DataBind();
-            
+            if (startDateTB.Text == "" && endDateTB.Text == "")
+            {
+                string str = " select [BillboardLocation].BillboardCode, [Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate," +
+                    "[Advertisement].EndDate from [Advertisement] inner join" +
+              " [AdvertisementLocation] on [Advertisement].AdvID=[AdvertisementLocation].AdvID join " +
+              "[BillboardLocation] on[AdvertisementLocation].BillboardID =[BillboardLocation].BillboardID " +
+              "where [Advertisement].status=1 and [BillboardLocation].BillboardID=@ID and (Name like '%' + @search + '%' OR ItemType like '%' + @search + '%' ) ";
+                SqlCommand xp = new SqlCommand(str, vid);
+                xp.Parameters.Add("@ID", SqlDbType.NVarChar).Value = Session["BillboardID"].ToString();
+                xp.Parameters.Add("@search", SqlDbType.NVarChar).Value = txtSearch.Text;
 
+                vid.Open();
+                xp.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = xp;
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                GridView1.DataSource = ds;
+                GridView1.DataBind();
 
+            }
+            else
+            {
+                DateTime sdate = DateTime.Parse(startDateTB.Text);
+                DateTime edate = DateTime.Parse(endDateTB.Text);
+                string str = " select [BillboardLocation].BillboardCode, [Advertisement].Name,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate," +
+                    "[Advertisement].EndDate from [Advertisement] inner join" +
+             " [AdvertisementLocation] on [Advertisement].AdvID=[AdvertisementLocation].AdvID join " +
+             "[BillboardLocation] on[AdvertisementLocation].BillboardID =[BillboardLocation].BillboardID " +
+             "where [Advertisement].status=1 and [BillboardLocation].BillboardID=@ID and [Advertisement].StartDate>=@sDate and [Advertisement].EndDate<=@eDate and" +
+             " (Name like '%' + @search + '%' OR ItemType like '%' + @search + '%' ) ";
+                SqlCommand xp = new SqlCommand(str, vid);
+                xp.Parameters.Add("@ID", SqlDbType.NVarChar).Value = Session["BillboardID"].ToString();
+                xp.Parameters.Add("@sDate", SqlDbType.DateTime).Value = sdate;
+                xp.Parameters.Add("@eDate", SqlDbType.DateTime).Value = edate;
+                xp.Parameters.Add("@search", SqlDbType.NVarChar).Value = txtSearch.Text;
+
+                vid.Open();
+                xp.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = xp;
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                GridView1.DataSource = ds;
+                GridView1.DataBind();
+            }
+              
         }
     }
 }

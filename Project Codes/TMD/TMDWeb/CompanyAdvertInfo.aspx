@@ -52,6 +52,33 @@
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
+        <br />
+
+                   <div id="demo" class="collapse">
+       <div class="row">
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label>Start Date:</label>
+                      
+                        <asp:TextBox Class="form-control" ID="startDateTB" runat="server" TextMode="Date" AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>
+                
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+
+                    <div class="form-group">
+                        <label>End Date: </label>
+                        
+                        <asp:TextBox class="form-control" ID="endDateTB" runat="server" TextMode="Date" AutoCompleteType="Disabled" autocomplete="off"></asp:TextBox>&nbsp;
+                         <asp:CompareValidator ID="CompareValidator2" runat="server" ControlToCompare="startDateTB" ControlToValidate="endDateTB" ErrorMessage="invalid end date" Operator="GreaterThan" Type="Date" ForeColor="Red"></asp:CompareValidator>
+                  
+                    </div>
+                </div>
+             
+            </div>
+  </div>
+        
 
 
           <div class="row">
@@ -70,6 +97,9 @@
                </div>
                 
                 </div>
+ 
+
+          <asp:Label id="ExtraDetailsLabel" Font-Bold="true" data-toggle="collapse" data-target="#demo"><u>Advanced Search^</u></asp:Label>
 
 
 

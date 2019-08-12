@@ -243,21 +243,47 @@ namespace targeted_marketing_display
 
         protected void btnRun_Click(object sender, EventArgs e)
         {
-            string str = " select [Company].Name as Company,[Advertisement].Name as adname,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
+            if (startDateTB.Text == "" && endDateTB.Text == "")
+            {
+                string str = " select [Company].Name as Company,[Advertisement].Name as adname,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
                         "where [Company].CompanyID=@ID and [Advertisement].status=1 and ([Advertisement].Name like '%' + @search + '%' OR ItemType like '%'" +
                         " + @search + '%' OR StartDate like '%' + @search + '%' OR  EndDate like '%' + @search + '%') ";
-            SqlCommand xp = new SqlCommand(str, vid);
-            xp.Parameters.Add("@ID", SqlDbType.NVarChar).Value = Session["CompanyID"].ToString();
-            xp.Parameters.Add("@search", SqlDbType.NVarChar).Value = txtSearch.Text;
-            //xp.Parameters.Add("@search2", SqlDbType.NVarChar).Value = txtSearch.Text;
-            vid.Open();
-            xp.ExecuteNonQuery();
-            SqlDataAdapter da = new SqlDataAdapter();
-            da.SelectCommand = xp;
-            DataSet ds = new DataSet();
-            da.Fill(ds, "Name");
-            GridView1.DataSource = ds;
-            GridView1.DataBind();
+                SqlCommand xp = new SqlCommand(str, vid);
+                xp.Parameters.Add("@ID", SqlDbType.NVarChar).Value = Session["CompanyID"].ToString();
+                xp.Parameters.Add("@search", SqlDbType.NVarChar).Value = txtSearch.Text;
+                //xp.Parameters.Add("@search2", SqlDbType.NVarChar).Value = txtSearch.Text;
+                vid.Open();
+                xp.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = xp;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "Name");
+                GridView1.DataSource = ds;
+                GridView1.DataBind();
+            }
+            else
+            {
+                DateTime sdate = DateTime.Parse(startDateTB.Text);
+                DateTime edate = DateTime.Parse(endDateTB.Text);
+                string str = " select [Company].Name as Company,[Advertisement].Name as adname,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
+                      "where [Company].CompanyID=@ID and [Advertisement].status=1 and [Advertisement].StartDate>=@sDate and [Advertisement].EndDate<=@eDate and ([Advertisement].Name like '%' + @search + '%' OR ItemType like '%'" +
+                      " + @search + '%' OR StartDate like '%' + @search + '%' OR  EndDate like '%' + @search + '%') ";
+                SqlCommand xp = new SqlCommand(str, vid);
+                xp.Parameters.Add("@ID", SqlDbType.NVarChar).Value = Session["CompanyID"].ToString();
+                xp.Parameters.Add("@search", SqlDbType.NVarChar).Value = txtSearch.Text;
+                xp.Parameters.Add("@sDate", SqlDbType.DateTime).Value = sdate;
+                xp.Parameters.Add("@eDate", SqlDbType.DateTime).Value = edate;
+                //xp.Parameters.Add("@search2", SqlDbType.NVarChar).Value = txtSearch.Text;
+                vid.Open();
+                xp.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = xp;
+                DataSet ds = new DataSet();
+                da.Fill(ds, "Name");
+                GridView1.DataSource = ds;
+                GridView1.DataBind();
+
+            }
         }
     }
 }
