@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#"  MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="AdListingUpdate.aspx.cs" EnableEventValidation="true" Inherits="targeted_marketing_display.AdListingUpdate" %>
+﻿<%@ Page Language="C#" validateRequest="false"  MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="AdListingUpdate.aspx.cs" EnableEventValidation="true" Inherits="targeted_marketing_display.AdListingUpdate" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

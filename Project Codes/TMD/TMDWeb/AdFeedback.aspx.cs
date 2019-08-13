@@ -1728,9 +1728,6 @@ namespace targeted_marketing_display
                         lblFbc.Visible = true;
                         chartFb.Visible = true;
                         NoDataDiv.Visible = false;
-                        TitleDetailsLabel.Visible = true;
-                        CompanyNameLabel.Visible = true;
-                        CompanyNameLabel.Text = "Company:"+companyName.ToString();
                         while (drGvCmd.Read())
                         {
 

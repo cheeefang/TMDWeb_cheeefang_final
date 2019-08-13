@@ -263,15 +263,7 @@
                     </div>
                 </div>
                 
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                        <asp:Label id="TitleDetailsLabel" text="Chart Data Details" runat="server" visible="false" Font-Bold="true"></asp:Label>
-                        <br />
-                        <asp:Label id="AdvertNameLabel" runat="server" visible="false"></asp:Label>
-                        <asp:Label id="CompanyNameLabel" runat="server" visible="false"></asp:Label>
-                        <asp:Label id="BillboardCodeLabel" runat="server" visible="false"></asp:Label>
-                        </div>
-                      </div>
+             
                 </div>
                 <br />
             <div id="NoDataDiv" runat="server" visible="false" align="center">
