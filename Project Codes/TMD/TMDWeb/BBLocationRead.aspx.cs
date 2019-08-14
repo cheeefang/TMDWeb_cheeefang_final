@@ -177,7 +177,8 @@ namespace targeted_marketing_display
 
                 bObj = bDao.getBillboardByID(lb_msgId.Text);
                 string  BBCode= bObj.BillboardCode;
-                SqlCommand cmdcount = new SqlCommand("Select count(*) as total from BillboardLocation as b inner join AdvertisementLocation al on b.BillboardID=al.BillboardID where al.BillboardID=@ID", conn);
+                SqlCommand cmdcount = new SqlCommand("Select count(*) as total from BillboardLocation as b inner join AdvertisementLocation al on b.BillboardID=al.BillboardID inner join Advertisement a2 on" +
+                    " al.AdvID=a2.AdvID where al.BillboardID=@ID and a2.status=1", conn);
                 SqlParameter paramCount = new SqlParameter();
                 paramCount.ParameterName = "@ID";
                 paramCount.Value = bObj.BillboardID.ToString();

@@ -94,7 +94,7 @@ namespace targeted_marketing_display
                 
                 Obj = cDao.getCompanyByID(lb_msgId.Text);
 
-                SqlCommand cmdCount = new SqlCommand("select count(*) as total from Advertisement as a inner join Company as c on a.companyID=c.CompanyID where c.CompanyID=@ID", conn);
+                SqlCommand cmdCount = new SqlCommand("select count(*) as total from Advertisement as a inner join Company as c on a.companyID=c.CompanyID where c.CompanyID=@ID and a.status=1", conn);
                 string CompanyName = Obj.Name;
                 SqlParameter param1 = new SqlParameter();
                 param1.ParameterName = "@ID";
