@@ -135,7 +135,7 @@ body
     bcgDiv.style.display = "block";
         imgDiv.style.display = "block";
         //if not admin
-        if ('<%=fuckoff %>'==0) {
+        if ('<%=adminint %>'==0) {
             document.getElementById('<%=Master.FindControl("stupidDiv").ClientID %>').style.opacity = "0.3";
 
             document.getElementById('<%=Master.FindControl("stupidDiv").ClientID %>').style.pointerEvents = "None";

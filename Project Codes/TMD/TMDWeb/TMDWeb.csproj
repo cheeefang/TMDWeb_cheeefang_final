@@ -164,7 +164,6 @@
     <Content Include="bin\TMDApp.exe" />
     <Content Include="bin\TMDWeb.dll" />
     <Content Include="bin\TMDWeb.pdb" />
-    <Content Include="Bullshit.aspx" />
     <Content Include="CoInfoCreate.aspx" />
     <Content Include="CoInfoRead.aspx" />
     <Content Include="CoInfoUpdate.aspx" />
@@ -1747,9 +1746,7 @@
     <Content Include="css\newgridview.css" />
     <Content Include="css\TMD.css" />
     <Content Include="DataProvider.aspx" />
-    <Content Include="DiuLeiLoMo.aspx" />
     <Content Include="ExportChartToPDF.aspx" />
-    <Content Include="f.aspx" />
     <Content Include="FAQ.aspx" />
     <Content Include="FeedbackAd.aspx" />
     <Content Include="FeedbackAnalyticsIndiv.aspx" />
@@ -1793,7 +1790,6 @@
     <Content Include="font-awesome\scss\_stacked.scss" />
     <Content Include="font-awesome\scss\_variables.scss" />
     <Content Include="FusionChart.aspx" />
-    <Content Include="HorseShit.aspx" />
     <Content Include="Images\1.jpg" />
     <Content Include="Images\2.jpg" />
     <Content Include="Images\250px-Bewear_anime.png" />
@@ -1878,7 +1874,6 @@
     <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-solid-900.woff" />
     <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-solid-900.woff2" />
-    <Content Include="Press_F_To_Pay_Respects.aspx" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
@@ -2094,13 +2089,6 @@
     <Compile Include="BillboardAdInfo.aspx.designer.cs">
       <DependentUpon>BillboardAdInfo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Bullshit.aspx.cs">
-      <DependentUpon>Bullshit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Bullshit.aspx.designer.cs">
-      <DependentUpon>Bullshit.aspx</DependentUpon>
-    </Compile>
     <Compile Include="CoInfoCreate.aspx.cs">
       <DependentUpon>CoInfoCreate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2140,23 +2128,9 @@
       <DependentUpon>DataProvider.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DiuLeiLoMo.aspx.cs">
-      <DependentUpon>DiuLeiLoMo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DiuLeiLoMo.aspx.designer.cs">
-      <DependentUpon>DiuLeiLoMo.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ExportChartToPDF.aspx.cs">
       <DependentUpon>ExportChartToPDF.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="f.aspx.cs">
-      <DependentUpon>f.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="f.aspx.designer.cs">
-      <DependentUpon>f.aspx</DependentUpon>
     </Compile>
     <Compile Include="FAQ.aspx.cs">
       <DependentUpon>FAQ.aspx</DependentUpon>
@@ -2192,13 +2166,6 @@
     </Compile>
     <Compile Include="FusionChart.aspx.designer.cs">
       <DependentUpon>FusionChart.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="HorseShit.aspx.cs">
-      <DependentUpon>HorseShit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="HorseShit.aspx.designer.cs">
-      <DependentUpon>HorseShit.aspx</DependentUpon>
     </Compile>
     <Compile Include="ImproveDesign.aspx.cs">
       <DependentUpon>ImproveDesign.aspx</DependentUpon>
@@ -2258,13 +2225,6 @@
     </Compile>
     <Compile Include="AdListing.aspx.designer.cs">
       <DependentUpon>AdListing.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Press_F_To_Pay_Respects.aspx.cs">
-      <DependentUpon>Press_F_To_Pay_Respects.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Press_F_To_Pay_Respects.aspx.designer.cs">
-      <DependentUpon>Press_F_To_Pay_Respects.aspx</DependentUpon>
     </Compile>
     <Compile Include="Template.Master.cs">
       <DependentUpon>Template.Master</DependentUpon>

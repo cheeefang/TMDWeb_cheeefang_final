@@ -23,7 +23,7 @@ namespace targeted_marketing_display
 
 
 
-        protected int fuckoff;
+        protected int adminint;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -48,11 +48,11 @@ namespace targeted_marketing_display
         
             if (Session["userType"].ToString() == "Admin")
             {
-                 fuckoff = 1;
+                adminint = 1;
             }
             else
             {
-                 fuckoff = 0;
+                adminint = 0;
             }
         }
         public void BindGrid()
