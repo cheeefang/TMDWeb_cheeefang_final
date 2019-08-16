@@ -164,7 +164,7 @@ function HideDiv() {
 
     }
     //if not admin
-    if ('<%=fuckoff %>' == 0) {
+    if ('<%=adminint %>' == 0) {
         document.getElementById('<%=Master.FindControl("stupidDiv").ClientID %>').style.opacity = "1";
 
           document.getElementById('<%=Master.FindControl("stupidDiv").ClientID %>').style.pointerEvents = "auto";

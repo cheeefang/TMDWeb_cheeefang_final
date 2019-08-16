@@ -2059,6 +2059,7 @@
     <Compile Include="App_Code\CompanyAdverts.cs" />
     <Compile Include="App_Code\Company_Management.cs" />
     <Compile Include="App_Code\Database.cs" />
+    <Content Include="App_Code\Reference.cs" />
     <Compile Include="App_Code\User.cs" />
     <Compile Include="App_Code\UserManagement.cs" />
     <Compile Include="BBLocationCreate.aspx.cs">

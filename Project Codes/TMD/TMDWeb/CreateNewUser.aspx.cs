@@ -150,6 +150,7 @@ namespace targeted_marketing_display
                         if (EmailExist == 0)
                         {
                             if (Type == "Admin")
+                            //if (Type == Reference.USR_ADM)
                             {
                                 Boolean insCnt = uDao.createAdmin(Name, Email, ContactNumber, Type, PasswordHash, PasswordSalt, Status, CreatedBy, CreatedOn);
 
