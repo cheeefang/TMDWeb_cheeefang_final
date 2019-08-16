@@ -202,7 +202,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                      
-                        <button type="button" id="selectadvbutton" class="btn btn-primary" data-toggle="modal" data-target="#AdvModal" style="width:30.7%"> <b>Select Advertisements: </b></button>
+                        <button type="button" id="ButtonAdvSelect" class="btn btn-primary" data-toggle="modal" data-target="#AdvModal" style="width:30.7%"> <b>Select Advertisements: </b></button>
 
                         <asp:Label runat="server" Text="OR/AND" Font-Bold="true"></asp:Label>
                         <button type="button" id="selectbbbutton" class="btn btn-primary" data-toggle="modal" data-target="#BbModal" style="width:30.7%"><b>Select Billboards:</b></button>
@@ -210,7 +210,7 @@
                 </div>
                            </ContentTemplate>
                                              <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="selectadvbutton" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="ButtonAdvSelect" EventName="Click" />
             </Triggers>
                      </asp:UpdatePanel>
             </div>

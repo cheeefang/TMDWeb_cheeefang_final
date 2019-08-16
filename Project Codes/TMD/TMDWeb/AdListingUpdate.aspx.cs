@@ -268,7 +268,7 @@ namespace targeted_marketing_display
                     string catChecker = ((String)datatableCat.Rows[i]["CategoryID"]);
                     for (int x = 0; x < CheckBoxList1.Items.Count; x++)
                     {
-                        if (catChecker == CheckBoxList1.SelectedValue)
+                        if (catChecker == CheckBoxList1.Items[x].Value)
                         {
                             CheckBoxList1.Items[x].Selected = true;
                             name = name + "," + CheckBoxList1.Items[x].Value;
@@ -279,7 +279,7 @@ namespace targeted_marketing_display
                         
                     // adCategoryTB.Text = (name).Substring(1);
                 }
-                adCategoryTB.Text = name.Substring(0);        
+                adCategoryTB.Text = name.Substring(1);        
             }
         }
         protected void ButtonConfirm_Click(object sender, EventArgs e)
