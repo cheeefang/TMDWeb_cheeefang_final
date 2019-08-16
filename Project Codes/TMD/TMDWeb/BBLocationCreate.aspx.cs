@@ -21,8 +21,21 @@ namespace targeted_marketing_display
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
+            Database db = new Database();
+            //SqlCommand cmd = new SqlCommand("select CodeValue,CodeDesc from CodeReferece where CodeType=Industry ");
+            //DataTable dt = db.getDataTable(cmd);
+            //CoIndustry.DataSource = dt;
+            //CoIndustry.DataValueField = "CodeValue";
+            //CoIndustry.DataTextField = "CodeDesc";
+            //CoIndustry.DataBind();
+            //CoIndustry.Items.Insert(0, new ListItem("---Select An Industry---", "0"));
+            SqlCommand cmd = new SqlCommand("select CodeValue,CodeDesc from CodeReferece where CodeType='Country' ");
+            DataTable dt = db.getDataTable(cmd);
+            BBCountry.DataSource = dt;
+            BBCountry.DataValueField = "CodeValue";
+            BBCountry.DataTextField = "CodeDesc";
+            BBCountry.DataBind();
+            BBCountry.Items.Insert(0, new ListItem("---Select A Country---", "0"));
         }
         protected void SubmitBtn_Click(object sender, EventArgs e)
         {
@@ -39,7 +52,7 @@ namespace targeted_marketing_display
             String AddressLn1 = BBAddLn1.Text.ToString();
             String AddressLn2 = BBAddLn2.Text.ToString();
             String City = BBCity.Text.ToString();
-            String Country = (BBCountry.SelectedValue.ToString());
+            String Country = (BBCountry.SelectedItem.Value.ToString());
             String PostalCode = BBPostalCode.Text.ToString();
             DateTime CreatedOn = DateTime.Now;
             int Status = 1;

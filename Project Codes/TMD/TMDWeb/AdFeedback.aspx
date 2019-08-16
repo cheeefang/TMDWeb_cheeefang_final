@@ -196,17 +196,23 @@
                 <asp:AsyncPostBackTrigger ControlID="addAdv" EventName="Click" />
             </Triggers>
                 </asp:UpdatePanel>--%>
-                
+                      <asp:UpdatePanel ID="updatepanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+
+                            <ContentTemplate>
                 <div class="col-lg-6">
                     <div class="form-group">
-                       
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AdvModal" style="width:30.7%"> <b>Select Advertisements: </b></button>
+                     
+                        <button type="button" id="selectadvbutton" class="btn btn-primary" data-toggle="modal" data-target="#AdvModal" style="width:30.7%"> <b>Select Advertisements: </b></button>
 
                         <asp:Label runat="server" Text="OR/AND" Font-Bold="true"></asp:Label>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#BbModal" style="width:30.7%"><b>Select Billboards:</b></button>
+                        <button type="button" id="selectbbbutton" class="btn btn-primary" data-toggle="modal" data-target="#BbModal" style="width:30.7%"><b>Select Billboards:</b></button>
                     </div>
                 </div>
-                          
+                           </ContentTemplate>
+                                             <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="selectadvbutton" EventName="Click" />
+            </Triggers>
+                     </asp:UpdatePanel>
             </div>
             <div class="row">
                 <div class="col-lg-6">
@@ -293,7 +299,8 @@
                                 </button>
                             </span>
                         </div>
-                        <asp:updatepanel id="updatepanel20" runat="server" updatemode="Conditional" childrenastriggers="true">
+
+                       <asp:UpdatePanel ID="updatepanel27" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
 
                             <ContentTemplate>
                         <asp:GridView ID="gvAdv" runat="server" Visible="true" Style="margin-top: 5px;" AutoGenerateColumns="False" CssClass="table table-bordered table-striped table-hover" OnRowDataBound="gvAdv_RowDataBound"
@@ -354,9 +361,9 @@
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" HorizontalAlign="Center"/>
                                 <SortedDescendingHeaderStyle BackColor="#383838" HorizontalAlign="Center"/>
                         </asp:GridView>
-                                </ContentTemplate>
-                      
-                         </asp:updatepanel>
+                                         </ContentTemplate>
+            
+     </asp:UpdatePanel>
                     </div>
                     </div>
                    

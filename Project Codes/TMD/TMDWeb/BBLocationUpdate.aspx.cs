@@ -18,6 +18,23 @@ namespace targeted_marketing_display
         protected string longtitude;
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            Database db = new Database();
+            //SqlCommand cmd = new SqlCommand("select CodeValue,CodeDesc from CodeReferece where CodeType=Industry ");
+            //DataTable dt = db.getDataTable(cmd);
+            //CoIndustry.DataSource = dt;
+            //CoIndustry.DataValueField = "CodeValue";
+            //CoIndustry.DataTextField = "CodeDesc";
+            //CoIndustry.DataBind();
+            //CoIndustry.Items.Insert(0, new ListItem("---Select An Industry---", "0"));
+            SqlCommand cmd = new SqlCommand("select CodeValue,CodeDesc from CodeReferece where CodeType='Country' ");
+            DataTable dt = db.getDataTable(cmd);
+            BBCountry.DataSource = dt;
+            BBCountry.DataValueField = "CodeValue";
+            BBCountry.DataTextField = "CodeDesc";
+            BBCountry.DataBind();
+            BBCountry.Items.Insert(0, new ListItem("---Select A Country---", "0"));
+
             if (!IsPostBack)
             {
                 Billboard BillboardObj = new Billboard();
@@ -71,7 +88,7 @@ namespace targeted_marketing_display
                 string Addr1 = BBAddLn1.Text.ToString();
                 string Addr2 = BBAddLn2.Text.ToString();
                 string City = BBCity.Text.ToString();
-                string Country = BBCountry.SelectedValue;
+                string Country = BBCountry.SelectedItem.Value.ToString();
                 string latitude = BBLatitude.Text.ToString();
                 string Longtitude = BBLongtitude.Text.ToString();
                 string postalCode = BBPostalCode.Text.ToString();
@@ -84,7 +101,7 @@ namespace targeted_marketing_display
              
                 BBAddLn1.Text = String.Empty;
                 BBAddLn2.Text = String.Empty;
-                BBCountry.SelectedValue = "";
+                BBCountry.SelectedItem.Value = "";
                 BBCity.Text = String.Empty;
                 BBPostalCode.Text = String.Empty;
                 BBLatitude.Text = String.Empty;

@@ -51,10 +51,6 @@
                         <label style="color: red">*</label>
                         <asp:DropDownList Class="form-control" ID="ddlUserType" runat="server" OnSelectedIndexChanged="ddlUserType_SelectedIndexChanged" AutoPostBack="true">
 
-                            <asp:ListItem Value="NULL">---Select User Type---</asp:ListItem>
-                            <asp:ListItem Value="Member">User</asp:ListItem>
-                            <asp:ListItem Value="Admin">Admin</asp:ListItem>
-
                         </asp:DropDownList>&nbsp;
                         <asp:RequiredFieldValidator ID="rfvUser" runat="server" ControlToValidate="ddlUserType" Display="Dynamic" ErrorMessage="Please Select User Type"></asp:RequiredFieldValidator>
 

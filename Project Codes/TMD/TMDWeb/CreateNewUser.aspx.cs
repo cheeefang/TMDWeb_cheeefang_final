@@ -33,6 +33,15 @@ namespace targeted_marketing_display
                 ddlCompany.DataBind();
 
                 ddlCompany.Items.Insert(0, new ListItem("---Select A Company---", "0"));
+                SqlCommand cmdUserType = new SqlCommand("select CodeValue,CodeDesc from CodeReferece where CodeType='UserType'");
+                DataTable dtUserType = db.getDataTable(cmdUserType);
+                ddlUserType.DataSource = dtUserType;
+                ddlUserType.DataValueField = "CodeValue";
+                ddlUserType.DataTextField = "CodeDesc";
+                ddlUserType.DataBind();
+                ddlUserType.Items.Insert(0, new ListItem("---Select A User Type---", "0"));
+                
+
             }
         }
 
@@ -69,11 +78,11 @@ namespace targeted_marketing_display
 
         protected void ddlUserType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlUserType.SelectedValue == "Member")
+            if (ddlUserType.SelectedItem.Value == Reference.USR_MEM)
             {
                 nUser.Visible = true;
             }
-            else if (ddlUserType.SelectedValue == "Admin")
+            else if (ddlUserType.SelectedItem.Value == Reference.USR_ADM)
             {
                 nUser.Visible = false;
             }
@@ -90,7 +99,7 @@ namespace targeted_marketing_display
 
             
             string Name = tbName.Text;
-            string Type = ddlUserType.SelectedValue;
+            string Type = ddlUserType.SelectedItem.Value;
             string Email = tbEmail.Text;
             string ContactNumber = tbConNo.Text;
             string Pswd = CreatePassword(8);
@@ -106,7 +115,7 @@ namespace targeted_marketing_display
             }
             else
             {
-                    if (Type == "Member" && CompanyID == 0)
+                    if (Type == Reference.USR_MEM && CompanyID == 0)
                     {
                         alertWarning.Visible = true;
                         msgWarning.Text = "Please Select Company!";
@@ -149,7 +158,7 @@ namespace targeted_marketing_display
 
                         if (EmailExist == 0)
                         {
-                            if (Type == "Admin")
+                            if (Type == Reference.USR_ADM)
                             //if (Type == Reference.USR_ADM)
                             {
                                 Boolean insCnt = uDao.createAdmin(Name, Email, ContactNumber, Type, PasswordHash, PasswordSalt, Status, CreatedBy, CreatedOn);
