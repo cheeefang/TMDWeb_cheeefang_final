@@ -256,6 +256,10 @@ namespace targeted_marketing_display
                 sdaCat.SelectCommand = cmdCat;
                 sdaCat.Fill(datatableCat);
                 string name = "";
+
+
+                
+
                 for (int i = 0; i < datatableCat.Rows.Count; i++)
                 {
                     //Auto,Bus,Career,Fin,Food,Gov,Health,Home,Ins,Int,Law,Mobile,Mother,Pets,Photo,Polit,
