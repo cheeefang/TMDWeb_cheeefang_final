@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="BBLocationUpdate.aspx.cs" Inherits="targeted_marketing_display.BBLocationUpdate" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="BBLocationUpdate.aspx.cs" Inherits="targeted_marketing_display.BBLocationUpdate" EnableViewState="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">

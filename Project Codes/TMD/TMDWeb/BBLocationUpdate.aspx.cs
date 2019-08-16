@@ -19,21 +19,7 @@ namespace targeted_marketing_display
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            Database db = new Database();
-            //SqlCommand cmd = new SqlCommand("select CodeValue,CodeDesc from CodeReferece where CodeType=Industry ");
-            //DataTable dt = db.getDataTable(cmd);
-            //CoIndustry.DataSource = dt;
-            //CoIndustry.DataValueField = "CodeValue";
-            //CoIndustry.DataTextField = "CodeDesc";
-            //CoIndustry.DataBind();
-            //CoIndustry.Items.Insert(0, new ListItem("---Select An Industry---", "0"));
-            SqlCommand cmd = new SqlCommand("select CodeValue,CodeDesc from CodeReferece where CodeType='Country' ");
-            DataTable dt = db.getDataTable(cmd);
-            BBCountry.DataSource = dt;
-            BBCountry.DataValueField = "CodeValue";
-            BBCountry.DataTextField = "CodeDesc";
-            BBCountry.DataBind();
-            BBCountry.Items.Insert(0, new ListItem("---Select A Country---", "0"));
+          
 
             if (!IsPostBack)
             {
@@ -46,6 +32,22 @@ namespace targeted_marketing_display
                 latitude = BillboardObj.latitude;
                 longtitude = BillboardObj.Longtitude;
                 //CompanyObj = CDao.getCompanyByID(Session["CompanyID"].ToString());
+                Database db = new Database();
+                //SqlCommand cmd = new SqlCommand("select CodeValue,CodeDesc from CodeReferece where CodeType=Industry ");
+                //DataTable dt = db.getDataTable(cmd);
+                //CoIndustry.DataSource = dt;
+                //CoIndustry.DataValueField = "CodeValue";
+                //CoIndustry.DataTextField = "CodeDesc";
+                //CoIndustry.DataBind();
+                //CoIndustry.Items.Insert(0, new ListItem("---Select An Industry---", "0"));
+                SqlCommand cmd = new SqlCommand("select CodeValue,CodeDesc from CodeReferece where CodeType='Country' ");
+                DataTable dt = db.getDataTable(cmd);
+                BBCountry.DataSource = dt;
+                BBCountry.DataValueField = "CodeValue";
+                BBCountry.DataTextField = "CodeDesc";
+                BBCountry.DataBind();
+                BBCountry.Items.Insert(0, new ListItem("---Select A Country---", "0"));
+
 
                 BBAddLn1.Text = BillboardObj.AddressLn1;
                 BBAddLn2.Text = BillboardObj.AddressLn2;

@@ -16,15 +16,7 @@ namespace targeted_marketing_display
         //CoIndustry=companyIndustrytextboxID
         protected void Page_Load(object sender, EventArgs e)
         {
-            Database db = new Database();
-            SqlCommand cmd = new SqlCommand("select * from CodeReferece where CodeType='Industry' ");
-            DataTable dt = db.getDataTable(cmd);
-            CoIndustry.DataSource = dt;
-            CoIndustry.DataValueField = "CodeValue";
-            CoIndustry.DataTextField = "CodeValue";
-            CoIndustry.DataBind();
-            CoIndustry.Items.Insert(0, new ListItem("---Select An Industry---", "0"));
-
+         
                 
             if (!IsPostBack)
             {
@@ -38,6 +30,14 @@ namespace targeted_marketing_display
 
                 CoName.Text = CompanyObj.Name;
                 CoIndustry.SelectedValue = CompanyObj.Industry;
+                Database db = new Database();
+                SqlCommand cmd = new SqlCommand("select * from CodeReferece where CodeType='Industry' ");
+                DataTable dt = db.getDataTable(cmd);
+                CoIndustry.DataSource = dt;
+                CoIndustry.DataValueField = "CodeValue";
+                CoIndustry.DataTextField = "CodeValue";
+                CoIndustry.DataBind();
+                CoIndustry.Items.Insert(0, new ListItem("---Select An Industry---", "0"));
 
             }
         }

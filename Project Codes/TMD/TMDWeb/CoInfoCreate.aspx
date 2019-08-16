@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="CoInfoCreate.aspx.cs" Inherits="targeted_marketing_display.CoInfoCreate" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="CoInfoCreate.aspx.cs" Inherits="targeted_marketing_display.CoInfoCreate" EnableViewState="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

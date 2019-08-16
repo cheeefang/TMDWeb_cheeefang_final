@@ -17,31 +17,35 @@ namespace targeted_marketing_display
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Database db = new Database();
+            if (!IsPostBack)
+            {
+                Database db = new Database();
 
-            //SqlCommand cmd = new SqlCommand("Select * from Company where status=1");
-            //DataTable dt = db.getDataTable(cmd);
+                //SqlCommand cmd = new SqlCommand("Select * from Company where status=1");
+                //DataTable dt = db.getDataTable(cmd);
 
-            //ddlCompany.DataSource = dt;
-            //ddlCompany.DataValueField = "CompanyID";
-            //ddlCompany.DataTextField = "Name";
-            //ddlCompany.DataBind();
+                //ddlCompany.DataSource = dt;
+                //ddlCompany.DataValueField = "CompanyID";
+                //ddlCompany.DataTextField = "Name";
+                //ddlCompany.DataBind();
 
-            //ddlCompany.Items.Insert(0, new ListItem("---Select A Company---", "0"));
-            //SqlCommand cmdUserType = new SqlCommand("select CodeValue,CodeDesc from CodeReferece where CodeType='UserType'");
-            //DataTable dtUserType = db.getDataTable(cmdUserType);
-            //ddlUserType.DataSource = dtUserType;
-            //ddlUserType.DataValueField = "CodeValue";
-            //ddlUserType.DataTextField = "CodeDesc";
-            //ddlUserType.DataBind();
-            //ddlUserType.Items.Insert(0, new ListItem("---Select A User Type---", "0"));
-            SqlCommand cmd = new SqlCommand("select * from CodeReferece where CodeType='Industry' ");
-            DataTable dt = db.getDataTable(cmd);
-            CoIndustry.DataSource = dt;
-            CoIndustry.DataValueField = "CodeValue";
-            CoIndustry.DataTextField = "CodeValue";
-            CoIndustry.DataBind();
-            CoIndustry.Items.Insert(0, new ListItem("---Select An Industry---", "0"));
+                //ddlCompany.Items.Insert(0, new ListItem("---Select A Company---", "0"));
+                //SqlCommand cmdUserType = new SqlCommand("select CodeValue,CodeDesc from CodeReferece where CodeType='UserType'");
+                //DataTable dtUserType = db.getDataTable(cmdUserType);
+                //ddlUserType.DataSource = dtUserType;
+                //ddlUserType.DataValueField = "CodeValue";
+                //ddlUserType.DataTextField = "CodeDesc";
+                //ddlUserType.DataBind();
+                //ddlUserType.Items.Insert(0, new ListItem("---Select A User Type---", "0"));
+                SqlCommand cmd = new SqlCommand("select * from CodeReferece where CodeType='Industry' ");
+                DataTable dt = db.getDataTable(cmd);
+                CoIndustry.DataSource = dt;
+                CoIndustry.DataValueField = "CodeValue";
+                CoIndustry.DataTextField = "CodeValue";
+                CoIndustry.DataBind();
+                CoIndustry.Items.Insert(0, new ListItem("---Select An Industry---", "0"));
+
+            }
 
 
         }
