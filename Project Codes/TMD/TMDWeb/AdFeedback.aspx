@@ -1,39 +1,42 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="AdFeedback.aspx.cs" Inherits="targeted_marketing_display.AdFeedback" %>
-<%@ Register assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.DataVisualization.Charting" tagprefix="asp" %>
+﻿<%@ page title="" language="C#" masterpagefile="~/Template.Master" autoeventwireup="true" codefile="AdFeedback.aspx.cs" inherits="targeted_marketing_display.AdFeedback" Async="true" %>
+
+<%@ register assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.DataVisualization.Charting" tagprefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .panel{
-            width:100% !important;
-            height:100% !important;
+        .panel {
+            width: 100% !important;
+            height: 100% !important;
         }
-        .chartFb
-        {
-            width:100% !important;
-            height:50% !important;
-        }
-        .calendar{
-            position:relative;
-            left:741px;
-            top:-34px;
-        }
-        .pickdate{
 
+        .chartFb {
+            width: 100% !important;
+            height: 50% !important;
         }
-        .fontfont{
-            position:relative;
-            left:710px;
-            top:-20px
-        }
-        #videoDog{
-     object-fit: cover;
-}
-#vidDiv{
 
-}
-    </style>  
+        .calendar {
+            position: relative;
+            left: 741px;
+            top: -34px;
+        }
+
+        .pickdate {
+        }
+
+        .fontfont {
+            position: relative;
+            left: 710px;
+            top: -20px
+        }
+
+        #videoDog {
+            object-fit: cover;
+        }
+
+        #vidDiv {
+        }
+    </style>
     <script>  
-        $(function ()
-        {
+        $(function () {
             $('.pickdate').datepicker(
                 {
                     dateFormat: 'dd/mm/yy',
@@ -60,28 +63,57 @@
         function showVadModal2() {
             $('#VadModal2').modal('show');
         }
-        
+
     </script>
-  <script type="text/javascript">
-      function RadioCheckAdvert(rb) {
+    <script type="text/javascript">
+        function RadioCheckAdvert(rb) {
 
-        var gv = document.getElementById("<%=gvAdv.ClientID%>");
+            var gv = document.getElementById("<%=gvAdv.ClientID%>");
 
-        var rbs = gv.getElementsByTagName("input");
+            var rbs = gv.getElementsByTagName("input");
 
- 
 
-        var row = rb.parentNode.parentNode;
 
-        for (var i = 0; i < rbs.length; i++) {
+            var row = rb.parentNode.parentNode;
 
-            if (rbs[i].type == "radio") {
+            for (var i = 0; i < rbs.length; i++) {
 
-                if (rbs[i].checked && rbs[i] != rb) {
+                if (rbs[i].type == "radio") {
 
-                    rbs[i].checked = false;
+                    if (rbs[i].checked && rbs[i] != rb) {
 
-                    break;
+                        rbs[i].checked = false;
+
+                        break;
+
+                    }
+
+                }
+
+            }
+
+        }
+        function RadioCheckBillboard(rb) {
+
+            var gv = document.getElementById("<%=gvBb.ClientID%>");
+
+            var rbs = gv.getElementsByTagName("input");
+
+
+
+            var row = rb.parentNode.parentNode;
+
+            for (var i = 0; i < rbs.length; i++) {
+
+                if (rbs[i].type == "radio") {
+
+                    if (rbs[i].checked && rbs[i] != rb) {
+
+                        rbs[i].checked = false;
+
+                        break;
+
+                    }
 
                 }
 
@@ -89,39 +121,10 @@
 
         }
 
-      }    
-      function RadioCheckBillboard(rb) {
 
-        var gv = document.getElementById("<%=gvBb.ClientID%>");
-
-        var rbs = gv.getElementsByTagName("input");
-
- 
-
-        var row = rb.parentNode.parentNode;
-
-        for (var i = 0; i < rbs.length; i++) {
-
-            if (rbs[i].type == "radio") {
-
-                if (rbs[i].checked && rbs[i] != rb) {
-
-                    rbs[i].checked = false;
-
-                    break;
-
-                }
-
-            }
-
-        }
-
-    }    
-
-
-</script>
+    </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" ClientIDMode="Static">
+<asp:content id="Content2" contentplaceholderid="ContentPlaceHolder1" runat="server" clientidmode="Static">
     <form runat="server">
           <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
 
@@ -181,38 +184,32 @@
                 </div>
             </div>
             <div class="row">
-                <%--<asp:UpdatePanel ID="updatePanelCompany" runat="server">
-                    <ContentTemplate>--%>
-
-                  
                 <div class ="col-lg-6">
                     <div class="form-group">
                         <asp:DropDownList ID="ddlCom" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlCom_SelectedIndexChanged" AutoPostBack="True" DataTextField="Name" DataValueField="Name"></asp:DropDownList>
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Targeted_Marketing_DisplayConnectionString %>" SelectCommand="SELECT [Name] FROM [Company] where status=1"></asp:SqlDataSource>
                     </div>
                 </div>
-                         <%-- </ContentTemplate>
-                                  <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="addAdv" EventName="Click" />
-            </Triggers>
-                </asp:UpdatePanel>--%>
-                      <asp:UpdatePanel ID="updatepanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
-
-                            <ContentTemplate>
+                      
+                      
                 <div class="col-lg-6">
                     <div class="form-group">
-                     
+                     <asp:UpdatePanel ID="updatepanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+
+                            <ContentTemplate>
                         <button type="button" id="ButtonAdvSelect" class="btn btn-primary" data-toggle="modal" data-target="#AdvModal" style="width:30.7%"> <b>Select Advertisements: </b></button>
 
                         <asp:Label runat="server" Text="OR/AND" Font-Bold="true"></asp:Label>
                         <button type="button" id="selectbbbutton" class="btn btn-primary" data-toggle="modal" data-target="#BbModal" style="width:30.7%"><b>Select Billboards:</b></button>
-                    </div>
-                </div>
-                           </ContentTemplate>
+                                      </ContentTemplate>
                                              <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="ButtonAdvSelect" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="addAdv" EventName="Click" />
             </Triggers>
                      </asp:UpdatePanel>
+                    </div>
+
+                </div>
+                     
             </div>
             <div class="row">
                 <div class="col-lg-6">
@@ -369,7 +366,7 @@
                    
                     <div class="modal-footer">
                        
-                    <asp:Button ID="addAdv" runat="server" CssClass="btn btn-primary" Text="Add" OnClick="addAdv_Click" />
+                    <asp:Button ID="addAdv" runat="server" CssClass="btn btn-primary" Text="Add" OnClick="addAdv_Click" autopostback="true"/>
                        
                     </div>
                      
@@ -440,7 +437,7 @@
                        <%-- <asp:UpdatePanel ID="updatepanel2" runat="server">
 
                             <ContentTemplate>--%>
-                    <asp:Button ID="addBb" runat="server" CssClass="btn btn-primary" Text="Add" OnClick="addBb_Click"/>
+                    <asp:Button ID="addBb" runat="server" CssClass="btn btn-primary" Text="Add" OnClick="addBb_Click" autopostback="true"/>
                     <%--            </ContentTemplate>
                             </asp:UpdatePanel>--%>
                     </div>
@@ -519,4 +516,4 @@
 
         </div> 
     </form>
-</asp:Content>
+</asp:content>
