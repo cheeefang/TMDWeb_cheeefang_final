@@ -488,7 +488,7 @@ namespace targeted_marketing_display
                 alertWarning.Visible = false;
                 alertSuccess.Visible = true;
                 Session["AdvertUpdate"] = 2;
-                Response.Redirect("AdvertListing.aspx");
+                Response.Redirect("AdvertList.aspx");
             }
 
             //ScriptManager.RegisterStartupScript(this, this.GetType(),

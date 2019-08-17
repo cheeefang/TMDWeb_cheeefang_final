@@ -18,7 +18,7 @@
                 <div runat="server" class="alert alert-success" id="alertSuccess" visible="False">
                     <strong>Success!</strong> 
                     <asp:Label runat="server" ID="msgSuccess"></asp:Label>
-                    <button type="button" class="close" onclick="window.location.href='ViewUser.aspx';">
+                    <button type="button" class="close" onclick="window.location.href='UserList.aspx';">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>

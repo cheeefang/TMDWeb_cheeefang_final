@@ -14,7 +14,7 @@ using targeted_marketing_display;
 
 namespace targeted_marketing_display
 {
-    public partial class UserListing : System.Web.UI.Page
+    public partial class UserList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

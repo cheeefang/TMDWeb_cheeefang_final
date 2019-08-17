@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="AdvertListing.aspx.cs" Inherits="targeted_marketing_display.AdvertListing" EnableEventValidation="false" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="AdvertList.aspx.cs" Inherits="targeted_marketing_display.AdvertList" EnableEventValidation="false" %>
 <%--NOTE:I put event validation=false because i manipulate the side menu with javascript and if i dont include it,it will show error.It compromises security though--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>

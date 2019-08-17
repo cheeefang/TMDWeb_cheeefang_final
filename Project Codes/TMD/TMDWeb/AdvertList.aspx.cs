@@ -13,7 +13,7 @@ namespace targeted_marketing_display
 {
  
 
-    public partial class AdvertListing : System.Web.UI.Page
+    public partial class AdvertList : System.Web.UI.Page
     {
         SqlConnection vid = new
              SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");

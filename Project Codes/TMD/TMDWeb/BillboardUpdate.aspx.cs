@@ -109,7 +109,7 @@ namespace targeted_marketing_display
                 BBLatitude.Text = String.Empty;
                 BBLongtitude.Text = String.Empty;
                 Session["BBUpdate"] = 2;
-                Response.Redirect("BillboardListing.aspx");
+                Response.Redirect("BillboardList.aspx");
 
             }
            

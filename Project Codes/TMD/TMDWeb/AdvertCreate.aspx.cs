@@ -342,7 +342,7 @@ namespace targeted_marketing_display
                 alertWarning.Visible = false;
                 alertSuccess.Visible = true;
                 Session["AdvertCreate"] = 2;
-                Response.Redirect("AdvertListing.aspx");
+                Response.Redirect("AdvertList.aspx");
             }
             
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="BillboardListing.aspx.cs" Inherits="targeted_marketing_display.BillboardListing" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.Master" AutoEventWireup="true" CodeFile="BillboardList.aspx.cs" Inherits="targeted_marketing_display.BillboardList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server" >
     <script src="scripts/jquery-1.4.3.min.js" type="text/javascript"></script>

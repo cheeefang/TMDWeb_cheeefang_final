@@ -16,7 +16,7 @@ using System.Configuration;
 namespace targeted_marketing_display
    
 {
-    public partial class CompanyListing : System.Web.UI.Page
+    public partial class CompanyList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

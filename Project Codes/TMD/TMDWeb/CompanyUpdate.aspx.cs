@@ -63,7 +63,7 @@ namespace targeted_marketing_display
                 CoName.Text = String.Empty;
                 CoIndustry.SelectedItem.Value = "";
                 Session["CoUpdate"] = 2;
-                Response.Redirect("CompanyListing.aspx");
+                Response.Redirect("CompanyList.aspx");
 
             }
           

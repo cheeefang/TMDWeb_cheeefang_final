@@ -76,7 +76,7 @@ namespace targeted_marketing_display
                    
                     if ((string)Session["userType"] == Reference.USR_ADM)
                     {
-                        Response.Redirect("BillboardListing.aspx");
+                        Response.Redirect("BillboardList.aspx");
                     }
                     else if ((string)Session["userType"] == Reference.USR_MEM)
                     {

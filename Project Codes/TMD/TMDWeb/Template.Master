@@ -150,7 +150,7 @@
 
                         <li>
 
-                            <a href="UserListing.aspx"><i class="fas fa-users"></i> User Listing </a>
+                            <a href="UserList.aspx"><i class="fas fa-users"></i> User Listing </a>
 
                         </li>
                         
@@ -162,7 +162,7 @@
                           
                                 <li>
                                                        
-                            <a href="CompanyListing.aspx"><i class="fa fa-building fa-fw"></i> Company Listing </a>
+                            <a href="CompanyList.aspx"><i class="fa fa-building fa-fw"></i> Company Listing </a>
                                </li>
 
                             
@@ -178,12 +178,12 @@
 
                         <li>
 
-                            <a href="BillboardListing.aspx"> <i class="fas fa-map-marker-alt"></i> Billboard Location Listing </a>
+                            <a href="BillboardList.aspx"> <i class="fas fa-map-marker-alt"></i> Billboard Location Listing </a>
                             
                         </li>
 
                                 <li>
-                                    <a href="AdvertListing.aspx"><i class="fa fa-sitemap fa-fw"></i> Advertisement Listing </a>
+                                    <a href="AdvertList.aspx"><i class="fa fa-sitemap fa-fw"></i> Advertisement Listing </a>
                                 </li>
 
                                      
@@ -304,7 +304,7 @@
                        
                         
                          <li>
-                            <a href="AdvertListing.aspx"><i class="fa fa-sitemap fa-fw"></i> Advertisement Listing </a>
+                            <a href="AdvertList.aspx"><i class="fa fa-sitemap fa-fw"></i> Advertisement Listing </a>
                         </li>
 
                         <li>

@@ -114,7 +114,7 @@ namespace targeted_marketing_display
                         //BBPostalCode.Text = String.Empty;
 
                         Session["BBCreate"] = 2;
-                        Response.Redirect("BillboardListing.aspx");
+                        Response.Redirect("BillboardList.aspx");
                     }
                 }
 

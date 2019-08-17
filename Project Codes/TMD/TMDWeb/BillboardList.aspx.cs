@@ -14,7 +14,7 @@ using System.Text;
 
 namespace targeted_marketing_display
 {
-    public partial class BillboardListing : System.Web.UI.Page
+    public partial class BillboardList : System.Web.UI.Page
     {
         
         protected void Page_Load(object sender, EventArgs e)

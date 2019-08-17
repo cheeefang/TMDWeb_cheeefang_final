@@ -74,7 +74,7 @@ namespace targeted_marketing_display
                 CoName.Text = String.Empty;
                 CoIndustry.SelectedItem.Value = "";
                 Session["CoCreate"] = 2;
-                Response.Redirect("CompanyListing.aspx");
+                Response.Redirect("CompanyList.aspx");
             }
             
         }

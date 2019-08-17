@@ -42,7 +42,7 @@ namespace targeted_marketing_display
             alertSuccess.Visible = true;
             msgSuccess.Text = "Updated Successfully";
             Session["UpdateUser"] = 2;
-            Response.Redirect("ViewUser.aspx");
+            Response.Redirect("UserList.aspx");
         }
         
     }

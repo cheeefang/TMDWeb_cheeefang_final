@@ -141,7 +141,7 @@
     <Content Include="AdvertInfo.aspx" />
     <Content Include="AdvertUpdate.aspx" />
     <Content Include="BillboardCreate.aspx" />
-    <Content Include="BillboardListing.aspx" />
+    <Content Include="BillboardList.aspx" />
     <Content Include="BillboardUpdate.aspx" />
     <Content Include="BillboardInfo.aspx" />
     <Content Include="bin\AjaxControlToolkit.dll" />
@@ -165,7 +165,7 @@
     <Content Include="bin\TMDWeb.dll" />
     <Content Include="bin\TMDWeb.pdb" />
     <Content Include="CompanyCreate.aspx" />
-    <Content Include="CompanyListing.aspx" />
+    <Content Include="CompanyList.aspx" />
     <Content Include="CompanyUpdate.aspx" />
     <Content Include="CompanyInfo.aspx" />
     <Content Include="Content\fontawesome-free-5.9.0-web\css\all.css" />
@@ -1810,7 +1810,7 @@
     <Content Include="obj\Debug\TMDWeb.csproj.FileListAbsolute.txt" />
     <Content Include="UserInfo.aspx" />
     <Content Include="ProfileInfo.aspx" />
-    <Content Include="AdvertListing.aspx" />
+    <Content Include="AdvertList.aspx" />
     <Content Include="Content\fontawesome-free-5.9.0-web\less\brands.less" />
     <Content Include="Content\fontawesome-free-5.9.0-web\less\fontawesome.less" />
     <Content Include="Content\fontawesome-free-5.9.0-web\less\regular.less" />
@@ -2005,7 +2005,7 @@
     <Content Include="testRead.aspx" />
     <Content Include="UserUpdate.aspx" />
     <Content Include="ProfileUpdate.aspx" />
-    <Content Include="UserListing.aspx" />
+    <Content Include="UserList.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2059,12 +2059,12 @@
     <Compile Include="BillboardCreate.aspx.designer.cs">
       <DependentUpon>BillboardCreate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BillboardListing.aspx.cs">
-      <DependentUpon>BillboardListing.aspx</DependentUpon>
+    <Compile Include="BillboardList.aspx.cs">
+      <DependentUpon>BillboardList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BillboardListing.aspx.designer.cs">
-      <DependentUpon>BillboardListing.aspx</DependentUpon>
+    <Compile Include="BillboardList.aspx.designer.cs">
+      <DependentUpon>BillboardList.aspx</DependentUpon>
     </Compile>
     <Compile Include="BillboardUpdate.aspx.cs">
       <DependentUpon>BillboardUpdate.aspx</DependentUpon>
@@ -2087,12 +2087,12 @@
     <Compile Include="CompanyCreate.aspx.designer.cs">
       <DependentUpon>CompanyCreate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CompanyListing.aspx.cs">
-      <DependentUpon>CompanyListing.aspx</DependentUpon>
+    <Compile Include="CompanyList.aspx.cs">
+      <DependentUpon>CompanyList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CompanyListing.aspx.designer.cs">
-      <DependentUpon>CompanyListing.aspx</DependentUpon>
+    <Compile Include="CompanyList.aspx.designer.cs">
+      <DependentUpon>CompanyList.aspx</DependentUpon>
     </Compile>
     <Compile Include="CompanyUpdate.aspx.cs">
       <DependentUpon>CompanyUpdate.aspx</DependentUpon>
@@ -2153,12 +2153,12 @@
     <Compile Include="ProfileInfo.aspx.designer.cs">
       <DependentUpon>ProfileInfo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdvertListing.aspx.cs">
-      <DependentUpon>AdvertListing.aspx</DependentUpon>
+    <Compile Include="AdvertList.aspx.cs">
+      <DependentUpon>AdvertList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdvertListing.aspx.designer.cs">
-      <DependentUpon>AdvertListing.aspx</DependentUpon>
+    <Compile Include="AdvertList.aspx.designer.cs">
+      <DependentUpon>AdvertList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Template.Master.cs">
       <DependentUpon>Template.Master</DependentUpon>
@@ -2195,12 +2195,12 @@
     <Compile Include="ProfileUpdate.aspx.designer.cs">
       <DependentUpon>ProfileUpdate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UserListing.aspx.cs">
-      <DependentUpon>UserListing.aspx</DependentUpon>
+    <Compile Include="UserList.aspx.cs">
+      <DependentUpon>UserList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserListing.aspx.designer.cs">
-      <DependentUpon>UserListing.aspx</DependentUpon>
+    <Compile Include="UserList.aspx.designer.cs">
+      <DependentUpon>UserList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
