@@ -1,6 +1,7 @@
-﻿<%@ page title="" language="C#" masterpagefile="~/Template.Master" autoeventwireup="true" codefile="AdFeedback.aspx.cs" inherits="targeted_marketing_display.AdFeedback" Async="true" %>
+﻿<%@ page title="" validateRequest="false" language="C#" masterpagefile="~/Template.Master" EnableEventValidation="true" AutoEventWireup="true" codefile="AdFeedback.aspx.cs" inherits="targeted_marketing_display.AdFeedback" Async="true" %>
 
 <%@ register assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.DataVisualization.Charting" tagprefix="asp" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .panel {
@@ -191,26 +192,30 @@
                     </div>
                 </div>
                       
-                      
+         <%--  <asp:UpdatePanel ID="updatepanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+
+                            <ContentTemplate>--%>
                 <div class="col-lg-6">
                     <div class="form-group">
-                     <asp:UpdatePanel ID="updatepanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                    
+                        <button type="button" id="ButtonAdvSelect" class="btn btn-primary" data-toggle="modal" data-target="#AdvModal" style="width:30.7%" > <b>Select Advertisements: </b>
 
-                            <ContentTemplate>
-                        <button type="button" id="ButtonAdvSelect" class="btn btn-primary" data-toggle="modal" data-target="#AdvModal" style="width:30.7%"> <b>Select Advertisements: </b></button>
-
+                        </button>
+                     
                         <asp:Label runat="server" Text="OR/AND" Font-Bold="true"></asp:Label>
+                               
                         <button type="button" id="selectbbbutton" class="btn btn-primary" data-toggle="modal" data-target="#BbModal" style="width:30.7%"><b>Select Billboards:</b></button>
-                                      </ContentTemplate>
-                                             <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="addAdv" EventName="Click" />
-            </Triggers>
-                     </asp:UpdatePanel>
+                                     
                     </div>
 
                 </div>
-                     
+             <%--      </ContentTemplate>
+                         <Triggers>
+                             <asp:AsyncPostBackTrigger ControlID="addAdv" EventName="Click" />
+                         </Triggers>
+                         </asp:UpdatePanel>--%>
             </div>
+                    
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
@@ -366,7 +371,7 @@
                    
                     <div class="modal-footer">
                        
-                    <asp:Button ID="addAdv" runat="server" CssClass="btn btn-primary" Text="Add" OnClick="addAdv_Click" autopostback="true"/>
+                    <asp:LinkButton ID="addAdv" runat="server" CssClass="btn btn-primary" Text="Add" OnClick="addAdv_Click"/>
                        
                     </div>
                      

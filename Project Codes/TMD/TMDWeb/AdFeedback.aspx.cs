@@ -113,39 +113,44 @@ namespace targeted_marketing_display
         //Company Dropdownlist
         protected void ddlCom_SelectedIndexChanged(object sender, EventArgs e)
         {
-            foreach (GridViewRow row in gvAdv.Rows)
+            if(ddlCom.SelectedItem.Text.Substring(1, 1) != "-")
             {
-                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorADV");
-                //CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
-                if (rdBtn.Checked == true)
+                foreach (GridViewRow row in gvAdv.Rows)
                 {
-                    rdBtn.Checked = false;
+                    RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorADV");
+                    //CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
+                    if (rdBtn.Checked == true)
+                    {
+                        rdBtn.Checked = false;
+                    }
                 }
-            }
-            foreach (GridViewRow row in gvBb.Rows)
-            {
-                RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorBB");
-                // CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
-                if (rdBtn.Checked == true)
+                foreach (GridViewRow row in gvBb.Rows)
                 {
-                    rdBtn.Checked = false;
+                    RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorBB");
+                    // CheckBox chkrw = (CheckBox)row.FindControl("CheckBox1");
+                    if (rdBtn.Checked == true)
+                    {
+                        rdBtn.Checked = false;
+                    }
                 }
-            }
-            NoDataDiv.Visible = false;
-            string code = ddlCom.SelectedItem.Text.Substring(1, 1);
-            Session["code"] = code;
-            lblFbc.Visible = false;
-            chartFb.Visible = false;
-            Database db = new Database();
-            SqlCommand command = new SqlCommand("Select AdvId,Name,Item,ItemType,StartDate,EndDate,Status From Advertisement Where Advertisement.Status=1 and Advertisement.CompanyID=@pComID");
-            command.Parameters.AddWithValue("@pAdv", txtAdv.Text);
-            command.Parameters.AddWithValue("@pComID", Convert.ToInt32(ddlCom.SelectedItem.Value));
-            DataTable adv = db.getDataTable(command);
-            gvAdv.DataSource = adv;
-            gvAdv.DataBind();
+                NoDataDiv.Visible = false;
+                string code = ddlCom.SelectedItem.Text.Substring(1, 1);
+                
+                Session["modalId"] = "com";
+                lblFbc.Visible = false;
+                chartFb.Visible = false;
+                Database db = new Database();
+                SqlCommand command = new SqlCommand("Select AdvId,Name,Item,ItemType,StartDate,EndDate,Status From Advertisement Where Advertisement.Status=1 and Advertisement.CompanyID=@pComID");
+                command.Parameters.AddWithValue("@pAdv", txtAdv.Text);
+                command.Parameters.AddWithValue("@pComID", Convert.ToInt32(ddlCom.SelectedItem.Value));
+                DataTable adv = db.getDataTable(command);
+                gvAdv.DataSource = adv;
+                gvAdv.DataBind();
 
-            gvAdv.Visible = true;
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showAdvModal();", true);
+                gvAdv.Visible = true;
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showAdvModal();", true);
+            }
+
         }
 
 
@@ -177,7 +182,7 @@ namespace targeted_marketing_display
 
            // NoDataDiv.Visible = false;
             //string code = ddlCom.SelectedItem.Text.Substring(1, 1);
-            //Session["code"] = code;
+ 
             //lblFbc.Visible = false;
             //chartFb.Visible = false;
             Database db = new Database();
@@ -298,7 +303,7 @@ namespace targeted_marketing_display
             //Advertisement Modal Add Button
             protected void addAdv_Click(object sender, EventArgs e)
             {
-            ddlCom.SelectedIndex = 0;
+        
             foreach (GridViewRow row in gvBb.Rows)
             {
                 RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorBB");
@@ -437,24 +442,24 @@ namespace targeted_marketing_display
                     RadioButtonNull.Visible = true;
                     dateNull.Visible = false;
                 }
-                else if (ddlCom.SelectedItem.Text.Substring(1, 1) == "-")
+                
+                else if (Session["modalId"].ToString() == "Adv")
                 {
                     lblFbc.Visible = true;
                     chartFb.Visible = true;
-                    if (Session["modalId"].ToString() == "Adv")
-                    {
-                        modalAdv();
-                    }
-                    else if (Session["modalId"].ToString() == "Bb")
-                    {
-                        modalBb();
-                    }
-                    else if (Session["modalId"].ToString() == "No Selection")
-                    {
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showVadModal2();", true);
-                    }
+                   
+                    modalAdv();
+                    
+  
+                   
                 }
-                else if (ddlCom.SelectedItem.Text.Substring(1, 1) != "-")
+                else if (Session["modalId"].ToString() == "Bb")
+                {
+                    lblFbc.Visible = true;
+                    chartFb.Visible = true;
+                    modalBb();
+                }
+                else if (ddlCom.SelectedItem.Text.Substring(1, 1) != "-" && Session["modalId"].ToString()!="Adv" && Session["modalId"].ToString()!="Bb")
                 {
                     lblFbc.Visible = true;
                     chartFb.Visible = true;
