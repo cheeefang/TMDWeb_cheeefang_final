@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using targeted_marketing_display.App_Code;
+using targeted_marketing_display;
 
 
 namespace targeted_marketing_display
@@ -74,11 +74,11 @@ namespace targeted_marketing_display
                     //System.Diagnostics.Debug.Write(Session["userID"]);
                     Session["userType"] = userObj.Type;
                    
-                    if ((string)Session["userType"] == "Admin")
+                    if ((string)Session["userType"] == Reference.USR_ADM)
                     {
                         Response.Redirect("bblocationread.aspx");
                     }
-                    else if ((string)Session["userType"] == "Member")
+                    else if ((string)Session["userType"] == Reference.USR_MEM)
                     {
                         Response.Redirect("OwnProfile.aspx");
                     }

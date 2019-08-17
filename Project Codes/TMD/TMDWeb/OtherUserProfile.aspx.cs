@@ -8,7 +8,7 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using targeted_marketing_display.App_Code;
+using targeted_marketing_display;
 
 
 namespace targeted_marketing_display

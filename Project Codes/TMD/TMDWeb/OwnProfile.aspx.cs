@@ -4,8 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using targeted_marketing_display.App_Code;
-
+using targeted_marketing_display;
 namespace targeted_marketing_display
 {
     public partial class OwnProfile : System.Web.UI.Page
@@ -23,7 +22,7 @@ namespace targeted_marketing_display
         protected void diffUserView()
         {
             //VIC: the user of the session key username is misleading, it should be usertype right?
-            if ((string)Session["userType"] == "Admin")
+            if ((string)Session["userType"] == Reference.USR_ADM)
             {
                 UserView.Visible = false;
                 AdminView.Visible = true;

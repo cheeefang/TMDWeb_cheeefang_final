@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 using System.Data;
 
 using System.Data.SqlClient;
-using BBMgmt;
+using targeted_marketing_display;
 using System.Text;
 
 using System.Threading.Tasks;
-using targeted_marketing_display.App_Code;
+
 namespace targeted_marketing_display
 {
     public partial class BillboardAdInfo : System.Web.UI.Page

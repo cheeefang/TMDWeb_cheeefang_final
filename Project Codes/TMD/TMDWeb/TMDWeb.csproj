@@ -1745,8 +1745,6 @@
     <Content Include="css\gridview.css" />
     <Content Include="css\newgridview.css" />
     <Content Include="css\TMD.css" />
-    <Content Include="DataProvider.aspx" />
-    <Content Include="ExportChartToPDF.aspx" />
     <Content Include="FAQ.aspx" />
     <Content Include="FeedbackAd.aspx" />
     <Content Include="FeedbackAnalyticsIndiv.aspx" />
@@ -1789,7 +1787,6 @@
     <Content Include="font-awesome\scss\_spinning.scss" />
     <Content Include="font-awesome\scss\_stacked.scss" />
     <Content Include="font-awesome\scss\_variables.scss" />
-    <Content Include="FusionChart.aspx" />
     <Content Include="Images\1.jpg" />
     <Content Include="Images\2.jpg" />
     <Content Include="Images\250px-Bewear_anime.png" />
@@ -1814,9 +1811,7 @@
     <Content Include="jquery-ui.css" />
     <Content Include="login.aspx" />
     <Content Include="Logout.aspx" />
-    <Content Include="notworking.aspx" />
     <Content Include="obj\Debug\TMDWeb.csproj.FileListAbsolute.txt" />
-    <Content Include="OneMapTest.aspx" />
     <Content Include="OtherUserProfile.aspx" />
     <Content Include="OwnProfile.aspx" />
     <Content Include="AdListing.aspx" />
@@ -2125,14 +2120,6 @@
     <Compile Include="CreateNewUser.aspx.designer.cs">
       <DependentUpon>CreateNewUser.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DataProvider.aspx.cs">
-      <DependentUpon>DataProvider.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ExportChartToPDF.aspx.cs">
-      <DependentUpon>ExportChartToPDF.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="FAQ.aspx.cs">
       <DependentUpon>FAQ.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2161,13 +2148,6 @@
     <Compile Include="FeedBackBillboard.aspx.designer.cs">
       <DependentUpon>FeedBackBillboard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="FusionChart.aspx.cs">
-      <DependentUpon>FusionChart.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FusionChart.aspx.designer.cs">
-      <DependentUpon>FusionChart.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ImproveDesign.aspx.cs">
       <DependentUpon>ImproveDesign.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2189,23 +2169,9 @@
     <Compile Include="Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
-    <Compile Include="notworking.aspx.cs">
-      <DependentUpon>notworking.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="notworking.aspx.designer.cs">
-      <DependentUpon>notworking.aspx</DependentUpon>
-    </Compile>
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="OneMapTest.aspx.cs">
-      <DependentUpon>OneMapTest.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="OneMapTest.aspx.designer.cs">
-      <DependentUpon>OneMapTest.aspx</DependentUpon>
-    </Compile>
     <Compile Include="OtherUserProfile.aspx.cs">
       <DependentUpon>OtherUserProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

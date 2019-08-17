@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using targeted_marketing_display.App_Code;
+using targeted_marketing_display;
 
 namespace targeted_marketing_display
 {
@@ -18,7 +18,7 @@ namespace targeted_marketing_display
                 User userObj = new User();
                 UserManagement uDao = new UserManagement();
 
-                if (Session["userType"].ToString() == "Admin")
+                if (Session["userType"].ToString() == Reference.USR_ADM)
                 {
                     userObj = uDao.getAdminByID(Session["userID"].ToString());
                 }
@@ -45,7 +45,7 @@ namespace targeted_marketing_display
             UserManagement uDao = new UserManagement();
             User uObj = new User();
 
-            if (Session["userType"].ToString() == "Admin")
+            if (Session["userType"].ToString() == Reference.USR_ADM)
             {
                 uObj = uDao.getAdminByID(Session["userID"].ToString());
             }

@@ -8,10 +8,9 @@ using System.Data;
 using System.Text;
 using System.Collections.Generic;
 
-using targeted_marketing_display.App_Code;
 using targeted_marketing_display;
 
-namespace CoInfoMgmt 
+namespace targeted_marketing_display
 {
     public class Company_Management
     {

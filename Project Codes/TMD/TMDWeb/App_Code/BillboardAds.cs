@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 
-namespace targeted_marketing_display.App_Code
+namespace targeted_marketing_display
 {
     public class BillboardAds
     {

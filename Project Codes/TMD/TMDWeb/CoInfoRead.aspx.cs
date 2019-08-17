@@ -6,13 +6,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
-using BBMgmt;
-using System.Text;
 using targeted_marketing_display;
+using System.Text;
 using System.Threading.Tasks;
-using targeted_marketing_display.App_Code;
+
 using System.Configuration;
-using CoInfoMgmt;
+
 
 namespace targeted_marketing_display
    

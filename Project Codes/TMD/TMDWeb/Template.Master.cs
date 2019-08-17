@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using targeted_marketing_display;
-using targeted_marketing_display.App_Code;
 namespace TMDWeb
 {
     public partial class Template : System.Web.UI.MasterPage
@@ -28,7 +27,7 @@ namespace TMDWeb
                     Response.Redirect("login.aspx");
                 }
 
-                if (Session["userType"].ToString() == "Admin")
+                if (Session["userType"].ToString() == Reference.USR_ADM)
                 {
                     userObj = uDao.getAdminByID(Session["userID"].ToString());
 
@@ -36,7 +35,7 @@ namespace TMDWeb
                     userDiv.Visible = false;
                     lbAdminName.Text = userObj.Name;
                 }
-                else if (Session["userType"].ToString() == "Member")
+                else if (Session["userType"].ToString() == Reference.USR_MEM)
                 {
                     userObj = uDao.getUserByID(Session["userID"].ToString());
 

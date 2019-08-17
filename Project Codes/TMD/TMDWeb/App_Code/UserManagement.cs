@@ -8,7 +8,7 @@ using System.Web;
 using System.Text;
 using System.Web;
 using targeted_marketing_display;
-using targeted_marketing_display.App_Code;
+
 
 
 namespace targeted_marketing_display
@@ -244,11 +244,11 @@ namespace targeted_marketing_display
         {
             string UT = "";
 
-            if (Type == "Admin")
+            if (Type == Reference.USR_ADM)
             {
                 UT = "Admin";
             }
-            else if (Type == "Member")
+            else if (Type == Reference.USR_MEM)
             {
                 UT = "Normal User";
             }

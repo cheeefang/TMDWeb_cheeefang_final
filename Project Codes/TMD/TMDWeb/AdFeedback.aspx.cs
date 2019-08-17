@@ -9,7 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.DataVisualization.Charting;
 using targeted_marketing_display;
-using targeted_marketing_display.App_Code;
+
 using System.Globalization;
 using System.Xml.Linq;
 using System.IO;
@@ -80,7 +80,7 @@ namespace targeted_marketing_display
             User uObj = new User();
             UserManagement uDao = new UserManagement();
             uObj = uDao.getUserByID(Session["userID"].ToString());
-            if (Session["userType"].ToString() == "Admin")
+            if (Session["userType"].ToString() == Reference.USR_ADM)
             {
                 Database db = new Database();
                 SqlCommand command = new SqlCommand("Select * From Company where status=1");

@@ -8,10 +8,10 @@ using System.Data;
 using System.Text;
 using System.Collections.Generic;
 using targeted_marketing_display;
-using targeted_marketing_display.App_Code;
 
 
-namespace BBMgmt
+
+namespace targeted_marketing_display
 {
    
     public class Billboard_Management

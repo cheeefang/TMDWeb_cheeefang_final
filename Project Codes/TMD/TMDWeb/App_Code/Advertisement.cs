@@ -6,7 +6,7 @@ using System.Web;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace targeted_marketing_display.App_Code
+namespace targeted_marketing_display
 {
     public class Advertisement
     {

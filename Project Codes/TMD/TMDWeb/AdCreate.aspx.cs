@@ -8,7 +8,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using targeted_marketing_display;
-using targeted_marketing_display.App_Code;
 using System.IO;
 namespace targeted_marketing_display
 {
@@ -20,7 +19,7 @@ namespace targeted_marketing_display
         protected void Page_Load(object sender, EventArgs e)
         {
            
-            if ((string)Session["userType"] == "Admin")
+            if ((string)Session["userType"] == Reference.USR_ADM)
             {
                 divCompany.Visible = true;
                 DropDownListCompany.Visible = true;
@@ -166,7 +165,7 @@ namespace targeted_marketing_display
                     SqlCommand sqlcomm = new SqlCommand(adv);
                     sqlcomm.Connection = sqlconn;
                     sqlconn.Open();
-                if ((string)Session["userType"] == "Admin")
+                if ((string)Session["userType"] == Reference.USR_ADM)
                 {
 
 

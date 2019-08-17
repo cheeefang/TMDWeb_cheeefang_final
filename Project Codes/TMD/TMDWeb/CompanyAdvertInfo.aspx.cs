@@ -7,8 +7,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Text;
 using System.Collections.Generic;
-using CoInfoMgmt;
-using targeted_marketing_display.App_Code;
+
 using targeted_marketing_display;
 using System.Web.UI.WebControls;
 using System.Web.UI;

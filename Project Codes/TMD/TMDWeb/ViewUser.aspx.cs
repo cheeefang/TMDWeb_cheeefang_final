@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Text;
 
-using targeted_marketing_display.App_Code;
+using targeted_marketing_display;
 
 
 namespace targeted_marketing_display

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using targeted_marketing_display;
-using targeted_marketing_display.App_Code;
+
 using System.Configuration;
 namespace targeted_marketing_display
 {
@@ -46,7 +46,7 @@ namespace targeted_marketing_display
             }
           
         
-            if (Session["userType"].ToString() == "Admin")
+            if (Session["userType"].ToString() == Reference.USR_ADM)
             {
                 adminint = 1;
             }
@@ -64,7 +64,7 @@ namespace targeted_marketing_display
                 conn = new
                     SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
                 conn.Open();
-            if (Session["userType"].ToString()=="Admin")
+            if (Session["userType"].ToString()==Reference.USR_ADM)
             {
                 // 1. declare command object with parameter
                 SqlCommand cmd = new SqlCommand(
@@ -192,7 +192,7 @@ namespace targeted_marketing_display
 
             //  " SELECT [Advertisement].AdvID,[Company].Name, [Advertisement].Name, [Advertisement].Item, [Advertisement].ItemType,[StartDate], [EndDate]FROM " +
             //"[Advertisement] inner join[Company] on Company.CompanyID =[Advertisement].CompanyID where[Advertisement].status = 1 and[Company].status = 1"
-            if (Session["UserType"].ToString()=="Admin")
+            if (Session["UserType"].ToString()==Reference.USR_ADM)
             {
                 SqlCommand cmd = new SqlCommand(
                " select AdvID, [Company].Name as CompanyName ,[Advertisement].Name as AdvertName,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate" +
@@ -270,7 +270,7 @@ namespace targeted_marketing_display
          //   " select [Company].Name as CompanyName ,[Advertisement].Name as AdvertName,[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate" +
          //" from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
          //        "where [Advertisement].status=1 order by " + e.SortExpression + "  " + strSortDirection, conn);
-            if (Session["userType"].ToString() == "Admin")
+            if (Session["userType"].ToString() == Reference.USR_ADM)
             {
                 //admin input
                 if (startDateTB.Text=="" && endDateTB.Text=="")
@@ -478,7 +478,7 @@ namespace targeted_marketing_display
                 //" SELECT [Advertisement].AdvID,[Company].Name as CompanyName, [Advertisement].Name as AdvertName, [Advertisement].Item, [Advertisement].ItemType,[StartDate], [EndDate]FROM " +
                 // "[Advertisement] inner join [Company] on Company.CompanyID =[Advertisement].CompanyID where [Advertisement].status = 1 and[Company].status = 1", conn);
                 Database db = new Database();
-                if (Session["userType"].ToString() == "Admin")
+                if (Session["userType"].ToString() == Reference.USR_ADM)
                 {
                     SqlCommand cmd = new SqlCommand("SELECT [Advertisement].AdvID,[Company].Name as CompanyName, [Advertisement].Name as AdvertName, [Advertisement].Item, [Advertisement].ItemType,[StartDate], [EndDate]FROM " +
                         "[Advertisement] inner join [Company] on Company.CompanyID =[Advertisement].CompanyID where [Advertisement].status = 1 and[Company].status = 1",conn);

@@ -8,9 +8,9 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using BBMgmt;
 using targeted_marketing_display;
-using targeted_marketing_display.App_Code;
+using targeted_marketing_display;
+
 using System.Net;
 using System.Xml.Linq;
 using System.Web.UI.HtmlControls;
