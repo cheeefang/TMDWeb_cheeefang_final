@@ -76,11 +76,11 @@ namespace targeted_marketing_display
                    
                     if ((string)Session["userType"] == Reference.USR_ADM)
                     {
-                        Response.Redirect("bblocationread.aspx");
+                        Response.Redirect("BillboardListing.aspx");
                     }
                     else if ((string)Session["userType"] == Reference.USR_MEM)
                     {
-                        Response.Redirect("OwnProfile.aspx");
+                        Response.Redirect("ProfileInfo.aspx");
                     }
                 }
 

@@ -144,13 +144,13 @@
 
                         <li>
 
-                            <a href="OwnProfile.aspx"><i class="fa fa-user fa-fw"></i> Profile Listing</a>
+                            <a href="ProfileInfo.aspx"><i class="fa fa-user fa-fw"></i> Profile Listing</a>
 
                         </li>
 
                         <li>
 
-                            <a href="ViewUser.aspx"><i class="fas fa-users"></i> User Listing </a>
+                            <a href="UserListing.aspx"><i class="fas fa-users"></i> User Listing </a>
 
                         </li>
                         
@@ -162,7 +162,7 @@
                           
                                 <li>
                                                        
-                            <a href="CoInfoRead.aspx"><i class="fa fa-building fa-fw"></i> Company Listing </a>
+                            <a href="CompanyListing.aspx"><i class="fa fa-building fa-fw"></i> Company Listing </a>
                                </li>
 
                             
@@ -178,17 +178,17 @@
 
                         <li>
 
-                            <a href="BBLocationRead.aspx"> <i class="fas fa-map-marker-alt"></i> Billboard Location Listing </a>
+                            <a href="BillboardListing.aspx"> <i class="fas fa-map-marker-alt"></i> Billboard Location Listing </a>
                             
                         </li>
 
                                 <li>
-                                    <a href="AdListing.aspx"><i class="fa fa-sitemap fa-fw"></i> Advertisement Listing </a>
+                                    <a href="AdvertListing.aspx"><i class="fa fa-sitemap fa-fw"></i> Advertisement Listing </a>
                                 </li>
 
                                      
                         <li>
-                            <a href="AdFeedback.aspx"><i class="fa fa-sitemap fa-fw"></i>Advertisement Feedback</a> 
+                            <a href="AdvertFeedback.aspx"><i class="fa fa-sitemap fa-fw"></i>Advertisement Feedback</a> 
                         </li>
 
                                 
@@ -263,7 +263,7 @@
 
                                   <li>
 
-                            <a href="OwnProfile.aspx"><i class="fa fa-user fa-fw"></i> My Profile </a>
+                            <a href="ProfileInfo.aspx"><i class="fa fa-user fa-fw"></i> My Profile </a>
 
                         </li>
 
@@ -304,11 +304,11 @@
                        
                         
                          <li>
-                            <a href="AdListing.aspx"><i class="fa fa-sitemap fa-fw"></i> Advertisement Listing </a>
+                            <a href="AdvertListing.aspx"><i class="fa fa-sitemap fa-fw"></i> Advertisement Listing </a>
                         </li>
 
                         <li>
-                            <a href="AdFeedback.aspx"><i class="fas fa-comments-dollar"></i> Feedback </a>
+                            <a href="AdvertFeedback.aspx"><i class="fas fa-comments-dollar"></i> Feedback </a>
                         </li>
                                 <li>
 

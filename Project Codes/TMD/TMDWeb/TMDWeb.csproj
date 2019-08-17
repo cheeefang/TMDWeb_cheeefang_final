@@ -136,14 +136,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AdFeedback.aspx" />
-    <Content Include="AdCreate.aspx" />
-    <Content Include="AdListingInfo.aspx" />
-    <Content Include="AdListingUpdate.aspx" />
-    <Content Include="BBLocationCreate.aspx" />
-    <Content Include="BBLocationRead.aspx" />
-    <Content Include="BBLocationUpdate.aspx" />
-    <Content Include="BillboardAdInfo.aspx" />
+    <Content Include="AdvertFeedback.aspx" />
+    <Content Include="AdvertCreate.aspx" />
+    <Content Include="AdvertInfo.aspx" />
+    <Content Include="AdvertUpdate.aspx" />
+    <Content Include="BillboardCreate.aspx" />
+    <Content Include="BillboardListing.aspx" />
+    <Content Include="BillboardUpdate.aspx" />
+    <Content Include="BillboardInfo.aspx" />
     <Content Include="bin\AjaxControlToolkit.dll" />
     <Content Include="bin\Korzh.EasyQuery.Db.dll" />
     <Content Include="bin\Korzh.EasyQuery.dll" />
@@ -164,10 +164,10 @@
     <Content Include="bin\TMDApp.exe" />
     <Content Include="bin\TMDWeb.dll" />
     <Content Include="bin\TMDWeb.pdb" />
-    <Content Include="CoInfoCreate.aspx" />
-    <Content Include="CoInfoRead.aspx" />
-    <Content Include="CoInfoUpdate.aspx" />
-    <Content Include="CompanyAdvertInfo.aspx" />
+    <Content Include="CompanyCreate.aspx" />
+    <Content Include="CompanyListing.aspx" />
+    <Content Include="CompanyUpdate.aspx" />
+    <Content Include="CompanyInfo.aspx" />
     <Content Include="Content\fontawesome-free-5.9.0-web\css\all.css" />
     <Content Include="Content\fontawesome-free-5.9.0-web\css\all.min.css" />
     <Content Include="Content\fontawesome-free-5.9.0-web\css\brands.css" />
@@ -1740,15 +1740,12 @@
     <Content Include="Content\fontawesome-free-5.9.0-web\webfonts\fa-solid-900.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="CreateNewUser.aspx" />
+    <Content Include="UserCreate.aspx" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\gridview.css" />
     <Content Include="css\newgridview.css" />
     <Content Include="css\TMD.css" />
     <Content Include="FAQ.aspx" />
-    <Content Include="FeedbackAd.aspx" />
-    <Content Include="FeedbackAnalyticsIndiv.aspx" />
-    <Content Include="FeedBackBillboard.aspx" />
     <Content Include="font-awesome\css\font-awesome.css.map" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.ttf" />
@@ -1807,14 +1804,13 @@
     <Content Include="Images\upload.png" />
     <Content Include="Images\Wheat.jpg" />
     <Content Include="Images\Yole.jpg" />
-    <Content Include="ImproveDesign.aspx" />
     <Content Include="jquery-ui.css" />
     <Content Include="login.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="obj\Debug\TMDWeb.csproj.FileListAbsolute.txt" />
-    <Content Include="OtherUserProfile.aspx" />
-    <Content Include="OwnProfile.aspx" />
-    <Content Include="AdListing.aspx" />
+    <Content Include="UserInfo.aspx" />
+    <Content Include="ProfileInfo.aspx" />
+    <Content Include="AdvertListing.aspx" />
     <Content Include="Content\fontawesome-free-5.9.0-web\less\brands.less" />
     <Content Include="Content\fontawesome-free-5.9.0-web\less\fontawesome.less" />
     <Content Include="Content\fontawesome-free-5.9.0-web\less\regular.less" />
@@ -1963,7 +1959,6 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
-    <Content Include="Testing1234.aspx" />
     <Content Include="webicons\255-2557792_up-arrow-top-image-png-white.png" />
     <Content Include="webicons\8-87169_white-down-arrow-png-down-arrow-white-png.png" />
     <Content Include="webicons\asc.gif" />
@@ -2008,41 +2003,41 @@
     <Content Include="js\sb-admin-2.js" />
     <Content Include="test.aspx" />
     <Content Include="testRead.aspx" />
-    <Content Include="UpdateOtherUserProfile.aspx" />
-    <Content Include="UpdateOwnProfile.aspx" />
-    <Content Include="ViewUser.aspx" />
+    <Content Include="UserUpdate.aspx" />
+    <Content Include="ProfileUpdate.aspx" />
+    <Content Include="UserListing.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdFeedback.aspx.cs">
-      <DependentUpon>AdFeedback.aspx</DependentUpon>
+    <Compile Include="AdvertFeedback.aspx.cs">
+      <DependentUpon>AdvertFeedback.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdFeedback.aspx.designer.cs">
-      <DependentUpon>AdFeedback.aspx</DependentUpon>
+    <Compile Include="AdvertFeedback.aspx.designer.cs">
+      <DependentUpon>AdvertFeedback.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdCreate.aspx.cs">
-      <DependentUpon>AdCreate.aspx</DependentUpon>
+    <Compile Include="AdvertCreate.aspx.cs">
+      <DependentUpon>AdvertCreate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdCreate.aspx.designer.cs">
-      <DependentUpon>AdCreate.aspx</DependentUpon>
+    <Compile Include="AdvertCreate.aspx.designer.cs">
+      <DependentUpon>AdvertCreate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdListingInfo.aspx.cs">
-      <DependentUpon>AdListingInfo.aspx</DependentUpon>
+    <Compile Include="AdvertInfo.aspx.cs">
+      <DependentUpon>AdvertInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdListingInfo.aspx.designer.cs">
-      <DependentUpon>AdListingInfo.aspx</DependentUpon>
+    <Compile Include="AdvertInfo.aspx.designer.cs">
+      <DependentUpon>AdvertInfo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdListingUpdate.aspx.cs">
-      <DependentUpon>AdListingUpdate.aspx</DependentUpon>
+    <Compile Include="AdvertUpdate.aspx.cs">
+      <DependentUpon>AdvertUpdate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdListingUpdate.aspx.designer.cs">
-      <DependentUpon>AdListingUpdate.aspx</DependentUpon>
+    <Compile Include="AdvertUpdate.aspx.designer.cs">
+      <DependentUpon>AdvertUpdate.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\Advertisement.cs" />
     <Compile Include="App_Code\Advertisement_Management.cs" />
@@ -2057,68 +2052,68 @@
     <Content Include="App_Code\Reference.cs" />
     <Compile Include="App_Code\User.cs" />
     <Compile Include="App_Code\UserManagement.cs" />
-    <Compile Include="BBLocationCreate.aspx.cs">
-      <DependentUpon>BBLocationCreate.aspx</DependentUpon>
+    <Compile Include="BillboardCreate.aspx.cs">
+      <DependentUpon>BillboardCreate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BBLocationCreate.aspx.designer.cs">
-      <DependentUpon>BBLocationCreate.aspx</DependentUpon>
+    <Compile Include="BillboardCreate.aspx.designer.cs">
+      <DependentUpon>BillboardCreate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BBLocationRead.aspx.cs">
-      <DependentUpon>BBLocationRead.aspx</DependentUpon>
+    <Compile Include="BillboardListing.aspx.cs">
+      <DependentUpon>BillboardListing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BBLocationRead.aspx.designer.cs">
-      <DependentUpon>BBLocationRead.aspx</DependentUpon>
+    <Compile Include="BillboardListing.aspx.designer.cs">
+      <DependentUpon>BillboardListing.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BBLocationUpdate.aspx.cs">
-      <DependentUpon>BBLocationUpdate.aspx</DependentUpon>
+    <Compile Include="BillboardUpdate.aspx.cs">
+      <DependentUpon>BillboardUpdate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BBLocationUpdate.aspx.designer.cs">
-      <DependentUpon>BBLocationUpdate.aspx</DependentUpon>
+    <Compile Include="BillboardUpdate.aspx.designer.cs">
+      <DependentUpon>BillboardUpdate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BillboardAdInfo.aspx.cs">
-      <DependentUpon>BillboardAdInfo.aspx</DependentUpon>
+    <Compile Include="BillboardInfo.aspx.cs">
+      <DependentUpon>BillboardInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BillboardAdInfo.aspx.designer.cs">
-      <DependentUpon>BillboardAdInfo.aspx</DependentUpon>
+    <Compile Include="BillboardInfo.aspx.designer.cs">
+      <DependentUpon>BillboardInfo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CoInfoCreate.aspx.cs">
-      <DependentUpon>CoInfoCreate.aspx</DependentUpon>
+    <Compile Include="CompanyCreate.aspx.cs">
+      <DependentUpon>CompanyCreate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CoInfoCreate.aspx.designer.cs">
-      <DependentUpon>CoInfoCreate.aspx</DependentUpon>
+    <Compile Include="CompanyCreate.aspx.designer.cs">
+      <DependentUpon>CompanyCreate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CoInfoRead.aspx.cs">
-      <DependentUpon>CoInfoRead.aspx</DependentUpon>
+    <Compile Include="CompanyListing.aspx.cs">
+      <DependentUpon>CompanyListing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CoInfoRead.aspx.designer.cs">
-      <DependentUpon>CoInfoRead.aspx</DependentUpon>
+    <Compile Include="CompanyListing.aspx.designer.cs">
+      <DependentUpon>CompanyListing.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CoInfoUpdate.aspx.cs">
-      <DependentUpon>CoInfoUpdate.aspx</DependentUpon>
+    <Compile Include="CompanyUpdate.aspx.cs">
+      <DependentUpon>CompanyUpdate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CoInfoUpdate.aspx.designer.cs">
-      <DependentUpon>CoInfoUpdate.aspx</DependentUpon>
+    <Compile Include="CompanyUpdate.aspx.designer.cs">
+      <DependentUpon>CompanyUpdate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CompanyAdvertInfo.aspx.cs">
-      <DependentUpon>CompanyAdvertInfo.aspx</DependentUpon>
+    <Compile Include="CompanyInfo.aspx.cs">
+      <DependentUpon>CompanyInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CompanyAdvertInfo.aspx.designer.cs">
-      <DependentUpon>CompanyAdvertInfo.aspx</DependentUpon>
+    <Compile Include="CompanyInfo.aspx.designer.cs">
+      <DependentUpon>CompanyInfo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CreateNewUser.aspx.cs">
-      <DependentUpon>CreateNewUser.aspx</DependentUpon>
+    <Compile Include="UserCreate.aspx.cs">
+      <DependentUpon>UserCreate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CreateNewUser.aspx.designer.cs">
-      <DependentUpon>CreateNewUser.aspx</DependentUpon>
+    <Compile Include="UserCreate.aspx.designer.cs">
+      <DependentUpon>UserCreate.aspx</DependentUpon>
     </Compile>
     <Compile Include="FAQ.aspx.cs">
       <DependentUpon>FAQ.aspx</DependentUpon>
@@ -2126,34 +2121,6 @@
     </Compile>
     <Compile Include="FAQ.aspx.designer.cs">
       <DependentUpon>FAQ.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FeedbackAd.aspx.cs">
-      <DependentUpon>FeedbackAd.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FeedbackAd.aspx.designer.cs">
-      <DependentUpon>FeedbackAd.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FeedbackAnalyticsIndiv.aspx.cs">
-      <DependentUpon>FeedbackAnalyticsIndiv.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FeedbackAnalyticsIndiv.aspx.designer.cs">
-      <DependentUpon>FeedbackAnalyticsIndiv.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FeedBackBillboard.aspx.cs">
-      <DependentUpon>FeedBackBillboard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FeedBackBillboard.aspx.designer.cs">
-      <DependentUpon>FeedBackBillboard.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ImproveDesign.aspx.cs">
-      <DependentUpon>ImproveDesign.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ImproveDesign.aspx.designer.cs">
-      <DependentUpon>ImproveDesign.aspx</DependentUpon>
     </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
@@ -2172,26 +2139,26 @@
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="OtherUserProfile.aspx.cs">
-      <DependentUpon>OtherUserProfile.aspx</DependentUpon>
+    <Compile Include="UserInfo.aspx.cs">
+      <DependentUpon>UserInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OtherUserProfile.aspx.designer.cs">
-      <DependentUpon>OtherUserProfile.aspx</DependentUpon>
+    <Compile Include="UserInfo.aspx.designer.cs">
+      <DependentUpon>UserInfo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="OwnProfile.aspx.cs">
-      <DependentUpon>OwnProfile.aspx</DependentUpon>
+    <Compile Include="ProfileInfo.aspx.cs">
+      <DependentUpon>ProfileInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="OwnProfile.aspx.designer.cs">
-      <DependentUpon>OwnProfile.aspx</DependentUpon>
+    <Compile Include="ProfileInfo.aspx.designer.cs">
+      <DependentUpon>ProfileInfo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdListing.aspx.cs">
-      <DependentUpon>AdListing.aspx</DependentUpon>
+    <Compile Include="AdvertListing.aspx.cs">
+      <DependentUpon>AdvertListing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdListing.aspx.designer.cs">
-      <DependentUpon>AdListing.aspx</DependentUpon>
+    <Compile Include="AdvertListing.aspx.designer.cs">
+      <DependentUpon>AdvertListing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Template.Master.cs">
       <DependentUpon>Template.Master</DependentUpon>
@@ -2207,13 +2174,6 @@
     <Compile Include="test.aspx.designer.cs">
       <DependentUpon>test.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Testing1234.aspx.cs">
-      <DependentUpon>Testing1234.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Testing1234.aspx.designer.cs">
-      <DependentUpon>Testing1234.aspx</DependentUpon>
-    </Compile>
     <Compile Include="testRead.aspx.cs">
       <DependentUpon>testRead.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2221,26 +2181,26 @@
     <Compile Include="testRead.aspx.designer.cs">
       <DependentUpon>testRead.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UpdateOtherUserProfile.aspx.cs">
-      <DependentUpon>UpdateOtherUserProfile.aspx</DependentUpon>
+    <Compile Include="UserUpdate.aspx.cs">
+      <DependentUpon>UserUpdate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UpdateOtherUserProfile.aspx.designer.cs">
-      <DependentUpon>UpdateOtherUserProfile.aspx</DependentUpon>
+    <Compile Include="UserUpdate.aspx.designer.cs">
+      <DependentUpon>UserUpdate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UpdateOwnProfile.aspx.cs">
-      <DependentUpon>UpdateOwnProfile.aspx</DependentUpon>
+    <Compile Include="ProfileUpdate.aspx.cs">
+      <DependentUpon>ProfileUpdate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UpdateOwnProfile.aspx.designer.cs">
-      <DependentUpon>UpdateOwnProfile.aspx</DependentUpon>
+    <Compile Include="ProfileUpdate.aspx.designer.cs">
+      <DependentUpon>ProfileUpdate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ViewUser.aspx.cs">
-      <DependentUpon>ViewUser.aspx</DependentUpon>
+    <Compile Include="UserListing.aspx.cs">
+      <DependentUpon>UserListing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ViewUser.aspx.designer.cs">
-      <DependentUpon>ViewUser.aspx</DependentUpon>
+    <Compile Include="UserListing.aspx.designer.cs">
+      <DependentUpon>UserListing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
