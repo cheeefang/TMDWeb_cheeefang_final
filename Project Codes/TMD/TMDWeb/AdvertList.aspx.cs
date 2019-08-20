@@ -424,7 +424,7 @@ namespace targeted_marketing_display
 
                 Session["AdvertID"] = lb_AdvID.Text;
 
-                Response.Redirect("AdListingUpdate.aspx");
+                Response.Redirect("AdvertUpdate.aspx");
             }
         }
 

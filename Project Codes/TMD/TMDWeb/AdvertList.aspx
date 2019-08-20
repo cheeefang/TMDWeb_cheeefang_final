@@ -375,7 +375,7 @@ function HideDiv() {
                                     <asp:templatefield headertext="Update">
                                         <itemtemplate>
                                  
-                                        <asp:LinkButton ID="editBtn" OnCommand="editBtn_Command" runat="server" CommandName="AdUpdateInfo" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
+                                        <asp:LinkButton ID="editBtn" OnCommand="editBtn_Command" runat="server" CommandName="AdvertUpdate" CommandArgument='<%#((GridViewRow) Container).RowIndex %>'>
 
                                         <i class="fa fa-edit"></i>
                                             
