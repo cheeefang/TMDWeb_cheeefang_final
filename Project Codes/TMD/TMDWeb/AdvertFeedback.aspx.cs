@@ -36,9 +36,9 @@ namespace targeted_marketing_display
             CompareValidator2.ValueToCompare = DateTime.Now.ToShortDateString();
         }
         //cheeefang was here
-        string DBConnect = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
+        //string DBConnect = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
 
-        //wtf is this
+        //what is this
         public static void DisableLinkButton(LinkButton linkButton)
         {
             linkButton.Attributes.Remove("href");
@@ -362,7 +362,7 @@ namespace targeted_marketing_display
         //Billboard Modal Add Button
         protected void addBb_Click(object sender, EventArgs e)
         {
-            ddlCom.SelectedIndex = 0;
+ 
             foreach (GridViewRow row in gvAdv.Rows)
             {
                 RadioButton rdBtn = (RadioButton)row.FindControl("RowSelectorADV");
@@ -449,7 +449,8 @@ namespace targeted_marketing_display
                 {
                     lblFbc.Visible = true;
                     chartFb.Visible = true;
-                   
+                    dateNull.Visible = false;
+                    RadioButtonNull.Visible = false;
                     modalAdv();
                     
   
@@ -459,12 +460,16 @@ namespace targeted_marketing_display
                 {
                     lblFbc.Visible = true;
                     chartFb.Visible = true;
+                    dateNull.Visible = false;
+                    RadioButtonNull.Visible = false;
                     modalBb();
                 }
                 else if (ddlCom.SelectedItem.Text.Substring(1, 1) != "-" && Session["modalId"].ToString()!="Adv" && Session["modalId"].ToString()!="Bb")
                 {
                     lblFbc.Visible = true;
                     chartFb.Visible = true;
+                    dateNull.Visible = false;
+                    RadioButtonNull.Visible = false;
                     modalCom();
                 }
             }
@@ -473,7 +478,7 @@ namespace targeted_marketing_display
         //Generate Chart Based On Advertisement Modal
         protected void modalAdv()
         {
-            SqlConnection con = new SqlConnection(DBConnect);
+            SqlConnection con = new SqlConnection(Reference.Constr);
             using (con)
             {
                 DataTable chartAdv = new DataTable();
@@ -921,7 +926,7 @@ namespace targeted_marketing_display
         //Generate Chart Based On Billboard Modal
         protected void modalBb()
         {
-            SqlConnection con = new SqlConnection(DBConnect);
+            SqlConnection con = new SqlConnection(Reference.Constr);
             using (con)
             {
                 DataTable chartBb = new DataTable();
@@ -1442,7 +1447,7 @@ namespace targeted_marketing_display
         //Generate Chart Based On Company Dropdownlist
         protected void modalCom()
         {
-            SqlConnection con = new SqlConnection(DBConnect);
+            SqlConnection con = new SqlConnection(Reference.Constr);
             int companyId = Convert.ToInt32(ddlCom.SelectedValue);
             String companyName = ddlCom.SelectedItem.ToString();
             using (con)
