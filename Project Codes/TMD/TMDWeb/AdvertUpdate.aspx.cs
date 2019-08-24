@@ -42,12 +42,12 @@ namespace targeted_marketing_display
                 //imgLogo.Visible = false;
                 videoDog.Src = ResolveUrl(previousimagepath);
             }
+
             
-              
             SqlConnection conn = null;
             SqlDataReader reader = null;
             conn = new
-            SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+            SqlConnection(Reference.Constr);
             conn.Open();
             
             if ((string)Session["userType"] == Reference.USR_ADM)
@@ -106,7 +106,7 @@ namespace targeted_marketing_display
 
                 Database db = new Database();
                 string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
-                SqlConnection sqlconn = new SqlConnection(dbConnStr);
+                SqlConnection sqlconn = new SqlConnection(Reference.Constr);
                 string sqlquery = "SELECT * FROM [CodeReferece] WHERE ([CodeType] = @CodeType)";
                 SqlCommand cmdCodeRef = new SqlCommand(sqlquery, sqlconn);
                 cmdCodeRef.Parameters.AddWithValue("@CodeType", "Category");
@@ -343,7 +343,7 @@ namespace targeted_marketing_display
                 
                 string lastUpdBy = Session["userID"].ToString();
                 string lastUpdOn = DateTime.Now.ToString("MM/dd/yyyy h:mm tt");
-                SqlConnection sqlcn = new SqlConnection(dbConnStr);
+                SqlConnection sqlcn = new SqlConnection(Reference.Constr);
                 
                 aDao.AdvertUpdate(Session["AdvertID"].ToString(),imagelink,newItemType,NewCompanyID,NewAdvertName,NewDuration, startdate, enddate,lastUpdBy,lastUpdOn);
                 //SqlCommand cmd = new SqlCommand("update [AdvertisementAudience] set AgeID=@newAgeID,GenderID=@newGenderID where AdvID=@paraAdvID " +
@@ -352,7 +352,7 @@ namespace targeted_marketing_display
                 aDao.AdvertAudienceDeleteExisting(Session["AdvertID"].ToString());
                 aDao.AdvertCategoryDeleteExisting(Session["AdvertID"].ToString());
                 aDao.AdvertLocationDeleteExisting(Session["AdvertID"].ToString());
-                SqlConnection sqlcon = new SqlConnection(dbConnStr);
+                SqlConnection sqlcon = new SqlConnection(Reference.Constr);
                 string sqlquery = "Insert into [AdvertisementCategory](AdvID,CategoryID) values(@AdvID,@CategoryID)";
                 SqlCommand sqlcom = new SqlCommand(sqlquery, sqlcon);
                 sqlcon.Open();
@@ -376,7 +376,7 @@ namespace targeted_marketing_display
                 sqlcon.Close();
 
 
-                SqlConnection sqlconnn = new SqlConnection(dbConnStr);
+                SqlConnection sqlconnn = new SqlConnection(Reference.Constr);
                 string sqlqueryy = "Insert into [AdvertisementLocation](AdvID,BillboardID) values(@AdvID,@BillboardID)";
                 SqlCommand sqlcommm = new SqlCommand(sqlqueryy, sqlconnn);
                 sqlconnn.Open();
@@ -401,7 +401,7 @@ namespace targeted_marketing_display
 
 
 
-                SqlConnection sqlcnAudience = new SqlConnection(dbConnStr);
+                SqlConnection sqlcnAudience = new SqlConnection(Reference.Constr);
                 string sqlque = "Insert into [AdvertisementAudience](AdvID,AgeID,GenderID) values(@AdvID,@AgeID,@GenderID)";
                 SqlCommand sqlcm = new SqlCommand(sqlque, sqlcnAudience);
                 sqlcnAudience.Open();

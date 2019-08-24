@@ -14,7 +14,7 @@ namespace targeted_marketing_display
     public partial class AdvertCreate : System.Web.UI.Page
     {
         public int companyID { get; set; }
-        SqlConnection insertconnection = new SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+
         string dbConnStr = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,7 +38,7 @@ namespace targeted_marketing_display
             {
                 Database db = new Database();
                 string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
-                SqlConnection sqlconn = new SqlConnection(dbConnStr);
+                SqlConnection sqlconn = new SqlConnection(Reference.Constr);
                 string sqlquery = "SELECT * FROM [CodeReferece] WHERE ([CodeType] = @CodeType)";
                 SqlCommand cmd = new SqlCommand(sqlquery, sqlconn);
                 cmd.Parameters.AddWithValue("@CodeType", "Category");
@@ -92,7 +92,7 @@ namespace targeted_marketing_display
         public int GetMaxIDAdvertisement()
         {
             int intID = 0;
-            SqlConnection co = new SqlConnection(dbConnStr);
+            SqlConnection co = new SqlConnection(Reference.Constr);
             SqlCommand cm = new SqlCommand("Select Max(AdvID) from Advertisement", co);
             co.Open();
             SqlDataReader dr = cm.ExecuteReader();
@@ -159,7 +159,7 @@ namespace targeted_marketing_display
                     int companyID = Convert.ToInt32(DropDownListCompany.SelectedItem.Value);
                     int AdvertisementID = GetMaxIDAdvertisement();
                     string mainconn = ConfigurationManager.ConnectionStrings["Targeted_Marketing_DisplayConnectionString"].ConnectionString;
-                    SqlConnection sqlconn = new SqlConnection(dbConnStr);
+                    SqlConnection sqlconn = new SqlConnection(Reference.Constr);
                     String adv = "Insert into [Advertisement](Name,Item,ItemType,Duration,CompanyID,StartDate,EndDate,Status,CreatedBy,CreatedOn)" +
                     " Values(@Name,@Item,@ItemType,@Duration,@CompanyID,@StartDate,@EndDate,@Status,@CreatedBy,@CreatedOn)";
                     SqlCommand sqlcomm = new SqlCommand(adv);
@@ -201,7 +201,7 @@ namespace targeted_marketing_display
                     sqlconn.Close();
                 }
 
-                    SqlConnection sqlcon = new SqlConnection(dbConnStr);
+                    SqlConnection sqlcon = new SqlConnection(Reference.Constr);
                     string sqlquery = "Insert into [AdvertisementCategory](AdvID,CategoryID) values(@AdvID,@CategoryID)";
                     SqlCommand sqlcom = new SqlCommand(sqlquery, sqlcon);
                     sqlcon.Open();
@@ -228,7 +228,7 @@ namespace targeted_marketing_display
 
 
                 List<int> ListOfID = new List<int>();
-                SqlConnection sqlconnn = new SqlConnection(dbConnStr);
+                SqlConnection sqlconnn = new SqlConnection(Reference.Constr);
                     string sqlqueryy = "Insert into [AdvertisementLocation](AdvID,BillboardID) values(@AdvID,@BillboardID)";
                     SqlCommand sqlcommm = new SqlCommand(sqlqueryy, sqlconnn);
                     sqlconnn.Open();
@@ -255,7 +255,7 @@ namespace targeted_marketing_display
 
 
 
-                    SqlConnection sqlcn = new SqlConnection(dbConnStr);
+                    SqlConnection sqlcn = new SqlConnection(Reference.Constr);
                     string sqlque = "Insert into [AdvertisementAudience](AdvID,AgeID,GenderID) values(@AdvID,@AgeID,@GenderID)";
                     SqlCommand sqlcm = new SqlCommand(sqlque, sqlcn);
                     sqlcn.Open();

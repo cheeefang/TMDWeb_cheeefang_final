@@ -18,7 +18,7 @@ namespace targeted_marketing_display
         //SqlConnection conn = null;
         //SqlDataReader reader = null;
         //conn = new
-        //SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+       
         //conn.Open();
         public Boolean CoInfoInsert(String CompanyName, String Industry, DateTime CreatedOn)
         {

@@ -17,7 +17,7 @@ namespace targeted_marketing_display
     public partial class CompanyInfo : System.Web.UI.Page
     {
         SqlConnection vid = new
-              SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+              SqlConnection(Reference.Constr);
         Database dbConnection = new Database();      
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,7 +39,7 @@ namespace targeted_marketing_display
 
                 // instantiate and open connection
                 conn = new
-                    SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                    SqlConnection(Reference.Constr);
                 conn.Open();
 
                 // 1. declare command object with parameter
@@ -168,7 +168,7 @@ namespace targeted_marketing_display
 
             // instantiate and open connection
             conn = new
-                SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                SqlConnection(Reference.Constr);
             conn.Open();
 
 

@@ -222,8 +222,9 @@ namespace targeted_marketing_display
          
             SqlConnection conn = null;
             SqlDataReader reader = null;
+         
             conn = new
-            SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+            SqlConnection(Reference.Constr);
             conn.Open();
             Database db = new Database();
             DataTable dtBillboards = new DataTable();
@@ -318,8 +319,9 @@ namespace targeted_marketing_display
             Session["modalId"] = modalId;
             SqlConnection conn = null;
             SqlDataReader reader = null;
+        
             conn = new
-            SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+            SqlConnection(Reference.Constr);
             conn.Open();
             Database db = new Database();
             DataTable dtBillboards = new DataTable();
@@ -990,10 +992,10 @@ namespace targeted_marketing_display
                 SqlDataReader reader = null;
 
 
-
+ 
                 // instantiate and open connection
                 conn = new
-                    SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;MultipleActiveResultSets=true;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                    SqlConnection(Reference.Constr);
                 conn.Open();
 
                 int totalPeople;

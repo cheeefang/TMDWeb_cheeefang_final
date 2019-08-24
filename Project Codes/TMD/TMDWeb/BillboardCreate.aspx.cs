@@ -50,7 +50,7 @@ namespace targeted_marketing_display
 
             // instantiate and open connection
             conn = new
-                SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                SqlConnection(Reference.Constr);
             conn.Open();
             String BillboardCode = BBLocationCode.Text.ToString();
             String AddressLn1 = BBAddLn1.Text.ToString();

@@ -15,17 +15,18 @@ namespace targeted_marketing_display
 
     public partial class AdvertList : System.Web.UI.Page
     {
-        SqlConnection vid = new
-             SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+
         private string sortExpression;
         private SortDirection sortDirection;
-        SqlConnection con = new SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
 
 
-
+        SqlConnection con = new SqlConnection(Reference.Constr);
         protected int adminint;
         protected void Page_Load(object sender, EventArgs e)
         {
+     
+            
+
             if (!IsPostBack)
             {
                 if (Convert.ToInt32(Session["AdvertUpdate"]) == 2)
@@ -59,10 +60,10 @@ namespace targeted_marketing_display
         {
                 SqlConnection conn = null;
                 SqlDataReader reader = null;
-
-                // instantiate and open connection
-                conn = new
-                    SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+   
+            // instantiate and open connection
+            conn = new
+                    SqlConnection(Reference.Constr);
                 conn.Open();
             if (Session["userType"].ToString()==Reference.USR_ADM)
             {
@@ -186,7 +187,7 @@ namespace targeted_marketing_display
 
             // instantiate and open connection
             conn = new
-                SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                SqlConnection(Reference.Constr);
             conn.Open();
 
 
@@ -279,10 +280,10 @@ namespace targeted_marketing_display
       ",[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
               "where  [Advertisement].status=1 and ([Advertisement].Name like '%' + @search + '%' OR [Company].Name like '%' + @search + '%' OR ItemType like '%'" +
               " + @search + '%' OR StartDate like '%' + @search + '%' OR  EndDate like '%' + @search + '%') ";
-                    SqlCommand xp = new SqlCommand(str, vid);
+                    SqlCommand xp = new SqlCommand(str, con);
                     xp.Parameters.Add("@search", SqlDbType.NVarChar).Value = txtSearch.Text;
                     //xp.Parameters.Add("@search2", SqlDbType.NVarChar).Value = txtSearch.Text;
-                    vid.Open();
+                    con.Open();
                     xp.ExecuteNonQuery();
                     SqlDataAdapter da = new SqlDataAdapter();
                     da.SelectCommand = xp;
@@ -300,12 +301,12 @@ namespace targeted_marketing_display
               "where  [Advertisement].status=1 and [Advertisement].StartDate>=@sDate and [Advertisement].EndDate<=@eDate and" +
               " ([Advertisement].Name like '%' + @search + '%' OR [Company].Name like '%' + @search + '%' OR ItemType like '%'" +
               " + @search + '%' OR StartDate like '%' + @search + '%' OR  EndDate like '%' + @search + '%') ";
-                    SqlCommand xp = new SqlCommand(str, vid);
+                    SqlCommand xp = new SqlCommand(str, con);
                     xp.Parameters.Add("@search", SqlDbType.NVarChar).Value = txtSearch.Text;
                     xp.Parameters.Add("@sDate", SqlDbType.DateTime).Value = sdate;
                     xp.Parameters.Add("@eDate", SqlDbType.DateTime).Value = edate;
                     //xp.Parameters.Add("@search2", SqlDbType.NVarChar).Value = txtSearch.Text;
-                    vid.Open();
+                    con.Open();
                     xp.ExecuteNonQuery();
                     SqlDataAdapter da = new SqlDataAdapter();
                     da.SelectCommand = xp;
@@ -328,11 +329,11 @@ namespace targeted_marketing_display
                  ",[Advertisement].Item,[Advertisement].ItemType,[Advertisement].StartDate,[Advertisement].EndDate from [Advertisement] inner join [Company] on [Advertisement].CompanyID =[Company].CompanyID " +
                          "where [Company].CompanyID=@ID and [Advertisement].status=1 and ([Advertisement].Name like '%' + @search + '%' OR [Company].Name like '%' + @search + '%' OR ItemType like '%'" +
                          " + @search + '%' OR StartDate like '%' + @search + '%' OR  EndDate like '%' + @search + '%') ";
-                    SqlCommand xp = new SqlCommand(str, vid);
+                    SqlCommand xp = new SqlCommand(str, con);
                     xp.Parameters.Add("@ID", SqlDbType.NVarChar).Value = uObj.CompanyID.ToString();
                     xp.Parameters.Add("@search", SqlDbType.NVarChar).Value = txtSearch.Text;
                     //xp.Parameters.Add("@search2", SqlDbType.NVarChar).Value = txtSearch.Text;
-                    vid.Open();
+                    con.Open();
                     xp.ExecuteNonQuery();
                     SqlDataAdapter da = new SqlDataAdapter();
                     da.SelectCommand = xp;
@@ -350,12 +351,12 @@ namespace targeted_marketing_display
               "where  [Advertisement].status=1 and [Advertisement].StartDate>=@sDate and [Advertisement].EndDate<=@eDate and" +
               " ([Advertisement].Name like '%' + @search + '%' OR [Company].Name like '%' + @search + '%' OR ItemType like '%'" +
               " + @search + '%' OR StartDate like '%' + @search + '%' OR  EndDate like '%' + @search + '%') ";
-                    SqlCommand xp = new SqlCommand(str, vid);
+                    SqlCommand xp = new SqlCommand(str, con);
                     xp.Parameters.Add("@search", SqlDbType.NVarChar).Value = txtSearch.Text;
                     xp.Parameters.Add("@sDate", SqlDbType.DateTime).Value = sdate;
                     xp.Parameters.Add("@eDate", SqlDbType.DateTime).Value = edate;
                     //xp.Parameters.Add("@search2", SqlDbType.NVarChar).Value = txtSearch.Text;
-                    vid.Open();
+                    con.Open();
                     xp.ExecuteNonQuery();
                     SqlDataAdapter da = new SqlDataAdapter();
                     da.SelectCommand = xp;
@@ -435,11 +436,11 @@ namespace targeted_marketing_display
             SqlConnection conn = null;
             SqlDataReader reader = null;
 
-
+      
 
             // instantiate and open connection
             conn = new
-                SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                SqlConnection(Reference.Constr);
             conn.Open();
 
             if (e.CommandName == "DeleteAdMessage")

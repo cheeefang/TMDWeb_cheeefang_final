@@ -17,7 +17,7 @@ namespace targeted_marketing_display
     public partial class BillboardInfo : System.Web.UI.Page
     {
         SqlConnection vid= new
-                SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                SqlConnection(Reference.Constr);
         public string sortExpression;
         public SortDirection sortDirection;
 
@@ -61,7 +61,7 @@ namespace targeted_marketing_display
 
             // instantiate and open connection
             conn = new
-                SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                SqlConnection(Reference.Constr);
             conn.Open();
 
 
@@ -129,7 +129,7 @@ namespace targeted_marketing_display
 
             // instantiate and open connection
             conn = new
-                SqlConnection(@"Data Source=L33527\CHEEEFANGSQL;Initial Catalog=Targeted_Marketing_Display;Persist Security Info=True;User ID=root;Password=passw8rd");
+                SqlConnection(Reference.Constr);
             conn.Open();
 
 
